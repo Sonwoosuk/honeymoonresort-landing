@@ -65,18 +65,21 @@ p {
    -> 색만 바꾸고 싶으면 이 영역의 값만 수정하면 전체에 반영됩니다.
 ------------------------------------------------------------- */
 :root {
-  --hero-color-bg:        #fbf9f6; /* 섹션 배경: 밝은 크림 (거의 화이트) */
-  --hero-color-surface:   #f1ece3; /* 이미지 플레이스홀더 배경 (연한 베이지) */
-  --hero-color-border:    #e2d9c8; /* 얇은 보더용 톤 */
+  /* ---- 4가지 코어 컬러: 화이트 / 브라운골드 / 브라이트골드 / 다크 에스프레소 ---- */
+  --hero-color-bg:        #ffffff; /* 섹션 배경: 화이트 */
+  --hero-color-surface:   #f8f2ea; /* 화이트에 브라운골드를 아주 옅게 섞은 카드 배경 */
+  --hero-color-border:    #e6d9c6; /* 브라운골드 톤 얇은 보더 */
 
-  --hero-color-ink:       #241a12; /* 타이틀/헤드라인 색 (진한 브라운-블랙) */
-  --hero-color-body:      #5c5248; /* 본문 문단 색 (뉴트럴 웜 그레이) */
-  --hero-color-gold:      #a97c3f; /* 골드 포인트 컬러 (라벨/구분선/보더) */
-  --hero-color-gold-soft: #c9a877; /* 골드 톤 보조 */
+  --hero-color-ink:       #2b1f16; /* 타이틀/헤드라인 색 (딥 에스프레소 브라운) */
+  --hero-color-body:      #6b5c4c; /* 본문 문단 색 (에스프레소 톤 뉴트럴) */
+  --hero-color-gold:      #8a6847; /* 브라운골드 (메인 포인트) */
+  --hero-color-gold-soft: #b79a7a; /* 브라운골드 연한 보조 톤 */
+  --hero-color-accent:    #f9c359; /* 브라이트골드 (하이라이트/뱃지/언더라인) */
+  --hero-color-on-accent: #2b1f16; /* 브라이트골드 위에 올라가는 텍스트 */
 
-  --hero-color-overlay:   rgba(36, 26, 18, 0.82); /* 배너 텍스트 패널 (flat, 그라데이션 아님) */
-  --hero-color-on-overlay:      #fbf9f6; /* 오버레이 위 텍스트 */
-  --hero-color-on-overlay-dim:  #cdbfae; /* 오버레이 위 보조 텍스트 */
+  --hero-color-overlay:   rgba(43, 31, 22, 0.84); /* 배너 텍스트 패널 (flat, 그라데이션 아님) */
+  --hero-color-on-overlay:      #ffffff; /* 오버레이 위 텍스트 */
+  --hero-color-on-overlay-dim:  #d9c7ae; /* 오버레이 위 보조 텍스트 */
 
   --hero-font: "Pretendard", -apple-system, BlinkMacSystemFont,
                "Malgun Gothic", sans-serif;
@@ -94,7 +97,7 @@ p {
 }
 
 .hero__inner {
-  max-width: 1200px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 0 40px;
   box-sizing: border-box;
@@ -107,16 +110,49 @@ p {
    - 클래스명은 "statement-" 네임스페이스(statement__) 사용
 ============================================================= */
 .statement {
+  position: relative;
   width: 100%;
   background-color: var(--hero-color-ink);
   font-family: var(--hero-font);
-  padding: 56px 0;
+  padding: 56px 0 84px;
   box-sizing: border-box;
   overflow: hidden;
 }
 
+/* 하단 찢어진 종이(torn paper) 느낌의 오가닉 디바이더
+   -> 다음 섹션(.process, 화이트 배경)과 자연스럽게 이어지도록
+      순수 CSS clip-path 로 톱니 모양 절개선을 만듭니다 (이미지/SVG 없음) */
+.statement::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 40px;
+  background-color: var(--hero-color-bg);
+  clip-path: polygon(
+    0% 100%,
+    3.125% 0%, 6.25% 100%,
+    9.375% 0%, 12.5% 100%,
+    15.625% 0%, 18.75% 100%,
+    21.875% 0%, 25% 100%,
+    28.125% 0%, 31.25% 100%,
+    34.375% 0%, 37.5% 100%,
+    40.625% 0%, 43.75% 100%,
+    46.875% 0%, 50% 100%,
+    53.125% 0%, 56.25% 100%,
+    59.375% 0%, 62.5% 100%,
+    65.625% 0%, 68.75% 100%,
+    71.875% 0%, 75% 100%,
+    78.125% 0%, 81.25% 100%,
+    84.375% 0%, 87.5% 100%,
+    90.625% 0%, 93.75% 100%,
+    96.875% 0%, 100% 100%
+  );
+}
+
 .statement__inner {
-  max-width: 1200px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 0 40px;
   box-sizing: border-box;
@@ -158,12 +194,26 @@ p {
 }
 
 /* -------------------------------------------------------------
-   4. 풀와이드 배너 이미지 (하단 좌측 텍스트 오버레이)
+   4. 풀와이드 배너 (오가닉 블롭 프레임 + CSS 전용 자동 슬라이드)
+   - 레퍼런스: Pigma(오가닉 블롭 마스크) + Aria Verde(캐러셀/도트)
+   - JS 없이 순수 CSS @keyframes 로 슬라이드 3장이 자동 크로스페이드
+     되고, 하단 우측 도트가 현재 슬라이드에 맞춰 함께 애니메이션됩니다.
+   - 실제 이미지로 교체 시: 각 .hero__banner-slide 안의 placeholder
+     span 들을 지우고 <img class="hero__banner-image" src="..."> 를
+     넣어주면 됩니다 (position/opacity 는 슬라이드 클래스가 처리).
 ------------------------------------------------------------- */
 .hero__banner {
   position: relative;
   width: 100%;
   overflow: hidden;
+  /* 좌우 여백 없이 화면 전체 폭으로 꽉 차는(풀블리드) 배너.
+     .hero__inner(최대폭 컨테이너) 밖에 위치하므로 각진 사각형을 그대로 사용합니다. */
+}
+
+.hero__banner-slides {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 1;
 }
 
 /* 실제 이미지로 교체 시 사용할 클래스 (임시 플레이스홀더 대체용) */
@@ -174,10 +224,13 @@ p {
   object-fit: cover;
 }
 
-/* 임시 플레이스홀더 (다른 개발자가 실제 이미지로 쉽게 교체 가능) */
-.hero__banner-placeholder {
+/* 슬라이드 1장 (임시 플레이스홀더). 3장이 절대 위치로 겹쳐 있다가
+   애니메이션 딜레이만 다르게 주어 순서대로 자동 크로스페이드 됩니다. */
+.hero__banner-slide {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  aspect-ratio: 3 / 1;
+  height: 100%;
   background-color: var(--hero-color-surface);
   border: 1px solid var(--hero-color-border);
   display: flex;
@@ -186,6 +239,28 @@ p {
   justify-content: center;
   gap: 8px;
   box-sizing: border-box;
+  opacity: 0;
+  animation-name: heroSlideFade;
+  animation-duration: 12s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+.hero__banner-slide:nth-child(1) { animation-delay: 0s; }
+.hero__banner-slide:nth-child(2) { animation-delay: 4s; }
+.hero__banner-slide:nth-child(3) { animation-delay: 8s; }
+
+@keyframes heroSlideFade {
+  0%       { opacity: 0; }
+  6%, 28%  { opacity: 1; }
+  34%      { opacity: 0; }
+  100%     { opacity: 0; }
+}
+
+/* 사용자가 애니메이션을 원치 않는 경우 첫 슬라이드만 정적으로 표시 */
+@media (prefers-reduced-motion: reduce) {
+  .hero__banner-slide { animation: none; opacity: 0; }
+  .hero__banner-slide:first-child { opacity: 1; }
 }
 
 .hero__banner-placeholder-label {
@@ -200,15 +275,59 @@ p {
   color: var(--hero-color-body);
 }
 
+/* 하단 우측 도트 인디케이터 (슬라이드와 같은 리듬으로 애니메이션) */
+.hero__banner-dots {
+  position: absolute;
+  right: 28px;
+  bottom: 24px;
+  z-index: 2;
+  display: flex;
+  gap: 8px;
+}
+
+.hero__banner-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+  animation-name: heroDotPulse;
+  animation-duration: 12s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+.hero__banner-dot:nth-child(1) { animation-delay: 0s; }
+.hero__banner-dot:nth-child(2) { animation-delay: 4s; }
+.hero__banner-dot:nth-child(3) { animation-delay: 8s; }
+
+@keyframes heroDotPulse {
+  0%, 28%  { width: 22px; border-radius: 4px; background-color: var(--hero-color-accent); }
+  34%, 100% { width: 8px;  border-radius: 50%; background-color: rgba(255, 255, 255, 0.5); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__banner-dot { animation: none; }
+}
+
 /* 배너 하단 좌측 텍스트 패널 (flat 컬러, 그라데이션 아님) */
 .hero__banner-overlay {
   position: absolute;
   left: 0;
   bottom: 0;
+  z-index: 2;
   max-width: 640px;
   background-color: var(--hero-color-overlay);
   padding: 32px 40px;
   box-sizing: border-box;
+}
+
+.hero__banner-eyebrow {
+  display: inline-block;
+  margin-bottom: 10px;
+  color: var(--hero-color-accent);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.04em;
 }
 
 .hero__banner-headline {
@@ -257,7 +376,7 @@ p {
     height: 44px;
   }
 
-  .hero__banner-placeholder {
+  .hero__banner-slides {
     aspect-ratio: 4 / 5;
   }
 
@@ -268,6 +387,11 @@ p {
 
   .hero__banner-headline {
     font-size: 17px;
+  }
+
+  .hero__banner-dots {
+    right: 18px;
+    bottom: 16px;
   }
 
   .hero__intro {
@@ -298,7 +422,7 @@ p {
 }
 
 .scale__inner {
-  max-width: 1000px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 0 40px;
   box-sizing: border-box;
@@ -314,14 +438,12 @@ p {
   text-align: center;
 }
 
-/* 숫자 통계 2열 (가운데 정렬) */
+/* 숫자 통계 2열 (가운데 정렬, Pigma 레퍼런스의 박스형 스탯 카드 참고) */
 .scale__stats {
   display: flex;
   justify-content: center;
-  gap: 64px;
-  padding-bottom: 24px;
-  margin-bottom: 24px;
-  border-bottom: 1px solid var(--hero-color-border);
+  gap: 24px;
+  margin-bottom: 28px;
 }
 
 .scale__stat {
@@ -329,6 +451,12 @@ p {
   flex-direction: column;
   align-items: center;
   gap: 8px;
+  min-width: 200px;
+  padding: 28px 24px;
+  background-color: var(--hero-color-surface);
+  border: 1px solid var(--hero-color-border);
+  border-radius: 4px 24px 4px 24px;
+  box-sizing: border-box;
 }
 
 .scale__stat-number {
@@ -400,9 +528,16 @@ p {
   }
 
   .scale__stats {
-    gap: 40px;
-    padding-bottom: 32px;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
     margin-bottom: 32px;
+  }
+
+  .scale__stat {
+    min-width: 0;
+    width: 100%;
+    max-width: 280px;
   }
 
   .scale__stat-number {
@@ -431,7 +566,7 @@ p {
 }
 
 .awards__inner {
-  max-width: 1000px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 0 40px;
   box-sizing: border-box;
@@ -541,6 +676,18 @@ p {
   text-align: center;
 }
 
+/* 타이틀 아래 브라이트골드 포인트 언더라인 (공용) */
+.section-title::after,
+.scale__title::after,
+.awards__title::after {
+  content: "";
+  display: block;
+  width: 44px;
+  height: 3px;
+  margin: 16px auto 0;
+  background-color: var(--hero-color-accent);
+}
+
 .text-stack {
   display: flex;
   flex-direction: column;
@@ -607,11 +754,33 @@ p {
   gap: 28px;
 }
 
+/* 폴라로이드 스타일: 화이트 프레임 + 그림자 + 카드마다 미세하게 다른 기울기
+   (레퍼런스: Sokotra 익스페디션의 폴라로이드 포토카드) */
 .image-card {
   flex: 0 1 calc((100% - 28px * 2) / 3);
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
+  background-color: var(--hero-color-bg);
+  border: 1px solid var(--hero-color-border);
+  padding: 10px 10px 16px;
+  box-sizing: border-box;
+  box-shadow: 0 10px 24px rgba(43, 31, 22, 0.1);
+  transform: rotate(-1.4deg);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.image-card:nth-child(3n+2) {
+  transform: rotate(1.2deg);
+}
+
+.image-card:nth-child(3n+3) {
+  transform: rotate(-0.6deg);
+}
+
+.image-card:hover {
+  transform: rotate(0deg) translateY(-2px);
+  box-shadow: 0 16px 32px rgba(43, 31, 22, 0.16);
 }
 
 /* 실제 이미지로 교체 시 이 div 안의 내용을 지우고
@@ -620,7 +789,6 @@ p {
   width: 100%;
   aspect-ratio: 4 / 3;
   background-color: var(--hero-color-surface);
-  border: 1px solid var(--hero-color-border);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -680,7 +848,7 @@ p {
 }
 
 .process__inner {
-  max-width: 1000px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 0 40px;
   box-sizing: border-box;
@@ -787,7 +955,7 @@ p {
 }
 
 .custom__inner {
-  max-width: 1200px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 0 40px;
   box-sizing: border-box;
@@ -855,7 +1023,7 @@ p {
 .verified__card {
   background-color: var(--hero-color-surface);
   border: 1px solid var(--hero-color-border);
-  padding: 24px 22px;
+  padding: 28px 24px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -863,13 +1031,13 @@ p {
 }
 
 .verified__card-title {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 700;
   color: var(--hero-color-gold);
 }
 
 .verified__card-desc {
-  font-size: 13.5px;
+  font-size: 14px;
   line-height: 1.8;
   color: var(--hero-color-body);
 }
@@ -922,7 +1090,7 @@ p {
 }
 
 .youtube__inner {
-  max-width: 1200px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 0 40px;
   box-sizing: border-box;
@@ -1012,7 +1180,7 @@ p {
 }
 
 .celeb__inner {
-  max-width: 1200px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 0 40px;
   box-sizing: border-box;
@@ -1061,7 +1229,7 @@ p {
 }
 
 .expo__inner {
-  max-width: 1000px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 0 40px;
   box-sizing: border-box;
@@ -1070,10 +1238,8 @@ p {
 .expo__stats {
   display: flex;
   justify-content: center;
-  gap: 64px;
-  padding-bottom: 24px;
-  margin-bottom: 24px;
-  border-bottom: 1px solid var(--hero-color-border);
+  gap: 24px;
+  margin-bottom: 28px;
 }
 
 .expo__stat {
@@ -1081,6 +1247,12 @@ p {
   flex-direction: column;
   align-items: center;
   gap: 8px;
+  min-width: 200px;
+  padding: 24px;
+  background-color: var(--hero-color-bg);
+  border: 1px solid var(--hero-color-border);
+  border-radius: 4px 24px 4px 24px;
+  box-sizing: border-box;
 }
 
 .expo__stat-number {
@@ -1109,9 +1281,16 @@ p {
   }
 
   .expo__stats {
-    gap: 36px;
-    padding-bottom: 32px;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
     margin-bottom: 32px;
+  }
+
+  .expo__stat {
+    min-width: 0;
+    width: 100%;
+    max-width: 280px;
   }
 
   .expo__stat-number {
@@ -1134,7 +1313,7 @@ p {
 }
 
 .contact__inner {
-  max-width: 1000px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 0 40px;
   box-sizing: border-box;
@@ -1149,7 +1328,7 @@ p {
 .contact__card {
   background-color: var(--hero-color-surface);
   border: 1px solid var(--hero-color-border);
-  padding: 32px;
+  padding: 28px 24px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -1157,13 +1336,13 @@ p {
 }
 
 .contact__card-title {
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 700;
-  color: var(--hero-color-ink);
+  color: var(--hero-color-gold);
 }
 
 .contact__card-desc {
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.8;
   color: var(--hero-color-body);
 }
@@ -1225,7 +1404,7 @@ p {
 }
 
 .brand__card-name {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
   color: var(--hero-color-gold);
 }
@@ -1266,7 +1445,7 @@ p {
 }
 
 .safety__inner {
-  max-width: 900px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 0 40px;
   box-sizing: border-box;
@@ -1329,21 +1508,45 @@ p {
       </h1>
     </div>
 
-    <!-- 풀와이드 배너 이미지 (임시 플레이스홀더) + 하단 좌측 텍스트 -->
-    <div class="hero__banner">
-      <div class="hero__banner-placeholder">
-        <!--
-          TODO: 실제 이미지로 교체
-          아래 div 를 지우고 <img class="hero__banner-image" src="실제경로.jpg" alt="허니문리조트"> 로 바꿔주세요.
-        -->
-        <span class="hero__banner-placeholder-label">IMAGE</span>
-        <span class="hero__banner-placeholder-size">1920 x 820</span>
-      </div>
+  </div>
 
-      <div class="hero__banner-overlay">
-        <p class="hero__banner-headline">허니문리조트는 1995년부터 신혼여행을 전문으로 맞춤여행으로 안내드린 허니문 전문 여행사입니다.</p>
+  <!-- 풀와이드 배너 (.hero__inner 컨테이너 밖에 배치 -> 좌우 여백 없이 화면 전체 폭으로 표시
+       // 오가닉 블롭 프레임 없이 각진 사각형 + CSS 전용 자동 슬라이드, 임시 플레이스홀더 3장) + 하단 좌측 텍스트 -->
+  <div class="hero__banner">
+    <div class="hero__banner-slides">
+      <!--
+        TODO: 실제 이미지로 교체
+        각 .hero__banner-slide 안의 span 2개를 지우고
+        <img class="hero__banner-image" src="실제경로.jpg" alt="허니문리조트"> 로 바꿔주세요.
+        (position/opacity/애니메이션은 .hero__banner-slide 클래스가 그대로 처리합니다)
+      -->
+      <div class="hero__banner-slide">
+        <span class="hero__banner-placeholder-label">IMAGE 1</span>
+        <span class="hero__banner-placeholder-size">1920 x 640</span>
+      </div>
+      <div class="hero__banner-slide">
+        <span class="hero__banner-placeholder-label">IMAGE 2</span>
+        <span class="hero__banner-placeholder-size">1920 x 640</span>
+      </div>
+      <div class="hero__banner-slide">
+        <span class="hero__banner-placeholder-label">IMAGE 3</span>
+        <span class="hero__banner-placeholder-size">1920 x 640</span>
       </div>
     </div>
+
+    <div class="hero__banner-dots" aria-hidden="true">
+      <span class="hero__banner-dot"></span>
+      <span class="hero__banner-dot"></span>
+      <span class="hero__banner-dot"></span>
+    </div>
+
+    <div class="hero__banner-overlay">
+      <span class="hero__banner-eyebrow">EST</span>
+      <p class="hero__banner-headline">허니문리조트는 1995년부터 신혼여행을 전문으로 맞춤여행으로 안내드린 허니문 전문 여행사입니다.</p>
+    </div>
+  </div>
+
+  <div class="hero__inner">
 
     <!-- 배너 하단: 나머지 소개 문단 (제공된 텍스트 그대로 사용) -->
     <div class="hero__intro">
@@ -1635,7 +1838,7 @@ p {
     <div class="image-card-grid">
       <!-- TODO: 각 카드의 .image-card__image 를 실제 커플 사진으로 교체 -->
       <div class="image-card">
-        <div class="image-card__image"><span class="image-card__image-label">IMG</span></div>
+        <div class="image-card__image"><img class="image-card__photo" src="assets/celeb/aeley-choisihoon.jpg" alt="에일리 · 최시훈"></div>
         <p class="image-card__caption">에일리 · 최시훈</p>
       </div>
       <div class="image-card">
@@ -1643,54 +1846,50 @@ p {
         <p class="image-card__caption">세븐 · 이다해</p>
       </div>
       <div class="image-card">
-        <div class="image-card__image"><span class="image-card__image-label">IMG</span></div>
+        <div class="image-card__image"><img class="image-card__photo" src="assets/celeb/kimkiri-moonjiin.jpg" alt="김기리 · 문지인"></div>
         <p class="image-card__caption">김기리 · 문지인</p>
       </div>
       <div class="image-card">
-        <div class="image-card__image"><span class="image-card__image-label">IMG</span></div>
+        <div class="image-card__image"><img class="image-card__photo" src="assets/celeb/parkhyunho-eungaeun.jpg" alt="박현호 · 은가은"></div>
         <p class="image-card__caption">박현호 · 은가은</p>
       </div>
       <div class="image-card">
-        <div class="image-card__image"><span class="image-card__image-label">IMG</span></div>
+        <div class="image-card__image"><img class="image-card__photo" src="assets/celeb/cheondung-mimi.jpg" alt="천둥 · 미미"></div>
         <p class="image-card__caption">천둥 · 미미</p>
       </div>
       <div class="image-card">
-        <div class="image-card__image"><span class="image-card__image-label">IMG</span></div>
+        <div class="image-card__image"><img class="image-card__photo" src="assets/celeb/simhyungtak-saya.jpg" alt="심형탁 · 사야"></div>
         <p class="image-card__caption">심형탁 · 사야</p>
       </div>
       <div class="image-card">
-        <div class="image-card__image"><span class="image-card__image-label">IMG</span></div>
-        <p class="image-card__caption">박명수 · 한수민</p>
-      </div>
-      <div class="image-card">
-        <div class="image-card__image"><span class="image-card__image-label">IMG</span></div>
+        <div class="image-card__image"><img class="image-card__photo" src="assets/celeb/bada.jpg" alt="바다 부부"></div>
         <p class="image-card__caption">바다 부부<br>(가수이자 뮤지컬 배우)</p>
       </div>
       <div class="image-card">
-        <div class="image-card__image"><span class="image-card__image-label">IMG</span></div>
+        <div class="image-card__image"><img class="image-card__photo" src="assets/celeb/parkhana-kimtaesul.jpg" alt="박하나 · 김태술"></div>
         <p class="image-card__caption">박하나 · 김태술</p>
       </div>
       <div class="image-card">
-        <div class="image-card__image"><span class="image-card__image-label">IMG</span></div>
+        <div class="image-card__image"><img class="image-card__photo" src="assets/celeb/chanmi-songeuihwan.jpg" alt="AOA찬미(임도화) · 송의환"></div>
         <p class="image-card__caption">AOA찬미(임도화) · 송의환</p>
       </div>
       <div class="image-card">
-        <div class="image-card__image"><span class="image-card__image-label">IMG</span></div>
+        <div class="image-card__image"><img class="image-card__photo" src="assets/celeb/daniel-lindemann.jpg" alt="다니엘 린데만 부부"></div>
         <p class="image-card__caption">다니엘 린데만 부부</p>
       </div>
       <div class="image-card">
-        <div class="image-card__image"><span class="image-card__image-label">IMG</span></div>
+        <div class="image-card__image"><img class="image-card__photo" src="assets/celeb/limsungjae.jpg" alt="임성재 부부"></div>
         <p class="image-card__caption">임성재 부부<br>(PGA 골프 선수)</p>
       </div>
       <div class="image-card">
-        <div class="image-card__image"><span class="image-card__image-label">IMG</span></div>
+        <div class="image-card__image"><img class="image-card__photo" src="assets/celeb/kimgaeun-yoonsunwoo.jpg" alt="김가은 · 윤선우"></div>
         <p class="image-card__caption">김가은 · 윤선우</p>
       </div>
     </div>
 
     <div class="text-stack celeb__note">
       <p>다양한 유명인 및 스포츠 선수의 허니문을 상담·진행한 경험 역시 맞춤형 신혼여행 운영 경험을 보여주는 사례입니다.</p>
-      <p>다양한 고객의 신혼여행 스타일과 일정에 맞춰 신혼여행을 상담하고 진행해온 경험은 허니문리조트의 전문성을 보여주는 중요한 신뢰 요소입니다.</p>
+      <p>다양한 고객의 신혼여행 스타일과 일정에 맞춰 신혼여행을 상담하고 진행해온 경험은<br>허니문리조트의 전문성을 보여주는 중요한 신뢰 요소입니다.</p>
     </div>
 
   </div>
