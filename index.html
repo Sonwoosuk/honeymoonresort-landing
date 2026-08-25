@@ -119,38 +119,6 @@ p {
   overflow: hidden;
 }
 
-/* 하단 찢어진 종이(torn paper) 느낌의 오가닉 디바이더
-   -> 다음 섹션(.process, 화이트 배경)과 자연스럽게 이어지도록
-      순수 CSS clip-path 로 톱니 모양 절개선을 만듭니다 (이미지/SVG 없음) */
-.statement::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 40px;
-  background-color: var(--hero-color-bg);
-  clip-path: polygon(
-    0% 100%,
-    3.125% 0%, 6.25% 100%,
-    9.375% 0%, 12.5% 100%,
-    15.625% 0%, 18.75% 100%,
-    21.875% 0%, 25% 100%,
-    28.125% 0%, 31.25% 100%,
-    34.375% 0%, 37.5% 100%,
-    40.625% 0%, 43.75% 100%,
-    46.875% 0%, 50% 100%,
-    53.125% 0%, 56.25% 100%,
-    59.375% 0%, 62.5% 100%,
-    65.625% 0%, 68.75% 100%,
-    71.875% 0%, 75% 100%,
-    78.125% 0%, 81.25% 100%,
-    84.375% 0%, 87.5% 100%,
-    90.625% 0%, 93.75% 100%,
-    96.875% 0%, 100% 100%
-  );
-}
-
 .statement__inner {
   max-width: 1100px;
   margin: 0 auto;
@@ -194,13 +162,10 @@ p {
 }
 
 /* -------------------------------------------------------------
-   4. 풀와이드 배너 (오가닉 블롭 프레임 + CSS 전용 자동 슬라이드)
-   - 레퍼런스: Pigma(오가닉 블롭 마스크) + Aria Verde(캐러셀/도트)
-   - JS 없이 순수 CSS @keyframes 로 슬라이드 3장이 자동 크로스페이드
-     되고, 하단 우측 도트가 현재 슬라이드에 맞춰 함께 애니메이션됩니다.
-   - 실제 이미지로 교체 시: 각 .hero__banner-slide 안의 placeholder
+   4. 풀와이드 배너 (이미지 1장, 정적)
+   - 실제 이미지로 교체 시: .hero__banner-slide 안의 placeholder
      span 들을 지우고 <img class="hero__banner-image" src="..."> 를
-     넣어주면 됩니다 (position/opacity 는 슬라이드 클래스가 처리).
+     넣어주면 됩니다.
 ------------------------------------------------------------- */
 .hero__banner {
   position: relative;
@@ -224,11 +189,9 @@ p {
   object-fit: cover;
 }
 
-/* 슬라이드 1장 (임시 플레이스홀더). 3장이 절대 위치로 겹쳐 있다가
-   애니메이션 딜레이만 다르게 주어 순서대로 자동 크로스페이드 됩니다. */
+/* 배너 이미지 1장 (임시 플레이스홀더) */
 .hero__banner-slide {
-  position: absolute;
-  inset: 0;
+  position: relative;
   width: 100%;
   height: 100%;
   background-color: var(--hero-color-surface);
@@ -239,28 +202,6 @@ p {
   justify-content: center;
   gap: 8px;
   box-sizing: border-box;
-  opacity: 0;
-  animation-name: heroSlideFade;
-  animation-duration: 12s;
-  animation-iteration-count: infinite;
-  animation-timing-function: ease-in-out;
-}
-
-.hero__banner-slide:nth-child(1) { animation-delay: 0s; }
-.hero__banner-slide:nth-child(2) { animation-delay: 4s; }
-.hero__banner-slide:nth-child(3) { animation-delay: 8s; }
-
-@keyframes heroSlideFade {
-  0%       { opacity: 0; }
-  6%, 28%  { opacity: 1; }
-  34%      { opacity: 0; }
-  100%     { opacity: 0; }
-}
-
-/* 사용자가 애니메이션을 원치 않는 경우 첫 슬라이드만 정적으로 표시 */
-@media (prefers-reduced-motion: reduce) {
-  .hero__banner-slide { animation: none; opacity: 0; }
-  .hero__banner-slide:first-child { opacity: 1; }
 }
 
 .hero__banner-placeholder-label {
@@ -273,40 +214,6 @@ p {
 .hero__banner-placeholder-size {
   font-size: 12px;
   color: var(--hero-color-body);
-}
-
-/* 하단 우측 도트 인디케이터 (슬라이드와 같은 리듬으로 애니메이션) */
-.hero__banner-dots {
-  position: absolute;
-  right: 28px;
-  bottom: 24px;
-  z-index: 2;
-  display: flex;
-  gap: 8px;
-}
-
-.hero__banner-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.5);
-  animation-name: heroDotPulse;
-  animation-duration: 12s;
-  animation-iteration-count: infinite;
-  animation-timing-function: ease-in-out;
-}
-
-.hero__banner-dot:nth-child(1) { animation-delay: 0s; }
-.hero__banner-dot:nth-child(2) { animation-delay: 4s; }
-.hero__banner-dot:nth-child(3) { animation-delay: 8s; }
-
-@keyframes heroDotPulse {
-  0%, 28%  { width: 22px; border-radius: 4px; background-color: var(--hero-color-accent); }
-  34%, 100% { width: 8px;  border-radius: 50%; background-color: rgba(255, 255, 255, 0.5); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero__banner-dot { animation: none; }
 }
 
 /* 배너 하단 좌측 텍스트 패널 (flat 컬러, 그라데이션 아님) */
@@ -357,7 +264,7 @@ p {
   line-height: 1.75;
   color: var(--hero-color-body);
   letter-spacing: -0.01em;
-  text-align: left;
+  text-align: justify;
 }
 
 /* -------------------------------------------------------------
@@ -387,11 +294,6 @@ p {
 
   .hero__banner-headline {
     font-size: 17px;
-  }
-
-  .hero__banner-dots {
-    right: 18px;
-    bottom: 16px;
   }
 
   .hero__intro {
@@ -455,7 +357,8 @@ p {
   padding: 28px 24px;
   background-color: var(--hero-color-surface);
   border: 1px solid var(--hero-color-border);
-  border-radius: 4px 24px 4px 24px;
+  border-radius: 20px;
+  box-shadow: 0 10px 24px rgba(43, 31, 22, 0.08);
   box-sizing: border-box;
 }
 
@@ -592,35 +495,110 @@ p {
   text-align: center;
 }
 
-/* 수상 목록: 3열 그리드 */
-.awards__list {
-  list-style: none;
-  margin: 0 0 28px;
-  padding: 20px 0;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  column-gap: 32px;
-  row-gap: 18px;
-  border-top: 1px solid var(--hero-color-border);
-  border-bottom: 1px solid var(--hero-color-border);
+/* 수상 목록: 연도 타임라인 (좌우 지그재그, 중앙 라인 기준 대칭 배치) */
+.awards__timeline {
+  position: relative;
+  margin: 12px auto 32px;
+  padding: 8px 0 4px;
+  max-width: 780px;
 }
 
-.awards__item {
+.awards__timeline::before {
+  content: '';
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 50%;
+  width: 1px;
+  background: var(--hero-color-border);
+  transform: translateX(-50%);
+}
+
+.awards__timeline-item {
+  position: relative;
+  width: 50%;
+  box-sizing: border-box;
+  padding: 0 44px 40px;
+}
+
+.awards__timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.awards__timeline-item:nth-child(odd) {
+  left: 0;
+  text-align: right;
+}
+
+.awards__timeline-item:nth-child(even) {
+  left: 50%;
+  text-align: left;
+}
+
+.awards__timeline-node {
+  position: absolute;
+  top: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--hero-color-bg);
+  border: 1px solid var(--hero-color-gold);
   display: flex;
-  align-items: baseline;
-  gap: 10px;
-  font-size: 14px;
-  line-height: 1.6;
-}
-
-.awards__item-year {
-  flex: none;
+  align-items: center;
+  justify-content: center;
   font-weight: 700;
+  font-size: 12px;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  text-align: center;
   color: var(--hero-color-gold);
+  z-index: 1;
 }
 
-.awards__item-name {
+.awards__timeline-item:nth-child(odd) .awards__timeline-node {
+  right: -28px;
+}
+
+.awards__timeline-item:nth-child(even) .awards__timeline-node {
+  left: -28px;
+}
+
+.awards__timeline-list {
+  margin: 0;
+  padding: 16px 0 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.awards__timeline-list li {
+  position: relative;
+  padding-left: 14px;
+  font-size: 14px;
+  line-height: 1.7;
   color: var(--hero-color-ink);
+}
+
+.awards__timeline-list li::before {
+  content: '';
+  position: absolute;
+  top: 0.72em;
+  left: 0;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--hero-color-gold);
+}
+
+.awards__timeline-item:nth-child(odd) .awards__timeline-list li {
+  padding-left: 0;
+  padding-right: 14px;
+}
+
+.awards__timeline-item:nth-child(odd) .awards__timeline-list li::before {
+  left: auto;
+  right: 0;
 }
 
 .awards__outro {
@@ -653,9 +631,41 @@ p {
     line-height: 1.8;
   }
 
-  .awards__list {
-    grid-template-columns: 1fr;
-    row-gap: 14px;
+  .awards__timeline::before {
+    left: 23px;
+    transform: none;
+  }
+
+  .awards__timeline-item,
+  .awards__timeline-item:nth-child(odd),
+  .awards__timeline-item:nth-child(even) {
+    left: 0;
+    width: 100%;
+    text-align: left;
+    padding: 0 0 26px 60px;
+  }
+
+  .awards__timeline-item:nth-child(odd) .awards__timeline-node,
+  .awards__timeline-item:nth-child(even) .awards__timeline-node {
+    left: -4px;
+    right: auto;
+    width: 46px;
+    height: 46px;
+    font-size: 10px;
+  }
+
+  .awards__timeline-list {
+    padding-top: 10px;
+  }
+
+  .awards__timeline-item:nth-child(odd) .awards__timeline-list li {
+    padding-left: 14px;
+    padding-right: 0;
+  }
+
+  .awards__timeline-item:nth-child(odd) .awards__timeline-list li::before {
+    left: 0;
+    right: auto;
   }
 }
 
@@ -674,18 +684,6 @@ p {
   letter-spacing: -0.02em;
   color: var(--hero-color-ink);
   text-align: center;
-}
-
-/* 타이틀 아래 브라이트골드 포인트 언더라인 (공용) */
-.section-title::after,
-.scale__title::after,
-.awards__title::after {
-  content: "";
-  display: block;
-  width: 44px;
-  height: 3px;
-  margin: 16px auto 0;
-  background-color: var(--hero-color-accent);
 }
 
 .text-stack {
@@ -873,15 +871,45 @@ p {
   gap: 14px;
 }
 
-/* 마지막 스텝을 제외하고 오른쪽에 화살표로 다음 단계와 연결 */
+/* 마지막 스텝을 제외하고 오른쪽에 화살표로 다음 단계와 연결
+   (이미지(64px) + gap(14px) + 숫자 원(56px) 절반 = 106px 지점이 숫자 원의 세로 중심) */
 .process__step:not(:last-child)::after {
   content: "\2192";
   position: absolute;
-  top: 28px;
+  top: 106px;
   right: -8px;
   transform: translate(50%, -50%);
   font-size: 20px;
   color: var(--hero-color-gold-soft);
+}
+
+/* 숫자 위에 들어가는 스텝 이미지 자리 (실제 이미지로 교체 시 span 을
+   <img class="process__step-image-photo" src="실제경로.jpg" alt="..."> 로 바꿔주세요) */
+.process__step-image {
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  background-color: var(--hero-color-surface);
+  border: 1px solid var(--hero-color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.process__step-image-photo {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.process__step-image-label {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--hero-color-gold);
+  font-weight: 600;
 }
 
 .process__step-number {
@@ -931,6 +959,13 @@ p {
 
   .process__step::after {
     display: none;
+  }
+
+  .process__step-image {
+    width: 48px;
+    height: 48px;
+    border-radius: 6px;
+    flex: none;
   }
 
   .process__step-label {
@@ -1023,6 +1058,8 @@ p {
 .verified__card {
   background-color: var(--hero-color-surface);
   border: 1px solid var(--hero-color-border);
+  border-radius: 20px;
+  box-shadow: 0 10px 24px rgba(43, 31, 22, 0.08);
   padding: 28px 24px;
   box-sizing: border-box;
   display: flex;
@@ -1113,6 +1150,8 @@ p {
   aspect-ratio: 16 / 9;
   background-color: var(--hero-color-bg);
   border: 1px solid var(--hero-color-border);
+  border-radius: 20px;
+  box-shadow: 0 10px 24px rgba(43, 31, 22, 0.08);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1251,7 +1290,8 @@ p {
   padding: 24px;
   background-color: var(--hero-color-bg);
   border: 1px solid var(--hero-color-border);
-  border-radius: 4px 24px 4px 24px;
+  border-radius: 20px;
+  box-shadow: 0 10px 24px rgba(43, 31, 22, 0.08);
   box-sizing: border-box;
 }
 
@@ -1266,7 +1306,7 @@ p {
 
 .expo__stat-label {
   margin: 0;
-  font-size: 15px;
+  font-size: 19px;
   font-weight: 600;
   color: var(--hero-color-body);
 }
@@ -1328,6 +1368,8 @@ p {
 .contact__card {
   background-color: var(--hero-color-surface);
   border: 1px solid var(--hero-color-border);
+  border-radius: 20px;
+  box-shadow: 0 10px 24px rgba(43, 31, 22, 0.08);
   padding: 28px 24px;
   box-sizing: border-box;
   display: flex;
@@ -1396,11 +1438,39 @@ p {
 .brand__card {
   background-color: var(--hero-color-bg);
   border: 1px solid var(--hero-color-border);
+  border-radius: 20px;
+  box-shadow: 0 10px 24px rgba(43, 31, 22, 0.08);
   padding: 28px 24px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   gap: 12px;
+}
+
+/* 브랜드 로고 자리 (실제 로고 이미지로 교체 시 span 을
+   <img class="brand__card-logo-image" src="실제경로.png" alt="브랜드명"> 로 바꿔주세요) */
+.brand__card-logo {
+  width: 100%;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.brand__card-logo-image {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+.brand__card-logo-label {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--hero-color-gold);
+  font-weight: 600;
 }
 
 .brand__card-name {
@@ -1486,6 +1556,29 @@ p {
     padding: 8px 14px;
   }
 }
+
+/* -------------------------------------------------------------
+   스크롤 등장 애니메이션 (JS로 .js-reveal 클래스를 부여하고
+   IntersectionObserver로 .is-visible 을 토글합니다)
+------------------------------------------------------------- */
+.js-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.js-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
 </style>
 </head>
 <body>
@@ -1516,28 +1609,13 @@ p {
     <div class="hero__banner-slides">
       <!--
         TODO: 실제 이미지로 교체
-        각 .hero__banner-slide 안의 span 2개를 지우고
+        .hero__banner-slide 안의 span 2개를 지우고
         <img class="hero__banner-image" src="실제경로.jpg" alt="허니문리조트"> 로 바꿔주세요.
-        (position/opacity/애니메이션은 .hero__banner-slide 클래스가 그대로 처리합니다)
       -->
       <div class="hero__banner-slide">
-        <span class="hero__banner-placeholder-label">IMAGE 1</span>
+        <span class="hero__banner-placeholder-label">IMAGE</span>
         <span class="hero__banner-placeholder-size">1920 x 640</span>
       </div>
-      <div class="hero__banner-slide">
-        <span class="hero__banner-placeholder-label">IMAGE 2</span>
-        <span class="hero__banner-placeholder-size">1920 x 640</span>
-      </div>
-      <div class="hero__banner-slide">
-        <span class="hero__banner-placeholder-label">IMAGE 3</span>
-        <span class="hero__banner-placeholder-size">1920 x 640</span>
-      </div>
-    </div>
-
-    <div class="hero__banner-dots" aria-hidden="true">
-      <span class="hero__banner-dot"></span>
-      <span class="hero__banner-dot"></span>
-      <span class="hero__banner-dot"></span>
     </div>
 
     <div class="hero__banner-overlay">
@@ -1550,10 +1628,10 @@ p {
 
     <!-- 배너 하단: 나머지 소개 문단 (제공된 텍스트 그대로 사용) -->
     <div class="hero__intro">
-      <p>예비부부의 예산, 일정, 여행 스타일에 맞춰 항공, 호텔, 투어, 현지 일정을 함께 구성하며 두 사람에게 맞는 신혼여행을 설계합니다.</p>
       <p>신혼여행은 인생에 한 번뿐인 특별한 여행입니다. 어디로 갈지, 어떤 리조트를 선택할지, 항공과 일정은 어떻게 구성할지, 현지에서 어떤 시간을 보낼지에 따라 신혼여행의 만족도가 달라집니다.</p>
-      <p>허니문리조트는 오랜 상담 경험을 바탕으로 예비부부가 원하는 신혼여행의 컨셉 & 분위기와 현실적인 조건을 함께 살펴보고, 가장 어울리는 신혼여행 일정을 제안합니다.</p>
+      <p>예비부부의 예산, 일정, 여행 스타일에 맞춰 항공, 호텔, 투어, 현지 일정을 함께 구성하며 두 사람에게 맞는 신혼여행을 설계합니다.</p>
       <p>대표적인 휴양지인 하와이 신혼여행, 몰디브 신혼여행, 발리 신혼여행, 칸쿤 신혼여행, 코사무이 신혼여행, 푸켓 신혼여행 외에도 관광과 휴양이 가능한 유럽 신혼여행, 스페인 신혼여행, 이탈리아 신혼여행, 프랑스 신혼여행, 호주 신혼여행 등 인기 신혼여행지를 중심으로 다양한 상품과 상담 노하우를 축적해왔으며, 신혼여행지 선택부터 예약 이후 소통까지 신혼여행 준비 전 과정을 함께합니다.</p>
+      <p>허니문리조트는 오랜 상담 경험을 바탕으로 예비부부가 원하는 신혼여행의 컨셉 & 분위기와 현실적인 조건을 함께 살펴보고, 가장 어울리는 신혼여행 일정을 제안합니다.</p>
     </div>
 
   </div>
@@ -1604,20 +1682,50 @@ p {
 
     <p class="awards__intro">허니문리조트는 대한민국 기업으로서, 수년간 글로벌 하이엔드 호텔·리조트의 높은 판매 실적을 쌓아왔습니다. 이를 바탕으로 각국 유명 호텔 브랜드와 긴밀한 파트너십을 구축했으며, 일부 호텔·리조트의 독점 특가와 단독 신혼여행 전용 프로모션을 제공하고 있습니다.</p>
 
-    <ul class="awards__list">
-      <li class="awards__item"><span class="awards__item-year">2025</span><span class="awards__item-name">와이키키 비치 메리어트 한국 세일즈 1위</span></li>
-      <li class="awards__item"><span class="awards__item-year">2025</span><span class="awards__item-name">힐튼 와이콜로아 빌리지 한국 세일즈 1위</span></li>
-      <li class="awards__item"><span class="awards__item-year">2024</span><span class="awards__item-name">AVA Resort Cancun 아시아 세일즈 1위</span></li>
-      <li class="awards__item"><span class="awards__item-year">2024</span><span class="awards__item-name">Impression Moxché by Secrets 아시아 세일즈 1위</span></li>
-      <li class="awards__item"><span class="awards__item-year">2024</span><span class="awards__item-name">바카루 몰디브 한국 세일즈 1위</span></li>
-      <li class="awards__item"><span class="awards__item-year">2024</span><span class="awards__item-name">힐튼 몰디브 아밍기리 한국 세일즈 1위</span></li>
-      <li class="awards__item"><span class="awards__item-year">2024</span><span class="awards__item-name">쿠다 빌링길리 한국 세일즈 1위</span></li>
-      <li class="awards__item"><span class="awards__item-year">2024</span><span class="awards__item-name">에메랄드 파루푸시 한국 세일즈 1위</span></li>
-      <li class="awards__item"><span class="awards__item-year">2023</span><span class="awards__item-name">쉐라톤 와이키키 아시아 세일즈 1위</span></li>
-      <li class="awards__item"><span class="awards__item-year">2015</span><span class="awards__item-name">스타우드 코리아 세일즈 어워드</span></li>
-      <li class="awards__item"><span class="awards__item-year">2013</span><span class="awards__item-name">태국관광청 세일즈 미션 수상</span></li>
-      <li class="awards__item"><span class="awards__item-year">2024·2025</span><span class="awards__item-name">Expedia TAAP B2B 세일즈 한국 1위</span></li>
-    </ul>
+    <div class="awards__timeline">
+      <div class="awards__timeline-item">
+        <div class="awards__timeline-node">2013</div>
+        <ul class="awards__timeline-list">
+          <li>태국관광청 세일즈 미션 수상</li>
+        </ul>
+      </div>
+      <div class="awards__timeline-item">
+        <div class="awards__timeline-node">2015</div>
+        <ul class="awards__timeline-list">
+          <li>스타우드 코리아 세일즈 어워드</li>
+        </ul>
+      </div>
+      <div class="awards__timeline-item">
+        <div class="awards__timeline-node">2023</div>
+        <ul class="awards__timeline-list">
+          <li>쉐라톤 와이키키 아시아 세일즈&nbsp;1위</li>
+        </ul>
+      </div>
+      <div class="awards__timeline-item">
+        <div class="awards__timeline-node">2024</div>
+        <ul class="awards__timeline-list">
+          <li>AVA Resort Cancun 아시아 세일즈&nbsp;1위</li>
+          <li>Impression Moxché by Secrets 아시아 세일즈&nbsp;1위</li>
+          <li>바카루 몰디브 한국 세일즈&nbsp;1위</li>
+          <li>힐튼 몰디브 아밍기리 한국 세일즈&nbsp;1위</li>
+          <li>쿠다 빌링길리 한국 세일즈&nbsp;1위</li>
+          <li>에메랄드 파루푸시 한국 세일즈&nbsp;1위</li>
+        </ul>
+      </div>
+      <div class="awards__timeline-item">
+        <div class="awards__timeline-node">2024<br>·2025</div>
+        <ul class="awards__timeline-list">
+          <li>Expedia TAAP B2B 세일즈 한국&nbsp;1위</li>
+        </ul>
+      </div>
+      <div class="awards__timeline-item">
+        <div class="awards__timeline-node">2025</div>
+        <ul class="awards__timeline-list">
+          <li>와이키키 비치 메리어트 한국 세일즈&nbsp;1위</li>
+          <li>힐튼 와이콜로아 빌리지 한국 세일즈&nbsp;1위</li>
+        </ul>
+      </div>
+    </div>
 
     <p class="awards__outro">이러한 판매 실적과 글로벌 호텔·리조트 파트너십을 바탕으로 글로벌 하이엔드 브랜드인 포시즌스 호텔 7개 지점의 한국 독점 도매 권한을 확보하고 있으며, 이외에도 주메이라, 리딩 호텔 오브 더 월드, 킴튼, 아난타라, 벨몬드 등과도 견고한 파트너십을 운영해 허니문리조트 고객을 위한 대한민국 독점 특가와 프로모션을 제공하고 있습니다.</p>
 
@@ -1644,23 +1752,30 @@ p {
     <h2 class="section-title">허니문리조트와 준비하는 신혼여행은 어떻게 진행되나요?</h2>
 
     <div class="process__steps">
+      <!-- TODO: 각 .process__step-image 안의 span 을
+           <img class="process__step-image-photo" src="실제경로.jpg" alt="..."> 로 바꿔주세요 -->
       <div class="process__step">
+        <div class="process__step-image"><span class="process__step-image-label">IMG</span></div>
         <span class="process__step-number">1</span>
         <span class="process__step-label">신혼여행 조건 확인</span>
       </div>
       <div class="process__step">
+        <div class="process__step-image"><span class="process__step-image-label">IMG</span></div>
         <span class="process__step-number">2</span>
         <span class="process__step-label">신혼여행지 및 리조트 비교</span>
       </div>
       <div class="process__step">
+        <div class="process__step-image"><span class="process__step-image-label">IMG</span></div>
         <span class="process__step-number">3</span>
         <span class="process__step-label">항공·호텔·투어 구성</span>
       </div>
       <div class="process__step">
+        <div class="process__step-image"><span class="process__step-image-label">IMG</span></div>
         <span class="process__step-number">4</span>
         <span class="process__step-label">견적 및 일정 확정</span>
       </div>
       <div class="process__step">
+        <div class="process__step-image"><span class="process__step-image-label">IMG</span></div>
         <span class="process__step-number">5</span>
         <span class="process__step-label">예약 후 출발 준비 안내</span>
       </div>
@@ -1964,14 +2079,17 @@ p {
 
     <div class="brand__grid">
       <div class="brand__card">
+        <div class="brand__card-logo"><img class="brand__card-logo-image" src="assets/logo/hotelntour-logo.png" alt="호텔엔투어"></div>
         <p class="brand__card-name">호텔엔투어</p>
         <p class="brand__card-desc">맞춤형 럭셔리 여행, 가족 여행, 베이비문, 단체 여행, 골프 여행을 위한 브랜드로서 하와이, 몰디브, 유럽, 발리를 주요 시장으로 하며, 12월부터 2월, 6월 말부터 8월까지의 여행 성수기 수요에 맞춘 1:1 맞춤 자유여행 상담을 제공합니다.</p>
       </div>
       <div class="brand__card">
+        <div class="brand__card-logo"><img class="brand__card-logo-image" src="assets/logo/hotelntrip-logo.png" alt="호텔엔트립"></div>
         <p class="brand__card-name">호텔엔트립</p>
         <p class="brand__card-desc">하와이 특화 B2C 패키지 호텔 예약 플랫폼입니다. 하와이를 주요 시장으로 운영하며, 2박 이상 예약 가능한 패키지 숙박 상품을 판매합니다.</p>
       </div>
       <div class="brand__card">
+        <div class="brand__card-logo"><img class="brand__card-logo-image" src="assets/logo/kwedding-logo.jpg" alt="K-웨딩 by 허니문리조트"></div>
         <p class="brand__card-name">K-웨딩 by 허니문리조트</p>
         <p class="brand__card-desc">서울을 기반으로 라이프스타일과 웨딩 경험을 맞춤 설계하는 프라이빗 컨시어지 인바운드 여행 서비스입니다. 한국을 방문하는 웨딩 인바운드 여행사로 1:1 맞춤 웨딩 상담부터 서울 전체 일정까지 30년 경력의 전문가가 처음부터 끝까지 영어로 진행합니다.</p>
       </div>
@@ -2009,6 +2127,78 @@ p {
 
   </div>
 </section>
+
+<!-- ============================================================
+   JS: 스크롤 등장 애니메이션 + 숫자 카운트업
+   - 실제 사이트에 적용할 때는 필요 없어지면 이 <script> 블록과
+     위 CSS의 .js-reveal / .js-reveal.is-visible 규칙만 지우면 됩니다.
+============================================================= -->
+<script>
+(function () {
+  var revealTargets = document.querySelectorAll(
+    '.section-title, .scale__stat, .expo__stat, .awards__timeline-item, ' +
+    '.verified__card, .contact__card, .brand__card, .process__step, ' +
+    '.image-card, .youtube__video-thumb'
+  );
+
+  if ('IntersectionObserver' in window) {
+    revealTargets.forEach(function (el) {
+      el.classList.add('js-reveal');
+    });
+
+    var revealObserver = new IntersectionObserver(function (entries, observer) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+    revealTargets.forEach(function (el) {
+      revealObserver.observe(el);
+    });
+  }
+
+  /* 숫자 카운트업: "허니문리조트는 어느 정도 규모?" 섹션의 13개 / 100명+ */
+  function animateCount(el, target, duration) {
+    var startTime = null;
+    function step(timestamp) {
+      if (startTime === null) startTime = timestamp;
+      var progress = Math.min((timestamp - startTime) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      el.firstChild.textContent = Math.round(target * eased);
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        el.firstChild.textContent = target;
+      }
+    }
+    requestAnimationFrame(step);
+  }
+
+  var numberEls = document.querySelectorAll('.scale__stat-number');
+
+  if ('IntersectionObserver' in window && numberEls.length) {
+    var numberObserver = new IntersectionObserver(function (entries, observer) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          var el = entry.target;
+          var target = parseInt(el.textContent, 10);
+          if (!isNaN(target)) {
+            animateCount(el, target, 1200);
+          }
+          observer.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    numberEls.forEach(function (el) {
+      numberObserver.observe(el);
+    });
+  }
+})();
+</script>
 
 </body>
 </html>
