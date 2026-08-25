@@ -114,7 +114,7 @@ p {
   width: 100%;
   background-color: var(--hero-color-ink);
   font-family: var(--hero-font);
-  padding: 56px 0 84px;
+  padding: 70px 0;
   box-sizing: border-box;
   overflow: hidden;
 }
@@ -130,7 +130,7 @@ p {
 .statement__logo {
   display: inline-block;
   width: 100%;
-  max-width: 720px;
+  max-width: 460px;
   height: auto;
 }
 
@@ -393,6 +393,15 @@ p {
   color: var(--hero-color-body);
   max-width: 720px;
   text-align: center;
+}
+
+/* 지사 네트워크 지도 */
+.scale__map {
+  display: block;
+  margin: 8px auto 28px;
+  max-width: 380px;
+  width: 100%;
+  height: auto;
 }
 
 /* 지사 목록 (가운데 점으로 구분된 한 줄 텍스트, 가운데 정렬) */
@@ -704,23 +713,25 @@ p {
 }
 
 /* 문단이 많은 섹션(셀러브리티, 박람회 등)에서 세로 길이를 줄이기 위한
-   2단 컬럼 변형. .text-stack 과 함께 사용합니다: class="text-stack text-stack--2col" */
+   2단 컬럼 변형. .text-stack 과 함께 사용합니다: class="text-stack text-stack--2col"
+   그리드 2열(행 우선 채움)이라 1,3,5번째 문단이 왼쪽에 옵니다 -
+   왼쪽 컬럼이 항상 더 무게감 있도록 문단 순서를 배치하세요. */
 .text-stack--2col {
-  display: block;
-  columns: 2;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   column-gap: 40px;
+  row-gap: 14px;
   max-width: 900px;
 }
 
 .text-stack--2col p {
-  margin: 0 0 14px;
-  break-inside: avoid;
+  margin: 0;
   text-align: left;
 }
 
 @media (max-width: 860px) {
   .text-stack--2col {
-    columns: 1;
+    grid-template-columns: 1fr;
   }
 
   .text-stack--2col p {
@@ -872,53 +883,24 @@ p {
 }
 
 /* 마지막 스텝을 제외하고 오른쪽에 화살표로 다음 단계와 연결
-   (이미지(64px) + gap(14px) + 숫자 원(56px) 절반 = 106px 지점이 숫자 원의 세로 중심) */
+   (숫자 원(64px) 절반 = 32px 지점이 숫자 원의 세로 중심) */
 .process__step:not(:last-child)::after {
   content: "\2192";
   position: absolute;
-  top: 106px;
+  top: 32px;
   right: -8px;
   transform: translate(50%, -50%);
   font-size: 20px;
   color: var(--hero-color-gold-soft);
 }
 
-/* 숫자 위에 들어가는 스텝 이미지 자리 (실제 이미지로 교체 시 span 을
-   <img class="process__step-image-photo" src="실제경로.jpg" alt="..."> 로 바꿔주세요) */
-.process__step-image {
+.process__step-number {
   width: 64px;
   height: 64px;
-  border-radius: 8px;
-  background-color: var(--hero-color-surface);
-  border: 1px solid var(--hero-color-border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  overflow: hidden;
-}
-
-.process__step-image-photo {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-}
-
-.process__step-image-label {
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  color: var(--hero-color-gold);
-  font-weight: 600;
-}
-
-.process__step-number {
-  width: 56px;
-  height: 56px;
   border-radius: 50%;
   background-color: var(--hero-color-gold);
   color: var(--hero-color-bg);
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 700;
   display: flex;
   align-items: center;
@@ -961,10 +943,10 @@ p {
     display: none;
   }
 
-  .process__step-image {
+  .process__step-number {
     width: 48px;
     height: 48px;
-    border-radius: 6px;
+    font-size: 18px;
     flex: none;
   }
 
@@ -1579,6 +1561,53 @@ p {
     transition: none;
   }
 }
+
+/* -------------------------------------------------------------
+   맨 위로 이동 버튼 (페이지를 절반 이상 스크롤하면 나타남)
+------------------------------------------------------------- */
+.back-to-top {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--hero-color-gold);
+  color: var(--hero-color-bg);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(43, 31, 22, 0.25);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s, background-color 0.2s ease;
+  z-index: 100;
+}
+
+.back-to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  background-color: var(--hero-color-ink);
+}
+
+@media (max-width: 860px) {
+  .back-to-top {
+    right: 16px;
+    bottom: 16px;
+    width: 44px;
+    height: 44px;
+    font-size: 18px;
+  }
+}
 </style>
 </head>
 <body>
@@ -1607,14 +1636,9 @@ p {
        // 오가닉 블롭 프레임 없이 각진 사각형 + CSS 전용 자동 슬라이드, 임시 플레이스홀더 3장) + 하단 좌측 텍스트 -->
   <div class="hero__banner">
     <div class="hero__banner-slides">
-      <!--
-        TODO: 실제 이미지로 교체
-        .hero__banner-slide 안의 span 2개를 지우고
-        <img class="hero__banner-image" src="실제경로.jpg" alt="허니문리조트"> 로 바꿔주세요.
-      -->
+      <!-- TODO: 실제 이미지로 교체 (현재는 임시 플레이스홀더 이미지) -->
       <div class="hero__banner-slide">
-        <span class="hero__banner-placeholder-label">IMAGE</span>
-        <span class="hero__banner-placeholder-size">1920 x 640</span>
+        <img class="hero__banner-image" src="assets/placeholders/hero-banner.jpg" alt="허니문리조트 (임시 이미지)">
       </div>
     </div>
 
@@ -1660,6 +1684,8 @@ p {
     </div>
 
     <p class="scale__desc">허니문리조트는 서울 청담동 본사를 중심으로 13개 지역 지사와 100명 이상의 임직원 운영 기반을 갖춘 허니문 전문 여행사입니다. 서울 본사와 천안, 대전, 대구, 포항, 울산, 부산, 창원, 전주, 광주, 진주, 순천, 제주, 하와이 등 국내외 상담 네트워크를 운영하며 B2C 신혼여행 상담과 B2B 여행 사업을 함께 운영하고 있습니다.</p>
+
+    <img class="scale__map" src="assets/branch-map.png" alt="허니문리조트 지사 네트워크 지도: 서울 본사, 천안, 대전, 대구, 포항, 울산, 부산, 창원, 전주, 광주, 순천, 제주, 하와이">
 
     <p class="scale__cities">
       <span class="scale__cities-label">지사 네트워크</span>
@@ -1752,30 +1778,23 @@ p {
     <h2 class="section-title">허니문리조트와 준비하는 신혼여행은 어떻게 진행되나요?</h2>
 
     <div class="process__steps">
-      <!-- TODO: 각 .process__step-image 안의 span 을
-           <img class="process__step-image-photo" src="실제경로.jpg" alt="..."> 로 바꿔주세요 -->
       <div class="process__step">
-        <div class="process__step-image"><span class="process__step-image-label">IMG</span></div>
         <span class="process__step-number">1</span>
         <span class="process__step-label">신혼여행 조건 확인</span>
       </div>
       <div class="process__step">
-        <div class="process__step-image"><span class="process__step-image-label">IMG</span></div>
         <span class="process__step-number">2</span>
         <span class="process__step-label">신혼여행지 및 리조트 비교</span>
       </div>
       <div class="process__step">
-        <div class="process__step-image"><span class="process__step-image-label">IMG</span></div>
         <span class="process__step-number">3</span>
         <span class="process__step-label">항공·호텔·투어 구성</span>
       </div>
       <div class="process__step">
-        <div class="process__step-image"><span class="process__step-image-label">IMG</span></div>
         <span class="process__step-number">4</span>
         <span class="process__step-label">견적 및 일정 확정</span>
       </div>
       <div class="process__step">
-        <div class="process__step-image"><span class="process__step-image-label">IMG</span></div>
         <span class="process__step-number">5</span>
         <span class="process__step-label">예약 후 출발 준비 안내</span>
       </div>
@@ -1801,60 +1820,60 @@ p {
     <div class="text-stack text-stack--2col">
       <p>허니문리조트와 함께하는 1:1 맞춤 신혼여행은 정해진 여행 패키지처럼 여행 루트를 그대로 적용하는 방식이 아니라, 예비부부의 예산·일정·여행 스타일에 따라 항공, 숙박, 투어와 이동 동선을 조합하는 방식입니다.</p>
       <p>같은 몰디브라도 수중환경과 객실 타입, 식사 조건, 이동 방식에 따라 최적의 리조트는 달라집니다. 하와이 역시 숙박 지역과 이웃 섬 일정에 따라 여행의 동선과 구성이 크게 달라질 수 있습니다.</p>
-      <p>일정 구성이 복잡한 유럽도 출·도착 도시(IN–OUT)부터 이용하는 호텔과 리조트의 정확한 명칭까지 투명하게 안내합니다.</p>
       <p>허니문리조트는 단순히 여행 상품을 판매하는 데 그치지 않고, 다양한 조건을 꼼꼼하게 비교해 두 사람의 취향과 예산, 여행 방식에 가장 잘 맞는 신혼여행을 제안합니다.</p>
+      <p>일정 구성이 복잡한 유럽도 출·도착 도시(IN–OUT)부터 이용하는 호텔과 리조트의 정확한 명칭까지 투명하게 안내합니다.</p>
     </div>
 
     <p class="custom__destinations-label">1:1 맞춤 신혼여행이 가능한 신혼여행지</p>
 
     <div class="image-card-grid">
-      <!-- TODO: 각 카드의 .image-card__image 를 실제 목적지 이미지로 교체 -->
+      <!-- TODO: 각 카드의 .image-card__image 를 실제 목적지 이미지로 교체 (현재는 임시 플레이스홀더 이미지) -->
       <div class="image-card">
-        <div class="image-card__image"><span class="image-card__image-label">IMG</span></div>
+        <div class="image-card__image"><img class="image-card__photo" src="assets/placeholders/hawaii.jpg" alt="하와이 신혼여행 (임시 이미지)"></div>
         <p class="image-card__caption">하와이 신혼여행</p>
       </div>
       <div class="image-card">
-        <div class="image-card__image"><span class="image-card__image-label">IMG</span></div>
+        <div class="image-card__image"><img class="image-card__photo" src="assets/placeholders/maldives.jpg" alt="몰디브 신혼여행 (임시 이미지)"></div>
         <p class="image-card__caption">몰디브 신혼여행</p>
       </div>
       <div class="image-card">
-        <div class="image-card__image"><span class="image-card__image-label">IMG</span></div>
+        <div class="image-card__image"><img class="image-card__photo" src="assets/placeholders/bali.jpg" alt="발리 신혼여행 (임시 이미지)"></div>
         <p class="image-card__caption">발리 신혼여행</p>
       </div>
       <div class="image-card">
-        <div class="image-card__image"><span class="image-card__image-label">IMG</span></div>
+        <div class="image-card__image"><img class="image-card__photo" src="assets/placeholders/cancun.jpg" alt="칸쿤 신혼여행 (임시 이미지)"></div>
         <p class="image-card__caption">칸쿤 신혼여행</p>
       </div>
       <div class="image-card">
-        <div class="image-card__image"><span class="image-card__image-label">IMG</span></div>
+        <div class="image-card__image"><img class="image-card__photo" src="assets/placeholders/kohsamui.jpg" alt="코사무이 신혼여행 (임시 이미지)"></div>
         <p class="image-card__caption">코사무이 신혼여행</p>
       </div>
       <div class="image-card">
-        <div class="image-card__image"><span class="image-card__image-label">IMG</span></div>
+        <div class="image-card__image"><img class="image-card__photo" src="assets/placeholders/phuket.jpg" alt="푸켓 신혼여행 (임시 이미지)"></div>
         <p class="image-card__caption">푸켓 신혼여행</p>
       </div>
       <div class="image-card">
-        <div class="image-card__image"><span class="image-card__image-label">IMG</span></div>
+        <div class="image-card__image"><img class="image-card__photo" src="assets/placeholders/europe.jpg" alt="유럽 신혼여행 (임시 이미지)"></div>
         <p class="image-card__caption">유럽 신혼여행</p>
       </div>
       <div class="image-card">
-        <div class="image-card__image"><span class="image-card__image-label">IMG</span></div>
+        <div class="image-card__image"><img class="image-card__photo" src="assets/placeholders/spain.jpg" alt="스페인 신혼여행 (임시 이미지)"></div>
         <p class="image-card__caption">스페인 신혼여행</p>
       </div>
       <div class="image-card">
-        <div class="image-card__image"><span class="image-card__image-label">IMG</span></div>
+        <div class="image-card__image"><img class="image-card__photo" src="assets/placeholders/australia.jpg" alt="호주 신혼여행 (임시 이미지)"></div>
         <p class="image-card__caption">호주 신혼여행</p>
       </div>
       <div class="image-card">
-        <div class="image-card__image"><span class="image-card__image-label">IMG</span></div>
+        <div class="image-card__image"><img class="image-card__photo" src="assets/placeholders/dubai.jpg" alt="두바이 신혼여행 (임시 이미지)"></div>
         <p class="image-card__caption">두바이 신혼여행</p>
       </div>
       <div class="image-card">
-        <div class="image-card__image"><span class="image-card__image-label">IMG</span></div>
+        <div class="image-card__image"><img class="image-card__photo" src="assets/placeholders/mauritius.jpg" alt="모리셔스 신혼여행 (임시 이미지)"></div>
         <p class="image-card__caption">모리셔스 신혼여행</p>
       </div>
       <div class="image-card">
-        <div class="image-card__image"><span class="image-card__image-label">IMG</span></div>
+        <div class="image-card__image"><img class="image-card__photo" src="assets/placeholders/tahiti.jpg" alt="타히티 신혼여행 (임시 이미지)"></div>
         <p class="image-card__caption">타히티 신혼여행</p>
       </div>
     </div>
@@ -2031,8 +2050,8 @@ p {
     </div>
 
     <div class="text-stack text-stack--2col">
-      <p>허니문리조트는 매주 주말 신혼여행 박람회를 통해 예비부부가 신혼여행지와 리조트를 직접 비교하고 상담받을 수 있는 자리를 운영합니다.</p>
       <p>매달 주말에 진행되는 박람회는 오전 11시부터 오후 7시까지 운영되며, 최소 150쌍에서 최대 300쌍의 예비부부가 참여하는 1:1 맞춤 신혼여행 상담 행사로 운영됩니다.</p>
+      <p>허니문리조트는 매주 주말 신혼여행 박람회를 통해 예비부부가 신혼여행지와 리조트를 직접 비교하고 상담받을 수 있는 자리를 운영합니다.</p>
       <p>허니문리조트 신혼여행 박람회에서는 각 신혼여행지에 대한 추가 할인 프로모션, 지역 설명, 리조트 독점 특가 등을 직접 확인할 수 있습니다.</p>
       <p>온라인 정보만으로는 알기 어려운 리조트 분위기, 객실 조건, 항공 일정, 투어 구성, 예산 범위를 상담을 통해 비교할 수 있습니다.</p>
       <p>허니문리조트 신혼여행 박람회는 스드메·예물 등 결혼 준비 전반을 다루는 일반 웨딩박람회와 달리, 신혼여행 상담과 여행지·리조트 비교에 집중한 허니문 전문 상담 행사입니다.</p>
@@ -2120,13 +2139,15 @@ p {
     </div>
 
     <div class="text-stack text-stack--2col">
-      <p>일반여행업 보증과 기획여행업 보증에 가입하고 있으며, 여행 과정에서 발생할 수 있는 사고와 피해에 대비해 여행업자 배상책임보험에도 가입되어 있습니다.</p>
       <p>또한 IATA(국제항공운송협회) BSP 7억 원 가입을 통해 국제 항공권 발권 및 정산 업무를 운영하고 있으며, 글로벌 여행 예약 플랫폼 Expedia TAAP Platinum Tier를 획득하는 등 B2B 여행 시장에서도 지속적인 거래 실적을 쌓아왔습니다.</p>
+      <p>일반여행업 보증과 기획여행업 보증에 가입하고 있으며, 여행 과정에서 발생할 수 있는 사고와 피해에 대비해 여행업자 배상책임보험에도 가입되어 있습니다.</p>
       <p>허니문리조트는 이러한 여행업 운영 기반과 함께 1995년부터 축적한 신혼여행 상담 경험, 전국 상담 네트워크, 100명 이상의 임직원 운영 기반을 바탕으로 상담부터 예약, 출발 전 안내까지 신혼여행 전 과정을 체계적으로 지원하고 있습니다.</p>
     </div>
 
   </div>
 </section>
+
+<button type="button" class="back-to-top" id="backToTop" aria-label="맨 위로 이동">&uarr;</button>
 
 <!-- ============================================================
    JS: 스크롤 등장 애니메이션 + 숫자 카운트업
@@ -2195,6 +2216,26 @@ p {
 
     numberEls.forEach(function (el) {
       numberObserver.observe(el);
+    });
+  }
+
+  /* 맨 위로 이동 버튼: 페이지를 절반 이상 스크롤하면 표시 */
+  var backToTop = document.getElementById('backToTop');
+  if (backToTop) {
+    var toggleBackToTop = function () {
+      var scrollTop = window.scrollY || document.documentElement.scrollTop;
+      var scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      if (scrollable > 0 && scrollTop > scrollable / 2) {
+        backToTop.classList.add('is-visible');
+      } else {
+        backToTop.classList.remove('is-visible');
+      }
+    };
+    window.addEventListener('scroll', toggleBackToTop, { passive: true });
+    toggleBackToTop();
+
+    backToTop.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
 })();
