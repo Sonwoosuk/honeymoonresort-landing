@@ -99,7 +99,7 @@ p {
   width: 100%;
   background-color: var(--hero-color-bg);
   font-family: var(--hero-font);
-  padding: 64px 0 72px;
+  padding: 0 0 72px;
   box-sizing: border-box;
 }
 
@@ -145,27 +145,6 @@ p {
   .statement {
     padding: 48px 0;
   }
-}
-
-/* -------------------------------------------------------------
-   3. 상단 타이틀 영역
-------------------------------------------------------------- */
-.hero__header {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-bottom: 24px;
-}
-
-/* 메인 로고 */
-.hero__logo {
-  margin: 0;
-}
-
-.hero__logo-image {
-  display: block;
-  height: 64px;
-  width: auto;
 }
 
 /* -------------------------------------------------------------
@@ -277,15 +256,11 @@ p {
 ------------------------------------------------------------- */
 @media (max-width: 860px) {
   .hero {
-    padding: 48px 0 56px;
+    padding: 0 0 56px;
   }
 
   .hero__inner {
     padding: 0 24px;
-  }
-
-  .hero__logo-image {
-    height: 44px;
   }
 
   .hero__banner-slides {
@@ -1805,17 +1780,6 @@ html, body {
 ============================================================= -->
 
 <section class="hero">
-  <div class="hero__inner">
-
-    <!-- 상단: 로고 -->
-    <div class="hero__header">
-      <h1 class="hero__logo">
-        <!-- 실제 브랜드 로고 (assets/logo/honeymoonresort-logo.png) -->
-        <img class="hero__logo-image" src="../assets/logo/honeymoonresort-logo.png" alt="허니문리조트 Honeymoon Resort">
-      </h1>
-    </div>
-
-  </div>
 
   <!-- 풀와이드 배너 (.hero__inner 컨테이너 밖에 배치 -> 좌우 여백 없이 화면 전체 폭으로 표시
        // 오가닉 블롭 프레임 없이 각진 사각형 + CSS 전용 자동 슬라이드, 임시 플레이스홀더 3장) + 하단 좌측 텍스트 -->
