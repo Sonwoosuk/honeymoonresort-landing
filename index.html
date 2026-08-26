@@ -178,7 +178,9 @@ p {
 .hero__banner-slides {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  height: 50vh;
+  max-height: 540px;
+  min-height: 320px;
 }
 
 /* 실제 이미지로 교체 시 사용할 클래스 (임시 플레이스홀더 대체용) */
@@ -460,8 +462,7 @@ p {
 /* =============================================================
    AWARDS SECTION STYLES
    - "허니문리조트에서 호텔·리조트를 예약하면 어떤 장점?" 섹션
-   - 구성: 타이틀 -> 도입 문단 -> 수상 목록(3열 그리드) -> 마무리 문단
-   - 트로피 이미지 없이 텍스트 그리드로만 구성해 1080px 안에 압축
+   - 구성: 타이틀 -> 도입 문단 -> 연도별 타임라인(수상 내역 + 인증서/트로피 사진) -> 마무리 문단
    - 클래스명은 "awards-" 네임스페이스(awards__) 사용
 ============================================================= */
 .awards {
@@ -605,6 +606,33 @@ p {
   right: 0;
 }
 
+.awards__timeline-photos {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+.awards__timeline-item:nth-child(odd) .awards__timeline-photos {
+  justify-content: flex-end;
+}
+
+.awards__timeline-item:nth-child(even) .awards__timeline-photos {
+  justify-content: flex-start;
+}
+
+.awards__timeline-photo {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  box-sizing: border-box;
+  padding: 8px;
+  background: var(--hero-color-bg);
+  border: 1px solid var(--hero-color-border);
+  border-radius: 10px;
+  box-shadow: 0 6px 14px rgba(43, 31, 22, 0.08);
+}
+
 .awards__outro {
   margin: 0 auto;
   max-width: 760px;
@@ -670,6 +698,16 @@ p {
   .awards__timeline-item:nth-child(odd) .awards__timeline-list li::before {
     left: 0;
     right: auto;
+  }
+
+  .awards__timeline-item:nth-child(odd) .awards__timeline-photos,
+  .awards__timeline-item:nth-child(even) .awards__timeline-photos {
+    justify-content: flex-start;
+  }
+
+  .awards__timeline-photo {
+    width: 108px;
+    height: 108px;
   }
 }
 
@@ -1690,7 +1728,7 @@ p {
     <div class="hero__banner-slides">
       <!-- TODO: 실제 이미지로 교체 (현재는 임시 플레이스홀더 이미지) -->
       <div class="hero__banner-slide">
-        <img class="hero__banner-image" src="assets/hero-main.png" alt="허니문리조트 신혼여행 커플">
+        <img class="hero__banner-image" src="assets/hero-main.jpg" alt="허니문리조트 몰디브 디가리 리조트 전경">
       </div>
     </div>
 
@@ -1771,17 +1809,43 @@ p {
         </ul>
       </div>
       <div class="awards__timeline-item">
+        <div class="awards__timeline-node">2017</div>
+        <ul class="awards__timeline-list">
+          <li>더 웨스틴 마우이 리조트&nbsp;&amp;&nbsp;스파(카아나팔리) 세일즈 우수 감사패 수상</li>
+        </ul>
+        <div class="awards__timeline-photos">
+          <img class="awards__timeline-photo" src="assets/awards/2017-westin-maui.jpg" alt="더 웨스틴 마우이 리조트 & 스파 세일즈 우수 감사패">
+        </div>
+      </div>
+      <div class="awards__timeline-item">
+        <div class="awards__timeline-node">2020</div>
+        <ul class="awards__timeline-list">
+          <li>경영혁신형 중소기업(Main-Biz) 인증 획득</li>
+        </ul>
+        <div class="awards__timeline-photos">
+          <img class="awards__timeline-photo" src="assets/awards/2020-mainbiz-certificate.jpg" alt="경영혁신형 중소기업 Main-Biz 확인서">
+        </div>
+      </div>
+      <div class="awards__timeline-item">
         <div class="awards__timeline-node">2022</div>
         <ul class="awards__timeline-list">
           <li>쉐라톤 와이키키 아시아 세일즈 우수 감사패 수상</li>
         </ul>
+        <div class="awards__timeline-photos">
+          <img class="awards__timeline-photo" src="assets/awards/2022-sheraton-waikiki.jpg" alt="쉐라톤 와이키키 아시아 세일즈 우수 감사패">
+        </div>
       </div>
       <div class="awards__timeline-item">
         <div class="awards__timeline-node">2023</div>
         <ul class="awards__timeline-list">
           <li>쉐라톤 와이키키 아시아 세일즈&nbsp;1위</li>
           <li>하와이 알로힐라니 리조트 와이키키 비치 호텔 최우수 세일즈 선정</li>
+          <li>릴리 비치 리조트&nbsp;&amp;&nbsp;스파 아시아 세일즈&nbsp;1위(Top Selling Korean Partner)</li>
         </ul>
+        <div class="awards__timeline-photos">
+          <img class="awards__timeline-photo" src="assets/awards/2023-sheraton-waikiki-turtle.png" alt="쉐라톤 와이키키 아시아 세일즈 1위 감사패">
+          <img class="awards__timeline-photo" src="assets/awards/2023-lily-beach.png" alt="릴리 비치 리조트 & 스파 아시아 세일즈 1위 트로피">
+        </div>
       </div>
       <div class="awards__timeline-item">
         <div class="awards__timeline-node">2024</div>
@@ -1793,12 +1857,19 @@ p {
           <li>쿠다 빌링길리 한국 세일즈&nbsp;1위</li>
           <li>에메랄드 파루푸시 한국 세일즈&nbsp;1위</li>
         </ul>
+        <div class="awards__timeline-photos">
+          <img class="awards__timeline-photo" src="assets/awards/2024-vakkaru.jpg" alt="바카루 몰디브 한국 세일즈 1위 트로피">
+          <img class="awards__timeline-photo" src="assets/awards/2024-emerald-faarufushi.jpg" alt="에메랄드 파루푸시 한국 세일즈 1위 트로피">
+        </div>
       </div>
       <div class="awards__timeline-item">
         <div class="awards__timeline-node">2024<br>·2025</div>
         <ul class="awards__timeline-list">
           <li>Expedia TAAP B2B 세일즈 한국&nbsp;1위</li>
         </ul>
+        <div class="awards__timeline-photos">
+          <img class="awards__timeline-photo" src="assets/awards/2024-2025-expedia-taap.jpg" alt="Expedia TAAP 2024 Best Performance Awards 인증서">
+        </div>
       </div>
       <div class="awards__timeline-item">
         <div class="awards__timeline-node">2025</div>
