@@ -1803,6 +1803,18 @@ html, body {
   margin-right: -50vw;
   overflow: hidden;
 }
+
+/* 실제 사이트 default.css의 전역 규칙
+     * { font-family: 'Pretendard Medium', 'Noto Sans KR', sans-serif; }
+   이 모든 하위 요소에 폰트를 직접 강제 지정하기 때문에, 상위 섹션에만
+   font-family를 걸어둔 우리 CSS는 자식 요소에서 상속이 아니라 이 전역
+   규칙에 덮여씁니다(같은 * 선택자라도 상속보다 직접 지정이 항상 우선).
+   .hr-page * 로 클래스 한 단계를 얹어 specificity를 올려서 우리 쪽이
+   이기도록 만듭니다. */
+.hr-page,
+.hr-page * {
+  font-family: var(--hero-font);
+}
 </style>
 </head>
 <body>
@@ -1810,6 +1822,7 @@ html, body {
 <jsp:include page="../layout/header.jsp"></jsp:include>
 
 <div class="wrap">
+<div class="hr-page">
 
 <!-- ============================================================
    HERO SECTION
@@ -2512,6 +2525,7 @@ html, body {
 </script>
 
 
+</div><!--hr-page-->
 </div><!--wrap-->
 
 <jsp:include page="../layout/footer.jsp"></jsp:include>
