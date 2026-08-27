@@ -10,7 +10,7 @@
 
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="travel" content="허니문리조트" />
-<meta name="keywords" content="허니문" />
+<meta name="keywords" content="허니문리조트, 신혼여행, 허니문, 신혼여행 전문 여행사, 허니문리조트 회사소개, 하와이 신혼여행, 몰디브 신혼여행, 발리 신혼여행" />
 <meta name="author" content="허니문리조트" />
 <meta http-equiv="Cache-Control" content="No-store, No-cache, Must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
@@ -19,14 +19,47 @@
 <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
 
 <c:set var = "url" value = "${pageContext.request.requestURL}"/>
-<c:if test="${fn:contains(url, 'hotelntour')}">
-<title>호텔엔투어</title>
-<link rel="shortcut icon" href="../new_ver/img/hnt2_tab_logo.png">
-</c:if>
-<c:if test="${fn:contains(url, 'honeymoonresort')}">
-<title>허니문리조트</title>
-<link rel="shortcut icon" href="../new_ver/img/hnt_tab_logo.png">
-</c:if>
+<c:set var="siteOrigin" value="${pageContext.request.scheme}://${header.host}"/>
+<c:choose>
+  <c:when test="${fn:contains(url, 'hotelntour')}">
+    <c:set var="siteName" value="호텔엔투어"/>
+    <link rel="shortcut icon" href="../new_ver/img/hnt2_tab_logo.png">
+  </c:when>
+  <c:otherwise>
+    <c:set var="siteName" value="허니문리조트"/>
+    <link rel="shortcut icon" href="../new_ver/img/hnt_tab_logo.png">
+  </c:otherwise>
+</c:choose>
+<title>회사소개 | ${siteName} - 1995년부터 신혼여행 전문 여행사</title>
+<meta name="description" content="${siteName}는 1995년부터 신혼여행을 전문으로 안내해 온 허니문 전문 여행사입니다. 서울 청담동 본사와 전국 13개 지사, 100명 이상의 임직원이 하와이·몰디브·발리 등 신혼여행지 상담부터 예약, 현지 소통까지 함께합니다." />
+<link rel="canonical" href="${url}" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="${siteName}" />
+<meta property="og:title" content="회사소개 | ${siteName}" />
+<meta property="og:description" content="1995년부터 신혼여행만 전문으로. 전국 13개 지사, 100명 이상 임직원 기반의 허니문 전문 여행사." />
+<meta property="og:url" content="${url}" />
+<meta property="og:image" content="${siteOrigin}/new_ver/img/company-intro/hero-main.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TravelAgency",
+  "name": "${siteName}",
+  "description": "1995년부터 신혼여행을 전문으로 하는 허니문 전문 여행사",
+  "foundingDate": "1995",
+  "url": "${siteOrigin}",
+  "logo": "${siteOrigin}/new_ver/img/company-intro/logo/honeymoonresort-logo.png",
+  "image": "${siteOrigin}/new_ver/img/company-intro/hero-main.jpg",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "서울",
+    "addressRegion": "서울",
+    "addressCountry": "KR"
+  },
+  "areaServed": ["하와이", "몰디브", "발리", "칸쿤", "코사무이", "푸켓", "유럽", "스페인", "이탈리아", "프랑스", "호주"],
+  "numberOfEmployees": { "@type": "QuantitativeValue", "minValue": 100 }
+}
+</script>
 <link rel="stylesheet" type="text/css" href="../new_ver/css/default.css" />
 <link rel="stylesheet" type="text/css" href="../new_ver/css/component.css" />
 <link rel="stylesheet" type="text/css" href="../new_ver/css/componentH.css" />
@@ -1834,6 +1867,9 @@ html, body {
 ============================================================= -->
 
 <section class="hero">
+
+  <!-- 화면에는 보이지 않는 페이지 대표 제목(h1): 스크린리더 & 검색엔진용 -->
+  <h1 style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;">${siteName} 회사소개 - 1995년부터 신혼여행을 전문으로 하는 허니문 전문 여행사</h1>
 
   <!-- 풀와이드 배너 (.hero__inner 컨테이너 밖에 배치 -> 좌우 여백 없이 화면 전체 폭으로 표시
        // 오가닉 블롭 프레임 없이 각진 사각형 + CSS 전용 자동 슬라이드, 임시 플레이스홀더 3장) + 하단 좌측 텍스트 -->
