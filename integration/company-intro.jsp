@@ -53,13 +53,6 @@
  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=586101824905584&ev=PageView&noscript=1" /></noscript>
  <!-- End Facebook Pixel Code -->
 
-     <link rel="stylesheet" type="text/css" href="../new_ver/css/star.css" />
-    <script type="text/javascript" src="../new_ver/js/fresco/fresco.js"></script>
-    <link rel="stylesheet" type="text/css" href="../new_ver/css/fresco/fresco.css" />
-    <link rel="stylesheet" type="text/css" href="../new_ver/css/board.css" />
-
-    <script src="../new_ver/js/cbpHorizontalMenu.js"></script>
-
 <script>
     function showFancyBox(e){
         console.log($(e).parent(".thumbnail").children(".clearfix").children("a")[0].click());
