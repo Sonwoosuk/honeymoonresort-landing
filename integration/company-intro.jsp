@@ -2074,7 +2074,7 @@ html, body {
     <div class="image-card-grid">
       <!-- TODO: 각 카드의 .image-card__image 를 실제 목적지 이미지로 교체 (현재는 임시 플레이스홀더 이미지) -->
       <div class="image-card">
-        <div class="image-card__image"><img class="image-card__photo" src="../new_ver/img/company-intro/destinations/hawaii.webp" alt="하와이 쉐라톤 와이키키 신혼여행"></div>
+        <div class="image-card__image"><img class="image-card__photo" src="../new_ver/img/company-intro/destinations/hawaii.jpg" alt="하와이 쉐라톤 와이키키 신혼여행"></div>
         <p class="image-card__caption">하와이 신혼여행</p>
       </div>
       <div class="image-card">
@@ -2098,7 +2098,7 @@ html, body {
         <p class="image-card__caption">푸켓 신혼여행</p>
       </div>
       <div class="image-card">
-        <div class="image-card__image"><img class="image-card__photo" src="../new_ver/img/company-intro/destinations/europe.webp" alt="유럽 풀만 파리 에펠 신혼여행"></div>
+        <div class="image-card__image"><img class="image-card__photo" src="../new_ver/img/company-intro/destinations/europe.jpg" alt="유럽 풀만 파리 에펠 신혼여행"></div>
         <p class="image-card__caption">유럽 신혼여행</p>
       </div>
       <div class="image-card">
