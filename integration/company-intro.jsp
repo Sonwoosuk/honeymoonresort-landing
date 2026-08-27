@@ -21,17 +21,17 @@
 <c:set var = "url" value = "${pageContext.request.requestURL}"/>
 <c:if test="${fn:contains(url, 'hotelntour')}">
 <title>호텔엔투어</title>
-<link rel="shortcut icon" href="../../new_ver/img/hnt2_tab_logo.png">
+<link rel="shortcut icon" href="../new_ver/img/hnt2_tab_logo.png">
 </c:if>
 <c:if test="${fn:contains(url, 'honeymoonresort')}">
 <title>허니문리조트</title>
-<link rel="shortcut icon" href="../../new_ver/img/hnt_tab_logo.png">
+<link rel="shortcut icon" href="../new_ver/img/hnt_tab_logo.png">
 </c:if>
-<link rel="stylesheet" type="text/css" href="../../new_ver/css/default.css" />
-<link rel="stylesheet" type="text/css" href="../../new_ver/css/component.css" />
-<link rel="stylesheet" type="text/css" href="../../new_ver/css/componentH.css" />
-<link rel="stylesheet" type="text/css" href="../../new_ver/css/main_new.css" />
-<link rel="stylesheet" type="text/css" href="../../new_ver/css/newMainR.css" />
+<link rel="stylesheet" type="text/css" href="../new_ver/css/default.css" />
+<link rel="stylesheet" type="text/css" href="../new_ver/css/component.css" />
+<link rel="stylesheet" type="text/css" href="../new_ver/css/componentH.css" />
+<link rel="stylesheet" type="text/css" href="../new_ver/css/main_new.css" />
+<link rel="stylesheet" type="text/css" href="../new_ver/css/newMainR.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css"/>
 
 <script src="/new_ver/js/domHelpers2.js"></script>
@@ -53,12 +53,12 @@
  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=586101824905584&ev=PageView&noscript=1" /></noscript>
  <!-- End Facebook Pixel Code -->
 
-     <link rel="stylesheet" type="text/css" href="../../new_ver/css/star.css" />
-    <script type="text/javascript" src="../../new_ver/js/fresco/fresco.js"></script>
-    <link rel="stylesheet" type="text/css" href="../../new_ver/css/fresco/fresco.css" />
-    <link rel="stylesheet" type="text/css" href="../../new_ver/css/board.css" />
+     <link rel="stylesheet" type="text/css" href="../new_ver/css/star.css" />
+    <script type="text/javascript" src="../new_ver/js/fresco/fresco.js"></script>
+    <link rel="stylesheet" type="text/css" href="../new_ver/css/fresco/fresco.css" />
+    <link rel="stylesheet" type="text/css" href="../new_ver/css/board.css" />
 
-    <script src="../../new_ver/js/cbpHorizontalMenu.js"></script>
+    <script src="../new_ver/js/cbpHorizontalMenu.js"></script>
 
 <script>
     function showFancyBox(e){
@@ -1848,7 +1848,7 @@ html, body {
     <div class="hero__banner-slides">
       <!-- TODO: 실제 이미지로 교체 (현재는 임시 플레이스홀더 이미지) -->
       <div class="hero__banner-slide">
-        <img class="hero__banner-image" src="../../new_ver/img/company-intro/hero-main.jpg" alt="허니문리조트 몰디브 디가리 리조트 전경">
+        <img class="hero__banner-image" src="../new_ver/img/company-intro/hero-main.jpg" alt="허니문리조트 몰디브 디가리 리조트 전경">
       </div>
     </div>
 
@@ -1892,7 +1892,7 @@ html, body {
 
     <p class="scale__desc">허니문리조트는 서울 청담동 본사를 중심으로 13개 지역 지사와 100명 이상의 임직원 운영 기반을 갖춘 허니문 전문 여행사입니다. 서울 본사와 천안, 대전, 대구, 포항, 울산, 부산, 창원, 전주, 광주, 진주, 순천, 제주, 하와이 등 국내외 상담 네트워크를 운영하며 B2C 신혼여행 상담과 B2B 여행 사업을 함께 운영하고 있습니다.</p>
 
-    <img class="scale__map" src="../../new_ver/img/company-intro/branch-map.png" alt="허니문리조트 지사 네트워크 지도: 서울 본사, 천안, 대전, 대구, 포항, 울산, 부산, 창원, 전주, 광주, 순천, 제주, 하와이">
+    <img class="scale__map" src="../new_ver/img/company-intro/branch-map.png" alt="허니문리조트 지사 네트워크 지도: 서울 본사, 천안, 대전, 대구, 포항, 울산, 부산, 창원, 전주, 광주, 순천, 제주, 하와이">
 
     <p class="scale__cities">
       <span class="scale__cities-label">지사 네트워크</span>
@@ -1934,7 +1934,7 @@ html, body {
           <li>더 웨스틴 마우이 리조트&nbsp;&amp;&nbsp;스파(카아나팔리) 세일즈 우수 감사패 수상</li>
         </ul>
         <div class="awards__timeline-photos">
-          <img class="awards__timeline-photo" src="../../new_ver/img/company-intro/awards/2017-westin-maui.jpg" alt="더 웨스틴 마우이 리조트 & 스파 세일즈 우수 감사패">
+          <img class="awards__timeline-photo" src="../new_ver/img/company-intro/awards/2017-westin-maui.jpg" alt="더 웨스틴 마우이 리조트 & 스파 세일즈 우수 감사패">
         </div>
       </div>
       <div class="awards__timeline-item">
@@ -1943,7 +1943,7 @@ html, body {
           <li>경영혁신형 중소기업(Main-Biz) 인증 획득</li>
         </ul>
         <div class="awards__timeline-photos">
-          <img class="awards__timeline-photo" src="../../new_ver/img/company-intro/awards/2020-mainbiz-certificate.jpg" alt="경영혁신형 중소기업 Main-Biz 확인서">
+          <img class="awards__timeline-photo" src="../new_ver/img/company-intro/awards/2020-mainbiz-certificate.jpg" alt="경영혁신형 중소기업 Main-Biz 확인서">
         </div>
       </div>
       <div class="awards__timeline-item">
@@ -1952,7 +1952,7 @@ html, body {
           <li>쉐라톤 와이키키 아시아 세일즈 우수 감사패 수상</li>
         </ul>
         <div class="awards__timeline-photos">
-          <img class="awards__timeline-photo" src="../../new_ver/img/company-intro/awards/2022-sheraton-waikiki.jpg" alt="쉐라톤 와이키키 아시아 세일즈 우수 감사패">
+          <img class="awards__timeline-photo" src="../new_ver/img/company-intro/awards/2022-sheraton-waikiki.jpg" alt="쉐라톤 와이키키 아시아 세일즈 우수 감사패">
         </div>
       </div>
       <div class="awards__timeline-item">
@@ -1963,8 +1963,8 @@ html, body {
           <li>릴리 비치 리조트&nbsp;&amp;&nbsp;스파 아시아 세일즈&nbsp;1위(Top Selling Korean Partner)</li>
         </ul>
         <div class="awards__timeline-photos">
-          <img class="awards__timeline-photo" src="../../new_ver/img/company-intro/awards/2023-sheraton-waikiki-turtle.png" alt="쉐라톤 와이키키 아시아 세일즈 1위 감사패">
-          <img class="awards__timeline-photo" src="../../new_ver/img/company-intro/awards/2023-lily-beach.png" alt="릴리 비치 리조트 & 스파 아시아 세일즈 1위 트로피">
+          <img class="awards__timeline-photo" src="../new_ver/img/company-intro/awards/2023-sheraton-waikiki-turtle.png" alt="쉐라톤 와이키키 아시아 세일즈 1위 감사패">
+          <img class="awards__timeline-photo" src="../new_ver/img/company-intro/awards/2023-lily-beach.png" alt="릴리 비치 리조트 & 스파 아시아 세일즈 1위 트로피">
         </div>
       </div>
       <div class="awards__timeline-item">
@@ -1978,8 +1978,8 @@ html, body {
           <li>에메랄드 파루푸시 한국 세일즈&nbsp;1위</li>
         </ul>
         <div class="awards__timeline-photos">
-          <img class="awards__timeline-photo" src="../../new_ver/img/company-intro/awards/2024-vakkaru.jpg" alt="바카루 몰디브 한국 세일즈 1위 트로피">
-          <img class="awards__timeline-photo" src="../../new_ver/img/company-intro/awards/2024-emerald-faarufushi.jpg" alt="에메랄드 파루푸시 한국 세일즈 1위 트로피">
+          <img class="awards__timeline-photo" src="../new_ver/img/company-intro/awards/2024-vakkaru.jpg" alt="바카루 몰디브 한국 세일즈 1위 트로피">
+          <img class="awards__timeline-photo" src="../new_ver/img/company-intro/awards/2024-emerald-faarufushi.jpg" alt="에메랄드 파루푸시 한국 세일즈 1위 트로피">
         </div>
       </div>
       <div class="awards__timeline-item">
@@ -1988,7 +1988,7 @@ html, body {
           <li>Expedia TAAP B2B 세일즈 한국&nbsp;1위</li>
         </ul>
         <div class="awards__timeline-photos">
-          <img class="awards__timeline-photo" src="../../new_ver/img/company-intro/awards/2024-2025-expedia-taap.jpg" alt="Expedia TAAP 2024 Best Performance Awards 인증서">
+          <img class="awards__timeline-photo" src="../new_ver/img/company-intro/awards/2024-2025-expedia-taap.jpg" alt="Expedia TAAP 2024 Best Performance Awards 인증서">
         </div>
       </div>
       <div class="awards__timeline-item">
@@ -2012,7 +2012,7 @@ html, body {
 
 <section class="statement">
   <div class="statement__inner">
-    <img class="statement__logo" src="../../new_ver/img/company-intro/logo/honeymoonresort-wordmark-white.png" alt="Honeymoon Resort">
+    <img class="statement__logo" src="../new_ver/img/company-intro/logo/honeymoonresort-wordmark-white.png" alt="Honeymoon Resort">
   </div>
 </section>
 
@@ -2074,51 +2074,51 @@ html, body {
     <div class="image-card-grid">
       <!-- TODO: 각 카드의 .image-card__image 를 실제 목적지 이미지로 교체 (현재는 임시 플레이스홀더 이미지) -->
       <div class="image-card">
-        <div class="image-card__image"><img class="image-card__photo" src="../../new_ver/img/company-intro/destinations/hawaii.webp" alt="하와이 쉐라톤 와이키키 신혼여행"></div>
+        <div class="image-card__image"><img class="image-card__photo" src="../new_ver/img/company-intro/destinations/hawaii.webp" alt="하와이 쉐라톤 와이키키 신혼여행"></div>
         <p class="image-card__caption">하와이 신혼여행</p>
       </div>
       <div class="image-card">
-        <div class="image-card__image"><img class="image-card__photo" src="../../new_ver/img/company-intro/destinations/maldives.jpg" alt="몰디브 포시즌스 란다기라바루 신혼여행"></div>
+        <div class="image-card__image"><img class="image-card__photo" src="../new_ver/img/company-intro/destinations/maldives.jpg" alt="몰디브 포시즌스 란다기라바루 신혼여행"></div>
         <p class="image-card__caption">몰디브 신혼여행</p>
       </div>
       <div class="image-card">
-        <div class="image-card__image"><img class="image-card__photo" src="../../new_ver/img/company-intro/destinations/bali.jpg" alt="발리 리츠칼튼 만다파 신혼여행"></div>
+        <div class="image-card__image"><img class="image-card__photo" src="../new_ver/img/company-intro/destinations/bali.jpg" alt="발리 리츠칼튼 만다파 신혼여행"></div>
         <p class="image-card__caption">발리 신혼여행</p>
       </div>
       <div class="image-card">
-        <div class="image-card__image"><img class="image-card__photo" src="../../new_ver/img/company-intro/destinations/cancun.jpg" alt="칸쿤 스칼렛 아르떼 신혼여행"></div>
+        <div class="image-card__image"><img class="image-card__photo" src="../new_ver/img/company-intro/destinations/cancun.jpg" alt="칸쿤 스칼렛 아르떼 신혼여행"></div>
         <p class="image-card__caption">칸쿤 신혼여행</p>
       </div>
       <div class="image-card">
-        <div class="image-card__image"><img class="image-card__photo" src="../../new_ver/img/company-intro/destinations/kohsamui.jpg" alt="코사무이 반얀트리 신혼여행"></div>
+        <div class="image-card__image"><img class="image-card__photo" src="../new_ver/img/company-intro/destinations/kohsamui.jpg" alt="코사무이 반얀트리 신혼여행"></div>
         <p class="image-card__caption">코사무이 신혼여행</p>
       </div>
       <div class="image-card">
-        <div class="image-card__image"><img class="image-card__photo" src="../../new_ver/img/company-intro/destinations/phuket.jpg" alt="푸켓 아마타라 신혼여행"></div>
+        <div class="image-card__image"><img class="image-card__photo" src="../new_ver/img/company-intro/destinations/phuket.jpg" alt="푸켓 아마타라 신혼여행"></div>
         <p class="image-card__caption">푸켓 신혼여행</p>
       </div>
       <div class="image-card">
-        <div class="image-card__image"><img class="image-card__photo" src="../../new_ver/img/company-intro/destinations/europe.webp" alt="유럽 풀만 파리 에펠 신혼여행"></div>
+        <div class="image-card__image"><img class="image-card__photo" src="../new_ver/img/company-intro/destinations/europe.webp" alt="유럽 풀만 파리 에펠 신혼여행"></div>
         <p class="image-card__caption">유럽 신혼여행</p>
       </div>
       <div class="image-card">
-        <div class="image-card__image"><img class="image-card__photo" src="../../new_ver/img/company-intro/destinations/spain.jpg" alt="스페인 마요르카 칸 베네잇 신혼여행"></div>
+        <div class="image-card__image"><img class="image-card__photo" src="../new_ver/img/company-intro/destinations/spain.jpg" alt="스페인 마요르카 칸 베네잇 신혼여행"></div>
         <p class="image-card__caption">스페인 신혼여행</p>
       </div>
       <div class="image-card">
-        <div class="image-card__image"><img class="image-card__photo" src="../../new_ver/img/company-intro/destinations/australia.jpg" alt="호주 시드니 신혼여행"></div>
+        <div class="image-card__image"><img class="image-card__photo" src="../new_ver/img/company-intro/destinations/australia.jpg" alt="호주 시드니 신혼여행"></div>
         <p class="image-card__caption">호주 신혼여행</p>
       </div>
       <div class="image-card">
-        <div class="image-card__image"><img class="image-card__photo" src="../../new_ver/img/company-intro/destinations/dubai.avif" alt="두바이 크라운 플라자 신혼여행"></div>
+        <div class="image-card__image"><img class="image-card__photo" src="../new_ver/img/company-intro/destinations/dubai.avif" alt="두바이 크라운 플라자 신혼여행"></div>
         <p class="image-card__caption">두바이 신혼여행</p>
       </div>
       <div class="image-card">
-        <div class="image-card__image"><img class="image-card__photo" src="../../new_ver/img/company-intro/destinations/mauritius.jpg" alt="모리셔스 포시즌스 수중폭포 신혼여행"></div>
+        <div class="image-card__image"><img class="image-card__photo" src="../new_ver/img/company-intro/destinations/mauritius.jpg" alt="모리셔스 포시즌스 수중폭포 신혼여행"></div>
         <p class="image-card__caption">모리셔스 신혼여행</p>
       </div>
       <div class="image-card">
-        <div class="image-card__image"><img class="image-card__photo" src="../../new_ver/img/company-intro/destinations/tahiti.jpg" alt="타히티 세인트 레지스 신혼여행"></div>
+        <div class="image-card__image"><img class="image-card__photo" src="../new_ver/img/company-intro/destinations/tahiti.jpg" alt="타히티 세인트 레지스 신혼여행"></div>
         <p class="image-card__caption">타히티 신혼여행</p>
       </div>
     </div>
@@ -2163,14 +2163,14 @@ html, body {
     <div class="verified__grid">
       <div class="verified__card">
         <div class="verified__card-header">
-          <img class="verified__card-logo" src="../../new_ver/img/company-intro/logo/hawaii-tourism-logo.png" alt="Hawaii Tourism Korea">
+          <img class="verified__card-logo" src="../new_ver/img/company-intro/logo/hawaii-tourism-logo.png" alt="Hawaii Tourism Korea">
         </div>
         <p class="verified__card-title">하와이 관광청</p>
         <p class="verified__card-desc">럭셔리 허니문 상품 관련 포시즌스 오아후 앳 코올리나 조식 제공 프로모션, 말라마 허니문 상품 프로모션, 마우이와 빅아일랜드 등 이웃 섬 신혼여행 상품 프로모션을 진행했습니다.</p>
       </div>
       <div class="verified__card">
         <div class="verified__card-header">
-          <img class="verified__card-logo" src="../../new_ver/img/company-intro/logo/dubai-tourism-logo.png" alt="Dubai Tourism">
+          <img class="verified__card-logo" src="../new_ver/img/company-intro/logo/dubai-tourism-logo.png" alt="Dubai Tourism">
           <span class="verified__card-years">2022–2026</span>
         </div>
         <p class="verified__card-title">두바이 관광청</p>
@@ -2178,14 +2178,14 @@ html, body {
       </div>
       <div class="verified__card">
         <div class="verified__card-header">
-          <img class="verified__card-logo" src="../../new_ver/img/company-intro/logo/queensland-tourism-logo.png" alt="Queensland Australia 관광청">
+          <img class="verified__card-logo" src="../new_ver/img/company-intro/logo/queensland-tourism-logo.png" alt="Queensland Australia 관광청">
         </div>
         <p class="verified__card-title">퀸즐랜드주 관광청</p>
         <p class="verified__card-desc">해밀턴 아일랜드 신혼여행지 상품 론칭과 골드코스트 2박 프로모션을 진행했습니다.</p>
       </div>
       <div class="verified__card">
         <div class="verified__card-header">
-          <img class="verified__card-logo" src="../../new_ver/img/company-intro/logo/tahiti-tourism-logo.png" alt="The Islands of Tahiti">
+          <img class="verified__card-logo" src="../new_ver/img/company-intro/logo/tahiti-tourism-logo.png" alt="The Islands of Tahiti">
           <span class="verified__card-years">2023–2026</span>
         </div>
         <p class="verified__card-title">타히티 관광청</p>
@@ -2193,28 +2193,28 @@ html, body {
       </div>
       <div class="verified__card">
         <div class="verified__card-header">
-          <img class="verified__card-logo" src="../../new_ver/img/company-intro/logo/catalonia-tourism-logo.png" alt="Agència Catalana de Turisme, Catalunya 관광청">
+          <img class="verified__card-logo" src="../new_ver/img/company-intro/logo/catalonia-tourism-logo.png" alt="Agència Catalana de Turisme, Catalunya 관광청">
         </div>
         <p class="verified__card-title">카탈루냐 관광청</p>
         <p class="verified__card-desc">바르셀로나를 비롯한 카탈루냐 지역 신혼여행 상품과 관련해 협력하고 있습니다.</p>
       </div>
       <div class="verified__card">
         <div class="verified__card-header">
-          <img class="verified__card-logo" src="../../new_ver/img/company-intro/logo/thailand-tourism-logo.png" alt="Tourism Authority of Thailand">
+          <img class="verified__card-logo" src="../new_ver/img/company-intro/logo/thailand-tourism-logo.png" alt="Tourism Authority of Thailand">
         </div>
         <p class="verified__card-title">태국관광청</p>
         <p class="verified__card-desc">2013년 태국관광청 세일즈 미션 수상을 비롯해 푸켓, 코사무이 등 태국 주요 신혼여행지 프로모션에 협력하고 있습니다.</p>
       </div>
       <div class="verified__card">
         <div class="verified__card-header">
-          <img class="verified__card-logo" src="../../new_ver/img/company-intro/logo/monaco-tourism-logo.png" alt="Visit Monaco, 모나코 관광청">
+          <img class="verified__card-logo" src="../new_ver/img/company-intro/logo/monaco-tourism-logo.png" alt="Visit Monaco, 모나코 관광청">
         </div>
         <p class="verified__card-title">모나코 관광청</p>
         <p class="verified__card-desc">모나코 신혼여행 상품과 관련해 협력하고 있습니다.</p>
       </div>
       <div class="verified__card">
         <div class="verified__card-header">
-          <img class="verified__card-logo" src="../../new_ver/img/company-intro/logo/brand-usa-logo.svg" alt="Brand USA, 미국 관광청">
+          <img class="verified__card-logo" src="../new_ver/img/company-intro/logo/brand-usa-logo.svg" alt="Brand USA, 미국 관광청">
           <span class="verified__card-years">2026</span>
         </div>
         <p class="verified__card-title">미국관광청(Brand USA)</p>
@@ -2279,51 +2279,51 @@ html, body {
     <div class="image-card-grid">
       <!-- TODO: 각 카드의 .image-card__image 를 실제 커플 사진으로 교체 -->
       <div class="image-card">
-        <div class="image-card__image"><img class="image-card__photo" src="../../new_ver/img/company-intro/celeb/aeley-choisihoon.jpg" alt="에일리 · 최시훈"></div>
+        <div class="image-card__image"><img class="image-card__photo" src="../new_ver/img/company-intro/celeb/aeley-choisihoon.jpg" alt="에일리 · 최시훈"></div>
         <p class="image-card__caption">에일리 · 최시훈</p>
       </div>
       <div class="image-card">
-        <div class="image-card__image"><img class="image-card__photo" src="../../new_ver/img/company-intro/celeb/seven-leedahae.jpg" alt="세븐 · 이다해"></div>
+        <div class="image-card__image"><img class="image-card__photo" src="../new_ver/img/company-intro/celeb/seven-leedahae.jpg" alt="세븐 · 이다해"></div>
         <p class="image-card__caption">세븐 · 이다해</p>
       </div>
       <div class="image-card">
-        <div class="image-card__image"><img class="image-card__photo" src="../../new_ver/img/company-intro/celeb/kimkiri-moonjiin.jpg" alt="김기리 · 문지인"></div>
+        <div class="image-card__image"><img class="image-card__photo" src="../new_ver/img/company-intro/celeb/kimkiri-moonjiin.jpg" alt="김기리 · 문지인"></div>
         <p class="image-card__caption">김기리 · 문지인</p>
       </div>
       <div class="image-card">
-        <div class="image-card__image"><img class="image-card__photo" src="../../new_ver/img/company-intro/celeb/parkhyunho-eungaeun.jpg" alt="박현호 · 은가은"></div>
+        <div class="image-card__image"><img class="image-card__photo" src="../new_ver/img/company-intro/celeb/parkhyunho-eungaeun.jpg" alt="박현호 · 은가은"></div>
         <p class="image-card__caption">박현호 · 은가은</p>
       </div>
       <div class="image-card">
-        <div class="image-card__image"><img class="image-card__photo" src="../../new_ver/img/company-intro/celeb/cheondung-mimi.jpg" alt="천둥 · 미미"></div>
+        <div class="image-card__image"><img class="image-card__photo" src="../new_ver/img/company-intro/celeb/cheondung-mimi.jpg" alt="천둥 · 미미"></div>
         <p class="image-card__caption">천둥 · 미미</p>
       </div>
       <div class="image-card">
-        <div class="image-card__image"><img class="image-card__photo" src="../../new_ver/img/company-intro/celeb/simhyungtak-saya.jpg" alt="심형탁 · 사야"></div>
+        <div class="image-card__image"><img class="image-card__photo" src="../new_ver/img/company-intro/celeb/simhyungtak-saya.jpg" alt="심형탁 · 사야"></div>
         <p class="image-card__caption">심형탁 · 사야</p>
       </div>
       <div class="image-card">
-        <div class="image-card__image"><img class="image-card__photo" src="../../new_ver/img/company-intro/celeb/bada.jpg" alt="바다 부부"></div>
+        <div class="image-card__image"><img class="image-card__photo" src="../new_ver/img/company-intro/celeb/bada.jpg" alt="바다 부부"></div>
         <p class="image-card__caption">바다 부부<br>(가수이자 뮤지컬 배우)</p>
       </div>
       <div class="image-card">
-        <div class="image-card__image"><img class="image-card__photo" src="../../new_ver/img/company-intro/celeb/parkhana-kimtaesul.jpg" alt="박하나 · 김태술"></div>
+        <div class="image-card__image"><img class="image-card__photo" src="../new_ver/img/company-intro/celeb/parkhana-kimtaesul.jpg" alt="박하나 · 김태술"></div>
         <p class="image-card__caption">박하나 · 김태술</p>
       </div>
       <div class="image-card">
-        <div class="image-card__image"><img class="image-card__photo" src="../../new_ver/img/company-intro/celeb/chanmi-songeuihwan.jpg" alt="AOA찬미(임도화) · 송의환"></div>
+        <div class="image-card__image"><img class="image-card__photo" src="../new_ver/img/company-intro/celeb/chanmi-songeuihwan.jpg" alt="AOA찬미(임도화) · 송의환"></div>
         <p class="image-card__caption">AOA찬미(임도화) · 송의환</p>
       </div>
       <div class="image-card">
-        <div class="image-card__image"><img class="image-card__photo" src="../../new_ver/img/company-intro/celeb/daniel-lindemann.jpg" alt="다니엘 린데만 부부"></div>
+        <div class="image-card__image"><img class="image-card__photo" src="../new_ver/img/company-intro/celeb/daniel-lindemann.jpg" alt="다니엘 린데만 부부"></div>
         <p class="image-card__caption">다니엘 린데만 부부</p>
       </div>
       <div class="image-card">
-        <div class="image-card__image"><img class="image-card__photo" src="../../new_ver/img/company-intro/celeb/limsungjae.jpg" alt="임성재 부부"></div>
+        <div class="image-card__image"><img class="image-card__photo" src="../new_ver/img/company-intro/celeb/limsungjae.jpg" alt="임성재 부부"></div>
         <p class="image-card__caption">임성재 부부<br>(PGA 골프 선수)</p>
       </div>
       <div class="image-card">
-        <div class="image-card__image"><img class="image-card__photo" src="../../new_ver/img/company-intro/celeb/kimgaeun-yoonsunwoo.jpg" alt="김가은 · 윤선우"></div>
+        <div class="image-card__image"><img class="image-card__photo" src="../new_ver/img/company-intro/celeb/kimgaeun-yoonsunwoo.jpg" alt="김가은 · 윤선우"></div>
         <p class="image-card__caption">김가은 · 윤선우</p>
       </div>
     </div>
@@ -2357,12 +2357,12 @@ html, body {
     </div>
 
     <div class="expo__gallery">
-      <img class="expo__gallery-photo" src="../../new_ver/img/company-intro/expo/consult-1.png" alt="허니문리조트 1:1 상담 공간">
-      <img class="expo__gallery-photo" src="../../new_ver/img/company-intro/expo/consult-2.png" alt="허니문리조트 상담실">
-      <img class="expo__gallery-photo" src="../../new_ver/img/company-intro/expo/consult-6.png" alt="허니문리조트 상담 공간">
-      <img class="expo__gallery-photo" src="../../new_ver/img/company-intro/expo/consult-4.jpg" alt="허니문리조트 신혼여행 박람회 상담 현장">
-      <img class="expo__gallery-photo" src="../../new_ver/img/company-intro/expo/consult-5.jpg" alt="허니문리조트 신혼여행 박람회 상담 현장">
-      <img class="expo__gallery-photo" src="../../new_ver/img/company-intro/expo/consult-3.png" alt="허니문리조트 임직원 업무 현장">
+      <img class="expo__gallery-photo" src="../new_ver/img/company-intro/expo/consult-1.png" alt="허니문리조트 1:1 상담 공간">
+      <img class="expo__gallery-photo" src="../new_ver/img/company-intro/expo/consult-2.png" alt="허니문리조트 상담실">
+      <img class="expo__gallery-photo" src="../new_ver/img/company-intro/expo/consult-6.png" alt="허니문리조트 상담 공간">
+      <img class="expo__gallery-photo" src="../new_ver/img/company-intro/expo/consult-4.jpg" alt="허니문리조트 신혼여행 박람회 상담 현장">
+      <img class="expo__gallery-photo" src="../new_ver/img/company-intro/expo/consult-5.jpg" alt="허니문리조트 신혼여행 박람회 상담 현장">
+      <img class="expo__gallery-photo" src="../new_ver/img/company-intro/expo/consult-3.png" alt="허니문리조트 임직원 업무 현장">
     </div>
 
     <div class="text-stack text-stack--2col">
@@ -2410,17 +2410,17 @@ html, body {
 
     <div class="brand__grid">
       <div class="brand__card">
-        <div class="brand__card-logo"><img class="brand__card-logo-image" src="../../new_ver/img/company-intro/logo/hotelntour-logo.png" alt="호텔엔투어"></div>
+        <div class="brand__card-logo"><img class="brand__card-logo-image" src="../new_ver/img/company-intro/logo/hotelntour-logo.png" alt="호텔엔투어"></div>
         <p class="brand__card-name">호텔엔투어</p>
         <p class="brand__card-desc">맞춤형 럭셔리 여행, 가족 여행, 베이비문, 단체 여행, 골프 여행을 위한 브랜드로서 하와이, 몰디브, 유럽, 발리를 주요 시장으로 하며, 12월부터 2월, 6월 말부터 8월까지의 여행 성수기 수요에 맞춘 1:1 맞춤 자유여행 상담을 제공합니다.</p>
       </div>
       <div class="brand__card">
-        <div class="brand__card-logo"><img class="brand__card-logo-image" src="../../new_ver/img/company-intro/logo/hotelntrip-logo.png" alt="호텔엔트립"></div>
+        <div class="brand__card-logo"><img class="brand__card-logo-image" src="../new_ver/img/company-intro/logo/hotelntrip-logo.png" alt="호텔엔트립"></div>
         <p class="brand__card-name">호텔엔트립</p>
         <p class="brand__card-desc">하와이 특화 B2C 패키지 호텔 예약 플랫폼입니다. 하와이를 주요 시장으로 운영하며, 2박 이상 예약 가능한 패키지 숙박 상품을 판매합니다.</p>
       </div>
       <div class="brand__card">
-        <div class="brand__card-logo"><img class="brand__card-logo-image" src="../../new_ver/img/company-intro/logo/kwedding-logo.png" alt="K-웨딩 by 허니문리조트"></div>
+        <div class="brand__card-logo"><img class="brand__card-logo-image" src="../new_ver/img/company-intro/logo/kwedding-logo.png" alt="K-웨딩 by 허니문리조트"></div>
         <p class="brand__card-name">K-웨딩 by 허니문리조트</p>
         <p class="brand__card-desc">서울을 기반으로 라이프스타일과 웨딩 경험을 맞춤 설계하는 프라이빗 컨시어지 인바운드 여행 서비스입니다. 한국을 방문하는 웨딩 인바운드 여행사로 1:1 맞춤 웨딩 상담부터 서울 전체 일정까지 30년 경력의 전문가가 처음부터 끝까지 영어로 진행합니다.</p>
       </div>
@@ -2444,23 +2444,23 @@ html, body {
 
     <div class="safety__badges">
       <div class="safety__badge">
-        <div class="safety__badge-image"><img src="../../new_ver/img/company-intro/safety/badge-1-travel-guarantee.jpg" alt="일반여행업 보증 가입 증서"></div>
+        <div class="safety__badge-image"><img src="../new_ver/img/company-intro/safety/badge-1-travel-guarantee.jpg" alt="일반여행업 보증 가입 증서"></div>
         <p class="safety__badge-caption">일반여행업 보증 가입</p>
       </div>
       <div class="safety__badge">
-        <div class="safety__badge-image"><img src="../../new_ver/img/company-intro/safety/badge-2-package-guarantee.jpg" alt="기획여행업 보증 가입 증서"></div>
+        <div class="safety__badge-image"><img src="../new_ver/img/company-intro/safety/badge-2-package-guarantee.jpg" alt="기획여행업 보증 가입 증서"></div>
         <p class="safety__badge-caption">기획여행영업 보증 가입</p>
       </div>
       <div class="safety__badge">
-        <div class="safety__badge-image"><img src="../../new_ver/img/company-intro/safety/badge-3-liability-insurance.jpg" alt="여행업자 배상책임보험 가입 증권"></div>
+        <div class="safety__badge-image"><img src="../new_ver/img/company-intro/safety/badge-3-liability-insurance.jpg" alt="여행업자 배상책임보험 가입 증권"></div>
         <p class="safety__badge-caption">여행업자 배상책임보험 가입</p>
       </div>
       <div class="safety__badge">
-        <div class="safety__badge-image"><img src="../../new_ver/img/company-intro/safety/badge-4-iata-bsp.jpg" alt="IATA 국제 항공 운송 협회 인증서"></div>
+        <div class="safety__badge-image"><img src="../new_ver/img/company-intro/safety/badge-4-iata-bsp.jpg" alt="IATA 국제 항공 운송 협회 인증서"></div>
         <p class="safety__badge-caption">IATA 국제 항공 운송 협회 BSP 7억 원 가입</p>
       </div>
       <div class="safety__badge">
-        <div class="safety__badge-image"><img src="../../new_ver/img/company-intro/safety/badge-5-expedia-platinum.jpg" alt="Expedia TAAP Platinum Tier 인증서"></div>
+        <div class="safety__badge-image"><img src="../new_ver/img/company-intro/safety/badge-5-expedia-platinum.jpg" alt="Expedia TAAP Platinum Tier 인증서"></div>
         <p class="safety__badge-caption">익스피디아 플래티넘</p>
       </div>
     </div>
