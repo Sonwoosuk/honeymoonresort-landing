@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%-- 모바일 웹앱(MOBLIE/ROOT)에는 JSTL 이 없을 수 있어 taglib 를 쓰지 않습니다.
+     이 페이지는 허니문리조트 모바일 전용이라 사이트명/도메인을 하드코딩합니다. --%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -20,39 +19,28 @@
 <meta http-equiv="Imagetoolbar" content="no">
 <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
 
-<c:set var = "url" value = "${pageContext.request.requestURL}"/>
-<c:set var="siteOrigin" value="${pageContext.request.scheme}://${header.host}"/>
-<c:choose>
-  <c:when test="${fn:contains(url, 'hotelntour')}">
-    <c:set var="siteName" value="호텔엔투어"/>
-    <link rel="shortcut icon" href="/new_ver/img/hnt2_tab_logo.png">
-  </c:when>
-  <c:otherwise>
-    <c:set var="siteName" value="허니문리조트"/>
-    <link rel="shortcut icon" href="/new_ver/img/hnt_tab_logo.png">
-  </c:otherwise>
-</c:choose>
-<title>회사소개 | ${siteName} - 1995년부터 신혼여행 전문 여행사</title>
-<meta name="description" content="${siteName}는 1995년부터 신혼여행을 전문으로 안내해 온 허니문 전문 여행사입니다. 서울 청담동 본사와 전국 13개 지사, 100명 이상의 임직원이 하와이·몰디브·발리 등 신혼여행지 상담부터 예약, 현지 소통까지 함께합니다." />
+<link rel="shortcut icon" href="/new_ver/img/hnt_tab_logo.png">
+<title>회사소개 | 허니문리조트 - 1995년부터 신혼여행 전문 여행사</title>
+<meta name="description" content="허니문리조트는 1995년부터 신혼여행을 전문으로 안내해 온 허니문 전문 여행사입니다. 서울 청담동 본사와 전국 13개 지사, 100명 이상의 임직원이 하와이·몰디브·발리 등 신혼여행지 상담부터 예약, 현지 소통까지 함께합니다." />
 <%-- 모바일 페이지는 PC URL을 대표(canonical)로 지정 --%>
-<link rel="canonical" href="${siteOrigin}/company/company.do" />
+<link rel="canonical" href="https://new.honeymoonresort.co.kr/company/company.do" />
 <meta property="og:type" content="website" />
-<meta property="og:site_name" content="${siteName}" />
-<meta property="og:title" content="회사소개 | ${siteName}" />
+<meta property="og:site_name" content="허니문리조트" />
+<meta property="og:title" content="회사소개 | 허니문리조트" />
 <meta property="og:description" content="1995년부터 신혼여행만 전문으로. 전국 13개 지사, 100명 이상 임직원 기반의 허니문 전문 여행사." />
-<meta property="og:url" content="${url}" />
-<meta property="og:image" content="${siteOrigin}/new_ver/img/company-intro/hero-main.jpg" />
+<meta property="og:url" content="https://new.honeymoonresort.co.kr/m/company_info.do" />
+<meta property="og:image" content="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/hero-main.jpg" />
 <meta name="twitter:card" content="summary_large_image" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "TravelAgency",
-  "name": "${siteName}",
+  "name": "허니문리조트",
   "description": "1995년부터 신혼여행을 전문으로 하는 허니문 전문 여행사",
   "foundingDate": "1995",
-  "url": "${siteOrigin}",
-  "logo": "${siteOrigin}/new_ver/img/company-intro/logo/honeymoonresort-logo.png",
-  "image": "${siteOrigin}/new_ver/img/company-intro/hero-main.jpg",
+  "url": "https://new.honeymoonresort.co.kr",
+  "logo": "https://new.honeymoonresort.co.kr/new_ver/img/company-intro/logo/honeymoonresort-logo.png",
+  "image": "https://new.honeymoonresort.co.kr/new_ver/img/company-intro/hero-main.jpg",
   "address": {
     "@type": "PostalAddress",
     "addressLocality": "서울",
@@ -65,10 +53,11 @@
 </script>
 <%-- ============================================================
    모바일 전용: PC용 CSS(default/component/main_new 등)와 fancybox·
-   jquery-ui 는 로드하지 않습니다. 이 페이지는 아래 <style> 블록으로
-   완전히 자립합니다. 모바일 헤더(header_new.jsp)가 jQuery 를 필요로
-   하면 아래 한 줄을 유지하세요.
+   jquery-ui 는 로드하지 않습니다. 본문은 아래 <style> 블록으로 자립하고,
+   include 되는 모바일 헤더/푸터(../layout/header_new.jsp · footer.jsp)는
+   기존 모바일 페이지와 동일하게 index.css + jQuery 로 스타일/동작합니다.
 ============================================================ --%>
+<link rel="stylesheet" type="text/css" href="./css/index.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
 <!-- Facebook Pixel Code (모바일) -->
@@ -78,9 +67,9 @@
  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
  document,'script','https://connect.facebook.net/en_US/fbevents.js');
- fbq('init', '586101824905584');
+ fbq('init', '162246964396993');
  fbq('track', "PageView");</script>
- <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=586101824905584&ev=PageView&noscript=1" /></noscript>
+ <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=162246964396993&ev=PageView&noscript=1" /></noscript>
  <!-- End Facebook Pixel Code -->
 
 <!-- ============================================================
@@ -1215,7 +1204,7 @@
 <section class="hero">
 
   <!-- 화면에는 보이지 않는 페이지 대표 제목(h1): 스크린리더 & 검색엔진용 -->
-  <h1 style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;">${siteName} 회사소개 - 1995년부터 신혼여행을 전문으로 하는 허니문 전문 여행사</h1>
+  <h1 style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;">허니문리조트 회사소개 - 1995년부터 신혼여행을 전문으로 하는 허니문 전문 여행사</h1>
 
   <!-- 풀와이드 배너 (.hero__inner 컨테이너 밖에 배치 -> 좌우 여백 없이 화면 전체 폭으로 표시
        // 오가닉 블롭 프레임 없이 각진 사각형 + CSS 전용 자동 슬라이드, 임시 플레이스홀더 3장) + 하단 좌측 텍스트 -->
