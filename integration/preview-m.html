@@ -5,6 +5,7 @@
 
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="format-detection" content="telephone=no" />
 <meta name="travel" content="허니문리조트" />
 <meta name="keywords" content="허니문리조트, 신혼여행, 허니문, 신혼여행 전문 여행사, 허니문리조트 회사소개, 하와이 신혼여행, 몰디브 신혼여행, 발리 신혼여행" />
 <meta name="author" content="허니문리조트" />
@@ -18,12 +19,13 @@
     <link rel="shortcut icon" href="https://new.honeymoonresort.co.kr/new_ver/img/hnt_tab_logo.png">
 <title>회사소개 | 허니문리조트 - 1995년부터 신혼여행 전문 여행사</title>
 <meta name="description" content="허니문리조트는 1995년부터 신혼여행을 전문으로 안내해 온 허니문 전문 여행사입니다. 서울 청담동 본사와 전국 13개 지사, 100명 이상의 임직원이 하와이·몰디브·발리 등 신혼여행지 상담부터 예약, 현지 소통까지 함께합니다." />
-<link rel="canonical" href="https://new.honeymoonresort.co.kr/m/company/company.do" />
+<!-- 모바일 페이지는 PC URL을 대표(canonical)로 지정 -->
+<link rel="canonical" href="https://new.honeymoonresort.co.kr/company/company.do" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="허니문리조트" />
 <meta property="og:title" content="회사소개 | 허니문리조트" />
 <meta property="og:description" content="1995년부터 신혼여행만 전문으로. 전국 13개 지사, 100명 이상 임직원 기반의 허니문 전문 여행사." />
-<meta property="og:url" content="https://new.honeymoonresort.co.kr/m/company/company.do" />
+<meta property="og:url" content="https://new.honeymoonresort.co.kr/m/company/company_info.do" />
 <meta property="og:image" content="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/hero-main.jpg" />
 <meta name="twitter:card" content="summary_large_image" />
 <script type="application/ld+json">
@@ -46,62 +48,28 @@
   "numberOfEmployees": { "@type": "QuantitativeValue", "minValue": 100 }
 }
 </script>
-<link rel="stylesheet" type="text/css" href="https://new.honeymoonresort.co.kr/new_ver/css/default.css" />
-<link rel="stylesheet" type="text/css" href="https://new.honeymoonresort.co.kr/new_ver/css/component.css" />
-<link rel="stylesheet" type="text/css" href="https://new.honeymoonresort.co.kr/new_ver/css/componentH.css" />
-<link rel="stylesheet" type="text/css" href="https://new.honeymoonresort.co.kr/new_ver/css/main_new.css" />
-<link rel="stylesheet" type="text/css" href="https://new.honeymoonresort.co.kr/new_ver/css/newMainR.css" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css"/>
+<!-- ============================================================
+   모바일 전용: PC용 CSS(default/component/main_new 등)와 fancybox·
+   jquery-ui 는 로드하지 않습니다. 이 페이지는 아래 <style> 블록으로
+   완전히 자립합니다. 모바일 헤더(header_new.jsp)가 jQuery 를 필요로
+   하면 아래 한 줄을 유지하세요.
+============================================================ -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
-<script src="/new_ver/js/domHelpers2.js"></script>
-<script type="text/javascript" src="https://new.honeymoonresort.co.kr/new_ver/js/jquery.js"></script>
-<script type="text/javascript" src="https://new.honeymoonresort.co.kr/new_ver/js/jquery-ui.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
-<link rel="stylesheet" type="text/css" href="/new_ver/css/submenu.css" />
-<!-- Facebook Pixel Code -->
-
- <script>
+<!-- Facebook Pixel Code (모바일) -->
+<script>
  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
  document,'script','https://connect.facebook.net/en_US/fbevents.js');
-
  fbq('init', '586101824905584');
  fbq('track', "PageView");</script>
  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=586101824905584&ev=PageView&noscript=1" /></noscript>
  <!-- End Facebook Pixel Code -->
 
-<script>
-    function showFancyBox(e){
-        console.log($(e).parent(".thumbnail").children(".clearfix").children("a")[0].click());
-
-    }
-
-    function board_view(n_idx){
-        const data = {n_idx : n_idx}
-
-        $.ajax({
-            type: "POST",
-            url : "/board/eventHit.do",
-            data : data,
-            success : function(res){
-                if(res > 0){
-                    window.location.href="/board/event_view.do?n_idx=" + n_idx;
-                }else{
-                    window.location.reload();
-                }
-            }
-        })
-
-
-    }
-</script>
-
 <!-- ============================================================
    회사소개 페이지 전용 CSS (Pretendard 폰트 + hero/awards/... 섹션)
-   기존 사이트 CSS(default.css/component.css/main_new.css 등) 뒤에
-   로드되므로, 동일 우선순위 규칙끼리는 이 블록이 이깁니다.
 ============================================================= -->
 <link rel="stylesheet" as="style" crossorigin
   href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
@@ -119,33 +87,40 @@
    - 폰트: Pretendard, 색상 변수는 PC 버전과 동일.
 ============================================================= */
 
-* {
+/* reset 은 .hr-page 안으로만 한정합니다. (include 되는 모바일
+   header_new.jsp / footer.jsp 의 자체 스타일을 건드리지 않기 위함) */
+.hr-page,
+.hr-page * {
   box-sizing: border-box;
+}
+
+.hr-page {
   margin: 0;
   padding: 0;
-}
-
-html {
-  font-size: 16px;
-  -webkit-text-size-adjust: 100%;
-}
-
-body {
   background-color: #fbf9f6;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   word-break: keep-all;
   overflow-wrap: break-word;
-}
-
-html, body {
+  -webkit-text-size-adjust: 100%;
   overflow-x: hidden;
 }
 
-h1, h2, h3 { text-wrap: balance; }
-p { text-wrap: pretty; }
+.hr-page h1, .hr-page h2, .hr-page h3, .hr-page h4,
+.hr-page p, .hr-page ul, .hr-page ol, .hr-page li,
+.hr-page figure, .hr-page section {
+  margin: 0;
+  padding: 0;
+}
 
-img { max-width: 100%; }
+.hr-page ul, .hr-page ol { list-style: none; }
+
+.hr-page h1,
+.hr-page h2,
+.hr-page h3 { text-wrap: balance; }
+.hr-page p { text-wrap: pretty; }
+
+.hr-page img { max-width: 100%; }
 
 :root {
   --hero-color-bg:        #ffffff;
@@ -1209,10 +1184,9 @@ img { max-width: 100%; }
 </head>
 <body>
 
-<%-- TODO(모바일): 아래 header/footer include 경로를 실제 /m/ 레이아웃 파일로 교체하세요
-     (예: ../m/layout/header.jsp 등). 현재는 PC 버전과 동일한 경로로 두었습니다. --%>
+<!-- 모바일 레이아웃 include. 기존 모바일 회사소개(company_info.jsp)와
+     동일한 경로 규칙입니다. 서버의 실제 파일명이 다르면 여기만 맞추세요. -->
 
-<div class="wrap">
 <div class="hr-page">
 
 <!-- ============================================================
@@ -1953,8 +1927,6 @@ img { max-width: 100%; }
 
 
 </div><!--hr-page-->
-</div><!--wrap-->
-
 
 </body>
 </html>
