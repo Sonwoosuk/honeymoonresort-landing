@@ -296,14 +296,13 @@
   object-position: center;
 }
 
+/* 텍스트를 이미지 위에 겹치지 않고 이미지 바로 아래 띠로 배치
+   (겹치면 배너 하단이 가려져서 사진이 잘 안 보임) */
 .hero__banner-overlay {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  position: static;
   z-index: 2;
   background-color: var(--hero-color-overlay);
-  padding: 18px var(--m-gutter);
+  padding: 16px var(--m-gutter);
   box-sizing: border-box;
 }
 
