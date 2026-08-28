@@ -278,21 +278,22 @@
 .hero__banner-slides {
   position: relative;
   width: 100%;
-  aspect-ratio: 3 / 4;
-  max-height: 68vh;
 }
 
 .hero__banner-slide {
   position: relative;
   width: 100%;
-  height: 100%;
 }
 
+/* 원본 비율 그대로 노출 (잘림 없음). 세로가 너무 길면
+   max-height 로만 살짝 제한하고 그때만 cover 로 중앙 크롭 */
 .hero__banner-image {
   width: 100%;
-  height: 100%;
+  height: auto;
+  max-height: 62vh;
   display: block;
   object-fit: cover;
+  object-position: center;
 }
 
 .hero__banner-overlay {
