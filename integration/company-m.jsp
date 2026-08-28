@@ -181,7 +181,7 @@
    공용 유틸 (.section-title / .text-stack)
 ============================================================= */
 .section-title {
-  margin: 0 0 20px;
+  margin: 0 0 32px;
   font-size: 22px;
   font-weight: 700;
   line-height: 1.4;
@@ -193,7 +193,7 @@
 .text-stack {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
   max-width: 100%;
   margin: 0 auto;
 }
@@ -261,7 +261,7 @@
 .safety {
   width: 100%;
   font-family: var(--hero-font);
-  padding: 44px 0;
+  padding: 58px 0;
   box-sizing: border-box;
 }
 
@@ -369,7 +369,7 @@
    SCALE (규모)
 ============================================================= */
 .scale__title {
-  margin: 0 0 22px;
+  margin: 0 0 32px;
   font-size: 22px;
   font-weight: 700;
   line-height: 1.4;
@@ -462,7 +462,7 @@
    AWARDS (수상 타임라인) — 모바일은 좌측 라인 단일 컬럼
 ============================================================= */
 .awards__title {
-  margin: 0 0 18px;
+  margin: 0 0 28px;
   font-size: 22px;
   font-weight: 700;
   line-height: 1.4;
@@ -889,7 +889,7 @@
    CELEB (셀러브리티)
 ============================================================= */
 .celeb__lead {
-  margin: 0 0 22px;
+  margin: 0 0 28px;
   font-size: 14px;
   font-weight: 600;
   color: var(--hero-color-ink);
@@ -1062,7 +1062,7 @@
    SAFETY (안전)
 ============================================================= */
 .safety {
-  padding: 44px 0 52px;
+  padding: 58px 0 66px;
 }
 
 .safety__intro {
