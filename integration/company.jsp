@@ -1208,6 +1208,13 @@ p {
   object-fit: contain;
 }
 
+/* 'amazing THAILAND' 로고는 2줄 스택형이라, 한 줄짜리 다른 관광청
+   로고와 같은 높이(28px)로 두면 글자가 너무 작게 보입니다.
+   이 로고에만 --stack 을 붙여 더 크게 표시합니다. */
+.verified__card-logo--stack {
+  height: 46px;
+}
+
 .verified__card-years {
   flex: none;
   padding: 4px 12px;
@@ -2229,7 +2236,7 @@ html, body {
       </div>
       <div class="verified__card">
         <div class="verified__card-header">
-          <img class="verified__card-logo" src="../new_ver/img/company-intro/logo/thailand-tourism-logo.png" alt="Amazing Thailand">
+          <img class="verified__card-logo verified__card-logo--stack" src="../new_ver/img/company-intro/logo/thailand-tourism-logo.png" alt="Amazing Thailand">
         </div>
         <p class="verified__card-title">태국관광청</p>
         <p class="verified__card-desc">2013년 태국관광청 세일즈 미션 수상을 비롯해 푸켓, 코사무이 등 태국 주요 신혼여행지 프로모션에 협력하고 있습니다.</p>
