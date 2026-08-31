@@ -78,6 +78,10 @@
 <link rel="stylesheet" as="style" crossorigin
   href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
 
+<!-- 증서·감사패 사진을 같은 페이지 위에서 크게 보기 위한 Fancybox (PC 버전과 동일) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css" />
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
 
 <style>
 /* =============================================================
@@ -603,6 +607,16 @@
   box-shadow: 0 5px 12px rgba(43, 31, 22, 0.08);
 }
 
+/* 사진을 누르면 같은 페이지 위 오버레이(Fancybox)로 감사패/트로피/인증서 원본이 크게 열립니다 */
+.awards__photo-link {
+  display: inline-block;
+  font-size: 0;
+  line-height: 0;
+  border-radius: 8px;
+  cursor: zoom-in;
+  -webkit-tap-highlight-color: transparent;
+}
+
 .awards__outro {
   margin: 0 auto;
   font-size: 14px;
@@ -1115,6 +1129,14 @@
   overflow: hidden;
 }
 
+/* 증서 배지를 누르면 같은 페이지 위 오버레이(Fancybox)로 원본이 크게 열립니다 */
+a.safety__badge-image {
+  display: block;
+  text-decoration: none;
+  cursor: zoom-in;
+  -webkit-tap-highlight-color: transparent;
+}
+
 .safety__badge-image img {
   width: 100%;
   height: 100%;
@@ -1303,7 +1325,7 @@
           <li>더 웨스틴 마우이 리조트&nbsp;&amp;&nbsp;스파(카아나팔리) 세일즈 우수 감사패 수상</li>
         </ul>
         <div class="awards__timeline-photos">
-          <img class="awards__timeline-photo" src="/new_ver/img/company-intro/awards/2017-westin-maui.jpg" alt="더 웨스틴 마우이 리조트 & 스파 세일즈 우수 감사패">
+          <a class="awards__photo-link" data-fancybox="awards" href="/new_ver/img/company-intro/awards/2017-westin-maui.jpg" data-caption="더 웨스틴 마우이 리조트 & 스파 세일즈 우수 감사패"><img class="awards__timeline-photo" src="/new_ver/img/company-intro/awards/2017-westin-maui.jpg" alt="더 웨스틴 마우이 리조트 & 스파 세일즈 우수 감사패"></a>
         </div>
       </div>
       <div class="awards__timeline-item">
@@ -1312,7 +1334,7 @@
           <li>경영혁신형 중소기업(Main-Biz) 인증 획득</li>
         </ul>
         <div class="awards__timeline-photos">
-          <img class="awards__timeline-photo" src="/new_ver/img/company-intro/awards/2020-mainbiz-certificate.jpg" alt="경영혁신형 중소기업 Main-Biz 확인서">
+          <a class="awards__photo-link" data-fancybox="awards" href="/new_ver/img/company-intro/awards/2020-mainbiz-certificate.jpg" data-caption="경영혁신형 중소기업 Main-Biz 확인서"><img class="awards__timeline-photo" src="/new_ver/img/company-intro/awards/2020-mainbiz-certificate.jpg" alt="경영혁신형 중소기업 Main-Biz 확인서"></a>
         </div>
       </div>
       <div class="awards__timeline-item">
@@ -1321,7 +1343,7 @@
           <li>쉐라톤 와이키키 아시아 세일즈 우수 감사패 수상</li>
         </ul>
         <div class="awards__timeline-photos">
-          <img class="awards__timeline-photo" src="/new_ver/img/company-intro/awards/2022-sheraton-waikiki.jpg" alt="쉐라톤 와이키키 아시아 세일즈 우수 감사패">
+          <a class="awards__photo-link" data-fancybox="awards" href="/new_ver/img/company-intro/awards/2022-sheraton-waikiki.jpg" data-caption="쉐라톤 와이키키 아시아 세일즈 우수 감사패"><img class="awards__timeline-photo" src="/new_ver/img/company-intro/awards/2022-sheraton-waikiki.jpg" alt="쉐라톤 와이키키 아시아 세일즈 우수 감사패"></a>
         </div>
       </div>
       <div class="awards__timeline-item">
@@ -1332,8 +1354,8 @@
           <li>릴리 비치 리조트&nbsp;&amp;&nbsp;스파 아시아 세일즈&nbsp;1위(Top Selling Korean Partner)</li>
         </ul>
         <div class="awards__timeline-photos">
-          <img class="awards__timeline-photo" src="/new_ver/img/company-intro/awards/2023-sheraton-waikiki-turtle.png" alt="쉐라톤 와이키키 아시아 세일즈 1위 감사패">
-          <img class="awards__timeline-photo" src="/new_ver/img/company-intro/awards/2023-lily-beach.png" alt="릴리 비치 리조트 & 스파 아시아 세일즈 1위 트로피">
+          <a class="awards__photo-link" data-fancybox="awards" href="/new_ver/img/company-intro/awards/2023-sheraton-waikiki-turtle.png" data-caption="쉐라톤 와이키키 아시아 세일즈 1위 감사패"><img class="awards__timeline-photo" src="/new_ver/img/company-intro/awards/2023-sheraton-waikiki-turtle.png" alt="쉐라톤 와이키키 아시아 세일즈 1위 감사패"></a>
+          <a class="awards__photo-link" data-fancybox="awards" href="/new_ver/img/company-intro/awards/2023-lily-beach.png" data-caption="릴리 비치 리조트 & 스파 아시아 세일즈 1위 트로피"><img class="awards__timeline-photo" src="/new_ver/img/company-intro/awards/2023-lily-beach.png" alt="릴리 비치 리조트 & 스파 아시아 세일즈 1위 트로피"></a>
         </div>
       </div>
       <div class="awards__timeline-item">
@@ -1347,8 +1369,8 @@
           <li>에메랄드 파루푸시 한국 세일즈&nbsp;1위</li>
         </ul>
         <div class="awards__timeline-photos">
-          <img class="awards__timeline-photo" src="/new_ver/img/company-intro/awards/2024-vakkaru.jpg" alt="바카루 몰디브 한국 세일즈 1위 트로피">
-          <img class="awards__timeline-photo" src="/new_ver/img/company-intro/awards/2024-emerald-faarufushi.jpg" alt="에메랄드 파루푸시 한국 세일즈 1위 트로피">
+          <a class="awards__photo-link" data-fancybox="awards" href="/new_ver/img/company-intro/awards/2024-vakkaru.jpg" data-caption="바카루 몰디브 한국 세일즈 1위 트로피"><img class="awards__timeline-photo" src="/new_ver/img/company-intro/awards/2024-vakkaru.jpg" alt="바카루 몰디브 한국 세일즈 1위 트로피"></a>
+          <a class="awards__photo-link" data-fancybox="awards" href="/new_ver/img/company-intro/awards/2024-emerald-faarufushi.jpg" data-caption="에메랄드 파루푸시 한국 세일즈 1위 트로피"><img class="awards__timeline-photo" src="/new_ver/img/company-intro/awards/2024-emerald-faarufushi.jpg" alt="에메랄드 파루푸시 한국 세일즈 1위 트로피"></a>
         </div>
       </div>
       <div class="awards__timeline-item">
@@ -1357,7 +1379,7 @@
           <li>Expedia TAAP B2B 세일즈 한국&nbsp;1위</li>
         </ul>
         <div class="awards__timeline-photos">
-          <img class="awards__timeline-photo" src="/new_ver/img/company-intro/awards/2024-2025-expedia-taap.jpg" alt="Expedia TAAP 2024 Best Performance Awards 인증서">
+          <a class="awards__photo-link" data-fancybox="awards" href="/new_ver/img/company-intro/awards/2024-2025-expedia-taap.jpg" data-caption="Expedia TAAP 2024 Best Performance Awards 인증서"><img class="awards__timeline-photo" src="/new_ver/img/company-intro/awards/2024-2025-expedia-taap.jpg" alt="Expedia TAAP 2024 Best Performance Awards 인증서"></a>
         </div>
       </div>
       <div class="awards__timeline-item">
@@ -1813,23 +1835,23 @@
 
     <div class="safety__badges">
       <div class="safety__badge">
-        <div class="safety__badge-image"><img src="/new_ver/img/company-intro/safety/badge-1-travel-guarantee.jpg" alt="일반여행업 보증 가입 증서"></div>
+        <a class="safety__badge-image" data-fancybox="safety" href="/new_ver/img/company-intro/safety/badge-1-travel-guarantee.jpg" data-caption="일반여행업 보증 가입 증서"><img src="/new_ver/img/company-intro/safety/badge-1-travel-guarantee.jpg" alt="일반여행업 보증 가입 증서"></a>
         <p class="safety__badge-caption">일반여행업 보증 가입</p>
       </div>
       <div class="safety__badge">
-        <div class="safety__badge-image"><img src="/new_ver/img/company-intro/safety/badge-2-package-guarantee.jpg" alt="기획여행업 보증 가입 증서"></div>
+        <a class="safety__badge-image" data-fancybox="safety" href="/new_ver/img/company-intro/safety/badge-2-package-guarantee.jpg" data-caption="기획여행업 보증 가입 증서"><img src="/new_ver/img/company-intro/safety/badge-2-package-guarantee.jpg" alt="기획여행업 보증 가입 증서"></a>
         <p class="safety__badge-caption">기획여행영업 보증 가입</p>
       </div>
       <div class="safety__badge">
-        <div class="safety__badge-image"><img src="/new_ver/img/company-intro/safety/badge-3-liability-insurance.jpg" alt="여행업자 배상책임보험 가입 증권"></div>
+        <a class="safety__badge-image" data-fancybox="safety" href="/new_ver/img/company-intro/safety/badge-3-liability-insurance.jpg" data-caption="여행업자 배상책임보험 가입 증권"><img src="/new_ver/img/company-intro/safety/badge-3-liability-insurance.jpg" alt="여행업자 배상책임보험 가입 증권"></a>
         <p class="safety__badge-caption">여행업자 배상책임보험 가입</p>
       </div>
       <div class="safety__badge">
-        <div class="safety__badge-image"><img src="/new_ver/img/company-intro/safety/badge-4-iata-bsp.jpg" alt="IATA 국제 항공 운송 협회 인증서"></div>
+        <a class="safety__badge-image" data-fancybox="safety" href="/new_ver/img/company-intro/safety/badge-4-iata-bsp.jpg" data-caption="IATA 국제 항공 운송 협회 인증서"><img src="/new_ver/img/company-intro/safety/badge-4-iata-bsp.jpg" alt="IATA 국제 항공 운송 협회 인증서"></a>
         <p class="safety__badge-caption">IATA 국제 항공 운송 협회 BSP 7억 원 가입</p>
       </div>
       <div class="safety__badge">
-        <div class="safety__badge-image"><img src="/new_ver/img/company-intro/safety/badge-5-expedia-platinum.jpg" alt="Expedia TAAP Platinum Tier 인증서"></div>
+        <a class="safety__badge-image" data-fancybox="safety" href="/new_ver/img/company-intro/safety/badge-5-expedia-platinum.jpg" data-caption="Expedia TAAP Platinum Tier 인증서"><img src="/new_ver/img/company-intro/safety/badge-5-expedia-platinum.jpg" alt="Expedia TAAP Platinum Tier 인증서"></a>
         <p class="safety__badge-caption">익스피디아 플래티넘</p>
       </div>
     </div>
@@ -1908,6 +1930,25 @@
 
     numberEls.forEach(function (el) {
       numberObserver.observe(el);
+    });
+  }
+})();
+</script>
+
+<!-- ============================================================
+   JS: 증서·감사패·트로피 사진 확대 보기 (PC 버전과 동일)
+   - "허니문리조트 그리고 안전"(data-fancybox="safety") +
+     "호텔·리조트 예약 장점" 수상 타임라인(data-fancybox="awards")
+   - 새 탭이 아니라 같은 페이지 위 오버레이(Fancybox)로 원본을 크게 표시
+============================================================= -->
+<script>
+(function () {
+  if (window.Fancybox) {
+    Fancybox.bind('[data-fancybox]', {
+      Thumbs: false,
+      Toolbar: {
+        display: ["counter", "zoomIn", "zoomOut", "slideshow", "fullscreen", "close"]
+      }
     });
   }
 })();
