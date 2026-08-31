@@ -770,12 +770,12 @@
 }
 
 /* 관광청 목록: 폭이 제각각인 알약이 가운데 정렬로 들쭉날쭉해 보여서
-   2열 그리드로 칸을 맞춰 정돈합니다. (마지막 홀수 항목은 가운데 한 칸) */
+   3열 그리드로 칸을 맞춰 정돈합니다. */
 .verified__boards {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
-  max-width: 340px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 7px;
+  max-width: 360px;
   margin: 0 auto 34px;
   padding: 0;
   list-style: none;
@@ -786,22 +786,20 @@
   align-items: center;
   justify-content: center;
   min-height: 40px;
-  padding: 8px 12px;
+  padding: 7px 6px;
   border: 1px solid var(--hero-color-border);
   border-radius: 999px;
   background-color: var(--hero-color-surface);
-  font-size: 12px;
-  line-height: 1.35;
+  font-size: 11px;
+  line-height: 1.3;
   color: var(--hero-color-body);
   text-align: center;
   word-break: keep-all;
 }
 
-/* 항목 수가 홀수면 마지막 하나가 왼쪽에 붙어 어색하므로 가운데로 */
-.verified__boards li:last-child:nth-child(odd) {
-  grid-column: 1 / -1;
-  justify-self: center;
-  min-width: calc(50% - 4px);
+/* 마지막 줄에 1개만 남으면 왼쪽에 붙지 않도록 가운데 칸으로 */
+.verified__boards li:last-child:nth-child(3n+1) {
+  grid-column: 2;
 }
 
 .verified__grid {
