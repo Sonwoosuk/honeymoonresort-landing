@@ -139,19 +139,31 @@
 .dest__hard p{ margin-top:6px; font-size:clamp(12px,1.05vw,13.5px); line-height:1.7; color:var(--body); }
 
 /* 성과 — 가로 스크롤 카드 */
-.dest__tl{ margin-top:clamp(22px,3.4vw,38px); background:var(--cream); border-radius:16px; padding:clamp(20px,3vw,30px) clamp(20px,3vw,32px); }
-.sec--white .dest__tl{ background:var(--yellow-soft); }
-.dest__tl-h{ font-size:clamp(14px,1.5vw,18px); font-weight:800; color:var(--ink); text-align:center; margin-bottom:clamp(16px,2vw,22px); }
-.dest__tl-list{
-  display:grid; grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:clamp(10px,1.4vw,14px) clamp(22px,3.4vw,44px);
+/* 세로 타임라인 (왼쪽). 스크롤에 맞춰 항목이 하나씩 등장 */
+.dest__tl{ margin-top:clamp(30px,4.5vw,54px); }
+.dest__tl-h{ font-size:clamp(15px,1.6vw,19px); font-weight:800; color:var(--ink); text-align:left; margin-bottom:clamp(14px,2vw,22px); }
+.tl{ max-width:680px; }
+.tl__track{ position:relative; display:flex; flex-direction:column; }
+.tl__track::before{
+  content:""; position:absolute; left:34px; top:18px; bottom:18px; width:3px;
+  background:var(--plum); border-radius:2px;
 }
-.dest__tl-list li{
-  display:flex; gap:10px; align-items:baseline;
-  font-size:clamp(12px,1.05vw,13.5px); line-height:1.5; color:var(--ink);
+.tl__item{
+  position:relative; display:flex; align-items:center; gap:clamp(16px,2vw,22px);
+  padding:clamp(8px,1.3vw,12px) 0;
 }
-.dest__tl-list li b{
-  flex:none; color:var(--plum); font-weight:800; font-variant-numeric:tabular-nums; letter-spacing:0;
+.tl__item.reveal{ opacity:0; transform:translateX(-24px); }
+.tl__item.reveal.in{ opacity:1; transform:none; }
+.tl__dot{
+  order:-1; position:relative; z-index:2; flex:none;
+  width:68px; aspect-ratio:1; border-radius:50%;
+  background:var(--white); border:2.5px solid var(--plum);
+  display:flex; align-items:center; justify-content:center;
+  color:var(--plum); font-weight:800; font-size:11px; white-space:nowrap;
+  box-shadow:0 4px 10px rgba(60,40,0,.1);
+}
+.tl__label{
+  font-size:clamp(13px,1.15vw,14.5px); line-height:1.5; font-weight:600; color:var(--ink);
 }
 
 /* ---- 무엇이 다른가요 (어두운 패널) ---- */
@@ -211,9 +223,6 @@
 .reveal.in{ opacity:1; transform:none; }
 @media (prefers-reduced-motion:reduce){ .reveal{ opacity:1 !important; transform:none !important; transition:none; } }
 
-@media (max-width:1000px){
-  .dest__tl-list{ grid-template-columns:repeat(2,minmax(0,1fr)); }
-}
 @media (max-width:820px){
   .hero{ aspect-ratio:4/5; }
   .hero__h{ font-size:clamp(23px,6.4vw,36px); line-height:1.14; bottom:clamp(16px,5vw,26px); }
@@ -224,7 +233,9 @@
   .dest__row{ grid-template-columns:1fr; gap:16px; }
   .dest__block:nth-of-type(even) .dest__media{ order:0; }
   .dest__media{ min-height:clamp(230px,60vw,320px); }
-  .dest__tl-list{ grid-template-columns:1fr; }
+  .tl__track::before{ left:28px; }
+  .tl__dot{ width:58px; font-size:10.5px; }
+  .tl__label{ padding-top:19px; }
   .tube__grid{ grid-template-columns:1fr; }
   .celeb__grid{ grid-template-columns:repeat(2,1fr); }
   .safe__badges{ grid-template-columns:repeat(2,1fr); }
@@ -318,27 +329,27 @@
         </div>
         <div class="dest__tl">
           <p class="dest__tl-h">호텔엔투어가 하와이에서 특별한 이유</p>
-          <ul class="dest__tl-list">
-            <li><b>2026.07</b><span>미국 관광청 2026년 글로벌 앰버서더 선정</span></li>
-            <li><b>2026.04</b><span>힐튼 와이콜로아 빌리지(빅아일랜드 코나) 대한민국 판매 1위</span></li>
-            <li><b>2025.11</b><span>하얏트 센트릭 와이키키 아시아 판매 1위</span></li>
-            <li><b>2025.10</b><span>하와이 관광청 “Your one &amp; only Hawai'i” 세일즈 캠페인</span></li>
-            <li><b>2025.10</b><span>배우 김가은·윤선우 커플 하와이 신혼여행</span></li>
-            <li><b>2025.04</b><span>은가은·박현호 커플 하와이 신혼여행</span></li>
-            <li><b>2025.03</b><span>와이키키 비치 메리어트 한국 세일즈 1위</span></li>
-            <li><b>2025.03</b><span>하와이 관광청 대표 여행사 VIP 팸투어</span></li>
-            <li><b>2025.02</b><span>불꽃야구 팀 하와이 골프 행사 진행</span></li>
-            <li><b>2024.10</b><span>사우스웨스트 항공 하와이 주내선 특가 직계약</span></li>
-            <li><b>2024.10</b><span>심형탁·사야 커플 하와이 신혼여행 &amp; 태교여행</span></li>
-            <li><b>2024.05</b><span>김기리·문지인 커플 하와이 신혼여행</span></li>
-            <li><b>2024.01</b><span>하와이 관광청 허니문 프로모션</span></li>
-            <li><b>2023.10</b><span>쉐라톤 와이키키 2023년 아시아 세일즈 1위</span></li>
-            <li><b>2023.05</b><span>미국관광청 IPW 2023 샌안토니오 한국 대표 참가</span></li>
-            <li><b>2023.02</b><span>알로힐라니 리조트 최우수 세일즈 여행사 선정</span></li>
-            <li><b>2023.02</b><span>미국방문위원회 한국 대표 여행사 선정</span></li>
-            <li><b>2022.12</b><span>PGA 임성재 하와이 신혼여행</span></li>
-            <li><b>2022.12</b><span>쉐라톤 와이키키 아시아 세일즈 우수 퍼포먼스 감사패</span></li>
-          </ul>
+          <div class="tl"><div class="tl__track">
+            <div class="tl__item" style="--i:0"><span class="tl__label">미국 관광청 2026년 글로벌 앰버서더 선정</span><span class="tl__dot">2026.07</span></div>
+            <div class="tl__item" style="--i:1"><span class="tl__label">힐튼 와이콜로아 빌리지(빅아일랜드 코나) 대한민국 판매 1위</span><span class="tl__dot">2026.04</span></div>
+            <div class="tl__item" style="--i:2"><span class="tl__label">하얏트 센트릭 와이키키 아시아 판매 1위</span><span class="tl__dot">2025.11</span></div>
+            <div class="tl__item" style="--i:3"><span class="tl__label">하와이 관광청 “Your one &amp; only Hawai'i” 세일즈 캠페인</span><span class="tl__dot">2025.10</span></div>
+            <div class="tl__item" style="--i:4"><span class="tl__label">배우 김가은·윤선우 커플 하와이 신혼여행</span><span class="tl__dot">2025.10</span></div>
+            <div class="tl__item" style="--i:5"><span class="tl__label">은가은·박현호 커플 하와이 신혼여행</span><span class="tl__dot">2025.04</span></div>
+            <div class="tl__item" style="--i:6"><span class="tl__label">와이키키 비치 메리어트 한국 세일즈 1위</span><span class="tl__dot">2025.03</span></div>
+            <div class="tl__item" style="--i:7"><span class="tl__label">하와이 관광청 하와이 신혼여행 대표 여행사 VIP 팸투어</span><span class="tl__dot">2025.03</span></div>
+            <div class="tl__item" style="--i:8"><span class="tl__label">불꽃야구 팀 하와이 골프 행사 진행</span><span class="tl__dot">2025.02</span></div>
+            <div class="tl__item" style="--i:9"><span class="tl__label">사우스웨스트 항공 x 허니문리조트 하와이 주내선 특가 직계약</span><span class="tl__dot">2024.10</span></div>
+            <div class="tl__item" style="--i:10"><span class="tl__label">심형탁·사야 커플 하와이 신혼여행 &amp; 태교여행</span><span class="tl__dot">2024.10</span></div>
+            <div class="tl__item" style="--i:11"><span class="tl__label">김기리·문지인 커플 하와이 신혼여행</span><span class="tl__dot">2024.05</span></div>
+            <div class="tl__item" style="--i:12"><span class="tl__label">하와이 관광청 x 허니문리조트 허니문 프로모션</span><span class="tl__dot">2024.01</span></div>
+            <div class="tl__item" style="--i:13"><span class="tl__label">쉐라톤 와이키키 2023년 아시아 세일즈 1위</span><span class="tl__dot">2023.10</span></div>
+            <div class="tl__item" style="--i:14"><span class="tl__label">미국관광청(Brand USA) IPW 2023 샌안토니오 한국 대표 여행사 참가</span><span class="tl__dot">2023.05</span></div>
+            <div class="tl__item" style="--i:15"><span class="tl__label">알로힐라니 리조트 와이키키 비치호텔 최우수 세일즈 여행사 선정</span><span class="tl__dot">2023.02</span></div>
+            <div class="tl__item" style="--i:16"><span class="tl__label">미국방문위원회(Visit USA Committee-Korea) 한국 대표 여행사 선정</span><span class="tl__dot">2023.02</span></div>
+            <div class="tl__item" style="--i:17"><span class="tl__label">PGA 골프 선수 임성재 하와이 신혼여행</span><span class="tl__dot">2022.12</span></div>
+            <div class="tl__item" style="--i:18"><span class="tl__label">쉐라톤 와이키키 아시아 세일즈 우수 퍼포먼스 감사패 수상</span><span class="tl__dot">2022.12</span></div>
+          </div></div>
         </div>
       </article>
 
@@ -362,18 +373,18 @@
         </div>
         <div class="dest__tl">
           <p class="dest__tl-h">호텔엔투어가 몰디브에서 특별한 이유</p>
-          <ul class="dest__tl-list">
-            <li><b>2025.06</b><span>AOA 찬미(임도화)·송의환 커플 몰디브 신혼여행</span></li>
-            <li><b>2025.05</b><span>에일리·최시훈 커플 몰디브 신혼여행</span></li>
-            <li><b>2024.12</b><span>쿠다 빌링길리 한국 세일즈 1위 수상</span></li>
-            <li><b>2024.11</b><span>힐튼 아밍기리 한국 세일즈 1위 수상</span></li>
-            <li><b>2024.11</b><span>에메랄드 파루푸시 한국 세일즈 1위 수상</span></li>
-            <li><b>2024.11</b><span>바카루 한국 세일즈 1위 수상</span></li>
-            <li><b>2024.05</b><span>천둥·미미 커플 몰디브 신혼여행 (바카루, 바로스)</span></li>
-            <li><b>2023.12</b><span>방송인 다니엘 린데만 몰디브 신혼여행</span></li>
-            <li><b>2023.11</b><span>릴리비치 리조트 한국 세일즈 1위</span></li>
-            <li><b>2023.10</b><span>쿠다빌링기리 리조트 한국 세일즈 1위</span></li>
-          </ul>
+          <div class="tl"><div class="tl__track">
+            <div class="tl__item" style="--i:0"><span class="tl__label">AOA 찬미(임도화)·송의환 커플 몰디브 신혼여행</span><span class="tl__dot">2025.06</span></div>
+            <div class="tl__item" style="--i:1"><span class="tl__label">에일리·최시훈 커플 몰디브 신혼여행</span><span class="tl__dot">2025.05</span></div>
+            <div class="tl__item" style="--i:2"><span class="tl__label">쿠다 빌링길리 한국 세일즈 1위 수상</span><span class="tl__dot">2024.12</span></div>
+            <div class="tl__item" style="--i:3"><span class="tl__label">힐튼 아밍기리 한국 세일즈 1위 수상</span><span class="tl__dot">2024.11</span></div>
+            <div class="tl__item" style="--i:4"><span class="tl__label">에메랄드 파루푸시 한국 세일즈 1위 수상</span><span class="tl__dot">2024.11</span></div>
+            <div class="tl__item" style="--i:5"><span class="tl__label">바카루 한국 세일즈 1위 수상</span><span class="tl__dot">2024.11</span></div>
+            <div class="tl__item" style="--i:6"><span class="tl__label">천둥·미미 커플 몰디브 신혼여행 (바카루, 바로스)</span><span class="tl__dot">2024.05</span></div>
+            <div class="tl__item" style="--i:7"><span class="tl__label">방송인 다니엘 린데만 몰디브 신혼여행</span><span class="tl__dot">2023.12</span></div>
+            <div class="tl__item" style="--i:8"><span class="tl__label">릴리비치 리조트 한국 세일즈 1위</span><span class="tl__dot">2023.11</span></div>
+            <div class="tl__item" style="--i:9"><span class="tl__label">쿠다빌링기리 리조트 한국 세일즈 1위</span><span class="tl__dot">2023.10</span></div>
+          </div></div>
         </div>
       </article>
 
@@ -418,20 +429,20 @@
         </div>
         <div class="dest__tl">
           <p class="dest__tl-h">호텔엔투어가 유럽에서 특별한 이유</p>
-          <ul class="dest__tl-list">
-            <li><b>2026.07</b><span>Skål International 멤버 합류</span></li>
-            <li><b>2026.02</b><span>익스피디아 그룹 B2B 2025년 베스트 퍼포먼스 (대한민국 1등)</span></li>
-            <li><b>2026.01</b><span>스위스 관광청 STA 세미나 수료 후 스위스 스터디 트립</span></li>
-            <li><b>2025.12</b><span>모나코 관광청 X 허니문리조트 인스펙션</span></li>
-            <li><b>2025.12</b><span>ILTM Cannes 한국 대표 buyer 참석</span></li>
-            <li><b>2025.05</b><span>프랑스 관광청 랑데부 프랑스 VIP 참석</span></li>
-            <li><b>2025.03</b><span>인플루언서 예영·지훈 스페인 커플 여행</span></li>
-            <li><b>2025.02</b><span>김기리·문지인 커플 두 번째 유럽 신혼여행 (체코 &amp; 헝가리)</span></li>
-            <li><b>2025.02</b><span>스위스 관광청 스위스 신혼여행 대표 여행사 초청</span></li>
-            <li><b>2024.12</b><span>익스피디아 그룹 B2B 2024년 베스트 퍼포먼스 (대한민국 1등)</span></li>
-            <li><b>2024.04</b><span>체코관광청 업그레이드 프로모션</span></li>
-            <li><b>2023.04</b><span>체코관광청 TTD 브르노 참가</span></li>
-          </ul>
+          <div class="tl"><div class="tl__track">
+            <div class="tl__item" style="--i:0"><span class="tl__label">Skål International 멤버 합류 (세계 최대 규모 관광·여행 전문가 연합)</span><span class="tl__dot">2026.07</span></div>
+            <div class="tl__item" style="--i:1"><span class="tl__label">익스피디아 그룹 B2B 2025년 베스트 퍼포먼스 수상 (대한민국 1등)</span><span class="tl__dot">2026.02</span></div>
+            <div class="tl__item" style="--i:2"><span class="tl__label">스위스 관광청 STA 총 7차 세미나 수료 후 스위스 스터디 트립</span><span class="tl__dot">2026.01</span></div>
+            <div class="tl__item" style="--i:3"><span class="tl__label">모나코 관광청 X 허니문리조트 인스펙션 진행</span><span class="tl__dot">2025.12</span></div>
+            <div class="tl__item" style="--i:4"><span class="tl__label">ILTM Cannes 한국 대표 buyer 참석</span><span class="tl__dot">2025.12</span></div>
+            <div class="tl__item" style="--i:5"><span class="tl__label">프랑스 관광청 랑데부 프랑스 VIP 참석</span><span class="tl__dot">2025.05</span></div>
+            <div class="tl__item" style="--i:6"><span class="tl__label">인플루언서 예영·지훈 스페인 커플 여행 진행</span><span class="tl__dot">2025.03</span></div>
+            <div class="tl__item" style="--i:7"><span class="tl__label">김기리·문지인 커플 두 번째 유럽 신혼여행 (체코 &amp; 헝가리)</span><span class="tl__dot">2025.02</span></div>
+            <div class="tl__item" style="--i:8"><span class="tl__label">스위스 관광청 스위스 신혼여행 대표 여행사로 초청</span><span class="tl__dot">2025.02</span></div>
+            <div class="tl__item" style="--i:9"><span class="tl__label">익스피디아 그룹 B2B 2024년 베스트 퍼포먼스 수상 (대한민국 1등)</span><span class="tl__dot">2024.12</span></div>
+            <div class="tl__item" style="--i:10"><span class="tl__label">체코관광청 x 허니문리조트 업그레이드 프로모션</span><span class="tl__dot">2024.04</span></div>
+            <div class="tl__item" style="--i:11"><span class="tl__label">체코관광청 TTD 브르노 참가</span><span class="tl__dot">2023.04</span></div>
+          </div></div>
         </div>
       </article>
     </div>
@@ -522,7 +533,7 @@
   var groups = [
     ['.sec__h', 0], ['.sec__tag', 60], ['.sec__lead', 90],
     ['.ask', 0], ['.aud__card', 0], ['.dest__block', 0],
-    ['.dest__tl', 0], ['.diff__panel', 0],
+    ['.tl__item', 0], ['.diff__panel', 0],
     ['.tube__item', 0], ['.tube__note', 80],
     ['.celeb__card', 0], ['.safe__badge', 0]
   ];
@@ -538,10 +549,12 @@
     entries.forEach(function(e){
       if (!e.isIntersecting) return;
       var el = e.target;
-      /* 같은 부모 안의 형제 순서에 따라 살짝 시차 */
-      var sibs = Array.prototype.indexOf.call(el.parentNode.children, el);
-      var delay = Math.min(sibs, 6) * 70;
-      el.style.transitionDelay = delay + 'ms';
+      /* 타임라인 항목은 스크롤 위치대로 하나씩 → 시차 없음.
+         나머지는 같은 부모 안 형제 순서에 따라 살짝 시차 */
+      if (!el.classList.contains('tl__item')) {
+        var sibs = Array.prototype.indexOf.call(el.parentNode.children, el);
+        el.style.transitionDelay = Math.min(sibs, 6) * 70 + 'ms';
+      }
       el.classList.add('in');
       io.unobserve(el);
     });
