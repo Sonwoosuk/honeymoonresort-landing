@@ -7,7 +7,7 @@
 <link rel="stylesheet" as="style" crossorigin
   href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
 <style>
-/* 호텔엔투어 소개 · 시안 4 — 옐로 배경 (igogo / Blend Bend 레퍼런스 기반, 내용만 교체) */
+/* 호텔엔투어 소개 · 시안 4 — 옐로 배경 (igogo / Blend Bend 레퍼런스 기반) */
 
 :root{
   --yellow:#ffc21f;
@@ -16,6 +16,7 @@
   --body:#2c2c2c;
   --white:#ffffff;
   --orange:#ec7514;
+  --plum:#8e3c5d;
   --font:"Pretendard",-apple-system,BlinkMacSystemFont,"Malgun Gothic",sans-serif;
   --gutter:clamp(18px,4vw,56px);
   --radius:clamp(18px,2.6vw,30px);
@@ -25,14 +26,14 @@
   margin:0; background:var(--yellow); color:var(--body); font-family:var(--font);
   -webkit-font-smoothing:antialiased; word-break:keep-all; overflow-wrap:break-word; overflow-x:hidden;
 }
-.pg :where(h1,h2,h3,p,ul,li,figure,section){margin:0;padding:0;}
+.pg :where(h1,h2,h3,h4,p,ul,li,figure,section){margin:0;padding:0;}
 .pg ul{list-style:none;}
 .pg img{display:block;max-width:100%;}
 .pg :where(h1,h2,h3){color:var(--ink);letter-spacing:-0.035em;text-wrap:balance;}
 .pg p{text-wrap:pretty;}
 .wrap{width:100%;max-width:1200px;margin:0 auto;padding:0 var(--gutter);}
 
-/* ---- 히어로 카드 ---- */
+/* ---- 히어로 ---- */
 .hero{
   position:relative; margin-top:clamp(16px,2.6vw,30px);
   border-radius:var(--radius); border-top-left-radius:0; overflow:hidden;
@@ -40,41 +41,26 @@
 }
 .hero__bg{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
 .hero::after{ content:""; position:absolute; inset:0; background:linear-gradient(105deg, rgba(10,16,20,.6), rgba(10,16,20,.15) 60%); }
-
-/* 왼쪽 위 모서리를 로고 판으로 대체 (Wembley Golf Club 레퍼런스처럼).
-   히어로의 좌상단은 각지게 두고(위 border-top-left-radius:0), 판이 그 자리를 채운다. */
 .hero__notch{
-  position:absolute; top:0; left:0; z-index:4;
-  background:var(--yellow);
+  position:absolute; top:0; left:0; z-index:4; background:var(--yellow);
   padding:clamp(12px,1.6vw,18px) clamp(26px,3.4vw,42px) clamp(15px,2vw,23px) clamp(22px,3vw,36px);
-  border-bottom-right-radius:clamp(20px,2.8vw,30px);
-  display:flex; align-items:center;
+  border-bottom-right-radius:clamp(20px,2.8vw,30px); display:flex; align-items:center;
 }
 .hero__notch img{ height:clamp(22px,2.8vw,32px); width:auto; }
-
 .hero__h{
-  position:absolute; z-index:3; left:clamp(20px,4vw,52px); bottom:clamp(24px,5vw,52px);
-  right:clamp(20px,4vw,52px);
-  color:var(--white); font-weight:800; letter-spacing:-0.04em;
-  font-size:clamp(32px,6vw,70px); line-height:1.12;
-  text-shadow:0 2px 24px rgba(10,14,18,.35);
-  text-wrap:balance;
+  position:absolute; z-index:3; left:clamp(20px,4vw,52px); bottom:clamp(24px,5vw,52px); right:clamp(20px,4vw,52px);
+  color:var(--white); font-weight:800; letter-spacing:-0.04em; font-size:clamp(32px,6vw,70px); line-height:1.12;
+  text-shadow:0 2px 24px rgba(10,14,18,.35); text-wrap:balance;
 }
-.hero__h .nb{ white-space:nowrap; }
-/* 비행 곡선은 사진 위쪽(하늘)에 배치해 타이틀과 겹치지 않게 한다 */
-.hero__wave{
-  position:absolute; left:0; right:0; top:12%; z-index:2; width:100%; height:clamp(80px,12vw,130px);
-  pointer-events:none; overflow:visible;
-}
+.hero__wave{ position:absolute; left:0; right:0; top:12%; z-index:2; width:100%; height:clamp(80px,12vw,130px); pointer-events:none; overflow:visible; }
 .hero__wave path{ fill:none; stroke:var(--yellow); stroke-width:6; stroke-linecap:round; }
 .hero__plane{
   position:absolute; z-index:3; right:8%; top:calc(12% + clamp(2px,1.4vw,14px));
-  font-size:clamp(30px,4.4vw,50px); color:var(--white);
-  transform:rotate(-16deg);
+  font-size:clamp(30px,4.4vw,50px); color:var(--white); transform:rotate(-16deg);
   filter:drop-shadow(0 3px 8px rgba(8,12,16,.4));
 }
 
-/* ---- 여행지 설명 마퀴 ---- */
+/* ---- 마퀴 ---- */
 .mq{ overflow:hidden; padding:clamp(16px,2.4vw,24px) 0; }
 .mq__row{ display:flex; width:max-content; animation:mq 40s linear infinite; }
 .mq:hover .mq__row{ animation-play-state:paused; }
@@ -85,159 +71,134 @@
 }
 .mq__set span::after{ content:"✈"; margin-left:clamp(14px,2vw,22px); color:var(--white); font-weight:400; }
 @keyframes mq{ from{transform:translateX(0)} to{transform:translateX(-50%)} }
-@media (prefers-reduced-motion:reduce){
-  .mq__row{ animation:none; flex-wrap:wrap; }
-  .mq__set:nth-child(2){ display:none; }
-}
+@media (prefers-reduced-motion:reduce){ .mq__row{ animation:none; flex-wrap:wrap; } .mq__set:nth-child(2){ display:none; } }
 
-/* ---- 질문 말풍선 (카카오톡 대화처럼 좌우좌우) ---- */
-.asks{
-  display:flex; flex-direction:column; gap:14px;
-  max-width:820px; margin:clamp(8px,1.4vw,18px) auto 0;
-}
+/* ---- 섹션 제목 공통 ---- */
+.sec{ padding:clamp(40px,5.5vw,78px) 0; }
+.sec__h{ font-size:clamp(26px,4.2vw,48px); font-weight:800; letter-spacing:-0.045em; line-height:1.2; }
+.sec__tag{ margin-top:16px; font-size:clamp(15px,1.7vw,21px); font-weight:700; line-height:1.55; color:var(--plum); letter-spacing:-0.02em; }
+.sec__lead{ margin-top:clamp(22px,3vw,34px); max-width:64ch; font-size:clamp(14px,1.2vw,16px); line-height:1.95; color:var(--body); }
+.sec__lead b{ color:var(--ink); font-weight:700; }
+
+/* ---- 질문 말풍선 ---- */
+.asks{ display:flex; flex-direction:column; gap:14px; max-width:820px; margin:clamp(24px,3.4vw,40px) 0 0; }
 .ask{ display:flex; align-items:flex-end; gap:9px; max-width:86%; }
-.ask__av{
-  flex:none; width:34px; height:34px; border-radius:50%;
-  background:var(--orange);
-}
-.ask__bubble{
-  border-radius:20px; padding:15px 18px; background:var(--white);
-  box-shadow:0 8px 20px rgba(70,45,0,.08);
-  max-width:min(78vw, 440px);
-}
-.ask__bubble p{
-  font-size:clamp(14px,1.25vw,16px); font-weight:600; line-height:1.65; letter-spacing:-0.02em; color:var(--ink);
-  text-wrap:balance;
-}
-.ask__dots{ display:flex; gap:6px; margin-top:12px; }
-.ask__dots i{
-  width:26px; height:26px; border-radius:50%; background:var(--yellow);
-  display:flex; align-items:center; justify-content:center; font-style:normal; font-size:12px; color:var(--ink);
-}
+.ask__av{ flex:none; width:34px; height:34px; border-radius:50%; background:var(--orange); }
+.ask__bubble{ border-radius:20px; padding:15px 18px; background:var(--white); box-shadow:0 8px 20px rgba(70,45,0,.08); max-width:min(78vw,440px); }
+.ask__bubble p{ font-size:clamp(14px,1.25vw,16px); font-weight:600; line-height:1.65; letter-spacing:-0.02em; color:var(--ink); text-wrap:balance; }
 .ask--l{ align-self:flex-start; }
 .ask--l .ask__bubble{ border-top-left-radius:5px; }
 .ask--r{ align-self:flex-end; flex-direction:row-reverse; }
 .ask--r .ask__av{ display:none; }
 .ask--r .ask__bubble{ background:var(--yellow-soft); border-top-right-radius:5px; }
-.ask__bubble--photo{ padding:6px; overflow:hidden; }
+.ask__bubble--photo{ padding:6px; overflow:hidden; max-width:min(80vw,380px); }
 .ask__bubble--photo img{ display:block; width:100%; border-radius:15px; max-height:220px; object-fit:cover; }
-.ask__bubble--photo{ max-width:min(80vw, 380px); }
 .ask__bubble--photo p{ padding:12px 12px 6px; text-wrap:pretty; }
 
-/* ---- 함께하는 여행 ---- */
-.aud{ padding:clamp(46px,7vw,100px) 0 clamp(40px,6vw,80px); }
-.aud__h{ font-size:clamp(30px,5.4vw,60px); font-weight:800; letter-spacing:-0.04em; line-height:1.1; }
+/* ---- 이런 여행을 설계합니다 ---- */
 .aud__stage{ position:relative; margin-top:clamp(24px,3.6vw,44px); }
 .aud__photo{ border-radius:var(--radius); overflow:hidden; aspect-ratio:16/8; background:#3a4a44; }
 .aud__photo img{ width:100%; height:100%; object-fit:cover; }
-.aud__cards{
-  display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(10px,1.4vw,16px);
-  margin-top:clamp(-60px,-6vw,-32px); padding:0 clamp(8px,2vw,28px); position:relative; z-index:2;
-}
-.aud__card{
-  background:var(--white); border-radius:clamp(14px,1.8vw,20px); padding:clamp(16px,2vw,24px);
-  display:flex; flex-direction:column; gap:8px; box-shadow:0 20px 40px rgba(60,40,0,.14);
-}
+.aud__cards{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(10px,1.4vw,16px); margin-top:clamp(-60px,-6vw,-32px); padding:0 clamp(8px,2vw,28px); position:relative; z-index:2; }
+.aud__card{ background:var(--white); border-radius:clamp(14px,1.8vw,20px); padding:clamp(16px,2vw,24px); display:flex; flex-direction:column; gap:8px; box-shadow:0 20px 40px rgba(60,40,0,.14); }
 .aud__card:nth-child(2){ background:var(--yellow-soft); }
-.aud__card h3{ font-size:clamp(15px,1.4vw,18px); font-weight:800; letter-spacing:-0.03em; }
+.aud__card h3{ font-size:clamp(16px,1.5vw,19px); font-weight:800; letter-spacing:-0.03em; }
 .aud__card p{ font-size:clamp(12px,1.05vw,13.5px); line-height:1.65; color:var(--body); text-wrap:pretty; }
-.aud__card i{
-  align-self:flex-start; margin-top:6px;
-  width:34px; height:34px; border-radius:50%; background:var(--yellow);
-  display:flex; align-items:center; justify-content:center; font-style:normal; font-size:15px;
-}
-.aud__card:nth-child(2) i{ background:var(--white); }
 
-/* ---- 여행지 (하와이 / 몰디브 / 발리 / 유럽) — 사진 좌우 교차 ---- */
-.dest{ padding:clamp(40px,6vw,84px) 0 clamp(16px,3vw,28px); }
+/* ---- 여행지 ---- */
 .dest__row{
-  display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-  gap:clamp(20px,3.4vw,52px); align-items:center;
-  padding:clamp(20px,3vw,40px) 0;
+  display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);
+  gap:clamp(20px,3.4vw,52px); align-items:start; padding:clamp(24px,3.5vw,44px) 0;
 }
 .dest__row:nth-child(even) .dest__media{ order:2; }
-.dest__media{
-  border-radius:var(--radius); overflow:hidden; aspect-ratio:4/3; background:#33454e;
-}
+.dest__media{ border-radius:var(--radius); overflow:hidden; background:#33454e; align-self:stretch; min-height:clamp(300px,36vw,480px); }
 .dest__media img{ width:100%; height:100%; object-fit:cover; }
-.dest__name{
-  font-size:clamp(26px,3.4vw,40px); font-weight:800; letter-spacing:-0.04em; line-height:1.1;
+.dest__name{ font-size:clamp(26px,3.4vw,40px); font-weight:800; letter-spacing:-0.04em; line-height:1.1; }
+.dest__name small{ display:block; margin-top:8px; font-size:clamp(13px,1.3vw,16px); font-weight:700; color:var(--orange); letter-spacing:-0.02em; }
+.dest__desc{ margin-top:16px; font-size:clamp(13px,1.15vw,15px); line-height:1.85; color:var(--body); text-wrap:pretty; }
+.dest__desc + .dest__desc{ margin-top:12px; }
+.dest__lineup{ margin-top:16px; background:var(--white); border-radius:16px; padding:16px 18px; display:flex; flex-direction:column; gap:8px; }
+.dest__lineup li{ font-size:clamp(12px,1.05vw,13.5px); line-height:1.55; color:var(--ink); }
+.dest__lineup li b{ color:var(--orange); font-weight:800; }
+.dest__hard{ margin-top:14px; background:var(--yellow-soft); border-radius:16px; padding:16px 18px; }
+.dest__hard h4{ font-size:clamp(13px,1.2vw,15px); font-weight:800; color:var(--ink); }
+.dest__hard p{ margin-top:6px; font-size:clamp(12px,1.05vw,13.5px); line-height:1.7; color:var(--body); }
+.dest details{ margin-top:14px; background:var(--white); border-radius:16px; padding:4px 18px; }
+.dest details summary{
+  list-style:none; cursor:pointer; padding:12px 0; font-size:13px; font-weight:800; color:var(--ink);
+  display:flex; align-items:center; justify-content:space-between;
 }
-.dest__name small{
-  display:block; margin-top:8px; font-size:clamp(13px,1.3vw,16px); font-weight:700; color:var(--orange);
-  letter-spacing:-0.02em;
-}
-.dest__desc{
-  margin-top:16px; font-size:clamp(13px,1.15vw,15px); line-height:1.85; color:var(--body); text-wrap:pretty;
-}
-.dest__facts{ margin-top:18px; display:flex; flex-direction:column; gap:9px; }
-.dest__facts li{
-  font-size:clamp(12px,1.05vw,13.5px); line-height:1.5; color:var(--ink);
-  padding-left:74px; position:relative;
-}
-.dest__facts li b{
-  position:absolute; left:0; top:0; font-weight:800; color:var(--orange);
-  font-variant-numeric:tabular-nums;
-}
+.dest details summary::-webkit-details-marker{ display:none; }
+.dest details summary::after{ content:"+"; font-size:16px; color:var(--orange); }
+.dest details[open] summary::after{ content:"–"; }
+.dest details ol{ list-style:none; padding:0 0 14px; display:flex; flex-direction:column; gap:8px; }
+.dest details ol li{ font-size:12px; line-height:1.5; color:var(--body); padding-left:66px; position:relative; }
+.dest details ol li b{ position:absolute; left:0; top:0; color:var(--orange); font-weight:800; font-variant-numeric:tabular-nums; }
 
-/* ---- 무엇이 다른가요 — 어두운 패널 ---- */
-.diff{ padding:clamp(46px,7vw,100px) 0; }
-.diff__panel{
-  background:var(--ink); color:var(--white);
-  border-radius:var(--radius); padding:clamp(28px,5vw,64px);
+/* ---- 무엇이 다른가요 (어두운 패널) ---- */
+.diff__panel{ background:var(--ink); color:var(--white); border-radius:var(--radius); padding:clamp(28px,5vw,64px); }
+.diff__panel h2{ color:var(--white); font-size:clamp(24px,3.6vw,42px); font-weight:800; letter-spacing:-0.04em; line-height:1.25; }
+.diff__panel p{ margin-top:18px; max-width:62ch; font-size:clamp(14px,1.25vw,16px); line-height:1.9; color:#e7e3da; text-wrap:pretty; }
+.diff__places{ margin-top:26px; display:flex; flex-wrap:wrap; gap:8px; }
+.diff__places li{ padding:8px 15px; border-radius:999px; background:rgba(255,255,255,.1); font-size:13px; font-weight:700; color:var(--white); }
+
+/* ---- 유튜브 ---- */
+.tube__grid{ margin-top:clamp(24px,3.4vw,40px); display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(12px,1.6vw,18px); }
+.tube__item{ display:block; border-radius:16px; overflow:hidden; position:relative; aspect-ratio:16/9; background:#20303a; text-decoration:none; }
+.tube__item img{ width:100%; height:100%; object-fit:cover; }
+.tube__item::after{
+  content:"▶"; position:absolute; inset:0; margin:auto; width:52px; height:52px;
+  display:flex; align-items:center; justify-content:center; font-size:16px;
+  background:rgba(0,0,0,.55); color:#fff; border-radius:50%;
 }
-.diff__panel h2{
-  color:var(--white); font-size:clamp(24px,3.6vw,42px); font-weight:800; letter-spacing:-0.04em; line-height:1.25;
-}
-.diff__panel p{
-  margin-top:18px; max-width:60ch;
-  font-size:clamp(14px,1.25vw,16px); line-height:1.9; color:#e7e3da; text-wrap:pretty;
-}
-.diff__places{
-  margin-top:26px; display:flex; flex-wrap:wrap; gap:8px;
-}
-.diff__places li{
-  padding:8px 15px; border-radius:999px; background:rgba(255,255,255,.1);
-  font-size:13px; font-weight:700; color:var(--white);
-}
+.tube__note{ margin-top:clamp(18px,2.4vw,28px); max-width:70ch; font-size:clamp(12px,1.1vw,14px); line-height:1.8; color:var(--body); }
+
+/* ---- 셀러브리티 ---- */
+.celeb__grid{ margin-top:clamp(24px,3.4vw,40px); display:grid; grid-template-columns:repeat(4,1fr); gap:clamp(10px,1.4vw,16px); }
+.celeb__card{ background:var(--white); border-radius:16px; overflow:hidden; }
+.celeb__card figure{ aspect-ratio:1; background:#e7ddc9; }
+.celeb__card img{ width:100%; height:100%; object-fit:cover; }
+.celeb__card p{ padding:10px 12px 12px; font-size:clamp(11px,1vw,13px); font-weight:700; color:var(--ink); text-align:center; }
+
+/* ---- 안전 ---- */
+.safe__badges{ margin-top:clamp(22px,3vw,34px); display:grid; grid-template-columns:repeat(5,1fr); gap:clamp(8px,1.4vw,16px); }
+.safe__badge{ display:flex; flex-direction:column; gap:8px; }
+.safe__badge figure{ aspect-ratio:3/4; background:var(--white); border-radius:12px; overflow:hidden; padding:8px; }
+.safe__badge img{ width:100%; height:100%; object-fit:contain; }
+.safe__badge span{ font-size:clamp(10px,1vw,12px); font-weight:700; color:var(--ink); text-align:center; line-height:1.35; }
 
 .closing{ padding:clamp(28px,4vw,44px) 0 clamp(46px,7vw,80px); text-align:center; }
 .closing p{ font-size:clamp(14px,1.4vw,17px); font-weight:700; color:var(--ink); letter-spacing:-0.02em; }
 
-/* ---- 비행기 탑버튼 (스크롤에 따라 오른쪽에서 이동, 비행기 모양 그대로) ---- */
+/* ---- 비행기 탑버튼 ---- */
 .fly{
-  position:fixed; right:clamp(10px,1.8vw,24px);
-  top:calc(14% + var(--p, 0) * 64%);
+  position:fixed; right:clamp(10px,1.8vw,24px); top:calc(14% + var(--p,0) * 64%);
   z-index:40; width:clamp(42px,4.4vw,54px); height:clamp(42px,4.4vw,54px);
-  border:0; background:none; padding:0; cursor:pointer;
-  display:block;
+  border:0; background:none; padding:0; cursor:pointer; display:block;
   opacity:0; transform:translateY(8px) scale(.9); pointer-events:none;
   transition:opacity .25s ease, transform .25s ease, top .12s linear;
 }
 .fly.show{ opacity:1; transform:none; pointer-events:auto; }
-.fly svg{
-  width:100%; height:100%; display:block; fill:var(--ink);
-  filter:drop-shadow(0 6px 10px rgba(60,40,0,.35));
-  animation:bob 2.6s ease-in-out infinite;
-}
+.fly svg{ width:100%; height:100%; display:block; fill:var(--ink); filter:drop-shadow(0 6px 10px rgba(60,40,0,.35)); animation:bob 2.6s ease-in-out infinite; }
 .fly:hover svg{ fill:var(--orange); }
 @keyframes bob{ 0%,100%{ transform:translateY(2px); } 50%{ transform:translateY(-3px); } }
 @media (prefers-reduced-motion:reduce){ .fly svg{ animation:none; } .fly{ transition:opacity .2s ease; } }
 
-.note{
-  position:sticky;top:0;z-index:50;background:var(--ink);color:var(--yellow);text-align:center;
-  font-size:12px;font-weight:700;padding:7px 14px;
-}
+.note{ position:sticky; top:0; z-index:50; background:var(--ink); color:var(--yellow); text-align:center; font-size:12px; font-weight:700; padding:7px 14px; }
+
 @media (max-width:820px){
   .hero{ aspect-ratio:4/5; }
   .hero__h{ font-size:clamp(23px,6.4vw,36px); line-height:1.14; bottom:clamp(16px,5vw,26px); }
   .hero__wave{ top:9%; height:64px; }
   .hero__plane{ font-size:34px; right:10%; top:calc(9% - 4px); }
-  .ask{ max-width:90%; }
+  .ask{ max-width:92%; }
   .aud__cards{ grid-template-columns:1fr; margin-top:16px; padding:0; }
   .dest__row{ grid-template-columns:1fr; gap:16px; }
   .dest__row:nth-child(even) .dest__media{ order:0; }
-  .dest__facts li{ padding-left:66px; }
+  .dest__media{ position:static; }
+  .tube__grid{ grid-template-columns:1fr; }
+  .celeb__grid{ grid-template-columns:repeat(2,1fr); }
+  .safe__badges{ grid-template-columns:repeat(2,1fr); }
 }
 </style>
 </head>
@@ -246,12 +207,11 @@
   <div class="note">호텔엔투어 소개 · 시안 4 / 이미지는 임시</div>
 
   <div class="wrap">
+
     <!-- 히어로 -->
     <section class="hero">
       <img class="hero__bg" src="https://images.unsplash.com/photo-1505881502353-a1986add3762?auto=format&fit=crop&w=1920&q=80" alt="에메랄드빛 바다 위 오버워터 빌라로 이어지는 잔교">
-      <div class="hero__notch">
-        <img src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/logo/hotelntour-logo.png" alt="호텔엔투어">
-      </div>
+      <div class="hero__notch"><img src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/logo/hotelntour-logo.png" alt="호텔엔투어"></div>
       <svg class="hero__wave" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
         <path d="M-40,96 C 220,30 430,120 640,82 S 1010,4 1250,14" />
       </svg>
@@ -259,7 +219,7 @@
       <h1 class="hero__h">하와이 · 몰디브 · 발리 · 유럽,<br>가족을 위한 1:1 맞춤 자유여행</h1>
     </section>
 
-    <!-- 여행지 설명 마퀴 -->
+    <!-- 마퀴 -->
     <div class="mq" aria-hidden="true">
       <div class="mq__row">
         <div class="mq__set"><span>하와이 — 맞춤형 알로하 라이프의 경험</span><span>몰디브 — 에메랄드빛 바다 위 프라이빗 휴양</span><span>발리 — 휴양과 액티비티가 공존하는 여행의 천국</span><span>유럽 — 내 맘대로 그리는 예술 같은 여정</span></div>
@@ -267,51 +227,49 @@
       </div>
     </div>
 
-    <!-- 질문 말풍선 (카카오톡 대화처럼 좌우좌우) -->
-    <div class="asks">
-      <article class="ask ask--l">
-        <span class="ask__av"></span>
-        <div class="ask__bubble">
-          <p>온라인 정보만으로는 리조트 분위기, 객실 조건, 항공 일정까지 비교하기 어렵지 않으셨나요?</p>
-          <div class="ask__dots"><i>🏨</i><i>✈</i><i>📍</i></div>
-        </div>
-      </article>
-      <article class="ask ask--r">
-        <div class="ask__bubble ask__bubble--photo">
-          <img src="https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?auto=format&fit=crop&w=1200&q=80" alt="리조트 수영장과 야자수">
-          <p>아이 동반 시 아동 1인 무료인지 2인 무료인지, 올인클루시브인지 하프보드인지 — 리조트마다 다른 혜택을 알기 어렵습니다.</p>
-        </div>
-      </article>
-      <article class="ask ask--l">
-        <span class="ask__av"></span>
-        <div class="ask__bubble">
-          <p>정해진 패키지 일정을 그대로 따라가는 여행이 우리 가족에겐 답답하게 느껴지셨나요?</p>
-          <div class="ask__dots"><i>🗺️</i><i>🧭</i></div>
-        </div>
-      </article>
-    </div>
+    <!-- 어떤 여행사인가요 -->
+    <section class="sec">
+      <h2 class="sec__h">호텔엔투어는 어떤 여행사인가요?</h2>
+      <p class="sec__tag">럭셔리 하이엔드 호텔 &amp; 리조트와 함께하는<br>1:1 맞춤 자유여행의 새로운 기준</p>
+      <p class="sec__lead">오직 당신만을 위해 설계된 특별하고 안전한 자유여행 일정을 찾고 계신가요? 호텔엔투어(Hotel N Tour)는 하와이, 몰디브, 발리, 유럽 여행 전문 컨설턴트들이 고객의 취향과 라이프스타일을 100% 반영하여 디자인하는 <b>1:1 맞춤 자유 여행 전문 브랜드</b>입니다. 모회사 허니문리조트의 글로벌 호텔·리조트 네트워크를 기반으로 전 세계 유명 인터내셔널 럭셔리 &amp; 하이엔드 호텔, 리조트들과의 <b>B2B 직계약</b>을 통해 거품을 뺀 가장 합리적인 가격과 차별화된 혜택을 선사합니다. 특히 3대 가족여행, 아이 동반 가족여행, 부모님 동반 가족여행, 우정여행, 프라이빗 투어, 골프여행, 태교여행, 베이비문, 신혼여행 등 고객의 목적과 취향에 맞춘 <b>무료 1:1 맞춤 여행플래닝</b>을 제안합니다.</p>
 
-    <!-- 함께하는 여행 -->
-    <section class="aud">
-      <h2 class="aud__h">이런 여행을 설계합니다</h2>
+      <div class="asks">
+        <article class="ask ask--l">
+          <span class="ask__av"></span>
+          <div class="ask__bubble">
+            <p>온라인 정보만으로는 리조트 분위기, 객실 조건, 항공 일정까지 비교하기 어렵지 않으셨나요?</p>
+          </div>
+        </article>
+        <article class="ask ask--r">
+          <div class="ask__bubble ask__bubble--photo">
+            <img src="https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?auto=format&fit=crop&w=1200&q=80" alt="리조트 수영장과 야자수">
+            <p>아이 동반 시 아동 1인 무료인지 2인 무료인지, 올인클루시브인지 하프보드인지 — 리조트마다 다른 혜택을 알기 어렵습니다.</p>
+          </div>
+        </article>
+        <article class="ask ask--l">
+          <span class="ask__av"></span>
+          <div class="ask__bubble">
+            <p>정해진 패키지 일정을 그대로 따라가는 여행이 우리 가족에겐 답답하게 느껴지셨나요?</p>
+          </div>
+        </article>
+      </div>
+    </section>
 
+    <!-- 이런 여행을 설계합니다 -->
+    <section class="sec">
+      <h2 class="sec__h">이런 여행을 설계합니다</h2>
       <div class="aud__stage">
-        <figure class="aud__photo">
-          <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1600&q=80" alt="가족이 함께 떠나는 여행">
-        </figure>
+        <figure class="aud__photo"><img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1600&q=80" alt="가족이 함께 떠나는 여행"></figure>
         <div class="aud__cards">
           <article class="aud__card">
-            <i>👪</i>
             <h3>가족여행</h3>
             <p>3대 가족여행, 아이 동반 · 부모님 동반 가족여행까지 구성과 일정에 맞춰 설계합니다.</p>
           </article>
           <article class="aud__card">
-            <i>🏝️</i>
             <h3>럭셔리 자유여행</h3>
             <p>전 세계 하이엔드 호텔·리조트와의 B2B 직계약 기반, 거품을 뺀 특가와 혜택을 제안합니다.</p>
           </article>
           <article class="aud__card">
-            <i>⛳</i>
             <h3>목적여행</h3>
             <p>골프여행, 태교여행, 베이비문, 우정여행, 프라이빗 투어, 신혼여행 등 목적에 맞춘 플래닝.</p>
           </article>
@@ -320,18 +278,48 @@
     </section>
 
     <!-- 여행지 -->
-    <section class="dest">
+    <section class="sec dest">
+      <h2 class="sec__h">1:1 맞춤 여행으로 추천하는 여행지</h2>
+
       <div class="dest__row">
-        <figure class="dest__media"><img src="https://images.unsplash.com/photo-1507876466758-bc54f384809c?auto=format&fit=crop&w=1200&q=80" alt="하와이 와이키키"></figure>
+        <figure class="dest__media"><img src="https://images.unsplash.com/photo-1507876466758-bc54f384809c?auto=format&fit=crop&w=1200&q=80" alt="하와이 와이키키 해변"></figure>
         <div>
-          <h3 class="dest__name">하와이<small>끝없는 매력, 맞춤형 알로하 라이프</small></h3>
-          <p class="dest__desc">와이키키 중심 인기 호텔부터 럭셔리 레지던스까지 폭넓은 직거래 라인업을 갖추고 있습니다. 쉐라톤 와이키키·힐튼 하와이안 빌리지·하얏트 리젠시 와이키키부터, 포시즌스 오아후 앳 코올리나·리츠칼튼 레지던스·할레쿨라니, 이웃섬의 포시즌스 후알랄라이·페어몬트 오키드까지 고객의 니즈에 맞춰 제안합니다. 하와이 현지 직영지사를 보유해 문제 발생 시 24시간 케어 서비스를 받으실 수 있습니다.</p>
-          <ul class="dest__facts">
-            <li><b>2026.07</b>미국 관광청 2026 글로벌 앰버서더 선정</li>
-            <li><b>2026.04</b>힐튼 와이콜로아 빌리지 대한민국 판매 1위</li>
-            <li><b>2025.11</b>하얏트 센트릭 와이키키 아시아 판매 1위</li>
-            <li><b>2025.03</b>와이키키 비치 메리어트 한국 세일즈 1위</li>
+          <h3 class="dest__name">하와이<small>끝없는 매력, 맞춤형 알로하 라이프의 경험</small></h3>
+          <p class="dest__desc">완벽한 인프라를 자랑하는 하와이는 가족여행과 신혼여행은 물론, 친구·지인과 함께하는 여행, 베이비문 및 태교여행, 세계적인 골프코스에서의 럭셔리 라운딩, 아이들의 세상을 넓혀주는 체험학습 여행까지 모든 테마를 만족시키는 곳입니다.</p>
+          <p class="dest__desc">와이키키 중심의 인기 호텔부터 럭셔리 레지던스까지 폭넓은 직거래 라인업을 갖추고 있습니다. 오아후섬을 넘어 빅아일랜드의 포시즌스 후알랄라이, 페어몬트 오키드, 마우이의 안다즈·포시즌스, 카우아이의 그랜드 하얏트, 포시즌스 라나이까지 호텔엔투어만의 압도적인 특가와 특별 프로모션으로 안내합니다.</p>
+          <ul class="dest__lineup">
+            <li><b>스테디셀러</b> 쉐라톤 와이키키 · 힐튼 하와이안 빌리지 · 하얏트 리젠시 와이키키</li>
+            <li><b>하이엔드</b> 포시즌스 오아후 앳 코올리나 · 리츠칼튼 레지던스 · 할레쿨라니</li>
+            <li><b>새 단장</b> 카라이 LXR · 모아나 서프라이더 · 리츠칼튼 터틀베이</li>
           </ul>
+          <div class="dest__hard">
+            <h4>하와이 자유여행, 준비로 고생하지 마세요</h4>
+            <p>오아후부터 마우이, 빅 아일랜드, 라나이, 카우아이까지 자유 일정으로 1:1 맞춤 플래닝이 가능합니다. 하와이 현지 직영지사를 보유해 문제 발생 시 24시간 케어 서비스를 받으실 수 있습니다.</p>
+          </div>
+          <details>
+            <summary>호텔엔투어가 하와이에서 특별한 이유</summary>
+            <ol>
+              <li><b>2026.07</b>미국 관광청 2026년 글로벌 앰버서더 선정</li>
+              <li><b>2026.04</b>힐튼 와이콜로아 빌리지(빅아일랜드 코나) 대한민국 판매 1위</li>
+              <li><b>2025.11</b>하얏트 센트릭 와이키키 아시아 판매 1위</li>
+              <li><b>2025.10</b>하와이 관광청 “Your one &amp; only Hawai'i” 세일즈 캠페인 진행</li>
+              <li><b>2025.10</b>배우 김가은·윤선우 커플 하와이 신혼여행 진행</li>
+              <li><b>2025.04</b>은가은·박현호 커플 하와이 신혼여행 진행</li>
+              <li><b>2025.03</b>와이키키 비치 메리어트 한국 세일즈 1위 수상</li>
+              <li><b>2025.03</b>하와이 관광청 하와이 신혼여행 대표 여행사 VIP 팸투어</li>
+              <li><b>2025.02</b>불꽃야구 팀 하와이 골프 행사 진행</li>
+              <li><b>2024.10</b>사우스웨스트 항공 x 허니문리조트 하와이 주내선 특가 직계약</li>
+              <li><b>2024.10</b>심형탁·사야 커플 하와이 신혼여행 &amp; 태교여행 진행</li>
+              <li><b>2024.05</b>김기리·문지인 커플 하와이 신혼여행 진행</li>
+              <li><b>2024.01</b>하와이 관광청 x 허니문리조트 허니문 프로모션</li>
+              <li><b>2023.10</b>쉐라톤 와이키키 2023년 아시아 세일즈 1위</li>
+              <li><b>2023.05</b>미국관광청(Brand USA) IPW 2023 샌안토니오 한국 대표 여행사 참가</li>
+              <li><b>2023.02</b>알로힐라니 리조트 와이키키 비치호텔 최우수 세일즈 여행사 선정</li>
+              <li><b>2023.02</b>미국방문위원회(Visit USA Committee-Korea) 한국 대표 여행사 선정</li>
+              <li><b>2022.12</b>PGA 임성재 하와이 신혼여행 진행</li>
+              <li><b>2022.12</b>쉐라톤 와이키키 아시아 세일즈 우수 퍼포먼스 감사패 수상</li>
+            </ol>
+          </details>
         </div>
       </div>
 
@@ -339,45 +327,139 @@
         <figure class="dest__media"><img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=1200&q=80" alt="몰디브 오버워터 빌라"></figure>
         <div>
           <h3 class="dest__name">몰디브<small>에메랄드빛 바다 위 완벽한 프라이빗 휴양</small></h3>
-          <p class="dest__desc">수십 개 리조트 중 예산과 취향, 특히 수중환경과 라군 비율까지 꼼꼼히 따져 최적의 빌라를 가장 합리적인 금액에 매칭합니다. 포시즌스 란다기라바루·코라코라·에메랄드 파루푸시·쿠다 빌링기리·힐튼 아밍기리 등. 아이 동반 시 아동 무료 인원, 올인클루시브·하프보드 여부 등 리조트별 혜택 조합도 담당자가 일정에 맞춰 안내합니다.</p>
-          <ul class="dest__facts">
-            <li><b>2024.12</b>쿠다 빌링길리 한국 세일즈 1위</li>
-            <li><b>2024.11</b>힐튼 아밍기리 · 에메랄드 파루푸시 · 바카루 한국 세일즈 1위</li>
-            <li><b>2023.11</b>릴리비치 리조트 한국 세일즈 1위</li>
+          <p class="dest__desc">몰디브는 온전한 쉼을 위한 지상 최고의 낙원입니다. 호텔엔투어의 몰디브 전문가들은 수십여 개의 리조트 중 고객의 예산과 취향, 특히 수중환경과 라군 비율까지 꼼꼼히 따져 최적의 몰디브 빌라를 가장 합리적인 금액에 매칭해 드립니다.</p>
+          <p class="dest__desc">두 사람만의 로맨틱한 신혼여행과 태교여행·베이비문은 물론, 최근 각광받는 다세대 가족여행 및 가족휴양까지 완벽한 쉼을 보장합니다. 리조트와의 다양한 직계약 독점 할인 특가로 가장 스마트하고 럭셔리하게 몰디브를 경험해 보세요.</p>
+          <ul class="dest__lineup">
+            <li><b>하이엔드</b> 포시즌스 란다기라바루 · 코라코라</li>
+            <li><b>올인클루시브</b> 에메랄드 파루푸시</li>
+            <li><b>스테디셀러</b> 쿠다 빌링기리 · 힐튼 아밍기리 · 센타라 미라지 · 아나네아</li>
           </ul>
+          <div class="dest__hard">
+            <h4>몰디브 가족여행이 어려운 이유?</h4>
+            <p>아이 동반 시 아동 1인 무료인지 2인 무료인지, 올인클루시브인지 하프보드인지 등 리조트별 혜택을 알기가 어렵습니다. 호텔엔투어 몰디브 전문 담당자가 고객의 상황과 일정에 맞는 최적의 조합을 안내해 드립니다.</p>
+          </div>
+          <details>
+            <summary>호텔엔투어가 몰디브에서 특별한 이유</summary>
+            <ol>
+              <li><b>2025.06</b>AOA 찬미(임도화)·송의환 커플 몰디브 신혼여행 진행 (W, 후바펜푸시)</li>
+              <li><b>2025.05</b>에일리·최시훈 커플 몰디브 신혼여행 진행 (W, 포시즌스 란다기라바루)</li>
+              <li><b>2024.12</b>쿠다 빌링길리 한국 세일즈 1위 수상</li>
+              <li><b>2024.11</b>힐튼 아밍기리 한국 세일즈 1위 수상</li>
+              <li><b>2024.11</b>에메랄드 파루푸시 한국 세일즈 1위 수상</li>
+              <li><b>2024.11</b>바카루 한국 세일즈 1위 수상</li>
+              <li><b>2024.05</b>천둥·미미 커플 몰디브 신혼여행 진행 (바카루, 바로스)</li>
+              <li><b>2023.12</b>방송인 다니엘 린데만 몰디브 신혼여행 진행</li>
+              <li><b>2023.11</b>릴리비치 리조트 한국 세일즈 1위</li>
+              <li><b>2023.10</b>쿠다빌링기리 리조트 한국 세일즈 1위</li>
+            </ol>
+          </details>
         </div>
       </div>
 
       <div class="dest__row">
-        <figure class="dest__media"><img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=80" alt="발리 우붓 풀빌라"></figure>
+        <figure class="dest__media"><img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=80" alt="발리 우붓 사원"></figure>
         <div>
           <h3 class="dest__name">발리<small>휴양과 액티비티가 공존하는 여행의 천국</small></h3>
-          <p class="dest__desc">짐바란·누사두아의 아야나·포시즌스·물리아·리츠칼튼, 우붓의 포시즌스 사이얀·파드마 우붓, 트렌디한 스미냑·사누르, 활기찬 꾸따까지 랜드마크급 럭셔리 리조트를 가장 좋은 조건으로 안내합니다. 바뚜르 일출 지프투어 등 발리의 하이라이트 액티비티도 맞춤 일정에 더할 수 있으며, 검증된 1:1 현지 가이드가 안전한 여행을 만들어드립니다.</p>
+          <p class="dest__desc">프라이빗 풀빌라의 낭만과 다이내믹한 현지 문화가 어우러진 발리. 신혼여행·가족여행은 물론 우정여행, 골프여행, 태교여행 등 다채로운 테마를 찾으신다면 발리가 정답입니다. 호텔엔투어는 발리 전역의 랜드마크급 럭셔리 리조트를 가장 좋은 조건으로 안내합니다.</p>
+          <ul class="dest__lineup">
+            <li><b>짐바란·누사두아</b> 아야나 · 포시즌스 짐바란 · 주메이라 · 물리아 · 리츠칼튼</li>
+            <li><b>우붓 힐링 풀빌라</b> 포시즌스 사이얀 · 에퀴포이즈 우붓 · 파드마 우붓</li>
+            <li><b>스미냑·르기안·사누르</b> 아바니 스미냑 · W 스미냑 · 인디고 스미냑 · 더 클럽 르기안 · 안다즈</li>
+            <li><b>꾸따</b> 아스톤 꾸따 · 포포인츠 쉐라톤 꾸따 · 트라이브 꾸따 · 머큐어 꾸따</li>
+          </ul>
+          <div class="dest__hard">
+            <h4>발리 가족여행 · 신혼여행이 어려운 이유?</h4>
+            <p>복잡한 교통수단부터 발리 밸리까지 여행의 위험 요소가 존재하지만, 완벽하게 검증된 1:1 맞춤 현지인 가이드가 안전한 발리 여행을 만들어드립니다. 바뚜르 일출 지프투어 등 하이라이트 액티비티도 맞춤 일정에 더할 수 있습니다.</p>
+          </div>
         </div>
       </div>
 
       <div class="dest__row">
-        <figure class="dest__media"><img src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=1200&q=80" alt="유럽 도시"></figure>
+        <figure class="dest__media"><img src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=1200&q=80" alt="유럽 도시 전경"></figure>
         <div>
           <h3 class="dest__name">유럽<small>내 맘대로 그리는 예술 같은 여정</small></h3>
-          <p class="dest__desc">서유럽 클래식(로마·피렌체·베네치아·파리), 지중해(니스·아말피·시칠리아·마요르카), 스위스 대자연, 동유럽 로맨스, 이베리아까지. 유럽 전역의 5·4성급 직거래 호텔을 기반으로 최적의 동선과 일정을 설계합니다. 특히 스페인은 직접 계약서를 보유한 호텔의 할인 특가(올라 바르셀로나, 마요르카 캡버멜·조에트리 등)를 자유여행 일정에 녹여드립니다.</p>
-          <ul class="dest__facts">
-            <li><b>2026.02</b>익스피디아 그룹 B2B 2025 베스트 퍼포먼스 (대한민국 1위)</li>
-            <li><b>2025.12</b>ILTM Cannes 한국 대표 buyer 참석</li>
-            <li><b>2024.12</b>익스피디아 그룹 B2B 2024 베스트 퍼포먼스 (대한민국 1위)</li>
+          <p class="dest__desc">틀에 박힌 패키지 투어가 답답하셨다면, 유럽 전역의 5성급·4성급 직거래 호텔을 기반으로 최적의 동선과 일정을 설계해 드립니다. 로맨틱한 허니문부터 아이의 견문을 넓혀줄 가족여행, 리프레시 우정여행까지 함께합니다.</p>
+          <ul class="dest__lineup">
+            <li><b>서유럽 클래식</b> 로마 · 피렌체 · 베네치아 · 밀라노 · 파리</li>
+            <li><b>지중해</b> 니스·남프랑스 · 아말피 · 포지타노 · 시칠리아 · 마요르카 · 아그리투리스모</li>
+            <li><b>스위스 대자연</b> 인터라켄 · 그린델발트 · 루체른 · 체르마트</li>
+            <li><b>동유럽 로맨스</b> 프라하 · 비엔나 · 잘츠부르크 · 부다페스트</li>
+            <li><b>이베리아</b> 바르셀로나 · 세비야 · 그라나다 · 리스본 · 포르투</li>
           </ul>
+          <div class="dest__hard">
+            <h4>스페인은 직계약 호텔 특가로</h4>
+            <p>바르셀로나 시내의 올라 바르셀로나·올라 에이샴플라, 마요르카·마르베야의 캡버멜·조에트리·호포사 코스타 도르·킴튼·손 몰리 등 국내에서 쉽게 수배하기 힘든 프리미엄 호텔을 직거래 가격으로 일정에 녹여드립니다.</p>
+          </div>
+          <details>
+            <summary>호텔엔투어가 유럽에서 특별한 이유</summary>
+            <ol>
+              <li><b>2026.07</b>Skål International 멤버 합류 (세계 최대 규모 관광·여행 전문가 연합)</li>
+              <li><b>2026.02</b>익스피디아 그룹 B2B 2025년 베스트 퍼포먼스 수상 (대한민국 1등)</li>
+              <li><b>2026.01</b>스위스 관광청 STA 총 7차 세미나 수료 후 스위스 스터디 트립</li>
+              <li><b>2025.12</b>모나코 관광청 X 허니문리조트 인스팩션 진행</li>
+              <li><b>2025.12</b>ILTM Cannes 한국 대표 buyer 참석</li>
+              <li><b>2025.05</b>프랑스 관광청 랑데부 프랑스 VIP 참석</li>
+              <li><b>2025.03</b>인플루언서 예영·지훈 스페인 커플 여행 진행</li>
+              <li><b>2025.02</b>김기리·문지인 커플 두 번째 유럽 신혼여행 진행 (체코 &amp; 헝가리)</li>
+              <li><b>2025.02</b>스위스 관광청 스위스 신혼여행 대표 여행사로 초청</li>
+              <li><b>2024.12</b>익스피디아 그룹 B2B 2024년 베스트 퍼포먼스 수상 (대한민국 1등)</li>
+              <li><b>2024.04</b>체코관광청 x 허니문리조트 업그레이드 프로모션</li>
+              <li><b>2023.04</b>체코관광청 TTD 브르노 참가</li>
+            </ol>
+          </details>
         </div>
       </div>
     </section>
 
     <!-- 무엇이 다른가요 -->
-    <section class="diff">
+    <section class="sec">
       <div class="diff__panel">
         <h2>호텔엔투어의 1:1 맞춤 자유여행은<br>무엇이 다른가요?</h2>
-        <p>정해진 패키지 일정을 그대로 따라가는 방식이 아니라, 고객의 여행 목적·동반자 구성·예산·여행 스타일에 따라 항공, 숙박, 투어, 차량 이동 동선을 조합하는 방식입니다. 같은 하와이라도 와이키키 중심의 관광형 일정인지, 코올리나의 조용한 휴양인지, 이웃섬 자연여행인지에 따라 추천 숙소와 일정이 달라집니다. 몰디브 역시 이동수단·밀플랜·객실 타입·수중환경·키즈 프로그램에 따라 가족에게 맞는 리조트가 달라집니다. 호텔엔투어는 호텔을 예약해드리는 데 그치지 않고, 가족 구성과 여행 목적에 맞춰 가장 편안하고 만족도 높은 자유여행 일정을 제안합니다.</p>
+        <p>정해진 패키지 일정을 그대로 따라가는 방식이 아니라, 고객의 여행 목적·동반자 구성·예산·여행 스타일에 따라 항공, 숙박, 투어, 차량 이동 동선을 조합하는 방식입니다. 같은 하와이라도 와이키키 중심의 관광형 일정인지, 코올리나의 조용한 휴양인지, 이웃섬 자연여행인지에 따라 추천 숙소와 일정이 달라집니다. 몰디브 역시 이동수단·밀플랜·객실 타입·수중환경·키즈 프로그램에 따라 가족에게 맞는 리조트가 달라지며, 발리와 유럽처럼 지역 조합과 이동 동선이 중요한 여행지도 숙소 위치와 일정 흐름까지 함께 비교해 안내합니다. 호텔엔투어는 호텔을 예약해드리는 데 그치지 않고, 가족 구성과 여행 목적에 맞춰 가장 편안하고 만족도 높은 자유여행 일정을 제안합니다.</p>
         <ul class="diff__places">
           <li>하와이</li><li>몰디브</li><li>발리</li><li>코사무이</li><li>푸켓</li><li>유럽</li><li>스페인</li>
         </ul>
+      </div>
+    </section>
+
+    <!-- 유튜브 -->
+    <section class="sec">
+      <h2 class="sec__h">호텔엔투어 유튜브</h2>
+      <p class="sec__lead">가족여행, 자유여행, 럭셔리 리조트 여행을 준비하는 고객이 여행지와 숙소를 더 쉽게 비교할 수 있도록 유튜브 콘텐츠를 직접 제작하고 있습니다. 리조트 분위기, 객실 타입, 부대시설, 이동 동선, 가족 동반 시 체크 포인트를 실제 상담 관점에서 소개합니다.</p>
+      <div class="tube__grid">
+        <a class="tube__item" href="https://www.youtube.com/watch?v=XebMVrVOYmo" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/XebMVrVOYmo/hqdefault.jpg" alt="호텔엔투어 유튜브 영상"></a>
+        <a class="tube__item" href="https://www.youtube.com/watch?v=S24Ayzi9kNM" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/S24Ayzi9kNM/hqdefault.jpg" alt="호텔엔투어 유튜브 영상"></a>
+        <a class="tube__item" href="https://www.youtube.com/watch?v=kH04H5OZBtU" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/kH04H5OZBtU/hqdefault.jpg" alt="호텔엔투어 유튜브 영상"></a>
+      </div>
+      <p class="tube__note">하와이의 힐튼 하와이안 빌리지, 포시즌스 오아후 앳 코올리나, 힐튼 와이콜로아 빌리지, 몰디브의 포시즌스 란다기라바루·디구파루, 발리의 물리아·아야나·파드마 우붓 등 호텔엔투어가 추천하는 주요 리조트와 여행지를 중심으로 콘텐츠를 선보이고 있습니다.</p>
+    </section>
+
+    <!-- 셀러브리티 -->
+    <section class="sec">
+      <h2 class="sec__h">호텔엔투어와 함께한 셀러브리티</h2>
+      <p class="sec__lead">호텔엔투어는 다양한 셀럽과 신혼여행, 가족여행을 진행해왔습니다.</p>
+      <div class="celeb__grid">
+        <div class="celeb__card"><figure><img src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/celeb/kimgaeun-yoonsunwoo.jpg" alt=""></figure><p>김가은 · 윤선우</p></div>
+        <div class="celeb__card"><figure><img src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/celeb/parkhyunho-eungaeun.jpg" alt=""></figure><p>은가은 · 박현호</p></div>
+        <div class="celeb__card"><figure><img src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/celeb/simhyungtak-saya.jpg" alt=""></figure><p>심형탁 · 사야</p></div>
+        <div class="celeb__card"><figure><img src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/celeb/kimkiri-moonjiin.jpg" alt=""></figure><p>김기리 · 문지인</p></div>
+        <div class="celeb__card"><figure><img src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/celeb/aeley-choisihoon.jpg" alt=""></figure><p>에일리 · 최시훈</p></div>
+        <div class="celeb__card"><figure><img src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/celeb/chanmi-songeuihwan.jpg" alt=""></figure><p>AOA찬미(임도화) · 송의환</p></div>
+        <div class="celeb__card"><figure><img src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/celeb/cheondung-mimi.jpg" alt=""></figure><p>천둥 · 미미</p></div>
+        <div class="celeb__card"><figure><img src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/celeb/daniel-lindemann.jpg" alt=""></figure><p>다니엘 린데만 부부</p></div>
+      </div>
+    </section>
+
+    <!-- 안전 -->
+    <section class="sec">
+      <h2 class="sec__h">호텔엔투어 그리고 안전</h2>
+      <p class="sec__lead">호텔엔투어는 일반여행업 보증과 기획여행업 보증에 가입하고 있으며, 여행 과정에서 발생할 수 있는 사고와 피해에 대비해 여행업자 배상책임보험에도 가입되어 있습니다. 또한 IATA(국제항공운송협회) BSP 7억 원 가입을 통해 국제 항공권 발권 및 정산 업무를 운영하고 있으며, 글로벌 여행 예약 플랫폼 Expedia TAAP Platinum Tier를 획득하는 등 B2B 여행 시장에서도 지속적인 거래 실적을 쌓아왔습니다.</p>
+      <div class="safe__badges">
+        <div class="safe__badge"><figure><img src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/safety/badge-1-travel-guarantee.jpg" alt=""></figure><span>일반여행업 보증 가입</span></div>
+        <div class="safe__badge"><figure><img src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/safety/badge-2-package-guarantee.jpg" alt=""></figure><span>기획여행업 보증 가입</span></div>
+        <div class="safe__badge"><figure><img src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/safety/badge-3-liability-insurance.jpg" alt=""></figure><span>여행업자 배상책임보험</span></div>
+        <div class="safe__badge"><figure><img src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/safety/badge-4-iata-bsp.jpg" alt=""></figure><span>IATA BSP 7억 원 가입</span></div>
+        <div class="safe__badge"><figure><img src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/safety/badge-5-expedia-platinum.jpg" alt=""></figure><span>Expedia TAAP 플래티넘</span></div>
       </div>
     </section>
 
@@ -387,28 +469,22 @@
   </div>
 
   <button class="fly" type="button" aria-label="맨 위로">
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M21 16v-2l-8-5V3.5C13 2.67 12.33 2 11.5 2S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
-    </svg>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 16v-2l-8-5V3.5C13 2.67 12.33 2 11.5 2S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
   </button>
 </div>
 
 <script>
 (function(){
-  var fly = document.querySelector('.fly');
-  var de = document.documentElement;
+  var fly = document.querySelector('.fly'), de = document.documentElement;
   function update(){
     var max = de.scrollHeight - de.clientHeight;
-    var p = max > 0 ? de.scrollTop / max : 0;
-    fly.style.setProperty('--p', p.toFixed(4));
+    fly.style.setProperty('--p', (max > 0 ? de.scrollTop / max : 0).toFixed(4));
     fly.classList.toggle('show', de.scrollTop > 380);
   }
   window.addEventListener('scroll', update, { passive:true });
   window.addEventListener('resize', update);
   update();
-  fly.addEventListener('click', function(){
-    window.scrollTo({ top:0, behavior:'smooth' });
-  });
+  fly.addEventListener('click', function(){ window.scrollTo({ top:0, behavior:'smooth' }); });
 })();
 </script>
 </body>
