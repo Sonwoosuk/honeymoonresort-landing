@@ -80,7 +80,7 @@
   font-size:clamp(15px,1.5vw,19px); font-weight:800; letter-spacing:-0.02em; color:var(--ink);
   padding:0 clamp(14px,2vw,22px); white-space:nowrap;
 }
-.mq__set span::after{ content:"✈"; margin-left:clamp(14px,2vw,22px); color:var(--white); font-weight:400; }
+.mq__set span::after{ content:"✈"; margin-left:clamp(14px,2vw,22px); color:var(--plum); font-weight:400; }
 @keyframes mq{ from{transform:translateX(0)} to{transform:translateX(-50%)} }
 @media (prefers-reduced-motion:reduce){ .mq__row{ animation:none; flex-wrap:wrap; } .mq__set:nth-child(2){ display:none; } }
 
@@ -122,13 +122,13 @@
 .dest__media{ border-radius:var(--radius); overflow:hidden; background:#33454e; align-self:stretch; min-height:clamp(300px,34vw,460px); }
 .dest__media img{ width:100%; height:100%; object-fit:cover; }
 .dest__name{ font-size:clamp(26px,3.4vw,40px); font-weight:800; letter-spacing:-0.04em; line-height:1.1; }
-.dest__name small{ display:block; margin-top:8px; font-size:clamp(13px,1.3vw,16px); font-weight:700; color:var(--orange); letter-spacing:-0.02em; }
+.dest__name small{ display:block; margin-top:8px; font-size:clamp(13px,1.3vw,16px); font-weight:700; color:var(--plum); letter-spacing:-0.02em; }
 .dest__desc{ margin-top:16px; font-size:clamp(13px,1.15vw,15px); line-height:1.85; color:var(--body); }
 .dest__desc + .dest__desc{ margin-top:12px; }
 .dest__lineup{ margin-top:16px; background:var(--cream); border-radius:16px; padding:16px 18px; display:flex; flex-direction:column; gap:8px; }
 .sec--white .dest__lineup{ background:var(--yellow-soft); }
 .dest__lineup li{ font-size:clamp(12px,1.05vw,13.5px); line-height:1.55; color:var(--ink); }
-.dest__lineup li b{ color:var(--orange); font-weight:800; }
+.dest__lineup li b{ color:var(--plum); font-weight:800; }
 .dest__hard{ margin-top:14px; background:var(--yellow-soft); border-radius:16px; padding:16px 18px; }
 .sec--white .dest__hard{ background:var(--cream); }
 .dest__hard h4{ font-size:clamp(13px,1.2vw,15px); font-weight:800; color:var(--ink); }
@@ -148,8 +148,8 @@
   background:var(--white); border-radius:16px; padding:16px 18px;
 }
 .sec--white .dest__tl-card{ background:var(--cream); }
-.dest__tl-card b{ display:block; color:var(--orange); font-size:15px; font-weight:800; margin-bottom:8px; font-variant-numeric:tabular-nums; letter-spacing:0; }
-.dest__tl-card p{ font-size:13px; line-height:1.55; color:var(--body); }
+.dest__tl-card b{ display:block; color:var(--plum); font-size:15px; font-weight:800; margin-bottom:8px; font-variant-numeric:tabular-nums; letter-spacing:0; }
+.dest__tl-card p{ font-size:13px; line-height:1.55; color:var(--ink); }
 
 /* ---- 무엇이 다른가요 (어두운 패널) ---- */
 .diff__panel{ background:var(--ink); color:var(--white); border-radius:var(--radius); padding:clamp(30px,5vw,66px); text-align:center; }
