@@ -261,14 +261,20 @@
 .safety {
   width: 100%;
   font-family: var(--hero-font);
-  padding: 72px 0;
+  padding: 80px 0;
   box-sizing: border-box;
 }
 
-/* 섹션끼리 딱 붙어 보이지 않도록 최소한의 구분선.
-   배경색이 같은 구간(예: hero→scale)에서도 경계가 살짝 보이게 합니다. */
+/* 섹션이 서로 확실히 나뉘어 보이도록: 넉넉한 상하 여백 + 눈에 보이는 구분선.
+   배경색이 비슷한 구간(흰색↔크림색)에서도 경계가 분명하게 읽힙니다. */
 .hr-page > section + section {
-  border-top: 1px solid rgba(43, 31, 22, 0.07);
+  border-top: 1px solid var(--hero-color-border);
+}
+
+/* statement(짙은 배경) 섹션은 그 자체로 강한 구분이 되므로 선은 뺍니다 */
+.hr-page > .statement + section,
+.hr-page > section + .statement {
+  border-top: none;
 }
 
 /* =============================================================
@@ -1069,7 +1075,7 @@
    SAFETY (안전)
 ============================================================= */
 .safety {
-  padding: 72px 0 80px;
+  padding: 80px 0 88px;
 }
 
 .safety__intro {
