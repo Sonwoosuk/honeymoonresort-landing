@@ -723,7 +723,7 @@
 .verified__badge-wrap {
   display: flex;
   justify-content: center;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 }
 
 .verified__badge {
@@ -743,7 +743,7 @@
 }
 
 .verified__boards-label {
-  margin: 0 0 12px;
+  margin: 4px 0 16px;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.04em;
@@ -755,18 +755,19 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 8px;
-  margin: 0 auto 28px;
+  gap: 10px;
+  margin: 0 auto 34px;
   padding: 0;
   list-style: none;
 }
 
 .verified__boards li {
-  padding: 6px 12px;
+  padding: 9px 14px;
   border: 1px solid var(--hero-color-border);
   border-radius: 999px;
   background-color: var(--hero-color-surface);
   font-size: 12px;
+  line-height: 1.3;
   color: var(--hero-color-body);
   white-space: nowrap;
 }
@@ -1499,7 +1500,7 @@
 
     <h2 class="section-title">허니문리조트는 검증된 회사입니다</h2>
 
-    <div class="text-stack" style="margin-bottom: 28px;">
+    <div class="text-stack" style="margin-bottom: 34px;">
       <p>허니문리조트는 하와이, 두바이, 호주 퀸즐랜드주, 타히티를 비롯한 13개 관광청과 협업하며 신혼여행 상품을 알리고 고객에게 더 다양한 선택지를 제공해왔습니다. 이렇게 쌓은 글로벌 네트워크와 허니문 전문성을 바탕으로 2026년 7월 미국관광청이 선정한 글로벌 앰버서더에 선정될 만큼, 여행업계 및 아웃바운드 럭셔리·허니문 관광산업에서 검증된 회사로 자리매김했습니다.</p>
     </div>
 
