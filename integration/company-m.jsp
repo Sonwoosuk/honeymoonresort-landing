@@ -261,15 +261,21 @@
 .safety {
   width: 100%;
   font-family: var(--hero-font);
-  padding: 58px 0;
+  padding: 72px 0;
   box-sizing: border-box;
+}
+
+/* 섹션끼리 딱 붙어 보이지 않도록 최소한의 구분선.
+   배경색이 같은 구간(예: hero→scale)에서도 경계가 살짝 보이게 합니다. */
+.hr-page > section + section {
+  border-top: 1px solid rgba(43, 31, 22, 0.07);
 }
 
 /* =============================================================
    HERO
 ============================================================= */
 .hero {
-  padding: 0 0 40px;
+  padding: 0 0 52px;
 }
 
 .hero__banner {
@@ -349,7 +355,7 @@
   width: 100%;
   background-color: var(--hero-color-ink);
   font-family: var(--hero-font);
-  padding: 40px 0;
+  padding: 52px 0;
   box-sizing: border-box;
   overflow: hidden;
 }
@@ -1062,7 +1068,7 @@
    SAFETY (안전)
 ============================================================= */
 .safety {
-  padding: 58px 0 66px;
+  padding: 72px 0 80px;
 }
 
 .safety__intro {
@@ -1139,39 +1145,6 @@
 }
 
 /* =============================================================
-   맨 위로 이동 버튼
-============================================================= */
-.back-to-top {
-  position: fixed;
-  right: 14px;
-  bottom: 14px;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background-color: var(--hero-color-gold);
-  color: var(--hero-color-bg);
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  line-height: 1;
-  cursor: pointer;
-  box-shadow: 0 8px 20px rgba(43, 31, 22, 0.25);
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(12px);
-  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s, background-color 0.2s ease;
-  z-index: 100;
-}
-
-.back-to-top.is-visible {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-/* =============================================================
    풀블리드 배너 (실제 사이트 .wrap 안에 넣을 때)
 ============================================================= */
 .hero__banner {
@@ -1182,6 +1155,29 @@
   margin-left: -50vw;
   margin-right: -50vw;
   overflow: hidden;
+}
+
+/* =============================================================
+   데스크톱/큰 화면에서 열었을 때: 모바일 컬럼을 가운데로 고정해
+   좌우가 허전하지 않도록 카드처럼 프레임 처리합니다.
+   (실제 스마트폰 화면 폭에서는 아래 규칙이 적용되지 않습니다.)
+============================================================= */
+@media (min-width: 540px) {
+  .hr-page {
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 0 60px rgba(43, 31, 22, 0.13);
+  }
+
+  /* 풀블리드 배너도 컬럼 폭에 맞춥니다 (100vw 로 삐져나오지 않도록) */
+  .hero__banner {
+    width: 100%;
+    left: auto;
+    right: auto;
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
 </style>
 
@@ -1836,8 +1832,6 @@
   </div>
 </section>
 
-<button type="button" class="back-to-top" id="backToTop" aria-label="맨 위로 이동">&uarr;</button>
-
 <!-- ============================================================
    JS: 스크롤 등장 애니메이션 + 숫자 카운트업
    - 실제 사이트에 적용할 때는 필요 없어지면 이 <script> 블록과
@@ -1905,26 +1899,6 @@
 
     numberEls.forEach(function (el) {
       numberObserver.observe(el);
-    });
-  }
-
-  /* 맨 위로 이동 버튼: 페이지를 절반 이상 스크롤하면 표시 */
-  var backToTop = document.getElementById('backToTop');
-  if (backToTop) {
-    var toggleBackToTop = function () {
-      var scrollTop = window.scrollY || document.documentElement.scrollTop;
-      var scrollable = document.documentElement.scrollHeight - window.innerHeight;
-      if (scrollable > 0 && scrollTop > scrollable / 2) {
-        backToTop.classList.add('is-visible');
-      } else {
-        backToTop.classList.remove('is-visible');
-      }
-    };
-    window.addEventListener('scroll', toggleBackToTop, { passive: true });
-    toggleBackToTop();
-
-    backToTop.addEventListener('click', function () {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
 })();
