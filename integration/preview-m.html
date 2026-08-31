@@ -106,9 +106,11 @@
   overflow-x: hidden;
 }
 
-.hr-page h1, .hr-page h2, .hr-page h3, .hr-page h4,
-.hr-page p, .hr-page ul, .hr-page ol, .hr-page li,
-.hr-page figure, .hr-page section {
+/* :where() 로 감싸 우선순위를 0 으로 만듭니다. 그래야 아래의
+   .section-title / .hero / .awards__intro 같은 한 클래스 규칙이
+   이 리셋을 정상적으로 덮어씁니다. (예전엔 `.hr-page section` 의
+   우선순위가 더 높아 섹션 상하 여백·제목 여백이 전부 0 으로 씹혔음) */
+.hr-page :where(h1, h2, h3, h4, p, ul, ol, li, figure, section) {
   margin: 0;
   padding: 0;
 }
@@ -257,7 +259,7 @@
 .safety {
   width: 100%;
   font-family: var(--hero-font);
-  padding: 80px 0;
+  padding: 64px 0;
   box-sizing: border-box;
 }
 
@@ -1071,7 +1073,7 @@
    SAFETY (안전)
 ============================================================= */
 .safety {
-  padding: 80px 0 88px;
+  padding: 64px 0 76px;
 }
 
 .safety__intro {
