@@ -44,17 +44,16 @@
 .sec__lead{ margin:clamp(22px,3vw,34px) auto 0; max-width:66ch; font-size:clamp(14px,1.2vw,16px); line-height:1.95; color:var(--body); text-align:center; }
 .sec__lead b{ color:var(--ink); font-weight:700; }
 
-/* ---- 히어로 : 4분할 밴드, 양쪽 풀블리드(최대 1920) (Dallas Buyers Club 포스터) ---- */
-.hero{
-  max-width:1920px; margin:clamp(14px,2vw,24px) auto 0;
-}
-.hero__brand{ padding:0 clamp(20px,4vw,56px); margin-bottom:clamp(12px,1.8vw,18px); }
-.hero__brand img{ height:clamp(22px,2.6vw,30px); width:auto; }
+/* ---- 히어로 : 4분할 밴드 (본문 폭 안에, 라운드 카드) ---- */
+.hero{ margin-top:clamp(18px,2.6vw,30px); }
 
-.hero__strips{ display:flex; flex-direction:column; gap:clamp(7px,1vw,12px); }
+.hero__strips{
+  display:flex; flex-direction:column; gap:clamp(6px,0.9vw,10px);
+  border-radius:var(--radius); overflow:hidden;
+}
 .hero__strip{
   position:relative;
-  height:clamp(120px,16vw,224px);
+  height:clamp(112px,15vw,200px);
 }
 .hero__strip-media{ position:absolute; inset:0; overflow:hidden; background:#20303a; }
 .hero__strip-media img{ width:100%; height:100%; object-fit:cover; }
@@ -71,9 +70,9 @@
   text-shadow:0 2px 18px rgba(8,12,16,.5);
 }
 .hero__tagline{
-  margin:clamp(24px,3.4vw,44px) 0 0; padding:0 clamp(20px,4vw,56px);
+  margin:clamp(22px,3.2vw,40px) 0 0;
   text-align:center;
-  font-size:clamp(26px,5vw,60px); font-weight:800; letter-spacing:-0.04em; line-height:1.18;
+  font-size:clamp(24px,4.4vw,52px); font-weight:800; letter-spacing:-0.04em; line-height:1.18;
   color:var(--ink);
 }
 
@@ -251,31 +250,30 @@
 <div class="pg">
   <div class="note">호텔엔투어 소개 · 시안 4 / 이미지는 임시</div>
 
-  <!-- 히어로 (양쪽 풀블리드) -->
-  <section class="hero">
-    <div class="hero__brand"><img src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/logo/hotelntour-logo.png" alt="호텔엔투어"></div>
-    <h1 class="hero__strips">
-      <span class="hero__strip">
-        <span class="hero__strip-media"><img src="https://images.unsplash.com/photo-1507876466758-bc54f384809c?auto=format&fit=crop&w=1920&q=80" alt="하와이"></span>
-        <b>Hawaii</b>
-      </span>
-      <span class="hero__strip">
-        <span class="hero__strip-media"><img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=1920&q=80" alt="몰디브"></span>
-        <b>Maldives</b>
-      </span>
-      <span class="hero__strip">
-        <span class="hero__strip-media"><img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1920&q=80" alt="발리"></span>
-        <b>Bali</b>
-      </span>
-      <span class="hero__strip">
-        <span class="hero__strip-media"><img src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=1920&q=80" alt="유럽"></span>
-        <b>Europe</b>
-      </span>
-    </h1>
-    <p class="hero__tagline">가족을 위한 1:1 맞춤 자유여행</p>
-  </section>
-
   <div class="wrap">
+    <!-- 히어로 : 4분할 밴드 -->
+    <section class="hero">
+      <h1 class="hero__strips">
+        <span class="hero__strip">
+          <span class="hero__strip-media"><img src="https://images.unsplash.com/photo-1507876466758-bc54f384809c?auto=format&fit=crop&w=1920&q=80" alt="하와이"></span>
+          <b>Hawaii</b>
+        </span>
+        <span class="hero__strip">
+          <span class="hero__strip-media"><img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=1920&q=80" alt="몰디브"></span>
+          <b>Maldives</b>
+        </span>
+        <span class="hero__strip">
+          <span class="hero__strip-media"><img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1920&q=80" alt="발리"></span>
+          <b>Bali</b>
+        </span>
+        <span class="hero__strip">
+          <span class="hero__strip-media"><img src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=1920&q=80" alt="유럽"></span>
+          <b>Europe</b>
+        </span>
+      </h1>
+      <p class="hero__tagline">가족을 위한 1:1 맞춤 자유여행</p>
+    </section>
+
     <div class="mq" aria-hidden="true">
       <div class="mq__row">
         <div class="mq__set"><span>하와이 — 맞춤형 알로하 라이프의 경험</span><span>몰디브 — 에메랄드빛 바다 위 프라이빗 휴양</span><span>발리 — 휴양과 액티비티가 공존하는 여행의 천국</span><span>유럽 — 내 맘대로 그리는 예술 같은 여정</span></div>
