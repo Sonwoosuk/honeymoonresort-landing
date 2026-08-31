@@ -772,11 +772,13 @@
 /* 관광청 목록: 폭이 제각각인 알약이 가운데 정렬로 들쭉날쭉해 보여서
    3열 그리드로 칸 너비를 통일해 정돈합니다.
    minmax(0,1fr) 로 긴 이름이 셀 밖으로 삐져나가지 않게 합니다. */
-.verified__boards {
+/* 여백을 .hr-page 로 한정해 우선순위를 올립니다. 실사이트 index.css 의
+   전역 ul 규칙(0,0,1)이 우리 :where() 리셋을 이겨 여백이 씹히던 문제 방지 */
+.hr-page .verified__boards {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 8px;
-  margin: 8px 0 56px;
+  margin: 8px 0 0;
   padding: 0;
   list-style: none;
 }
@@ -802,10 +804,13 @@
   grid-column: 2;
 }
 
-.verified__grid {
+/* 알약 목록과 관광청 상세 카드 사이 간격. div 에 얹어 index.css 의
+   전역 리셋 영향을 받지 않도록 하고, .hr-page 로 우선순위도 확보합니다. */
+.hr-page .verified__grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 12px;
+  margin-top: 56px;
 }
 
 .verified__card {
