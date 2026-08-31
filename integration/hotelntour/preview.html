@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>호텔엔투어 소개 · 시안 (섹션 1)</title>
+<link rel="stylesheet" as="style" crossorigin
+  href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+
+<style>
+/* =============================================================
+   호텔엔투어(hotel n tour) 소개 페이지 · 시안 v0.1
+   - 섹션 1 (히어로 + "어떤 여행사인가요?") 만 우선 구성
+   - 허니문리조트 회사소개와 마크업/클래스 구조는 그대로,
+     색·타이포·모션만 호텔엔투어 브랜드로 재설계
+   - 톤: 허니문리조트(차분한 골드 럭셔리)와 대비되는
+     밝고 따뜻한 오렌지 + 자두(플럼) + 선옐로, 큼직한 헤드라인,
+     "여정 라인" 모티프, 마퀴 스트립
+============================================================= */
+
+:root {
+  --htn-bg:          #fffaf3;
+  --htn-surface:     #fff1e0;
+  --htn-surface-2:   #ffe6c9;
+  --htn-border:      #f3ddc0;
+  --htn-border-soft: #f7e9d7;
+
+  --htn-ink:         #241a14;
+  --htn-body:        #6c5a4c;
+  --htn-body-dim:    #927b68;
+
+  --htn-orange:      #ec7514;
+  --htn-orange-deep: #c65a08;
+  --htn-plum:        #8e3c5d;
+  --htn-plum-deep:   #6f2a47;
+  --htn-sun:         #ffb43d;
+
+  --htn-overlay:     rgba(30, 18, 10, 0.58);
+  --htn-on-dark:     #fff7ee;
+  --htn-on-dark-dim: #f0d8bd;
+
+  --htn-font: "Pretendard", -apple-system, BlinkMacSystemFont, "Malgun Gothic", sans-serif;
+
+  --htn-gutter: clamp(20px, 5vw, 64px);
+  --htn-maxw: 1100px;
+}
+
+* { box-sizing: border-box; }
+
+.htn-page {
+  margin: 0;
+  background-color: var(--htn-bg);
+  color: var(--htn-body);
+  font-family: var(--htn-font);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  overflow-x: hidden;
+}
+
+.htn-page :where(h1, h2, h3, h4, p, ul, ol, li, figure, section) {
+  margin: 0;
+  padding: 0;
+}
+.htn-page :where(ul, ol) { list-style: none; }
+.htn-page img { max-width: 100%; display: block; }
+.htn-page :where(h1, h2, h3) { color: var(--htn-ink); text-wrap: balance; }
+.htn-page p { text-wrap: pretty; }
+
+/* 공통 컨테이너 */
+.htn-inner {
+  width: 100%;
+  max-width: var(--htn-maxw);
+  margin: 0 auto;
+  padding: 0 var(--htn-gutter);
+}
+
+/* =============================================================
+   HERO
+============================================================= */
+.hero {
+  position: relative;
+  background-color: var(--htn-bg);
+}
+
+.hero__banner {
+  position: relative;
+  width: 100%;
+  height: clamp(440px, 64vh, 680px);
+  overflow: hidden;
+  background: linear-gradient(120deg, #f7a24a, #ec7514 45%, #8e3c5d);
+}
+
+.hero__banner-slides,
+.hero__banner-slide { position: absolute; inset: 0; }
+
+.hero__banner-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 42%;
+}
+
+/* 이미지 위 어둡게 — 하단으로 갈수록 진하게 (텍스트 가독성) */
+.hero__banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, var(--htn-overlay) 8%, rgba(30,18,10,0.12) 46%, rgba(30,18,10,0.30) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* "여정 라인" 모티프 — 배너를 가로지르는 점선 + 핀 */
+.hero__route {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 20%;
+  width: 100%;
+  height: 180px;
+  z-index: 2;
+  pointer-events: none;
+  overflow: visible;
+}
+.hero__route path {
+  fill: none;
+  stroke: var(--htn-on-dark);
+  stroke-width: 2.5;
+  stroke-dasharray: 2 10;
+  stroke-linecap: round;
+  opacity: 0.9;
+}
+.hero__route circle {
+  fill: var(--htn-sun);
+  stroke: #fff;
+  stroke-width: 3;
+}
+
+.hero__banner-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  padding: clamp(24px, 4vw, 44px) 0 clamp(26px, 4vw, 46px);
+}
+.hero__banner-overlay .htn-inner { display: block; }
+
+.hero__banner-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px 7px 12px;
+  border-radius: 999px;
+  background: var(--htn-orange);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  margin-bottom: 16px;
+}
+.hero__banner-eyebrow::before {
+  content: "";
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--htn-sun);
+}
+
+.hero__banner-headline {
+  max-width: 20ch;
+  color: var(--htn-on-dark);
+  font-size: clamp(30px, 5.4vw, 56px);
+  font-weight: 800;
+  line-height: 1.16;
+  letter-spacing: -0.03em;
+  text-shadow: 0 2px 24px rgba(20, 10, 4, 0.35);
+}
+.hero__banner-headline b {
+  color: var(--htn-sun);
+  font-weight: 800;
+}
+
+/* 배너 아래 리드 문단 */
+.hero__intro {
+  margin-top: clamp(28px, 4vw, 48px);
+}
+.hero__intro p {
+  max-width: 62ch;
+  font-size: clamp(15px, 1.4vw, 18px);
+  line-height: 1.9;
+  color: var(--htn-body);
+}
+.hero__intro p .lead {
+  color: var(--htn-ink);
+  font-weight: 700;
+}
+
+/* =============================================================
+   MARQUEE — 배너와 본문 사이 여행지 스트립
+============================================================= */
+.marquee {
+  position: relative;
+  margin-top: clamp(30px, 4vw, 46px);
+  padding: 14px 0;
+  border-top: 1px solid var(--htn-border);
+  border-bottom: 1px solid var(--htn-border);
+  background: var(--htn-surface);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+          mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+.marquee__track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 34s linear infinite;
+}
+.marquee:hover .marquee__track { animation-play-state: paused; }
+
+.marquee__group {
+  display: flex;
+  flex-shrink: 0;
+}
+.marquee__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  padding: 0 22px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--htn-ink);
+  white-space: nowrap;
+}
+.marquee__item::after {
+  content: "✳";
+  color: var(--htn-orange);
+  font-size: 13px;
+}
+
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee__track { animation: none; }
+  .marquee { -webkit-mask-image: none; mask-image: none; }
+  .marquee__group:nth-child(2) { display: none; }
+  .marquee__track { flex-wrap: wrap; justify-content: center; gap: 6px 0; }
+}
+
+/* =============================================================
+   INTRO — "호텔엔투어는 어떤 여행사인가요?"
+============================================================= */
+.intro {
+  padding: clamp(46px, 6vw, 84px) 0 clamp(56px, 8vw, 104px);
+  background-color: var(--htn-bg);
+}
+
+.intro__head {
+  max-width: 40ch;
+  margin-bottom: clamp(28px, 4vw, 44px);
+}
+.intro__eyebrow {
+  display: block;
+  margin-bottom: 14px;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: var(--htn-orange);
+}
+.section-title {
+  font-size: clamp(26px, 3.6vw, 42px);
+  font-weight: 800;
+  line-height: 1.28;
+  letter-spacing: -0.03em;
+  color: var(--htn-ink);
+}
+.intro__tagline {
+  margin-top: 18px;
+  font-size: clamp(16px, 1.7vw, 21px);
+  font-weight: 700;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+  color: var(--htn-plum);
+}
+
+.intro__body {
+  display: grid;
+  gap: 18px;
+  max-width: 66ch;
+}
+.intro__body p {
+  font-size: clamp(15px, 1.35vw, 17px);
+  line-height: 1.95;
+  color: var(--htn-body);
+}
+.intro__body strong {
+  color: var(--htn-ink);
+  font-weight: 700;
+  background: linear-gradient(transparent 62%, var(--htn-surface-2) 62%);
+}
+
+/* 여행 목적 칩 */
+.intro__purposes {
+  margin-top: clamp(30px, 4vw, 46px);
+}
+.intro__purposes-label {
+  margin-bottom: 16px;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--htn-body-dim);
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.chips li {
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--htn-border);
+  background: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--htn-ink);
+  box-shadow: 0 6px 16px rgba(140, 70, 20, 0.06);
+}
+.chips li:nth-child(3n+1) { background: var(--htn-surface); border-color: var(--htn-border-soft); }
+.chips li.is-star {
+  background: var(--htn-orange);
+  border-color: var(--htn-orange);
+  color: #fff;
+}
+
+/* =============================================================
+   시안 안내 바 (실제 페이지엔 안 들어감)
+============================================================= */
+.draft-note {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  padding: 8px 16px;
+  background: var(--htn-plum);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .hero__banner { height: 62vh; }
+  .marquee__item { font-size: 14px; gap: 14px; padding: 0 16px; }
+}
+</style>
+</head>
+<body>
+<div class="htn-page">
+
+  <div class="draft-note">호텔엔투어 소개 · 시안 v0.1 — 섹션 1(히어로 + 어떤 여행사인가요) / 이미지는 임시</div>
+
+  <!-- ============================================================
+     HERO
+  ============================================================= -->
+  <section class="hero">
+    <h1 style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;">호텔엔투어 — 하와이·몰디브·발리·유럽 1:1 맞춤 자유여행 전문 브랜드</h1>
+
+    <div class="hero__banner">
+      <div class="hero__banner-slides">
+        <div class="hero__banner-slide">
+          <!-- TODO: 실제 이미지로 교체 (임시: Unsplash) -->
+          <img class="hero__banner-image"
+               src="https://images.unsplash.com/photo-1505881502353-a1986add3762?auto=format&fit=crop&w=1920&q=80"
+               alt="에메랄드빛 바다 위 오버워터 빌라">
+        </div>
+      </div>
+
+      <svg class="hero__route" viewBox="0 0 1200 180" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M-20,150 C 220,40 360,150 560,110 S 900,10 1220,90" />
+        <circle cx="560" cy="110" r="7" />
+        <circle cx="1050" cy="52" r="7" />
+      </svg>
+
+      <div class="hero__banner-overlay">
+        <div class="htn-inner">
+          <span class="hero__banner-eyebrow">HOTEL N TOUR</span>
+          <p class="hero__banner-headline">하와이·몰디브·발리·유럽,<br>가족을 위한 <b>1:1 맞춤 자유여행</b></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="htn-inner">
+      <div class="hero__intro">
+        <p><span class="lead">호텔엔투어는 하와이, 몰디브, 발리, 유럽 등 장거리 가족여행과 럭셔리 자유여행을 1:1 맞춤으로 설계하는 여행 브랜드입니다.</span> 고객의 여행 목적, 가족 구성, 예산, 숙소 취향, 이동 동선, 현지 체류 방식을 함께 확인해 여행지와 리조트를 비교하고, 모회사 허니문리조트의 글로벌 호텔·리조트 네트워크와 B2B 직계약 기반을 활용해 합리적인 특가와 맞춤 일정을 제안합니다.</p>
+      </div>
+    </div>
+
+    <!-- MARQUEE -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <div class="marquee__group">
+          <span class="marquee__item">하와이</span>
+          <span class="marquee__item">몰디브</span>
+          <span class="marquee__item">발리</span>
+          <span class="marquee__item">유럽</span>
+          <span class="marquee__item">스페인</span>
+          <span class="marquee__item">코사무이</span>
+          <span class="marquee__item">푸켓</span>
+          <span class="marquee__item">3대 가족여행</span>
+          <span class="marquee__item">베이비문 · 태교여행</span>
+          <span class="marquee__item">골프여행</span>
+          <span class="marquee__item">프라이빗 투어</span>
+        </div>
+        <div class="marquee__group">
+          <span class="marquee__item">하와이</span>
+          <span class="marquee__item">몰디브</span>
+          <span class="marquee__item">발리</span>
+          <span class="marquee__item">유럽</span>
+          <span class="marquee__item">스페인</span>
+          <span class="marquee__item">코사무이</span>
+          <span class="marquee__item">푸켓</span>
+          <span class="marquee__item">3대 가족여행</span>
+          <span class="marquee__item">베이비문 · 태교여행</span>
+          <span class="marquee__item">골프여행</span>
+          <span class="marquee__item">프라이빗 투어</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+     INTRO — 호텔엔투어는 어떤 여행사인가요?
+  ============================================================= -->
+  <section class="intro">
+    <div class="htn-inner">
+
+      <div class="intro__head">
+        <span class="intro__eyebrow">ABOUT HOTEL N TOUR</span>
+        <h2 class="section-title">호텔엔투어는 어떤 여행사인가요?</h2>
+        <p class="intro__tagline">럭셔리 하이엔드 호텔 &amp; 리조트와 함께하는<br>1:1 맞춤 자유여행의 새로운 기준</p>
+      </div>
+
+      <div class="intro__body">
+        <p>오직 당신만을 위해 설계된 특별하고 안전한 자유여행 일정을 찾고 계신가요? 호텔엔투어(Hotel N Tour)는 하와이, 몰디브, 발리, 유럽 여행 전문 컨설턴트들이 고객의 취향과 라이프스타일을 100% 반영하여 디자인하는 <strong>1:1 맞춤 자유 여행 전문 브랜드</strong>입니다.</p>
+        <p>호텔엔투어는 모회사 허니문리조트의 글로벌 호텔·리조트 네트워크를 기반으로 전 세계 유명 인터내셔널 럭셔리 &amp; 하이엔드 호텔, 리조트들과의 <strong>B2B 직계약</strong>을 통해 거품을 뺀 가장 합리적인 가격과 차별화된 혜택을 선사합니다.</p>
+        <p>특히 3대 가족여행, 아이 동반 가족여행, 부모님 동반 가족여행, 우정여행, 프라이빗 투어, 골프여행, 태교여행, 베이비문, 신혼여행 등 고객의 목적과 취향에 맞춘 <strong>무료 1:1 맞춤 여행플래닝</strong>을 제안합니다.</p>
+      </div>
+
+      <div class="intro__purposes">
+        <p class="intro__purposes-label">이런 여행을 함께 설계합니다</p>
+        <ul class="chips">
+          <li class="is-star">3대 가족여행</li>
+          <li>아이 동반 가족여행</li>
+          <li>부모님 동반 가족여행</li>
+          <li>우정여행</li>
+          <li>프라이빗 투어</li>
+          <li>골프여행</li>
+          <li>태교여행</li>
+          <li>베이비문</li>
+          <li>신혼여행</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
