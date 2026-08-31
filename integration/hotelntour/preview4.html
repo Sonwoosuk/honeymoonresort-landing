@@ -7,7 +7,7 @@
 <link rel="stylesheet" as="style" crossorigin
   href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
 <style>
-/* 호텔엔투어 소개 · 시안 4 — 옐로 배경 (igogo / Blend Bend 레퍼런스 거의 그대로, 내용만 교체) */
+/* 호텔엔투어 소개 · 시안 4 — 옐로 배경 (igogo / Blend Bend 레퍼런스 기반, 내용만 교체) */
 
 :root{
   --yellow:#ffc21f;
@@ -32,76 +32,103 @@
 .pg p{text-wrap:pretty;}
 .wrap{width:100%;max-width:1200px;margin:0 auto;padding:0 var(--gutter);}
 
-.brandbar{ text-align:center; padding:clamp(24px,4vw,44px) 0 clamp(18px,3vw,30px); }
-.brandbar img{ height:clamp(24px,3vw,32px); width:auto; margin:0 auto; }
-
 /* ---- 히어로 카드 ---- */
 .hero{
-  position:relative; border-radius:var(--radius); overflow:hidden;
+  position:relative; margin-top:clamp(16px,2.6vw,30px);
+  border-radius:var(--radius); border-top-left-radius:0; overflow:hidden;
   aspect-ratio:16/9; background:#20303a;
 }
 .hero__bg{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
 .hero::after{ content:""; position:absolute; inset:0; background:linear-gradient(105deg, rgba(10,16,20,.6), rgba(10,16,20,.15) 60%); }
-.hero__mark{
-  position:absolute; top:clamp(16px,2.4vw,28px); right:clamp(16px,2.4vw,28px); z-index:3;
-  height:clamp(16px,2vw,22px); width:auto; filter:brightness(0) invert(1); opacity:.92;
+
+/* 왼쪽 위 모서리를 로고 판으로 대체 (Wembley Golf Club 레퍼런스처럼).
+   히어로의 좌상단은 각지게 두고(위 border-top-left-radius:0), 판이 그 자리를 채운다. */
+.hero__notch{
+  position:absolute; top:0; left:0; z-index:4;
+  background:var(--yellow);
+  padding:clamp(12px,1.6vw,18px) clamp(26px,3.4vw,42px) clamp(15px,2vw,23px) clamp(22px,3vw,36px);
+  border-bottom-right-radius:clamp(20px,2.8vw,30px);
+  display:flex; align-items:center;
 }
+.hero__notch img{ height:clamp(22px,2.8vw,32px); width:auto; }
+
 .hero__h{
-  position:absolute; z-index:3; left:clamp(20px,4vw,52px); bottom:clamp(22px,5vw,54px);
+  position:absolute; z-index:3; left:clamp(20px,4vw,52px); bottom:clamp(24px,5vw,52px);
   right:clamp(20px,4vw,52px);
   color:var(--white); font-weight:800; letter-spacing:-0.04em;
-  font-size:clamp(34px,6.4vw,74px); line-height:1.05;
+  font-size:clamp(32px,6vw,70px); line-height:1.12;
+  text-shadow:0 2px 24px rgba(10,14,18,.35);
+  text-wrap:balance;
 }
+.hero__h .nb{ white-space:nowrap; }
+/* 비행 곡선은 사진 위쪽(하늘)에 배치해 타이틀과 겹치지 않게 한다 */
 .hero__wave{
-  position:absolute; left:0; right:0; bottom:26%; z-index:2; width:100%; height:120px; pointer-events:none;
+  position:absolute; left:0; right:0; top:12%; z-index:2; width:100%; height:clamp(80px,12vw,130px);
+  pointer-events:none; overflow:visible;
 }
-.hero__wave path{ fill:none; stroke:var(--yellow); stroke-width:7; stroke-linecap:round; }
+.hero__wave path{ fill:none; stroke:var(--yellow); stroke-width:6; stroke-linecap:round; }
 .hero__plane{
-  position:absolute; z-index:2; right:9%; bottom:calc(26% + 30px);
-  font-size:clamp(20px,3vw,30px); color:var(--yellow);
-  transform:rotate(8deg);
+  position:absolute; z-index:3; right:8%; top:calc(12% + clamp(2px,1.4vw,14px));
+  font-size:clamp(30px,4.4vw,50px); color:var(--white);
+  transform:rotate(-16deg);
+  filter:drop-shadow(0 3px 8px rgba(8,12,16,.4));
 }
 
-/* ---- 질문 카드 3개 ---- */
+/* ---- 여행지 설명 마퀴 ---- */
+.mq{ overflow:hidden; padding:clamp(16px,2.4vw,24px) 0; }
+.mq__row{ display:flex; width:max-content; animation:mq 40s linear infinite; }
+.mq:hover .mq__row{ animation-play-state:paused; }
+.mq__set{ display:flex; flex:none; }
+.mq__set span{
+  font-size:clamp(15px,1.5vw,19px); font-weight:800; letter-spacing:-0.02em; color:var(--ink);
+  padding:0 clamp(14px,2vw,22px); white-space:nowrap;
+}
+.mq__set span::after{ content:"✈"; margin-left:clamp(14px,2vw,22px); color:var(--white); font-weight:400; }
+@keyframes mq{ from{transform:translateX(0)} to{transform:translateX(-50%)} }
+@media (prefers-reduced-motion:reduce){
+  .mq__row{ animation:none; flex-wrap:wrap; }
+  .mq__set:nth-child(2){ display:none; }
+}
+
+/* ---- 질문 말풍선 (카카오톡 대화처럼 좌우좌우) ---- */
 .asks{
-  display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(12px,1.6vw,20px);
-  margin-top:clamp(16px,2.4vw,26px);
+  display:flex; flex-direction:column; gap:14px;
+  max-width:820px; margin:clamp(8px,1.4vw,18px) auto 0;
 }
-.ask{
-  border-radius:var(--radius); padding:clamp(22px,2.8vw,34px);
-  display:flex; flex-direction:column; justify-content:space-between; gap:clamp(28px,5vw,64px);
-  min-height:clamp(240px,26vw,320px);
+.ask{ display:flex; align-items:flex-end; gap:9px; max-width:86%; }
+.ask__av{
+  flex:none; width:34px; height:34px; border-radius:50%;
+  background:var(--orange);
 }
-.ask p{
-  font-size:clamp(15px,1.35vw,18px); font-weight:700; line-height:1.55; letter-spacing:-0.02em;
-  color:var(--ink);
+.ask__bubble{
+  border-radius:20px; padding:15px 18px; background:var(--white);
+  box-shadow:0 8px 20px rgba(70,45,0,.08);
+  max-width:min(78vw, 440px);
 }
-.ask--white{ background:var(--white); }
-.ask--photo{ position:relative; overflow:hidden; background:#33454e; }
-.ask--photo img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
-.ask--photo::after{ content:""; position:absolute; inset:0; background:linear-gradient(to top, rgba(12,18,22,.78), rgba(12,18,22,.2)); }
-.ask--photo p{ position:relative; z-index:2; color:var(--white); }
-.ask--photo .ask__dots{ position:relative; z-index:2; }
-.ask--yellow{ background:var(--yellow-soft); }
-.ask__dots{ display:flex; gap:8px; }
+.ask__bubble p{
+  font-size:clamp(14px,1.25vw,16px); font-weight:600; line-height:1.65; letter-spacing:-0.02em; color:var(--ink);
+  text-wrap:balance;
+}
+.ask__dots{ display:flex; gap:6px; margin-top:12px; }
 .ask__dots i{
-  width:30px; height:30px; border-radius:50%; background:var(--yellow);
-  display:flex; align-items:center; justify-content:center; font-style:normal; font-size:14px; color:var(--ink);
+  width:26px; height:26px; border-radius:50%; background:var(--yellow);
+  display:flex; align-items:center; justify-content:center; font-style:normal; font-size:12px; color:var(--ink);
 }
-.ask--white .ask__dots i{ background:var(--yellow); }
-.ask--yellow .ask__dots i{ background:var(--white); }
+.ask--l{ align-self:flex-start; }
+.ask--l .ask__bubble{ border-top-left-radius:5px; }
+.ask--r{ align-self:flex-end; flex-direction:row-reverse; }
+.ask--r .ask__av{ display:none; }
+.ask--r .ask__bubble{ background:var(--yellow-soft); border-top-right-radius:5px; }
+.ask__bubble--photo{ padding:6px; overflow:hidden; }
+.ask__bubble--photo img{ display:block; width:100%; border-radius:15px; max-height:220px; object-fit:cover; }
+.ask__bubble--photo{ max-width:min(80vw, 380px); }
+.ask__bubble--photo p{ padding:12px 12px 6px; text-wrap:pretty; }
 
-/* ---- 함께하는 여행 (igogo "Users" 블록) ---- */
-.aud{ padding:clamp(48px,7vw,104px) 0 clamp(40px,6vw,80px); }
-.aud__tag{
-  display:inline-block; padding:8px 16px; border-radius:999px; background:var(--white);
-  font-size:13px; font-weight:700; color:var(--ink); margin-bottom:16px;
-}
+/* ---- 함께하는 여행 ---- */
+.aud{ padding:clamp(46px,7vw,100px) 0 clamp(40px,6vw,80px); }
 .aud__h{ font-size:clamp(30px,5.4vw,60px); font-weight:800; letter-spacing:-0.04em; line-height:1.1; }
 .aud__stage{ position:relative; margin-top:clamp(24px,3.6vw,44px); }
-.aud__photo{
-  border-radius:var(--radius); overflow:hidden; aspect-ratio:16/8; background:#3a4a44;
-}
+.aud__photo{ border-radius:var(--radius); overflow:hidden; aspect-ratio:16/8; background:#3a4a44; }
 .aud__photo img{ width:100%; height:100%; object-fit:cover; }
 .aud__cards{
   display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(10px,1.4vw,16px);
@@ -113,7 +140,7 @@
 }
 .aud__card:nth-child(2){ background:var(--yellow-soft); }
 .aud__card h3{ font-size:clamp(15px,1.4vw,18px); font-weight:800; letter-spacing:-0.03em; }
-.aud__card p{ font-size:clamp(12px,1.05vw,13.5px); line-height:1.6; color:var(--body); }
+.aud__card p{ font-size:clamp(12px,1.05vw,13.5px); line-height:1.65; color:var(--body); text-wrap:pretty; }
 .aud__card i{
   align-self:flex-start; margin-top:6px;
   width:34px; height:34px; border-radius:50%; background:var(--yellow);
@@ -121,67 +148,151 @@
 }
 .aud__card:nth-child(2) i{ background:var(--white); }
 
-.closing{
-  padding:clamp(28px,4vw,44px) 0 clamp(40px,6vw,72px); text-align:center;
+/* ---- 여행지 (하와이 / 몰디브 / 발리 / 유럽) — 사진 좌우 교차 ---- */
+.dest{ padding:clamp(40px,6vw,84px) 0 clamp(16px,3vw,28px); }
+.dest__row{
+  display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:clamp(20px,3.4vw,52px); align-items:center;
+  padding:clamp(20px,3vw,40px) 0;
 }
+.dest__row:nth-child(even) .dest__media{ order:2; }
+.dest__media{
+  border-radius:var(--radius); overflow:hidden; aspect-ratio:4/3; background:#33454e;
+}
+.dest__media img{ width:100%; height:100%; object-fit:cover; }
+.dest__name{
+  font-size:clamp(26px,3.4vw,40px); font-weight:800; letter-spacing:-0.04em; line-height:1.1;
+}
+.dest__name small{
+  display:block; margin-top:8px; font-size:clamp(13px,1.3vw,16px); font-weight:700; color:var(--orange);
+  letter-spacing:-0.02em;
+}
+.dest__desc{
+  margin-top:16px; font-size:clamp(13px,1.15vw,15px); line-height:1.85; color:var(--body); text-wrap:pretty;
+}
+.dest__facts{ margin-top:18px; display:flex; flex-direction:column; gap:9px; }
+.dest__facts li{
+  font-size:clamp(12px,1.05vw,13.5px); line-height:1.5; color:var(--ink);
+  padding-left:74px; position:relative;
+}
+.dest__facts li b{
+  position:absolute; left:0; top:0; font-weight:800; color:var(--orange);
+  font-variant-numeric:tabular-nums;
+}
+
+/* ---- 무엇이 다른가요 — 어두운 패널 ---- */
+.diff{ padding:clamp(46px,7vw,100px) 0; }
+.diff__panel{
+  background:var(--ink); color:var(--white);
+  border-radius:var(--radius); padding:clamp(28px,5vw,64px);
+}
+.diff__panel h2{
+  color:var(--white); font-size:clamp(24px,3.6vw,42px); font-weight:800; letter-spacing:-0.04em; line-height:1.25;
+}
+.diff__panel p{
+  margin-top:18px; max-width:60ch;
+  font-size:clamp(14px,1.25vw,16px); line-height:1.9; color:#e7e3da; text-wrap:pretty;
+}
+.diff__places{
+  margin-top:26px; display:flex; flex-wrap:wrap; gap:8px;
+}
+.diff__places li{
+  padding:8px 15px; border-radius:999px; background:rgba(255,255,255,.1);
+  font-size:13px; font-weight:700; color:var(--white);
+}
+
+.closing{ padding:clamp(28px,4vw,44px) 0 clamp(46px,7vw,80px); text-align:center; }
 .closing p{ font-size:clamp(14px,1.4vw,17px); font-weight:700; color:var(--ink); letter-spacing:-0.02em; }
 
+/* ---- 비행기 탑버튼 (스크롤에 따라 오른쪽에서 이동, 비행기 모양 그대로) ---- */
+.fly{
+  position:fixed; right:clamp(10px,1.8vw,24px);
+  top:calc(14% + var(--p, 0) * 64%);
+  z-index:40; width:clamp(42px,4.4vw,54px); height:clamp(42px,4.4vw,54px);
+  border:0; background:none; padding:0; cursor:pointer;
+  display:block;
+  opacity:0; transform:translateY(8px) scale(.9); pointer-events:none;
+  transition:opacity .25s ease, transform .25s ease, top .12s linear;
+}
+.fly.show{ opacity:1; transform:none; pointer-events:auto; }
+.fly svg{
+  width:100%; height:100%; display:block; fill:var(--ink);
+  filter:drop-shadow(0 6px 10px rgba(60,40,0,.35));
+  animation:bob 2.6s ease-in-out infinite;
+}
+.fly:hover svg{ fill:var(--orange); }
+@keyframes bob{ 0%,100%{ transform:translateY(2px); } 50%{ transform:translateY(-3px); } }
+@media (prefers-reduced-motion:reduce){ .fly svg{ animation:none; } .fly{ transition:opacity .2s ease; } }
+
 .note{
-  position:sticky;top:0;z-index:9;background:var(--ink);color:var(--yellow);text-align:center;
+  position:sticky;top:0;z-index:50;background:var(--ink);color:var(--yellow);text-align:center;
   font-size:12px;font-weight:700;padding:7px 14px;
 }
 @media (max-width:820px){
   .hero{ aspect-ratio:4/5; }
-  .hero__h{ font-size:clamp(24px,6.6vw,38px); line-height:1.12; bottom:clamp(18px,5vw,28px); }
-  .hero__wave{ bottom:32%; height:80px; }
-  .asks{ grid-template-columns:1fr; }
-  .ask{ min-height:0; gap:26px; }
-  .ask--photo{ min-height:220px; }
+  .hero__h{ font-size:clamp(23px,6.4vw,36px); line-height:1.14; bottom:clamp(16px,5vw,26px); }
+  .hero__wave{ top:9%; height:64px; }
+  .hero__plane{ font-size:34px; right:10%; top:calc(9% - 4px); }
+  .ask{ max-width:90%; }
   .aud__cards{ grid-template-columns:1fr; margin-top:16px; padding:0; }
+  .dest__row{ grid-template-columns:1fr; gap:16px; }
+  .dest__row:nth-child(even) .dest__media{ order:0; }
+  .dest__facts li{ padding-left:66px; }
 }
-@media (prefers-reduced-motion:reduce){ }
 </style>
 </head>
 <body>
 <div class="pg">
   <div class="note">호텔엔투어 소개 · 시안 4 / 이미지는 임시</div>
 
-  <div class="brandbar">
-    <img src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/logo/hotelntour-logo.png" alt="호텔엔투어">
-  </div>
-
   <div class="wrap">
     <!-- 히어로 -->
     <section class="hero">
       <img class="hero__bg" src="https://images.unsplash.com/photo-1505881502353-a1986add3762?auto=format&fit=crop&w=1920&q=80" alt="에메랄드빛 바다 위 오버워터 빌라로 이어지는 잔교">
-      <img class="hero__mark" src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/logo/hotelntour-logo.png" alt="">
+      <div class="hero__notch">
+        <img src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/logo/hotelntour-logo.png" alt="호텔엔투어">
+      </div>
       <svg class="hero__wave" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M-20,80 C 240,10 380,110 620,70 S 980,0 1220,60" />
+        <path d="M-40,96 C 220,30 430,120 640,82 S 1010,4 1250,14" />
       </svg>
       <span class="hero__plane" aria-hidden="true">✈</span>
       <h1 class="hero__h">하와이 · 몰디브 · 발리 · 유럽,<br>가족을 위한 1:1 맞춤 자유여행</h1>
     </section>
 
-    <!-- 질문 카드 -->
+    <!-- 여행지 설명 마퀴 -->
+    <div class="mq" aria-hidden="true">
+      <div class="mq__row">
+        <div class="mq__set"><span>하와이 — 맞춤형 알로하 라이프의 경험</span><span>몰디브 — 에메랄드빛 바다 위 프라이빗 휴양</span><span>발리 — 휴양과 액티비티가 공존하는 여행의 천국</span><span>유럽 — 내 맘대로 그리는 예술 같은 여정</span></div>
+        <div class="mq__set"><span>하와이 — 맞춤형 알로하 라이프의 경험</span><span>몰디브 — 에메랄드빛 바다 위 프라이빗 휴양</span><span>발리 — 휴양과 액티비티가 공존하는 여행의 천국</span><span>유럽 — 내 맘대로 그리는 예술 같은 여정</span></div>
+      </div>
+    </div>
+
+    <!-- 질문 말풍선 (카카오톡 대화처럼 좌우좌우) -->
     <div class="asks">
-      <article class="ask ask--white">
-        <p>온라인 정보만으로는 리조트 분위기, 객실 조건, 항공 일정까지 비교하기 어렵지 않으셨나요?</p>
-        <div class="ask__dots"><i>🏨</i><i>✈</i><i>📍</i></div>
+      <article class="ask ask--l">
+        <span class="ask__av"></span>
+        <div class="ask__bubble">
+          <p>온라인 정보만으로는 리조트 분위기, 객실 조건, 항공 일정까지 비교하기 어렵지 않으셨나요?</p>
+          <div class="ask__dots"><i>🏨</i><i>✈</i><i>📍</i></div>
+        </div>
       </article>
-      <article class="ask ask--photo">
-        <img src="https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?auto=format&fit=crop&w=1200&q=80" alt="리조트 수영장과 야자수">
-        <p>아이 동반 시 아동 1인 무료인지 2인 무료인지, 올인클루시브인지 하프보드인지 — 리조트마다 다른 혜택을 알기 어렵습니다.</p>
-        <div class="ask__dots"><i>👨‍👩‍👧</i><i>🍽️</i></div>
+      <article class="ask ask--r">
+        <div class="ask__bubble ask__bubble--photo">
+          <img src="https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?auto=format&fit=crop&w=1200&q=80" alt="리조트 수영장과 야자수">
+          <p>아이 동반 시 아동 1인 무료인지 2인 무료인지, 올인클루시브인지 하프보드인지 — 리조트마다 다른 혜택을 알기 어렵습니다.</p>
+        </div>
       </article>
-      <article class="ask ask--yellow">
-        <p>정해진 패키지 일정을 그대로 따라가는 여행이 우리 가족에겐 답답하게 느껴지셨나요?</p>
-        <div class="ask__dots"><i>🗺️</i><i>🧭</i></div>
+      <article class="ask ask--l">
+        <span class="ask__av"></span>
+        <div class="ask__bubble">
+          <p>정해진 패키지 일정을 그대로 따라가는 여행이 우리 가족에겐 답답하게 느껴지셨나요?</p>
+          <div class="ask__dots"><i>🗺️</i><i>🧭</i></div>
+        </div>
       </article>
     </div>
 
     <!-- 함께하는 여행 -->
     <section class="aud">
-      <span class="aud__tag">함께하는 여행</span>
       <h2 class="aud__h">이런 여행을 설계합니다</h2>
 
       <div class="aud__stage">
@@ -208,10 +319,97 @@
       </div>
     </section>
 
+    <!-- 여행지 -->
+    <section class="dest">
+      <div class="dest__row">
+        <figure class="dest__media"><img src="https://images.unsplash.com/photo-1507876466758-bc54f384809c?auto=format&fit=crop&w=1200&q=80" alt="하와이 와이키키"></figure>
+        <div>
+          <h3 class="dest__name">하와이<small>끝없는 매력, 맞춤형 알로하 라이프</small></h3>
+          <p class="dest__desc">와이키키 중심 인기 호텔부터 럭셔리 레지던스까지 폭넓은 직거래 라인업을 갖추고 있습니다. 쉐라톤 와이키키·힐튼 하와이안 빌리지·하얏트 리젠시 와이키키부터, 포시즌스 오아후 앳 코올리나·리츠칼튼 레지던스·할레쿨라니, 이웃섬의 포시즌스 후알랄라이·페어몬트 오키드까지 고객의 니즈에 맞춰 제안합니다. 하와이 현지 직영지사를 보유해 문제 발생 시 24시간 케어 서비스를 받으실 수 있습니다.</p>
+          <ul class="dest__facts">
+            <li><b>2026.07</b>미국 관광청 2026 글로벌 앰버서더 선정</li>
+            <li><b>2026.04</b>힐튼 와이콜로아 빌리지 대한민국 판매 1위</li>
+            <li><b>2025.11</b>하얏트 센트릭 와이키키 아시아 판매 1위</li>
+            <li><b>2025.03</b>와이키키 비치 메리어트 한국 세일즈 1위</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="dest__row">
+        <figure class="dest__media"><img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=1200&q=80" alt="몰디브 오버워터 빌라"></figure>
+        <div>
+          <h3 class="dest__name">몰디브<small>에메랄드빛 바다 위 완벽한 프라이빗 휴양</small></h3>
+          <p class="dest__desc">수십 개 리조트 중 예산과 취향, 특히 수중환경과 라군 비율까지 꼼꼼히 따져 최적의 빌라를 가장 합리적인 금액에 매칭합니다. 포시즌스 란다기라바루·코라코라·에메랄드 파루푸시·쿠다 빌링기리·힐튼 아밍기리 등. 아이 동반 시 아동 무료 인원, 올인클루시브·하프보드 여부 등 리조트별 혜택 조합도 담당자가 일정에 맞춰 안내합니다.</p>
+          <ul class="dest__facts">
+            <li><b>2024.12</b>쿠다 빌링길리 한국 세일즈 1위</li>
+            <li><b>2024.11</b>힐튼 아밍기리 · 에메랄드 파루푸시 · 바카루 한국 세일즈 1위</li>
+            <li><b>2023.11</b>릴리비치 리조트 한국 세일즈 1위</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="dest__row">
+        <figure class="dest__media"><img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=80" alt="발리 우붓 풀빌라"></figure>
+        <div>
+          <h3 class="dest__name">발리<small>휴양과 액티비티가 공존하는 여행의 천국</small></h3>
+          <p class="dest__desc">짐바란·누사두아의 아야나·포시즌스·물리아·리츠칼튼, 우붓의 포시즌스 사이얀·파드마 우붓, 트렌디한 스미냑·사누르, 활기찬 꾸따까지 랜드마크급 럭셔리 리조트를 가장 좋은 조건으로 안내합니다. 바뚜르 일출 지프투어 등 발리의 하이라이트 액티비티도 맞춤 일정에 더할 수 있으며, 검증된 1:1 현지 가이드가 안전한 여행을 만들어드립니다.</p>
+        </div>
+      </div>
+
+      <div class="dest__row">
+        <figure class="dest__media"><img src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=1200&q=80" alt="유럽 도시"></figure>
+        <div>
+          <h3 class="dest__name">유럽<small>내 맘대로 그리는 예술 같은 여정</small></h3>
+          <p class="dest__desc">서유럽 클래식(로마·피렌체·베네치아·파리), 지중해(니스·아말피·시칠리아·마요르카), 스위스 대자연, 동유럽 로맨스, 이베리아까지. 유럽 전역의 5·4성급 직거래 호텔을 기반으로 최적의 동선과 일정을 설계합니다. 특히 스페인은 직접 계약서를 보유한 호텔의 할인 특가(올라 바르셀로나, 마요르카 캡버멜·조에트리 등)를 자유여행 일정에 녹여드립니다.</p>
+          <ul class="dest__facts">
+            <li><b>2026.02</b>익스피디아 그룹 B2B 2025 베스트 퍼포먼스 (대한민국 1위)</li>
+            <li><b>2025.12</b>ILTM Cannes 한국 대표 buyer 참석</li>
+            <li><b>2024.12</b>익스피디아 그룹 B2B 2024 베스트 퍼포먼스 (대한민국 1위)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 무엇이 다른가요 -->
+    <section class="diff">
+      <div class="diff__panel">
+        <h2>호텔엔투어의 1:1 맞춤 자유여행은<br>무엇이 다른가요?</h2>
+        <p>정해진 패키지 일정을 그대로 따라가는 방식이 아니라, 고객의 여행 목적·동반자 구성·예산·여행 스타일에 따라 항공, 숙박, 투어, 차량 이동 동선을 조합하는 방식입니다. 같은 하와이라도 와이키키 중심의 관광형 일정인지, 코올리나의 조용한 휴양인지, 이웃섬 자연여행인지에 따라 추천 숙소와 일정이 달라집니다. 몰디브 역시 이동수단·밀플랜·객실 타입·수중환경·키즈 프로그램에 따라 가족에게 맞는 리조트가 달라집니다. 호텔엔투어는 호텔을 예약해드리는 데 그치지 않고, 가족 구성과 여행 목적에 맞춰 가장 편안하고 만족도 높은 자유여행 일정을 제안합니다.</p>
+        <ul class="diff__places">
+          <li>하와이</li><li>몰디브</li><li>발리</li><li>코사무이</li><li>푸켓</li><li>유럽</li><li>스페인</li>
+        </ul>
+      </div>
+    </section>
+
     <div class="closing">
       <p>당신의 상상이 현실이 되는 여행 — 전문가와의 무료 1:1 맞춤 상담으로 확인해보세요.</p>
     </div>
   </div>
+
+  <button class="fly" type="button" aria-label="맨 위로">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M21 16v-2l-8-5V3.5C13 2.67 12.33 2 11.5 2S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
+    </svg>
+  </button>
 </div>
+
+<script>
+(function(){
+  var fly = document.querySelector('.fly');
+  var de = document.documentElement;
+  function update(){
+    var max = de.scrollHeight - de.clientHeight;
+    var p = max > 0 ? de.scrollTop / max : 0;
+    fly.style.setProperty('--p', p.toFixed(4));
+    fly.classList.toggle('show', de.scrollTop > 380);
+  }
+  window.addEventListener('scroll', update, { passive:true });
+  window.addEventListener('resize', update);
+  update();
+  fly.addEventListener('click', function(){
+    window.scrollTo({ top:0, behavior:'smooth' });
+  });
+})();
+</script>
 </body>
 </html>
