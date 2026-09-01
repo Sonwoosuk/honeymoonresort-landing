@@ -71,7 +71,7 @@
   text-shadow:0 2px 18px rgba(8,12,16,.5);
 }
 .hero__tagline{
-  margin:clamp(22px,3.2vw,40px) 0 0;
+  margin:0 0 clamp(16px,2.4vw,28px);
   text-align:center;
   font-size:clamp(24px,4.4vw,52px); font-weight:800; letter-spacing:-0.04em; line-height:1.18;
   color:var(--ink);
@@ -257,7 +257,8 @@
   <div class="wrap">
     <!-- 히어로 : 4분할 밴드 -->
     <section class="hero">
-      <h1 class="hero__strips">
+      <h1 class="hero__tagline">가족을 위한 1:1 맞춤 자유여행</h1>
+      <div class="hero__strips">
         <span class="hero__strip">
           <span class="hero__strip-media"><img src="../assets/htn-hero/hawaii.jpg" alt="하와이"></span>
           <b>Hawaii</b>
@@ -274,8 +275,7 @@
           <span class="hero__strip-media"><img src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/destinations/europe.jpg" alt="유럽"></span>
           <b>Europe</b>
         </span>
-      </h1>
-      <p class="hero__tagline">가족을 위한 1:1 맞춤 자유여행</p>
+      </div>
     </section>
 
     <div class="mq" aria-hidden="true">
