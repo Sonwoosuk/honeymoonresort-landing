@@ -71,11 +71,22 @@
   text-shadow:0 2px 18px rgba(8,12,16,.5);
 }
 .hero__tagline{
-  margin:0 0 clamp(16px,2.4vw,28px);
+  margin:0 0 clamp(14px,2vw,22px);
   text-align:center;
   font-size:clamp(24px,4.4vw,52px); font-weight:800; letter-spacing:-0.04em; line-height:1.18;
   color:var(--ink);
 }
+
+/* 히어로 로고 마스크 : 호텔엔투어 로고 모양 안에 여행지 사진 */
+.hero__logomask{
+  margin:clamp(14px,2.6vw,30px) auto 0;
+  width:min(100%,860px);
+  aspect-ratio:1500 / 402;
+  background:var(--ink);
+  -webkit-mask:url(../../assets/htn-logo/htn-logo-kr-white.png) center/contain no-repeat;
+          mask:url(../../assets/htn-logo/htn-logo-kr-white.png) center/contain no-repeat;
+}
+.hero__logomask img{ width:100%; height:100%; object-fit:cover; }
 
 /* ---- 마퀴 ---- */
 .mq{ overflow:hidden; padding:clamp(16px,2.4vw,24px) 0 0; }
@@ -89,6 +100,7 @@
 .mq__set span::after{
   content:"✈"; color:var(--white); font-weight:400; font-size:0.9em;
   margin:0 clamp(18px,2.6vw,30px); line-height:1;
+  display:inline-block; transform:scaleX(-1);
 }
 @keyframes mq{ from{transform:translateX(0)} to{transform:translateX(-50%)} }
 @media (prefers-reduced-motion:reduce){ .mq__row{ animation:none; flex-wrap:wrap; } .mq__set:nth-child(2){ display:none; } }
@@ -253,27 +265,9 @@
 <div class="pg">
 
   <div class="wrap">
-    <!-- 히어로 : 4분할 밴드 -->
+    <!-- 히어로 : 태그라인 → 마퀴 → 로고 마스크 이미지 -->
     <section class="hero">
-      <h1 class="hero__tagline">가족을 위한 1:1 맞춤 자유여행</h1>
-      <div class="hero__strips">
-        <span class="hero__strip">
-          <span class="hero__strip-media"><img src="../../assets/htn-hero/hawaii.jpg" alt="하와이"></span>
-          <b>Hawaii</b>
-        </span>
-        <span class="hero__strip">
-          <span class="hero__strip-media"><img src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/destinations/maldives.jpg" alt="몰디브"></span>
-          <b>Maldives</b>
-        </span>
-        <span class="hero__strip">
-          <span class="hero__strip-media"><img src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/destinations/bali.jpg" alt="발리"></span>
-          <b>Bali</b>
-        </span>
-        <span class="hero__strip">
-          <span class="hero__strip-media"><img src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/destinations/europe.jpg" alt="유럽"></span>
-          <b>Europe</b>
-        </span>
-      </div>
+      <p class="hero__tagline">가족을 위한 1:1 맞춤 자유여행</p>
     </section>
 
     <div class="mq" aria-hidden="true">
@@ -282,6 +276,10 @@
         <div class="mq__set"><span>하와이 — 맞춤형 알로하 라이프의 경험</span><span>몰디브 — 에메랄드빛 바다 위 프라이빗 휴양</span><span>발리 — 휴양과 액티비티가 공존하는 여행의 천국</span><span>유럽 — 내 맘대로 그리는 예술 같은 여정</span></div>
       </div>
     </div>
+
+    <h1 class="hero__logomask" aria-label="호텔엔투어">
+      <img src="../../assets/hero-main.jpg" alt="">
+    </h1>
   </div>
 
   <!-- 어떤 여행사인가요 -->
@@ -318,6 +316,30 @@
           <article class="aud__card"><h3>럭셔리 자유여행</h3><p>전 세계 하이엔드 호텔·리조트와의 B2B 직계약 기반, 거품을 뺀 특가와 혜택을 제안합니다.</p></article>
           <article class="aud__card"><h3>목적여행</h3><p>골프여행, 태교여행, 베이비문, 우정여행, 프라이빗 투어, 신혼여행 등 목적에 맞춘 플래닝.</p></article>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4분할 여행지 밴드 -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="hero__strips">
+        <span class="hero__strip">
+          <span class="hero__strip-media"><img src="../../assets/htn-hero/hawaii.jpg" alt="하와이"></span>
+          <b>Hawaii</b>
+        </span>
+        <span class="hero__strip">
+          <span class="hero__strip-media"><img src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/destinations/maldives.jpg" alt="몰디브"></span>
+          <b>Maldives</b>
+        </span>
+        <span class="hero__strip">
+          <span class="hero__strip-media"><img src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/destinations/bali.jpg" alt="발리"></span>
+          <b>Bali</b>
+        </span>
+        <span class="hero__strip">
+          <span class="hero__strip-media"><img src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/destinations/europe.jpg" alt="유럽"></span>
+          <b>Europe</b>
+        </span>
       </div>
     </div>
   </section>
