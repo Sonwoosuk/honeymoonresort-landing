@@ -564,14 +564,15 @@
       for (var s = 0; s < segs.length; s++) bounds.push(bounds[s] + segs[s]);
       var loopLen = bounds[bounds.length - 1];
       var paint = function(i){ for (var k = 0; k < cards.length; k++) cards[k].classList.toggle('is-active', k === i); };
+      var lag = 0.2; /* 영상 컷보다 이만큼 늦게 카드 전환 */
       var idxAt = function(t){
-        var m = t % loopLen;
+        var m = ((t % loopLen) + loopLen) % loopLen;
         for (var i = bounds.length - 2; i >= 0; i--) if (m >= bounds[i]) return i;
         return 0;
       };
       var raf = function(){
         if (!vid.paused && !vid.ended) {
-          var ni = idxAt(vid.currentTime);
+          var ni = idxAt(vid.currentTime - lag);
           if (ni !== ci) { ci = ni; paint(ci); }
         }
         requestAnimationFrame(raf);
