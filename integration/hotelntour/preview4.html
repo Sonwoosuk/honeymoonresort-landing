@@ -116,7 +116,7 @@
 .aud__photo{ border-radius:var(--radius); overflow:hidden; aspect-ratio:16/8; background:#3a4a44; }
 .aud__photo img,.aud__photo video{ width:100%; height:100%; object-fit:cover; display:block; }
 .aud__cards{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(10px,1.4vw,16px); margin-top:clamp(-60px,-6vw,-32px); padding:0 clamp(8px,2vw,28px); position:relative; z-index:2; }
-.aud__card{ background:var(--white); border-radius:clamp(14px,1.8vw,20px); padding:clamp(16px,2vw,24px); display:flex; flex-direction:column; gap:8px; box-shadow:0 20px 40px rgba(60,40,0,.14); transition:background-color .55s ease; }
+.aud__card{ background:var(--white); border-radius:clamp(14px,1.8vw,20px); padding:clamp(16px,2vw,24px); display:flex; flex-direction:column; gap:8px; box-shadow:0 20px 40px rgba(60,40,0,.14); transition:background-color .3s ease; }
 .aud__card:nth-child(2){ background:var(--yellow-soft); }
 .aud__cards.is-cycling .aud__card{ background:var(--white); }
 .aud__cards.is-cycling .aud__card.is-active{ background:var(--yellow-soft); }
@@ -550,20 +550,34 @@
   fly.addEventListener('click', function(){ window.scrollTo({ top:0, behavior:'smooth' }); });
 
   /* 스크롤 도착 시 '이런 여행을 설계합니다' 영상 자동재생 (화면 밖이면 일시정지)
-     + 영상이 한 바퀴 돌 때마다 강조 카드를 가족여행→럭셔리 자유여행→목적여행 순환 */
+     + 영상 컷 타이밍에 맞춰 강조 카드를 가족여행→럭셔리 자유여행→목적여행 전환 */
   var vid = document.querySelector('.aud__video');
   if (vid) {
     var cardWrap = document.querySelector('.aud__cards');
     var cards = cardWrap ? cardWrap.querySelectorAll('.aud__card') : [];
-    var ci = 0, lastT = 0;
+    var ci = -1;
     if (cards.length) {
       cardWrap.classList.add('is-cycling');
-      var paint = function(){ for (var i=0;i<cards.length;i++){ cards[i].classList.toggle('is-active', i===ci); } };
-      paint();
-      vid.addEventListener('timeupdate', function(){
-        if (vid.currentTime + 0.25 < lastT) { ci = (ci + 1) % cards.length; paint(); }
-        lastT = vid.currentTime;
-      });
+      /* 영상 속 장면 전환 길이(초): 가족여행 / 럭셔리 자유여행 / 목적여행 */
+      var segs = [1.15, 1.5, 1.2];
+      var bounds = [0];
+      for (var s = 0; s < segs.length; s++) bounds.push(bounds[s] + segs[s]);
+      var loopLen = bounds[bounds.length - 1];
+      var paint = function(i){ for (var k = 0; k < cards.length; k++) cards[k].classList.toggle('is-active', k === i); };
+      var idxAt = function(t){
+        var m = t % loopLen;
+        for (var i = bounds.length - 2; i >= 0; i--) if (m >= bounds[i]) return i;
+        return 0;
+      };
+      var raf = function(){
+        if (!vid.paused && !vid.ended) {
+          var ni = idxAt(vid.currentTime);
+          if (ni !== ci) { ci = ni; paint(ci); }
+        }
+        requestAnimationFrame(raf);
+      };
+      paint(0); ci = 0;
+      requestAnimationFrame(raf);
     }
     if (!('IntersectionObserver' in window)) {
       var kick = function(){ vid.play().catch(function(){}); };
