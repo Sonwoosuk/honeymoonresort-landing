@@ -55,12 +55,17 @@
 .hero__strip{
   position:relative;
   height:clamp(112px,15vw,200px);
+  transition:opacity .4s ease;
 }
 .hero__strip-media{ position:absolute; inset:0; overflow:hidden; background:#20303a; }
-.hero__strip-media img{ width:100%; height:100%; object-fit:cover; }
+.hero__strip-media img{
+  width:100%; height:100%; object-fit:cover;
+  transition:transform .6s cubic-bezier(.22,.61,.36,1);
+}
 .hero__strip-media::after{
   content:""; position:absolute; inset:0;
   background:linear-gradient(90deg, rgba(10,14,18,.62), rgba(10,14,18,.08) 60%);
+  transition:opacity .4s ease;
 }
 .hero__strip b{
   position:absolute; z-index:2; left:clamp(18px,4vw,56px);
@@ -69,6 +74,17 @@
   text-transform:uppercase;
   color:var(--white);
   text-shadow:0 2px 18px rgba(8,12,16,.5);
+  transition:transform .4s cubic-bezier(.22,.61,.36,1), letter-spacing .4s ease;
+}
+/* 4컷 호버 : 올린 컷은 확대·선명, 나머지는 살짝 흐리게 */
+.hero__strips:hover .hero__strip{ opacity:.5; }
+.hero__strips:hover .hero__strip:hover{ opacity:1; }
+.hero__strip:hover .hero__strip-media img{ transform:scale(1.08); }
+.hero__strip:hover .hero__strip-media::after{ opacity:.45; }
+.hero__strip:hover b{ transform:translateY(-6px); letter-spacing:0.01em; }
+@media (prefers-reduced-motion:reduce){
+  .hero__strip,.hero__strip-media img,.hero__strip-media::after,.hero__strip b{ transition:none; }
+  .hero__strip:hover .hero__strip-media img{ transform:none; }
 }
 .hero__tagline{
   margin:0 0 clamp(14px,2vw,22px);
