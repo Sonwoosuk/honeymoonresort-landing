@@ -219,6 +219,20 @@
 @keyframes bob{ 0%,100%{ transform:translateY(2px); } 50%{ transform:translateY(-3px); } }
 @media (prefers-reduced-motion:reduce){ .fly svg{ animation:none; } .fly{ transition:opacity .2s ease; } }
 
+/* 비행기 탑버튼 클릭 시 짧은 구름 자국 */
+.cloud-puff{
+  position:fixed; z-index:39; pointer-events:none;
+  width:clamp(16px,2.2vw,24px); aspect-ratio:1; border-radius:50%;
+  background:radial-gradient(circle at 50% 45%, rgba(255,255,255,.95), rgba(255,255,255,0) 70%);
+  opacity:0; will-change:transform,opacity;
+  animation:puff .7s ease-out forwards;
+}
+@keyframes puff{
+  0%{ opacity:.55; transform:scale(.35); }
+  100%{ opacity:0; transform:scale(1.6) translateY(22px); }
+}
+@media (prefers-reduced-motion:reduce){ .cloud-puff{ display:none; } }
+
 .note{ position:sticky; top:0; z-index:50; background:var(--ink); color:var(--yellow); text-align:center; font-size:12px; font-weight:700; padding:7px 14px; }
 
 /* ---- 스크롤 등장 애니메이션 ---- */
@@ -522,7 +536,20 @@
   window.addEventListener('scroll', update, { passive:true });
   window.addEventListener('resize', update);
   update();
-  fly.addEventListener('click', function(){ window.scrollTo({ top:0, behavior:'smooth' }); });
+  fly.addEventListener('click', function(){
+    window.scrollTo({ top:0, behavior:'smooth' });
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var n = 0, iv = setInterval(function(){
+      var r = fly.getBoundingClientRect();
+      var c = document.createElement('span');
+      c.className = 'cloud-puff';
+      c.style.left = (r.left + r.width / 2 - 10 + (Math.random() * 12 - 6)) + 'px';
+      c.style.top = (r.bottom - 8 + Math.random() * 8) + 'px';
+      document.body.appendChild(c);
+      setTimeout(function(){ c.remove(); }, 800);
+      if (++n >= 6) clearInterval(iv);
+    }, 65);
+  });
 
   /* 스크롤 등장 애니메이션 */
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
