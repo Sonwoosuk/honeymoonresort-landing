@@ -114,7 +114,7 @@
 /* ---- 이런 여행을 설계합니다 ---- */
 .aud__stage{ position:relative; margin-top:clamp(24px,3.6vw,44px); }
 .aud__photo{ border-radius:var(--radius); overflow:hidden; aspect-ratio:16/8; background:#3a4a44; }
-.aud__photo img{ width:100%; height:100%; object-fit:cover; }
+.aud__photo img,.aud__photo video{ width:100%; height:100%; object-fit:cover; display:block; }
 .aud__cards{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(10px,1.4vw,16px); margin-top:clamp(-60px,-6vw,-32px); padding:0 clamp(8px,2vw,28px); position:relative; z-index:2; }
 .aud__card{ background:var(--white); border-radius:clamp(14px,1.8vw,20px); padding:clamp(16px,2vw,24px); display:flex; flex-direction:column; gap:8px; box-shadow:0 20px 40px rgba(60,40,0,.14); }
 .aud__card:nth-child(2){ background:var(--yellow-soft); }
@@ -312,7 +312,7 @@
     <div class="wrap">
       <h2 class="sec__h">이런 여행을 설계합니다</h2>
       <div class="aud__stage">
-        <figure class="aud__photo"><img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1600&q=80" alt="가족이 함께 떠나는 여행"></figure>
+        <figure class="aud__photo"><video class="aud__video" src="../../assets/video/0901.mp4" muted loop playsinline preload="metadata" aria-label="가족이 함께 떠나는 여행"></video></figure>
         <div class="aud__cards">
           <article class="aud__card"><h3>가족여행</h3><p>3대 가족여행, 아이 동반 · 부모님 동반 가족여행까지 구성과 일정에 맞춰 설계합니다.</p></article>
           <article class="aud__card"><h3>럭셔리 자유여행</h3><p>전 세계 하이엔드 호텔·리조트와의 B2B 직계약 기반, 거품을 뺀 특가와 혜택을 제안합니다.</p></article>
@@ -545,6 +545,23 @@
   window.addEventListener('resize', update);
   update();
   fly.addEventListener('click', function(){ window.scrollTo({ top:0, behavior:'smooth' }); });
+
+  /* 스크롤 도착 시 '이런 여행을 설계합니다' 영상 자동재생 (화면 밖이면 일시정지) */
+  var vid = document.querySelector('.aud__video');
+  if (vid) {
+    if (!('IntersectionObserver' in window)) {
+      var kick = function(){ vid.play().catch(function(){}); };
+      vid.addEventListener('canplay', kick, { once:true });
+      kick();
+    } else {
+      new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if (e.isIntersecting) { vid.play().catch(function(){}); }
+          else { vid.pause(); }
+        });
+      }, { threshold: 0.4 }).observe(vid);
+    }
+  }
 
   /* 스크롤 등장 애니메이션 */
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
