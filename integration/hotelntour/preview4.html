@@ -104,32 +104,32 @@
 }
 .hero__logomask img{ width:100%; height:100%; object-fit:cover; }
 
-/* ---- 히어로 → 본문 사이 끊어주는 요소 (비행 경로) ---- */
-.breather{ padding:clamp(56px,9vw,120px) var(--gutter); text-align:center; }
+/* ---- 히어로 → 본문 사이 끊어주는 요소 ---- */
+.breather{ padding:clamp(60px,10vw,132px) var(--gutter); text-align:center; }
 .breather__kicker{
-  max-width:36ch; margin:0 auto;
-  font-size:clamp(13px,1.4vw,16px); font-weight:700; letter-spacing:-0.02em; line-height:1.6;
-  color:var(--plum);
+  max-width:20ch; margin:0 auto;
+  font-size:clamp(21px,3.4vw,34px); font-weight:800; letter-spacing:-0.035em; line-height:1.38;
+  color:var(--ink);
 }
-.breather__path{
-  position:relative; width:min(100%,440px); height:2px;
-  margin:clamp(24px,4vw,40px) auto 0;
-  background:linear-gradient(90deg, var(--ink) 42%, transparent 0) repeat-x;
-  background-size:12px 2px; opacity:.32;
+.breather__kicker b{ color:var(--plum); font-weight:800; }
+.breather__cue{
+  position:relative; width:2px; height:clamp(48px,7vw,74px);
+  margin:clamp(26px,4.4vw,46px) auto 0;
+  background:rgba(25,25,25,.16); overflow:hidden;
 }
-.breather__plane{
-  position:absolute; top:50%; left:0; transform:translate(-50%,-50%);
-  font-size:clamp(16px,2vw,20px); color:var(--ink);
-  animation:breather-fly 7s cubic-bezier(.45,0,.55,1) infinite;
+.breather__cue::after{
+  content:""; position:absolute; left:0; top:0; width:100%; height:42%;
+  background:var(--ink); border-radius:2px;
+  animation:cue-drop 2.3s cubic-bezier(.5,0,.5,1) infinite;
 }
-@keyframes breather-fly{
-  0%{ left:0%; opacity:0; }
-  14%{ opacity:1; }
-  86%{ opacity:1; }
-  100%{ left:100%; opacity:0; }
+@keyframes cue-drop{
+  0%{ transform:translateY(-110%); opacity:0; }
+  25%{ opacity:1; }
+  75%{ opacity:1; }
+  100%{ transform:translateY(360%); opacity:0; }
 }
 @media (prefers-reduced-motion:reduce){
-  .breather__plane{ animation:none; left:50%; }
+  .breather__cue::after{ animation:none; height:100%; opacity:.4; }
 }
 
 /* ---- 마퀴 ---- */
@@ -326,10 +326,10 @@
     </h1>
   </div>
 
-  <!-- 끊어주는 요소 : 비행 경로 디바이더 -->
+  <!-- 끊어주는 요소 -->
   <section class="breather">
-    <p class="breather__kicker">가족의 여행, 그 시작과 끝을 함께 설계합니다</p>
-    <div class="breather__path" aria-hidden="true"><span class="breather__plane">✈</span></div>
+    <p class="breather__kicker">가족의 여행, <b>그 시작과 끝</b>을 함께 설계합니다</p>
+    <div class="breather__cue" aria-hidden="true"></div>
   </section>
 
   <!-- 어떤 여행사인가요 -->
