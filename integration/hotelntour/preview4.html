@@ -95,14 +95,16 @@
 
 /* 히어로 로고 마스크 : 호텔엔투어 로고 모양 안에 여행지 사진 */
 .hero__logomask{
-  margin:clamp(14px,2.6vw,30px) auto 0;
-  width:min(100%,860px);
+  position:relative;
+  margin:clamp(20px,3.4vw,44px) auto clamp(4px,1vw,12px);
+  width:min(100%,1180px);
   aspect-ratio:1500 / 402;
   background:var(--ink);
   -webkit-mask:url(../../assets/htn-logo/htn-logo-kr-white.png) center/contain no-repeat;
           mask:url(../../assets/htn-logo/htn-logo-kr-white.png) center/contain no-repeat;
 }
 .hero__logomask img{ width:100%; height:100%; object-fit:cover; }
+.hero__logomask::after{ content:""; position:absolute; inset:0; background:rgba(18,18,18,.22); }
 
 /* ---- 히어로 → 본문 사이 끊어주는 요소 ---- */
 .breather{ padding:clamp(60px,10vw,132px) var(--gutter); text-align:center; }
@@ -111,7 +113,7 @@
   font-size:clamp(21px,3.4vw,34px); font-weight:800; letter-spacing:-0.035em; line-height:1.38;
   color:var(--ink);
 }
-.breather__kicker b{ color:var(--plum); font-weight:800; }
+.breather__kicker b{ color:var(--orange); font-weight:800; }
 .breather__cue{
   position:relative; width:2px; height:clamp(48px,7vw,74px);
   margin:clamp(26px,4.4vw,46px) auto 0;
