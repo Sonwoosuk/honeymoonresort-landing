@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>허니문리조트 리플렛 시안</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Noto+Sans+KR:wght@300;400;500;700&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+:root{ color-scheme:light; }
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background:#e7e0d4;
+  font-family:"Noto Sans KR", system-ui, sans-serif;
+  color:#3a3229;
+  -webkit-font-smoothing:antialiased;
+  word-break:keep-all;
+}
+
+/* 미리보기 안내바 — 인쇄물 이식 시 제거 */
+.demo-bar{
+  padding:16px clamp(18px,5vw,36px);
+  background:#fff;
+  border-bottom:1px solid rgba(58,50,41,.14);
+  display:flex; flex-wrap:wrap; gap:5px 14px; align-items:baseline;
+}
+.demo-bar strong{ font-family:"Cormorant Garamond",serif; font-size:15px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; }
+.demo-bar span{ font-size:12px; color:#8a7d6d; }
+
+.stage{
+  --ink:#3a3229;
+  --muted:#8a7d6d;
+  --gold:#a8865c;
+  --line:rgba(58,50,41,.16);
+  --line-soft:rgba(58,50,41,.09);
+  --paper:#fdfaf4;
+  --sand:#f3ecdf;
+  padding:clamp(24px,5vw,56px) clamp(16px,4vw,40px) clamp(40px,8vw,88px);
+  display:flex; flex-direction:column; align-items:center; gap:clamp(24px,5vw,44px);
+}
+
+.panel{
+  width:100%;
+  max-width:680px;
+  background:var(--paper);
+  border:1px solid var(--line);
+  padding:clamp(30px,6vw,58px) clamp(24px,6vw,54px);
+}
+.panel__mark{
+  display:block; text-align:center;
+  font-family:"Cormorant Garamond",serif;
+  font-size:12px; letter-spacing:.32em; text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:clamp(24px,5vw,38px);
+}
+
+/* ---------- 1면 ---------- */
+.hero{ text-align:center; }
+.hero__eyebrow{
+  margin:0;
+  font-size:13px; font-weight:500; letter-spacing:.06em; color:var(--muted);
+}
+.hero__title{
+  margin:12px 0 0;
+  font-family:"Cormorant Garamond",serif;
+  font-weight:600;
+  font-size:clamp(32px,7vw,52px);
+  letter-spacing:.06em;
+  line-height:1.1;
+  color:var(--ink);
+}
+.rule{
+  width:44px; height:1px; background:var(--ink); opacity:.45;
+  margin:clamp(22px,4vw,30px) auto;
+}
+
+.facts{
+  display:grid; grid-template-columns:1fr 1fr;
+  border-top:1px solid var(--line-soft);
+  border-left:1px solid var(--line-soft);
+}
+.fact{
+  border-right:1px solid var(--line-soft);
+  border-bottom:1px solid var(--line-soft);
+  padding:clamp(18px,3.4vw,26px) clamp(14px,3vw,22px);
+  text-align:center;
+  display:flex; flex-direction:column; gap:7px;
+}
+.fact__k{
+  font-family:"Cormorant Garamond",serif;
+  font-size:clamp(19px,3.4vw,24px); font-weight:600; letter-spacing:.04em; color:var(--gold);
+}
+.fact__v{ font-size:13.5px; line-height:1.6; color:var(--ink); }
+
+.qr-row{
+  display:grid; grid-template-columns:1fr 1fr; gap:clamp(16px,4vw,30px);
+  margin-top:clamp(26px,5vw,40px);
+}
+.qr{
+  text-align:center; display:flex; flex-direction:column; align-items:center; gap:12px;
+}
+.qr__code{
+  width:120px; height:120px; padding:8px; background:#fff; border:1px solid var(--line);
+  display:flex; align-items:center; justify-content:center;
+}
+.qr__code img, .qr__code canvas{ display:block; width:100%; height:100%; }
+.qr__label{ font-size:12.5px; line-height:1.55; color:var(--muted); max-width:20ch; }
+.qr__label b{ display:block; color:var(--ink); font-weight:700; font-size:13px; margin-bottom:2px; }
+
+.brandline{
+  margin:clamp(30px,6vw,46px) 0 clamp(18px,4vw,26px);
+  padding-top:clamp(22px,4vw,30px);
+  border-top:1px solid var(--line);
+  text-align:center;
+  font-size:14px; font-weight:500; line-height:1.7; color:var(--ink);
+}
+.branches{
+  list-style:none; margin:0; padding:0;
+  display:flex; flex-wrap:wrap; justify-content:center;
+  gap:8px 0;
+  font-size:12px; color:var(--muted); line-height:1.5;
+}
+.branches li{ padding:0 11px; border-right:1px solid var(--line); white-space:nowrap; }
+.branches li:nth-child(4n){ border-right:0; }
+.branches li:last-child{ border-right:0; }
+.branches b{ color:var(--ink); font-weight:600; margin-right:3px; }
+.note{
+  margin:14px 0 0; text-align:center;
+  font-size:11px; color:#b6a892; letter-spacing:.01em;
+}
+
+/* ---------- 2면 ---------- */
+.guide__title{
+  margin:0; text-align:center;
+  font-family:"Cormorant Garamond",serif;
+  /* 한글이라 세리프 대신 산세리프 유지 */
+  font-family:"Noto Sans KR",sans-serif;
+  font-weight:700; font-size:clamp(21px,4.4vw,28px); letter-spacing:-.01em; color:var(--ink);
+}
+.guide__qs{
+  margin:clamp(16px,3vw,22px) auto clamp(28px,5vw,40px);
+  max-width:34ch;
+  display:flex; flex-direction:column; gap:8px;
+  text-align:center; font-size:13px; line-height:1.65; color:var(--muted);
+}
+.guide__qs b{ color:var(--gold); font-weight:700; margin-right:5px; }
+
+.tier{ border-top:1px solid var(--line); padding:clamp(22px,4vw,30px) 0; }
+.tier:last-child{ padding-bottom:0; }
+.tier__head{ text-align:center; margin-bottom:clamp(16px,3vw,22px); }
+.tier__badge{
+  font-family:"Cormorant Garamond",serif;
+  font-size:22px; font-weight:600; letter-spacing:.08em; color:var(--gold);
+}
+.tier__mix{
+  display:block; margin-top:4px;
+  font-size:13.5px; font-weight:700; color:var(--ink);
+}
+.tier__for{
+  display:block; margin-top:3px;
+  font-size:12px; color:var(--muted);
+}
+
+.dests{ display:flex; flex-direction:column; gap:1px; background:var(--line-soft); }
+.dest{
+  background:var(--paper);
+  display:grid;
+  grid-template-columns:minmax(96px,1fr) auto;
+  grid-template-areas:"name price" "desc desc";
+  gap:4px 14px;
+  padding:15px 4px;
+}
+.dest__name{ grid-area:name; font-size:15px; font-weight:700; color:var(--ink); align-self:center; }
+.dest__price{ grid-area:price; font-size:12.5px; font-weight:600; color:var(--gold); align-self:center; white-space:nowrap; }
+.dest__desc{ grid-area:desc; font-size:12.5px; line-height:1.6; color:var(--muted); }
+.dest__desc em{ font-style:normal; color:var(--ink); }
+.dest__flight{ display:block; margin-top:3px; font-size:11.5px; color:#b6a892; }
+
+@media (max-width:520px){
+  .qr-row{ grid-template-columns:1fr; gap:22px; }
+  .facts{ grid-template-columns:1fr; }
+}
+
+@media print{
+  body{ background:#fff; }
+  .demo-bar{ display:none; }
+  .stage{ padding:0; gap:0; }
+  .panel{ border:0; max-width:none; min-height:100vh; page-break-after:always; padding:14mm; }
+  .panel:last-child{ page-break-after:auto; }
+  a[href]{ color:inherit; text-decoration:none; }
+}
+</style>
+</head>
+<body>
+
+<div class="demo-bar">
+  <strong>Honeymoon Resort</strong>
+  <span>리플렛 시안 · 1장 앞뒤 (연락처·QR 링크는 최종 확인 필요)</span>
+</div>
+
+<div class="stage">
+
+  <!-- ================= 1면 ================= -->
+  <section class="panel">
+    <span class="panel__mark">Front &middot; 1면</span>
+
+    <div class="hero">
+      <p class="hero__eyebrow">신혼여행 전문 여행사</p>
+      <h1 class="hero__title">Honeymoon&nbsp;Resort</h1>
+    </div>
+    <div class="rule"></div>
+
+    <ul class="facts">
+      <li class="fact">
+        <span class="fact__k">Since 1995</span>
+        <span class="fact__v">30년 이상<br>신혼여행 한 길</span>
+      </li>
+      <li class="fact">
+        <span class="fact__k">100<span style="letter-spacing:0">+</span></span>
+        <span class="fact__v">임직원 100명 이상<br>전국 13개 지역 지사</span>
+      </li>
+      <li class="fact">
+        <span class="fact__k">B2B</span>
+        <span class="fact__v">글로벌 파트너십 기반<br>호텔 &middot; 리조트 직거래 특가</span>
+      </li>
+      <li class="fact">
+        <span class="fact__k">1 : 1</span>
+        <span class="fact__v">예산 &middot; 일정 &middot; 취향에 맞춘<br>1:1 맞춤 상담</span>
+      </li>
+    </ul>
+
+    <div class="qr-row">
+      <div class="qr">
+        <div class="qr__code" id="qr-quote"></div>
+        <p class="qr__label"><b>온라인 견적문의</b>QR을 찍고 바로 상담 신청</p>
+      </div>
+      <div class="qr">
+        <div class="qr__code" id="qr-youtube"></div>
+        <p class="qr__label"><b>허니문리조트 유튜브</b>인기 신혼여행지 영상으로 미리 보기</p>
+      </div>
+    </div>
+
+    <p class="brandline">전국 13개 지사와 100명 이상의 임직원이 함께하는<br>신혼여행 대표 브랜드</p>
+
+    <ul class="branches">
+      <li><b>본사</b> 02-548-2222</li>
+      <li><b>천안</b> 041-576-6445</li>
+      <li><b>대전</b> 042-546-1234</li>
+      <li><b>전주</b> 063-283-7090</li>
+      <li><b>광주</b> 062-449-5353</li>
+      <li><b>순천</b> 061-743-6548</li>
+      <li><b>대구</b> 053-421-0003</li>
+      <li><b>포항</b> 054-727-1253</li>
+      <li><b>울산</b> 052-267-6405</li>
+      <li><b>창원</b> 055-246-5678</li>
+      <li><b>진주</b> 055-920-6026</li>
+      <li><b>부산</b> 051-747-8255</li>
+      <li><b>제주</b> 064-744-4741</li>
+    </ul>
+    <p class="note">* 지사 연락처 및 QR 링크는 배포 전 최종 확인이 필요합니다.</p>
+  </section>
+
+  <!-- ================= 2면 ================= -->
+  <section class="panel">
+    <span class="panel__mark">Back &middot; 2면</span>
+
+    <h2 class="guide__title">우리에게 맞는 신혼여행지는 어디?</h2>
+    <div class="guide__qs">
+      <span><b>Q1.</b> 신혼여행에서는 푹 쉬는 것이 가장 중요한가요?</span>
+      <span><b>Q2.</b> 휴양만큼 관광과 새로운 경험도 기대하시나요?</span>
+    </div>
+
+    <div class="tier">
+      <div class="tier__head">
+        <span class="tier__badge">A</span>
+        <span class="tier__mix">휴양 100%</span>
+        <span class="tier__for">온전히 쉬고 싶은 커플</span>
+      </div>
+      <div class="dests">
+        <div class="dest">
+          <span class="dest__name">몰디브</span>
+          <span class="dest__price">1인 400만~600만원</span>
+          <span class="dest__desc"><em>에메랄드빛 바다 위 수상빌라</em>에서 보내는 완전한 휴양
+            <span class="dest__flight">비행 약 14시간~ · 경유 1회</span></span>
+        </div>
+        <div class="dest">
+          <span class="dest__name">타히티</span>
+          <span class="dest__price">1인 600만~800만원</span>
+          <span class="dest__desc">수만 년의 자연이 빚은 <em>하이엔드 휴양지</em>
+            <span class="dest__flight">비행 약 18시간~ · 경유 1회</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tier">
+      <div class="tier__head">
+        <span class="tier__badge">B</span>
+        <span class="tier__mix">휴양 60% &nbsp;/&nbsp; 관광 40%</span>
+        <span class="tier__for">휴양을 중심으로 가벼운 관광도 원하는 커플</span>
+      </div>
+      <div class="dests">
+        <div class="dest">
+          <span class="dest__name">발리</span>
+          <span class="dest__price">1인 250만~450만원</span>
+          <span class="dest__desc"><em>프라이빗 풀빌라 휴양</em>, 감성 해변과 정글 관광까지
+            <span class="dest__flight">비행 약 7시간 · 직항</span></span>
+        </div>
+        <div class="dest">
+          <span class="dest__name">태국<span style="font-weight:400;color:var(--muted);font-size:12px"> 푸켓·카오락·코사무이</span></span>
+          <span class="dest__price">1인 200만~400만원</span>
+          <span class="dest__desc">이국적인 섬 관광과 <em>풀빌라 속 여유로운 휴양</em>
+            <span class="dest__flight">비행 약 6시간 · 푸켓 직항</span></span>
+        </div>
+        <div class="dest">
+          <span class="dest__name">칸쿤</span>
+          <span class="dest__price">1인 400만~700만원</span>
+          <span class="dest__desc">카리브해 <em>올 인클루시브 리조트</em>로 완성되는 휴양
+            <span class="dest__flight">비행 약 19시간~ · 경유 1회</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tier">
+      <div class="tier__head">
+        <span class="tier__badge">C</span>
+        <span class="tier__mix">관광 60% &nbsp;/&nbsp; 휴양 40%</span>
+        <span class="tier__for">관광 &middot; 미식 &middot; 쇼핑 등 다양한 경험을 원하는 커플</span>
+      </div>
+      <div class="dests">
+        <div class="dest">
+          <span class="dest__name">유럽</span>
+          <span class="dest__price">1인 400만~800만원</span>
+          <span class="dest__desc">여러 도시를 오가며 <em>역사와 예술을 따라 걷는 허니문</em>
+            <span class="dest__flight">비행 약 12시간~ · 주요 도시 직항</span></span>
+        </div>
+        <div class="dest">
+          <span class="dest__name">하와이</span>
+          <span class="dest__price">1인 350만~700만원</span>
+          <span class="dest__desc">와이키키의 활기와 <em>이웃 섬 대자연</em>을 함께 즐기는 허니문
+            <span class="dest__flight">비행 약 9시간 · 직항</span></span>
+        </div>
+        <div class="dest">
+          <span class="dest__name">호주</span>
+          <span class="dest__price">1인 400만~700만원</span>
+          <span class="dest__desc">대자연과 대도시 관광에 <em>해밀턴 아일랜드의 휴양</em>까지
+            <span class="dest__flight">비행 약 9시간~ · 주요 도시 직항</span></span>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+</div>
+
+<script>
+(function(){
+  var QUOTE_URL   = "https://new.honeymoonresort.co.kr/board/board_QnA_new.do?flag=5";
+  var YOUTUBE_URL = "https://www.youtube.com/channel/UCcECqjOZsxf1teQXCBeUycw";
+  function make(id, text){
+    var el = document.getElementById(id);
+    if(!el || !window.QRCode) return;
+    new QRCode(el, { text:text, width:200, height:200,
+      colorDark:"#3a3229", colorLight:"#fdfaf4", correctLevel:QRCode.CorrectLevel.M });
+  }
+  make("qr-quote", QUOTE_URL);
+  make("qr-youtube", YOUTUBE_URL);
+})();
+</script>
+
+</body>
+</html>
