@@ -113,6 +113,20 @@ body{
   letter-spacing:-.01em;
   color:var(--kw-muted);
 }
+.kw .intro-map{
+  align-self:center;
+  width:100%; max-width:440px;
+  margin:clamp(14px,3vw,26px) auto clamp(6px,1.5vw,14px);
+  text-align:center;
+}
+.kw .intro-map img{
+  width:100%; height:auto; display:block;
+  mix-blend-mode:darken;   /* 크림색 배경을 페이지 바탕에 녹여 '배경 없이' 보이게 */
+}
+.kw .intro-map figcaption{
+  margin-top:12px;
+  font-size:12px; letter-spacing:.03em; color:var(--kw-muted);
+}
 
 /* ── tourism-board section ────────────────────────────────── */
 .kw .verified__badge-wrap{
@@ -293,6 +307,10 @@ body{
       <h2 class="section-title">K-Wedding by Honeymoon Resort</h2>
       <div class="text-stack">
         <p>K-Wedding is operated by Honeymoon Resort, one of Korea's leading honeymoon and luxury travel agencies. Founded in 1995 and headquartered in Gangnam, Seoul, Honeymoon Resort serves more than 20,000 couples every year.</p>
+        <figure class="intro-map">
+          <img src="branches-map.jpg" alt="Honeymoon Resort branch network — 13 offices across Korea plus Hawaii">
+          <figcaption>Seoul HQ and 12 regional offices across Korea, plus Hawaii</figcaption>
+        </figure>
         <p>With 14 regional branches and over 100 sales professionals across Korea and Hawaii, the company runs both tailor-made honeymoon consultation and B2B travel operations, giving K-Wedding a strong foundation in travel planning, partner coordination, and client support.</p>
         <p>Over the past three decades, Honeymoon Resort has built close relationships with luxury hotels and resorts worldwide. Its performance record has earned the company exclusive Korea wholesale rights for seven Four Seasons properties, alongside partnerships with Jumeirah, Leading Hotels of the World, Kimpton, Anantara, and Belmond.</p>
       </div>
