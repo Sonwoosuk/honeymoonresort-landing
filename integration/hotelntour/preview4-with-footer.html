@@ -12,9 +12,13 @@
 <link rel="stylesheet" type="text/css" href="https://www.hotelntour.co.kr/new_ver/css/componentH.css">
 <link rel="stylesheet" type="text/css" href="https://www.hotelntour.co.kr/new_ver/css/main_new.css">
 <link rel="stylesheet" type="text/css" href="https://www.hotelntour.co.kr/new_ver/css/main_new2.css">
+<link rel="stylesheet" type="text/css" href="https://www.hotelntour.co.kr/new_ver/css/newMainR.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <style>
   /* 미리보기 보정: 푸터 로고 원본(hnt_foot_logo.png)이 1573px라 실제 표시 크기로 축소 */
   #new_footer .f_bottom .f_logo > img{ width:200px; height:auto; }
+  /* 미리보기 보정: 상단 고정 네비가 본문을 가리지 않도록 */
+  body{ overflow-x:hidden; }
 </style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" />
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
@@ -273,8 +277,8 @@
 .safe__badge figure a:hover img{ transform:scale(1.05); }
 .safe__badge span{ font-size:clamp(10px,1vw,12px); font-weight:700; color:var(--ink); text-align:center; line-height:1.35; }
 
-.closing{ padding:clamp(30px,4vw,48px) 0 clamp(48px,7vw,84px); text-align:center; }
-.closing p{ font-size:clamp(14px,1.4vw,17px); font-weight:700; color:var(--ink); letter-spacing:-0.02em; }
+.closing{ min-height:clamp(240px,34vw,360px); padding:clamp(56px,9vw,110px) 0; display:flex; align-items:center; justify-content:center; text-align:center; }
+.closing p{ margin:0 auto; max-width:30ch; font-size:clamp(20px,2.8vw,34px); font-weight:800; color:var(--ink); letter-spacing:-0.035em; line-height:1.5; text-wrap:balance; }
 
 /* ---- 비행기 탑버튼 ---- */
 .fly{
@@ -314,6 +318,68 @@
 </style>
 </head>
 <body>
+
+<!-- ============================================================
+     실제 사이트 header.jsp 렌더링 결과 — 호텔엔투어(hotelntour.co.kr) 기준.
+     배포 시엔 이 블록 대신 <jsp:include page="../layout/header.jsp"/> 가 들어감.
+     로컬 확인용이라 이미지/링크는 전체 URL로.
+============================================================= -->
+<nav class="fixtop">
+<div class="top_banner">
+	<ul class="top_b_wrap">
+		<li class="li_top_b_1">
+			<a href="https://new.honeymoonresort.co.kr/hr/pcexpo.do" target="_blank" class="top_b_1">
+				<img src="https://www.hotelntour.co.kr/new_ver/ban/ban.jpg">
+			</a>
+		</li>
+	</ul>
+</div>
+
+<div class="new_header">
+	<div class="inner">
+		<h1><a href="https://www.hotelntour.co.kr/index.do"><img class="header_logo" src="https://www.hotelntour.co.kr/new_ver/img/new/hnt2_logo.png" alt="호텔엔투어"></a></h1>
+		<ul class="top_menu">
+			<li><a href="https://www.hotelntour.co.kr/board/event.do">이벤트</a></li>
+			<li><a href="http://hnt.honeymoonresort.co.kr:9820/customer/mypage/login">마이페이지</a></li>
+		</ul>
+		<ul class="top_link">
+			<li><a href="https://www.hotelntour.co.kr/board/board_QnA_new.do?flag=5">견적문의</a></li>
+			<li><a href="https://www.hotelntour.co.kr/board/board_review.do?flag=1">여행후기</a></li>
+			<li><a href="https://www.hotelntour.co.kr/board/board_AS_new.do">고객센터</a></li>
+		</ul>
+	</div>
+	<div class="new_navi">
+		<div class="inner">
+			<ul class="new_menu">
+				<li class="total">
+					<a href="javascript:;"><span>전체여행지</span></a>
+					<div class="total_menu">
+						<ul>
+							<li><p class="menu_title"><span>하와이 오아후</span><img src="https://www.hotelntour.co.kr/new_ver/img/new/top_ico01.png" alt=""></p><ul><li><a href="javascript:;">오아후 인기호텔</a></li><li><a href="javascript:;">레지던스&amp;리조트형</a></li><li><a href="javascript:;">럭셔리</a></li><li><a href="javascript:;">와이키키 중심형</a></li></ul></li>
+							<li><p class="menu_title"><span>하와이 이웃섬</span><img src="https://www.hotelntour.co.kr/new_ver/img/new/top_ico02.png" alt=""></p><ul><li><a href="javascript:;">빅아일랜드</a></li><li><a href="javascript:;">마우이</a></li><li><a href="javascript:;">카우아이</a></li><li><a href="javascript:;">라나이</a></li></ul></li>
+							<li><p class="menu_title"><span>몰디브</span><img src="https://www.hotelntour.co.kr/new_ver/img/new/top_ico03.png" alt=""></p><ul><li><a href="javascript:;">스피드보트</a></li><li><a href="javascript:;">수상비행기</a></li><li><a href="javascript:;">국내선</a></li></ul></li>
+							<li><p class="menu_title"><span>발리</span><img src="https://www.hotelntour.co.kr/new_ver/img/new/top_ico04.png" alt=""></p><ul><li><a href="javascript:;">짐바란</a></li><li><a href="javascript:;">울루와뚜</a></li><li><a href="javascript:;">누사두아</a></li><li><a href="javascript:;">스미냑</a></li><li><a href="javascript:;">꾸따/짱구/사누르/기타 지역</a></li><li><a href="javascript:;">우붓</a></li></ul></li>
+							<li><p class="menu_title"><span>유럽</span><img src="https://www.hotelntour.co.kr/new_ver/img/new/top_ico05.png" alt=""></p><ul><li><a href="javascript:;">맞춤여행</a></li></ul></li>
+							<li><p class="menu_title"><span>스페인/포르투갈</span><img src="https://www.hotelntour.co.kr/new_ver/img/new/top_ico06.png" alt=""></p><ul><li><a href="javascript:;">맞춤여행</a></li></ul></li>
+							<li><p class="menu_title"><span>호주</span><img src="https://www.hotelntour.co.kr/new_ver/img/new/top_ico07.png" alt=""></p><ul><li><a href="javascript:;">해밀턴 아일랜드</a></li><li><a href="javascript:;">시드니</a></li><li><a href="javascript:;">멜버른</a></li><li><a href="javascript:;">골드코스트/케언즈</a></li></ul></li>
+							<li><p class="menu_title"><span>테마여행</span><img src="https://www.hotelntour.co.kr/new_ver/img/new/top_ico08.png" alt=""></p><ul><li><a href="javascript:;">키즈전용</a></li><li><a href="javascript:;">골프여행</a></li></ul></li>
+						</ul>
+					</div>
+				</li>
+				<li><a href="javascript:;">하와이 오아후</a></li><li><a href="javascript:;">하와이 이웃섬</a></li><li><a href="javascript:;">몰디브</a></li><li><a href="javascript:;">발리</a></li><li><a href="javascript:;">유럽</a></li><li><a href="javascript:;">스페인/포르투갈</a></li><li><a href="javascript:;">호주</a></li><li><a href="javascript:;">테마여행</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+</nav>
+<script>
+/* 미리보기용: 전체여행지 드롭다운 (실제 사이트 company.jsp 의 스니펫과 동일) */
+jQuery(function($){
+	$(".total").on("mouseenter", function(){ $(this).children(".total_menu").show(); });
+	$(".total").on("mouseleave", function(){ $(this).children(".total_menu").hide(); });
+});
+</script>
+
 <div class="pg">
 
   <div class="wrap">
