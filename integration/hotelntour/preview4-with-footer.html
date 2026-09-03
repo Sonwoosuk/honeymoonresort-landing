@@ -15,9 +15,18 @@
 <link rel="stylesheet" type="text/css" href="https://www.hotelntour.co.kr/new_ver/css/newMainR.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <style>
-  /* 미리보기 보정: 푸터 로고 원본(hnt_foot_logo.png)이 1573px라 실제 표시 크기로 축소 */
+  /* ===== 미리보기 전용 보정 ===== */
+  /* 1) 실제 사이트 헤더는 position:sticky 라 스크롤 내내 본문 위를 덮음 → 미리보기에선 고정 해제(그냥 위에 얹힘) */
+  nav.fixtop{ position:static !important; width:auto !important; }
+  /* 2) newMainR.css 가 좁은 화면에서 nav/footer 를 1400px 로 강제 → 가로 잘림. 화면폭 따라가게 되돌림 */
+  #new_footer{ width:auto !important; min-width:0 !important; }
+  #new_footer .inner{ max-width:1220px; }
+  @media (max-width:1259px){
+    nav.fixtop, #new_footer{ width:auto !important; }
+    #fp{ margin-left:0 !important; }
+  }
+  /* 3) 푸터 로고 원본(hnt_foot_logo.png)이 1573px라 실제 표시 크기로 축소 */
   #new_footer .f_bottom .f_logo > img{ width:200px; height:auto; }
-  /* 미리보기 보정: 상단 고정 네비가 본문을 가리지 않도록 */
   body{ overflow-x:hidden; }
 </style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" />
