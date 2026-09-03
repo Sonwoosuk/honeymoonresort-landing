@@ -93,18 +93,12 @@
   color:var(--ink);
 }
 
-/* 히어로 로고 마스크 : 호텔엔투어 로고 모양 안에 여행지 사진 */
-.hero__logomask{
-  position:relative;
-  margin:clamp(20px,3.4vw,44px) auto clamp(4px,1vw,12px);
-  width:min(100%,1180px);
-  aspect-ratio:1500 / 402;
-  background:var(--ink);
-  -webkit-mask:url(../../assets/htn-logo/htn-logo-kr-white.png) center/contain no-repeat;
-          mask:url(../../assets/htn-logo/htn-logo-kr-white.png) center/contain no-repeat;
+/* 히어로 로고 : 호텔엔투어 브랜드 로고 (넉넉한 상하 여백) */
+.hero__logo{
+  margin:clamp(52px,9vw,104px) auto clamp(52px,9vw,104px);
+  width:min(74%,600px);
 }
-.hero__logomask img{ width:100%; height:100%; object-fit:cover; }
-.hero__logomask::after{ content:""; position:absolute; inset:0; background:rgba(18,18,18,.22); }
+.hero__logo img{ width:100%; height:auto; }
 
 /* ---- 히어로 → 본문 사이 끊어주는 요소 ---- */
 .breather{ padding:clamp(60px,10vw,132px) var(--gutter); text-align:center; }
@@ -323,8 +317,8 @@
       </div>
     </div>
 
-    <h1 class="hero__logomask" aria-label="호텔엔투어">
-      <img src="../../assets/hero-main.jpg" alt="">
+    <h1 class="hero__logo" aria-label="호텔엔투어">
+      <img src="../../assets/htn-logo/htn-logo-kr.png" alt="호텔엔투어">
     </h1>
   </div>
 
