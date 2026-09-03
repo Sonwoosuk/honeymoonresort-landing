@@ -3,9 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>호텔엔투어 소개 · 시안 4</title>
+<title>호텔엔투어 소개 · 시안 4 (+ 실제 푸터)</title>
 <link rel="stylesheet" as="style" crossorigin
   href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+<!-- ▼ 실제 사이트 footer.jsp 스타일용 (hotelntour = hotelntour.co.kr 자산). 로컬 미리보기 전용 -->
+<link rel="stylesheet" type="text/css" href="https://www.hotelntour.co.kr/new_ver/css/default.css">
+<link rel="stylesheet" type="text/css" href="https://www.hotelntour.co.kr/new_ver/css/component.css">
+<link rel="stylesheet" type="text/css" href="https://www.hotelntour.co.kr/new_ver/css/componentH.css">
+<link rel="stylesheet" type="text/css" href="https://www.hotelntour.co.kr/new_ver/css/main_new.css">
+<link rel="stylesheet" type="text/css" href="https://www.hotelntour.co.kr/new_ver/css/main_new2.css">
+<link rel="stylesheet" type="text/css" href="https://www.hotelntour.co.kr/new_ver/css/newMainR.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<style>
+  /* ===== 미리보기 전용 보정 ===== */
+  /* 1) 실제 사이트 헤더는 position:sticky 라 스크롤 내내 본문 위를 덮음 → 미리보기에선 고정 해제(그냥 위에 얹힘) */
+  nav.fixtop{ position:static !important; width:auto !important; }
+  /* 2) newMainR.css 가 좁은 화면에서 nav/footer 를 1400px 로 강제 → 가로 잘림. 화면폭 따라가게 되돌림 */
+  #new_footer{ width:auto !important; min-width:0 !important; }
+  #new_footer .inner{ max-width:1220px; }
+  @media (max-width:1259px){
+    nav.fixtop, #new_footer{ width:auto !important; }
+    #fp{ margin-left:0 !important; }
+  }
+  /* 3) 푸터 로고 원본(hnt_foot_logo.png)이 1573px라 실제 표시 크기로 축소 */
+  #new_footer .f_bottom .f_logo > img{ width:200px; height:auto; }
+  body{ overflow-x:hidden; }
+</style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" />
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
 <style>
@@ -55,12 +78,17 @@
 .hero__strip{
   position:relative;
   height:clamp(112px,15vw,200px);
+  transition:opacity .4s ease;
 }
 .hero__strip-media{ position:absolute; inset:0; overflow:hidden; background:#20303a; }
-.hero__strip-media img{ width:100%; height:100%; object-fit:cover; }
+.hero__strip-media img{
+  width:100%; height:100%; object-fit:cover;
+  transition:transform .6s cubic-bezier(.22,.61,.36,1);
+}
 .hero__strip-media::after{
   content:""; position:absolute; inset:0;
   background:linear-gradient(90deg, rgba(10,14,18,.62), rgba(10,14,18,.08) 60%);
+  transition:opacity .4s ease;
 }
 .hero__strip b{
   position:absolute; z-index:2; left:clamp(18px,4vw,56px);
@@ -69,12 +97,60 @@
   text-transform:uppercase;
   color:var(--white);
   text-shadow:0 2px 18px rgba(8,12,16,.5);
+  transition:transform .4s cubic-bezier(.22,.61,.36,1), letter-spacing .4s ease;
+}
+/* 4컷 호버 : 올린 컷은 확대·선명, 나머지는 살짝 흐리게 */
+.hero__strips:hover .hero__strip{ opacity:.5; }
+.hero__strips:hover .hero__strip:hover{ opacity:1; }
+.hero__strip:hover .hero__strip-media img{ transform:scale(1.08); }
+.hero__strip:hover .hero__strip-media::after{ opacity:.45; }
+.hero__strip:hover b{ transform:translateY(-6px); letter-spacing:0.01em; }
+@media (prefers-reduced-motion:reduce){
+  .hero__strip,.hero__strip-media img,.hero__strip-media::after,.hero__strip b{ transition:none; }
+  .hero__strip:hover .hero__strip-media img{ transform:none; }
 }
 .hero__tagline{
-  margin:0 0 clamp(16px,2.4vw,28px);
+  margin:0 0 clamp(14px,2vw,22px);
   text-align:center;
   font-size:clamp(24px,4.4vw,52px); font-weight:800; letter-spacing:-0.04em; line-height:1.18;
   color:var(--ink);
+}
+
+/* 히어로 로고 마스크 : 로고 글자 모양 안에 여행지 사진 (SVG 마스크 — 안정적으로 렌더) */
+.hero__logomask{
+  display:block;
+  margin:clamp(88px,13vw,168px) auto clamp(56px,9vw,112px);
+  width:min(78%,820px);
+  aspect-ratio:1500 / 402;
+}
+.hero__logomask image{ display:block; }
+
+/* ---- 히어로 → 본문 사이 끊어주는 요소 ---- */
+.breather{ padding:clamp(60px,10vw,132px) var(--gutter); text-align:center; }
+.breather__kicker{
+  max-width:20ch; margin:0 auto;
+  font-size:clamp(21px,3.4vw,34px); font-weight:800; letter-spacing:-0.035em; line-height:1.38;
+  color:var(--ink);
+}
+.breather__kicker b{ color:#a5330b; font-weight:800; }
+.breather__cue{
+  position:relative; width:2px; height:clamp(48px,7vw,74px);
+  margin:clamp(26px,4.4vw,46px) auto 0;
+  background:rgba(25,25,25,.16); overflow:hidden;
+}
+.breather__cue::after{
+  content:""; position:absolute; left:0; top:0; width:100%; height:42%;
+  background:var(--ink); border-radius:2px;
+  animation:cue-drop 2.3s cubic-bezier(.5,0,.5,1) infinite;
+}
+@keyframes cue-drop{
+  0%{ transform:translateY(-110%); opacity:0; }
+  25%{ opacity:1; }
+  75%{ opacity:1; }
+  100%{ transform:translateY(360%); opacity:0; }
+}
+@media (prefers-reduced-motion:reduce){
+  .breather__cue::after{ animation:none; height:100%; opacity:.4; }
 }
 
 /* ---- 마퀴 ---- */
@@ -89,6 +165,7 @@
 .mq__set span::after{
   content:"✈"; color:var(--white); font-weight:400; font-size:0.9em;
   margin:0 clamp(18px,2.6vw,30px); line-height:1;
+  display:inline-block; transform:scaleX(-1);
 }
 @keyframes mq{ from{transform:translateX(0)} to{transform:translateX(-50%)} }
 @media (prefers-reduced-motion:reduce){ .mq__row{ animation:none; flex-wrap:wrap; } .mq__set:nth-child(2){ display:none; } }
@@ -114,7 +191,7 @@
 /* ---- 이런 여행을 설계합니다 ---- */
 .aud__stage{ position:relative; margin-top:clamp(24px,3.6vw,44px); }
 .aud__photo{ border-radius:var(--radius); overflow:hidden; aspect-ratio:16/8; background:#3a4a44; }
-.aud__photo img{ width:100%; height:100%; object-fit:cover; }
+.aud__photo img,.aud__photo video{ width:100%; height:100%; object-fit:cover; display:block; }
 .aud__cards{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(10px,1.4vw,16px); margin-top:clamp(-60px,-6vw,-32px); padding:0 clamp(8px,2vw,28px); position:relative; z-index:2; }
 .aud__card{ background:var(--white); border-radius:clamp(14px,1.8vw,20px); padding:clamp(16px,2vw,24px); display:flex; flex-direction:column; gap:8px; box-shadow:0 20px 40px rgba(60,40,0,.14); }
 .aud__card:nth-child(2){ background:var(--yellow-soft); }
@@ -209,8 +286,8 @@
 .safe__badge figure a:hover img{ transform:scale(1.05); }
 .safe__badge span{ font-size:clamp(10px,1vw,12px); font-weight:700; color:var(--ink); text-align:center; line-height:1.35; }
 
-.closing{ padding:clamp(30px,4vw,48px) 0 clamp(48px,7vw,84px); text-align:center; }
-.closing p{ font-size:clamp(14px,1.4vw,17px); font-weight:700; color:var(--ink); letter-spacing:-0.02em; }
+.closing{ min-height:clamp(240px,34vw,360px); padding:clamp(56px,9vw,110px) 0; display:flex; align-items:center; justify-content:center; text-align:center; }
+.closing p{ margin:0 auto; max-width:30ch; font-size:clamp(20px,2.8vw,34px); font-weight:800; color:var(--ink); letter-spacing:-0.035em; line-height:1.5; text-wrap:balance; }
 
 /* ---- 비행기 탑버튼 ---- */
 .fly{
@@ -250,15 +327,148 @@
 </style>
 </head>
 <body>
+
+<!-- ============================================================
+     실제 사이트 header.jsp 렌더링 결과 — 호텔엔투어(hotelntour.co.kr) 기준.
+     배포 시엔 이 블록 대신 <jsp:include page="../layout/header.jsp"/> 가 들어감.
+     로컬 확인용이라 이미지/링크는 전체 URL로.
+============================================================= -->
+<nav class="fixtop">
+<div class="top_banner">
+	<ul class="top_b_wrap">
+		<li class="li_top_b_1">
+			<a href="https://new.honeymoonresort.co.kr/hr/pcexpo.do" target="_blank" class="top_b_1">
+				<img src="https://www.hotelntour.co.kr/new_ver/ban/ban.jpg">
+			</a>
+		</li>
+	</ul>
+</div>
+
+<div class="new_header">
+	<div class="inner">
+		<h1><a href="https://www.hotelntour.co.kr/index.do"><img class="header_logo" src="https://www.hotelntour.co.kr/new_ver/img/new/hnt2_logo.png" alt="호텔엔투어"></a></h1>
+		<ul class="top_menu">
+			<li><a href="https://www.hotelntour.co.kr/board/event.do">이벤트</a></li>
+			<li><a href="http://hnt.honeymoonresort.co.kr:9820/customer/mypage/login">마이페이지</a></li>
+		</ul>
+		<ul class="top_link">
+			<li><a href="https://www.hotelntour.co.kr/board/board_QnA_new.do?flag=5">견적문의</a></li>
+			<li><a href="https://www.hotelntour.co.kr/board/board_review.do?flag=1">여행후기</a></li>
+			<li><a href="https://www.hotelntour.co.kr/board/board_AS_new.do">고객센터</a></li>
+		</ul>
+	</div>
+	<div class="new_navi">
+		<div class="inner">
+			<ul class="new_menu">
+				<li class="total">
+					<a href="javascript:;"><span>전체여행지</span></a>
+					<div class="total_menu">
+						<ul>
+							<li><p class="menu_title"><span>하와이 오아후</span><img src="https://www.hotelntour.co.kr/new_ver/img/new/top_ico01.png" alt=""></p><ul><li><a href="javascript:;">오아후 인기호텔</a></li><li><a href="javascript:;">레지던스&amp;리조트형</a></li><li><a href="javascript:;">럭셔리</a></li><li><a href="javascript:;">와이키키 중심형</a></li></ul></li>
+							<li><p class="menu_title"><span>하와이 이웃섬</span><img src="https://www.hotelntour.co.kr/new_ver/img/new/top_ico02.png" alt=""></p><ul><li><a href="javascript:;">빅아일랜드</a></li><li><a href="javascript:;">마우이</a></li><li><a href="javascript:;">카우아이</a></li><li><a href="javascript:;">라나이</a></li></ul></li>
+							<li><p class="menu_title"><span>몰디브</span><img src="https://www.hotelntour.co.kr/new_ver/img/new/top_ico03.png" alt=""></p><ul><li><a href="javascript:;">스피드보트</a></li><li><a href="javascript:;">수상비행기</a></li><li><a href="javascript:;">국내선</a></li></ul></li>
+							<li><p class="menu_title"><span>발리</span><img src="https://www.hotelntour.co.kr/new_ver/img/new/top_ico04.png" alt=""></p><ul><li><a href="javascript:;">짐바란</a></li><li><a href="javascript:;">울루와뚜</a></li><li><a href="javascript:;">누사두아</a></li><li><a href="javascript:;">스미냑</a></li><li><a href="javascript:;">꾸따/짱구/사누르/기타 지역</a></li><li><a href="javascript:;">우붓</a></li></ul></li>
+							<li><p class="menu_title"><span>유럽</span><img src="https://www.hotelntour.co.kr/new_ver/img/new/top_ico05.png" alt=""></p><ul><li><a href="javascript:;">맞춤여행</a></li></ul></li>
+							<li><p class="menu_title"><span>스페인/포르투갈</span><img src="https://www.hotelntour.co.kr/new_ver/img/new/top_ico06.png" alt=""></p><ul><li><a href="javascript:;">맞춤여행</a></li></ul></li>
+							<li><p class="menu_title"><span>호주</span><img src="https://www.hotelntour.co.kr/new_ver/img/new/top_ico07.png" alt=""></p><ul><li><a href="javascript:;">해밀턴 아일랜드</a></li><li><a href="javascript:;">시드니</a></li><li><a href="javascript:;">멜버른</a></li><li><a href="javascript:;">골드코스트/케언즈</a></li></ul></li>
+							<li><p class="menu_title"><span>테마여행</span><img src="https://www.hotelntour.co.kr/new_ver/img/new/top_ico08.png" alt=""></p><ul><li><a href="javascript:;">키즈전용</a></li><li><a href="javascript:;">골프여행</a></li></ul></li>
+						</ul>
+					</div>
+				</li>
+				<li><a href="javascript:;">하와이 오아후</a></li><li><a href="javascript:;">하와이 이웃섬</a></li><li><a href="javascript:;">몰디브</a></li><li><a href="javascript:;">발리</a></li><li><a href="javascript:;">유럽</a></li><li><a href="javascript:;">스페인/포르투갈</a></li><li><a href="javascript:;">호주</a></li><li><a href="javascript:;">테마여행</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+</nav>
+<script>
+/* 미리보기용: 전체여행지 드롭다운 (실제 사이트 company.jsp 의 스니펫과 동일) */
+jQuery(function($){
+	$(".total").on("mouseenter", function(){ $(this).children(".total_menu").show(); });
+	$(".total").on("mouseleave", function(){ $(this).children(".total_menu").hide(); });
+});
+</script>
+
 <div class="pg">
 
   <div class="wrap">
-    <!-- 히어로 : 4분할 밴드 -->
+    <!-- 히어로 : 태그라인 → 마퀴 → 로고 마스크 이미지 -->
     <section class="hero">
-      <h1 class="hero__tagline">가족을 위한 1:1 맞춤 자유여행</h1>
+      <p class="hero__tagline">가족을 위한 1:1 맞춤 자유여행</p>
+    </section>
+
+    <div class="mq" aria-hidden="true">
+      <div class="mq__row">
+        <div class="mq__set"><span>하와이 — 맞춤형 알로하 라이프의 경험</span><span>몰디브 — 에메랄드빛 바다 위 프라이빗 휴양</span><span>발리 — 휴양과 액티비티가 공존하는 여행의 천국</span><span>유럽 — 내 맘대로 그리는 예술 같은 여정</span></div>
+        <div class="mq__set"><span>하와이 — 맞춤형 알로하 라이프의 경험</span><span>몰디브 — 에메랄드빛 바다 위 프라이빗 휴양</span><span>발리 — 휴양과 액티비티가 공존하는 여행의 천국</span><span>유럽 — 내 맘대로 그리는 예술 같은 여정</span></div>
+      </div>
+    </div>
+
+    <h1 style="margin:0">
+      <svg class="hero__logomask" viewBox="0 0 1500 402" role="img" aria-label="호텔엔투어">
+        <defs>
+          <mask id="htnLogoMask" maskUnits="userSpaceOnUse" x="0" y="0" width="1500" height="402">
+            <image href="../../assets/htn-logo/htn-logo-kr-white.png" xlink:href="../../assets/htn-logo/htn-logo-kr-white.png" width="1500" height="402"></image>
+          </mask>
+        </defs>
+        <g mask="url(#htnLogoMask)">
+          <image href="../../assets/hero-main.jpg" xlink:href="../../assets/hero-main.jpg" width="1500" height="402" preserveAspectRatio="xMidYMid slice"></image>
+          <rect width="1500" height="402" fill="#121212" opacity="0.34"></rect>
+        </g>
+      </svg>
+    </h1>
+  </div>
+
+  <!-- 끊어주는 요소 -->
+  <section class="breather">
+    <p class="breather__kicker">가족의 여행, <b>그 시작과 끝</b>을 함께 설계합니다</p>
+    <div class="breather__cue" aria-hidden="true"></div>
+  </section>
+
+  <!-- 어떤 여행사인가요 -->
+  <section class="sec">
+    <div class="wrap">
+      <h2 class="sec__h">호텔엔투어는 어떤 여행사인가요?</h2>
+      <p class="sec__tag">럭셔리 하이엔드 호텔 &amp; 리조트와 함께하는<br>1:1 맞춤 자유여행의 새로운 기준</p>
+      <p class="sec__lead">오직 당신만을 위해 설계된 특별하고 안전한 자유여행 일정을 찾고 계신가요? 호텔엔투어(Hotel N Tour)는 하와이, 몰디브, 발리, 유럽 여행 전문 컨설턴트들이 고객의 취향과 라이프스타일을 100% 반영하여 디자인하는 <b>1:1 맞춤 자유 여행 전문 브랜드</b>입니다. 모회사 허니문리조트의 글로벌 호텔·리조트 네트워크를 기반으로 전 세계 유명 인터내셔널 럭셔리 &amp; 하이엔드 호텔, 리조트들과의 <b>B2B 직계약</b>을 통해 거품을 뺀 가장 합리적인 가격과 차별화된 혜택을 선사합니다. 특히 3대 가족여행, 아이 동반 가족여행, 부모님 동반 가족여행, 우정여행, 프라이빗 투어, 골프여행, 태교여행, 베이비문, 신혼여행 등 고객의 목적과 취향에 맞춘 <b>무료 1:1 맞춤 여행플래닝</b>을 제안합니다.</p>
+
+      <div class="asks">
+        <article class="ask ask--l">
+          <span class="ask__av"><img src="../../assets/htn-logo/htn-mark.png" alt=""></span>
+          <div class="ask__bubble"><p>온라인 정보만으로는 리조트 분위기, 객실 조건, 항공 일정까지 비교하기 어렵지 않으셨나요?</p></div>
+        </article>
+        <article class="ask ask--r">
+          <div class="ask__bubble"><p>아이 동반 시 아동 1인 무료인지 2인 무료인지, 올인클루시브인지 하프보드인지 — 리조트마다 다른 혜택을 알기 어렵습니다.</p></div>
+        </article>
+        <article class="ask ask--l">
+          <span class="ask__av"><img src="../../assets/htn-logo/htn-mark.png" alt=""></span>
+          <div class="ask__bubble"><p>정해진 패키지 일정을 그대로 따라가는 여행이 우리 가족에겐 답답하게 느껴지셨나요?</p></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 이런 여행을 설계합니다 -->
+  <section class="sec">
+    <div class="wrap">
+      <h2 class="sec__h">이런 여행을 설계합니다</h2>
+      <div class="aud__stage">
+        <figure class="aud__photo"><video class="aud__video" src="../../assets/video/0901.mp4" muted loop playsinline preload="metadata" aria-label="가족이 함께 떠나는 여행"></video></figure>
+        <div class="aud__cards">
+          <article class="aud__card"><h3>가족여행</h3><p>3대 가족여행, 아이 동반 · 부모님 동반 가족여행까지 구성과 일정에 맞춰 설계합니다.</p></article>
+          <article class="aud__card"><h3>럭셔리 자유여행</h3><p>전 세계 하이엔드 호텔·리조트와의 B2B 직계약 기반, 거품을 뺀 특가와 혜택을 제안합니다.</p></article>
+          <article class="aud__card"><h3>목적여행</h3><p>골프여행, 태교여행, 베이비문, 우정여행, 프라이빗 투어, 신혼여행 등 목적에 맞춘 플래닝.</p></article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4분할 여행지 밴드 -->
+  <section class="sec">
+    <div class="wrap">
       <div class="hero__strips">
         <span class="hero__strip">
-          <span class="hero__strip-media"><img src="../assets/htn-hero/hawaii.jpg" alt="하와이"></span>
+          <span class="hero__strip-media"><img src="../../assets/htn-hero/hawaii.jpg" alt="하와이"></span>
           <b>Hawaii</b>
         </span>
         <span class="hero__strip">
@@ -273,51 +483,6 @@
           <span class="hero__strip-media"><img src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/destinations/europe.jpg" alt="유럽"></span>
           <b>Europe</b>
         </span>
-      </div>
-    </section>
-
-    <div class="mq" aria-hidden="true">
-      <div class="mq__row">
-        <div class="mq__set"><span>하와이 — 맞춤형 알로하 라이프의 경험</span><span>몰디브 — 에메랄드빛 바다 위 프라이빗 휴양</span><span>발리 — 휴양과 액티비티가 공존하는 여행의 천국</span><span>유럽 — 내 맘대로 그리는 예술 같은 여정</span></div>
-        <div class="mq__set"><span>하와이 — 맞춤형 알로하 라이프의 경험</span><span>몰디브 — 에메랄드빛 바다 위 프라이빗 휴양</span><span>발리 — 휴양과 액티비티가 공존하는 여행의 천국</span><span>유럽 — 내 맘대로 그리는 예술 같은 여정</span></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 어떤 여행사인가요 -->
-  <section class="sec">
-    <div class="wrap">
-      <h2 class="sec__h">호텔엔투어는 어떤 여행사인가요?</h2>
-      <p class="sec__tag">럭셔리 하이엔드 호텔 &amp; 리조트와 함께하는<br>1:1 맞춤 자유여행의 새로운 기준</p>
-      <p class="sec__lead">오직 당신만을 위해 설계된 특별하고 안전한 자유여행 일정을 찾고 계신가요? 호텔엔투어(Hotel N Tour)는 하와이, 몰디브, 발리, 유럽 여행 전문 컨설턴트들이 고객의 취향과 라이프스타일을 100% 반영하여 디자인하는 <b>1:1 맞춤 자유 여행 전문 브랜드</b>입니다. 모회사 허니문리조트의 글로벌 호텔·리조트 네트워크를 기반으로 전 세계 유명 인터내셔널 럭셔리 &amp; 하이엔드 호텔, 리조트들과의 <b>B2B 직계약</b>을 통해 거품을 뺀 가장 합리적인 가격과 차별화된 혜택을 선사합니다. 특히 3대 가족여행, 아이 동반 가족여행, 부모님 동반 가족여행, 우정여행, 프라이빗 투어, 골프여행, 태교여행, 베이비문, 신혼여행 등 고객의 목적과 취향에 맞춘 <b>무료 1:1 맞춤 여행플래닝</b>을 제안합니다.</p>
-
-      <div class="asks">
-        <article class="ask ask--l">
-          <span class="ask__av"><img src="../assets/htn-logo/htn-mark.png" alt=""></span>
-          <div class="ask__bubble"><p>온라인 정보만으로는 리조트 분위기, 객실 조건, 항공 일정까지 비교하기 어렵지 않으셨나요?</p></div>
-        </article>
-        <article class="ask ask--r">
-          <div class="ask__bubble"><p>아이 동반 시 아동 1인 무료인지 2인 무료인지, 올인클루시브인지 하프보드인지 — 리조트마다 다른 혜택을 알기 어렵습니다.</p></div>
-        </article>
-        <article class="ask ask--l">
-          <span class="ask__av"><img src="../assets/htn-logo/htn-mark.png" alt=""></span>
-          <div class="ask__bubble"><p>정해진 패키지 일정을 그대로 따라가는 여행이 우리 가족에겐 답답하게 느껴지셨나요?</p></div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- 이런 여행을 설계합니다 -->
-  <section class="sec">
-    <div class="wrap">
-      <h2 class="sec__h">이런 여행을 설계합니다</h2>
-      <div class="aud__stage">
-        <figure class="aud__photo"><img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1600&q=80" alt="가족이 함께 떠나는 여행"></figure>
-        <div class="aud__cards">
-          <article class="aud__card"><h3>가족여행</h3><p>3대 가족여행, 아이 동반 · 부모님 동반 가족여행까지 구성과 일정에 맞춰 설계합니다.</p></article>
-          <article class="aud__card"><h3>럭셔리 자유여행</h3><p>전 세계 하이엔드 호텔·리조트와의 B2B 직계약 기반, 거품을 뺀 특가와 혜택을 제안합니다.</p></article>
-          <article class="aud__card"><h3>목적여행</h3><p>골프여행, 태교여행, 베이비문, 우정여행, 프라이빗 투어, 신혼여행 등 목적에 맞춘 플래닝.</p></article>
-        </div>
       </div>
     </div>
   </section>
@@ -499,11 +664,11 @@
       <div class="celeb__grid">
         <div class="celeb__card"><figure><img src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/celeb/kimgaeun-yoonsunwoo.jpg" alt=""></figure><p>김가은 · 윤선우</p></div>
         <div class="celeb__card"><figure><img src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/celeb/parkhyunho-eungaeun.jpg" alt=""></figure><p>은가은 · 박현호</p></div>
-        <div class="celeb__card"><figure><img src="../assets/celeb/simhyungtak-saya-htn.jpg" alt="심형탁 · 사야"></figure><p>심형탁 · 사야</p></div>
-        <div class="celeb__card"><figure><img src="../assets/celeb/kimkiri-moonjiin-htn.jpg" alt="김기리 · 문지인"></figure><p>김기리 · 문지인</p></div>
+        <div class="celeb__card"><figure><img src="../../assets/celeb/simhyungtak-saya-htn.jpg" alt="심형탁 · 사야"></figure><p>심형탁 · 사야</p></div>
+        <div class="celeb__card"><figure><img src="../../assets/celeb/kimkiri-moonjiin-htn.jpg" alt="김기리 · 문지인"></figure><p>김기리 · 문지인</p></div>
         <div class="celeb__card"><figure><img src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/celeb/aeley-choisihoon.jpg" alt=""></figure><p>에일리 · 최시훈</p></div>
         <div class="celeb__card"><figure><img src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/celeb/chanmi-songeuihwan.jpg" alt=""></figure><p>AOA찬미(임도화) · 송의환</p></div>
-        <div class="celeb__card"><figure><img src="../assets/celeb/cheondung-mimi-htn.jpg" alt="천둥 · 미미"></figure><p>천둥 · 미미</p></div>
+        <div class="celeb__card"><figure><img src="../../assets/celeb/cheondung-mimi-htn.jpg" alt="천둥 · 미미"></figure><p>천둥 · 미미</p></div>
         <div class="celeb__card"><figure><img src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/celeb/daniel-lindemann.jpg" alt=""></figure><p>다니엘 린데만 부부</p></div>
       </div>
     </div>
@@ -533,6 +698,52 @@
   </button>
 </div>
 
+<!-- ============================================================
+     실제 사이트 footer.jsp 렌더링 결과 — 호텔엔투어(hotelntour.co.kr) 기준.
+     배포 시엔 이 블록 대신 <jsp:include page="../layout/footer.jsp"/> 가 들어감.
+     로컬 확인용이라 링크/이미지는 전체 URL로 원격 로드.
+============================================================= -->
+<footer id="new_footer">
+    <div class="f_top">
+        <div class="inner">
+            <ul class="f_link">
+                <li><a href="https://www.hotelntour.co.kr/company/company.do">회사소개</a></li>
+                <li><a href="https://www.hotelntour.co.kr/company/history.do">회사연혁</a></li>
+                <li><a href="https://www.hotelntour.co.kr/company/location.do">찾아오시는 길</a></li>
+                <li><a href="https://www.hotelntour.co.kr/company/terms_travel.do">여행약관</a></li>
+                <li><a href="https://www.hotelntour.co.kr/company/terms_use.do">이용안내</a></li>
+                <li><a href="https://www.hotelntour.co.kr/company/terms_personal.do">개인정보처리방침</a></li>
+            </ul>
+            <ul class="f_sns">
+                <li class="ico01"><a href="https://pf.kakao.com/_xkxonJb" target="_blank">kakao</a></li>
+                <li class="ico02"><a href="https://www.instagram.com/hotelntour" target="_blank">instagram</a></li>
+                <li class="ico03"><a href="https://www.youtube.com/channel/UCJWVy7OibcGP2dsni2t8_qw" target="_blank">youtube</a></li>
+                <li class="ico04"><a href="https://ko-kr.facebook.com/hotelntour" target="_blank">facebook</a></li>
+                <li class="ico05"><a href="https://blog.naver.com/hotel-tour" target="_blank">blog</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="f_bottom">
+        <div class="inner">
+            <address>
+                (06070) 서울시 강남구 도산대로 506, 2층(청담동, 재정빌딩) (주)호텔엔투어<br>
+                고객센터 : 02.6259.6000 | 팩스 : 02.6007.1532 | 사업자 등록번호 : 762-88-00877 | 대표 : 유태선 | 통신신고번호 : 제2018-서울강남-01061호
+            </address>
+            <div class="f_logo">
+                <img src="https://www.hotelntour.co.kr/new_ver/img/new/hnt_foot_logo.png" alt="호텔엔투어">
+                <div class="f_button">
+                    <div id="admin" style="margin-right: 10px;">
+                        <a href="https://www.hotelntour.co.kr/Admin/login.do">ADMIN</a>
+                    </div>
+                    <div id="mobile">
+                        <a href="https://www.hotelntour.co.kr/m/index.do">모바일 화면보기</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
 <script>
 (function(){
   var fly = document.querySelector('.fly'), de = document.documentElement;
@@ -545,6 +756,23 @@
   window.addEventListener('resize', update);
   update();
   fly.addEventListener('click', function(){ window.scrollTo({ top:0, behavior:'smooth' }); });
+
+  /* 스크롤 도착 시 '이런 여행을 설계합니다' 영상 자동재생 (화면 밖이면 일시정지) */
+  var vid = document.querySelector('.aud__video');
+  if (vid) {
+    if (!('IntersectionObserver' in window)) {
+      var kick = function(){ vid.play().catch(function(){}); };
+      vid.addEventListener('canplay', kick, { once:true });
+      kick();
+    } else {
+      new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if (e.isIntersecting) { vid.play().catch(function(){}); }
+          else { vid.pause(); }
+        });
+      }, { threshold: 0.4 }).observe(vid);
+    }
+  }
 
   /* 스크롤 등장 애니메이션 */
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
