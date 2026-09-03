@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>K-웨딩 톤 · 관광청 &amp; 셀러브리티 섹션 시안</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Aboreto&family=Cormorant+Garamond:ital@1&family=Noto+Sans+KR:wght@300;400;500;700&display=swap">
+
+<style>
+/* =========================================================================
+   DEMO CHROME  ── 미리보기용. 실제 이식할 때는 이 블록은 빼세요.
+   ========================================================================= */
+:root { color-scheme: light; }
+body{
+  margin:0;
+  background:#EDEBEB;
+  font-family:"Noto Sans KR", system-ui, sans-serif;
+  color:#473429;
+}
+.demo-bar{
+  padding:18px clamp(20px,5vw,40px);
+  border-bottom:1px solid rgba(71,52,41,.16);
+  background:#fff;
+  display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 14px;
+}
+.demo-bar strong{
+  font-family:"Aboreto", serif;
+  font-weight:400; letter-spacing:.14em; text-transform:uppercase;
+  font-size:13px;
+}
+.demo-bar span{ font-size:12px; color:#8B7E76; letter-spacing:.01em; }
+
+/* =========================================================================
+   K-WEDDING TONE  ── 관광청 / 셀러브리티 섹션 이식용 스타일
+   -------------------------------------------------------------------------
+   · 모든 값은 k-wedding.co.kr 의 실제 토큰(common.css / reset.css)에서 가져옴
+       --primary : #463429        (본문·브랜드 브라운)
+       #wrap bg  : #EDEBEB        (섹션 바탕)
+       카드      : #fff / 직각 모서리 / 얇은 브라운 헤어라인, 그림자 없음
+       라벨/연도 : Aboreto 대문자 + 자간
+       본문 폰트 : ff-good-web-pro (여기선 Noto Sans KR 로 대체)
+   · .kw 로 스코프를 감쌌으므로 host 사이트의 기존 클래스와 충돌하지 않음.
+   · k-wedding CSS 변수(--primary 등)가 있으면 자동으로 그 값을 쓰고,
+     없으면 괄호 안 폴백 값을 씀 → 그대로 붙여넣어도 동작.
+   ========================================================================= */
+.kw{
+  --kw-ink:        var(--primary, #473429);
+  --kw-bg:         #EDEBEB;
+  --kw-surface:    #ffffff;
+  --kw-surface-2:  #F6F5F5;
+  --kw-tint:       #F9E8DB;                 /* 따뜻한 샌드 – 배지 */
+  --kw-line:       rgba(71,52,41,.16);      /* 헤어라인 */
+  --kw-line-2:     rgba(71,52,41,.30);      /* 구분선(진하게) – k-wedding 실제 값 */
+  --kw-muted:      #8B7E76;                 /* 브라운 계열 보조 텍스트 */
+
+  --kw-display: var(--ff-aboreto, "Aboreto"), "Cormorant Garamond", serif;
+  --kw-serif:   var(--ff-parlare, "Cormorant Garamond"), "Nanum Myeongjo", serif;
+  --kw-body:    var(--ff-goodpro, "ff-good-web-pro"), "Noto Sans KR", system-ui, -apple-system, sans-serif;
+
+  font-family:var(--kw-body);
+  color:var(--kw-ink);
+  -webkit-font-smoothing:antialiased;
+  word-break:keep-all;
+}
+.kw *{ box-sizing:border-box; }
+
+/* ── 섹션 셸 ─────────────────────────────────────────────── */
+.kw .verified,
+.kw .celeb{
+  width:100%;
+  background:var(--kw-bg);
+  padding:clamp(72px,10vw,112px) 0;
+}
+.kw .verified__inner,
+.kw .celeb__inner{
+  max-width:1120px;
+  margin:0 auto;
+  padding:0 clamp(20px,5vw,40px);
+}
+
+/* ── 공통 타이틀 / 문단 ──────────────────────────────────── */
+.kw .section-title{
+  margin:0 0 20px;
+  padding-bottom:20px;
+  position:relative;
+  text-align:center;
+  font-family:var(--kw-body);
+  font-weight:500;
+  font-size:clamp(23px,3vw,33px);
+  line-height:1.45;
+  letter-spacing:-.01em;
+  color:var(--kw-ink);
+  text-wrap:balance;
+}
+.kw .section-title::after{         /* K-웨딩식 짧은 헤어라인 */
+  content:"";
+  position:absolute; left:50%; bottom:0;
+  width:36px; height:1px;
+  transform:translateX(-50%);
+  background:var(--kw-ink);
+  opacity:.4;
+}
+.kw .text-stack{
+  max-width:720px;
+  margin:0 auto;
+  display:flex; flex-direction:column; gap:14px;
+}
+.kw .text-stack p{
+  margin:0;
+  text-align:center;
+  font-size:15px;
+  line-height:1.9;
+  letter-spacing:-.01em;
+  color:var(--kw-muted);
+}
+
+/* ── 관광청 섹션 ─────────────────────────────────────────── */
+.kw .verified__badge-wrap{
+  display:flex; justify-content:center;
+  margin-bottom:22px;
+}
+.kw .verified__badge{
+  display:inline-flex; align-items:center; gap:7px;
+  padding:8px 18px;
+  background:var(--kw-tint);
+  border-radius:0;
+  font-size:12px;
+  font-weight:500;
+  letter-spacing:.04em;
+  color:var(--kw-ink);
+  white-space:nowrap;
+}
+
+.kw .verified__boards-label{
+  margin:40px 0 16px;
+  text-align:center;
+  font-size:12px;
+  letter-spacing:.04em;
+  color:var(--kw-muted);
+}
+.kw .verified__boards{
+  display:flex; flex-wrap:wrap; justify-content:center; gap:8px;
+  max-width:860px;
+  margin:0 auto 46px;
+  padding:0; list-style:none;
+}
+.kw .verified__boards li{
+  padding:7px 14px;
+  border:1px solid var(--kw-line);
+  border-radius:0;
+  background:transparent;
+  font-size:12px;
+  color:var(--kw-ink);
+  white-space:nowrap;
+}
+
+.kw .verified__grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:clamp(16px,2vw,24px);
+}
+.kw .verified__card{
+  display:flex; flex-direction:column; gap:14px;
+  padding:clamp(24px,3vw,36px);
+  background:var(--kw-surface);
+  border:1px solid var(--kw-line);
+  border-radius:0;
+  box-shadow:none;
+  transition:border-color .3s ease;
+}
+.kw .verified__card:hover{ border-color:var(--kw-line-2); }
+
+.kw .verified__card-header{
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  min-height:30px;
+  padding-bottom:16px;
+  border-bottom:1px solid var(--kw-line);
+}
+.kw .verified__card-logo{
+  height:26px; width:auto; object-fit:contain;
+}
+.kw .verified__card-logo--stack{ height:42px; }
+.kw .verified__card-years{
+  flex:none;
+  padding:0;
+  background:transparent;
+  border:0;
+  border-radius:0;
+  font-family:var(--kw-display);
+  font-size:12px;
+  font-weight:400;
+  letter-spacing:.1em;
+  color:var(--kw-muted);
+  white-space:nowrap;
+}
+.kw .verified__card-title{
+  font-size:16px;
+  font-weight:700;
+  letter-spacing:-.01em;
+  color:var(--kw-ink);
+}
+.kw .verified__card-desc{
+  font-size:14px;
+  line-height:1.85;
+  color:var(--kw-muted);
+}
+
+/* ── 셀러브리티 섹션 ─────────────────────────────────────── */
+.kw .celeb__lead{
+  margin:0 0 clamp(32px,5vw,48px);
+  text-align:center;
+  font-size:15px;
+  font-weight:400;
+  color:var(--kw-muted);
+}
+.kw .image-card-grid{
+  display:flex; flex-wrap:wrap; justify-content:center;
+  gap:20px;
+}
+.kw .celeb__inner .image-card-grid{ margin-bottom:0; }
+
+.kw .image-card{
+  flex:0 1 calc((100% - 40px) / 3);
+  display:flex; flex-direction:column; gap:12px;
+  padding:8px;
+  background:var(--kw-surface);
+  border:1px solid var(--kw-line);
+  border-radius:0;
+  box-shadow:none;
+  transform:none;                 /* 허니문리조트판의 폴라로이드 기울기 제거 */
+  transition:transform .3s ease, border-color .3s ease;
+}
+.kw .image-card:nth-child(3n+2),
+.kw .image-card:nth-child(3n+3){ transform:none; }   /* 기울기 override */
+.kw .image-card:hover{
+  transform:translateY(-4px);
+  border-color:var(--kw-line-2);
+}
+.kw .image-card__image{
+  width:100%;
+  aspect-ratio:4 / 3;
+  overflow:hidden;
+  background:var(--kw-surface-2);
+}
+.kw .image-card__photo{
+  width:100%; height:100%;
+  display:block;
+  object-fit:cover;
+}
+.kw .image-card__caption{
+  margin:0;
+  padding:0 4px 4px;
+  text-align:center;
+  font-size:13px;
+  font-weight:500;
+  line-height:1.5;
+  letter-spacing:-.01em;
+  color:var(--kw-ink);
+}
+
+.kw .celeb__note{
+  margin-top:clamp(40px,6vw,64px);
+  padding-top:clamp(28px,4vw,40px);
+  border-top:1px solid var(--kw-line-2);
+}
+
+/* ── 반응형 ─────────────────────────────────────────────── */
+@media (max-width:860px){
+  .kw .verified__grid{ grid-template-columns:1fr; }
+  .kw .image-card{ flex-basis:calc((100% - 20px) / 2); }
+}
+@media (max-width:520px){
+  .kw .image-card{ flex-basis:100%; }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .kw *{ transition:none !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="demo-bar">
+  <strong>K-WEDDING TONE</strong>
+  <span>관광청 · 셀러브리티 섹션 — 내용 그대로, 톤·스타일만 K-웨딩 기준으로 분리</span>
+</div>
+
+<div class="kw">
+
+  <!-- ============================================================
+       VERIFIED / 함께한 관광청  (내용 원본 그대로)
+  ============================================================= -->
+  <section class="verified">
+    <div class="verified__inner">
+
+      <div class="verified__badge-wrap">
+        <span class="verified__badge">&#9733; 2026.07 미국관광청 선정 · 글로벌 앰버서더</span>
+      </div>
+
+      <h2 class="section-title">허니문리조트는 검증된 회사입니다</h2>
+
+      <div class="text-stack" style="margin-bottom:28px;">
+        <p>허니문리조트는 하와이, 두바이, 호주 퀸즐랜드주, 타히티를 비롯한 13개 관광청과 협업하며 신혼여행 상품을 알리고 고객에게 더 다양한 선택지를 제공해왔습니다. 이렇게 쌓은 글로벌 네트워크와 허니문 전문성을 바탕으로 2026년 7월 미국관광청이 선정한 글로벌 앰버서더에 선정될 만큼, 여행업계 및 아웃바운드 럭셔리·허니문 관광산업에서 검증된 회사로 자리매김했습니다.</p>
+      </div>
+
+      <p class="verified__boards-label">함께한 관광청</p>
+      <ul class="verified__boards">
+        <li>하와이 관광청</li>
+        <li>두바이 관광청</li>
+        <li>호주 퀸즐랜드주 관광청</li>
+        <li>타히티 관광청</li>
+        <li>체코 관광청</li>
+        <li>모나코 관광청</li>
+        <li>몰디브 관광청</li>
+        <li>프랑스 관광청</li>
+        <li>아부다비 관광청</li>
+        <li>카탈루냐 관광청</li>
+        <li>미국 관광청</li>
+        <li>스페인 관광청</li>
+        <li>태국 관광청</li>
+      </ul>
+
+      <div class="verified__grid">
+        <div class="verified__card">
+          <div class="verified__card-header">
+            <img class="verified__card-logo" src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/logo/hawaii-tourism-logo.png" alt="Hawaii Tourism Korea">
+          </div>
+          <p class="verified__card-title">하와이 관광청</p>
+          <p class="verified__card-desc">럭셔리 허니문 상품 관련 포시즌스 오아후 앳 코올리나 조식 제공 프로모션, 말라마 허니문 상품 프로모션, 마우이와 빅아일랜드 등 이웃 섬 신혼여행 상품 프로모션을 진행했습니다.</p>
+        </div>
+        <div class="verified__card">
+          <div class="verified__card-header">
+            <img class="verified__card-logo" src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/logo/dubai-tourism-logo.png" alt="Dubai Tourism">
+            <span class="verified__card-years">2022–2026</span>
+          </div>
+          <p class="verified__card-title">두바이 관광청</p>
+          <p class="verified__card-desc">2022년부터 2026년까지 두바이 신혼여행 1+1 프로모션을 진행했습니다.</p>
+        </div>
+        <div class="verified__card">
+          <div class="verified__card-header">
+            <img class="verified__card-logo" src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/logo/queensland-tourism-logo.png" alt="Queensland Australia 관광청">
+          </div>
+          <p class="verified__card-title">퀸즐랜드주 관광청</p>
+          <p class="verified__card-desc">해밀턴 아일랜드 신혼여행지 상품 론칭과 골드코스트 2박 프로모션을 진행했습니다.</p>
+        </div>
+        <div class="verified__card">
+          <div class="verified__card-header">
+            <img class="verified__card-logo" src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/logo/tahiti-tourism-logo.png" alt="The Islands of Tahiti">
+            <span class="verified__card-years">2023–2026</span>
+          </div>
+          <p class="verified__card-title">타히티 관광청</p>
+          <p class="verified__card-desc">2023년부터 2026년까지 타히티 신혼여행 추가 할인 프로모션을 운영했습니다.</p>
+        </div>
+        <div class="verified__card">
+          <div class="verified__card-header">
+            <img class="verified__card-logo" src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/logo/catalonia-tourism-logo.png" alt="Agència Catalana de Turisme, Catalunya 관광청">
+          </div>
+          <p class="verified__card-title">카탈루냐 관광청</p>
+          <p class="verified__card-desc">바르셀로나를 비롯한 카탈루냐 지역 신혼여행 상품과 관련해 협력하고 있습니다.</p>
+        </div>
+        <div class="verified__card">
+          <div class="verified__card-header">
+            <img class="verified__card-logo verified__card-logo--stack" src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/logo/thailand-tourism-logo.png" alt="Amazing Thailand">
+          </div>
+          <p class="verified__card-title">태국관광청</p>
+          <p class="verified__card-desc">2013년 태국관광청 세일즈 미션 수상을 비롯해 푸켓, 코사무이 등 태국 주요 신혼여행지 프로모션에 협력하고 있습니다.</p>
+        </div>
+        <div class="verified__card">
+          <div class="verified__card-header">
+            <img class="verified__card-logo" src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/logo/monaco-tourism-logo.png" alt="Visit Monaco, 모나코 관광청">
+          </div>
+          <p class="verified__card-title">모나코 관광청</p>
+          <p class="verified__card-desc">모나코 신혼여행 상품과 관련해 협력하고 있습니다.</p>
+        </div>
+        <div class="verified__card">
+          <div class="verified__card-header">
+            <img class="verified__card-logo" src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/logo/brand-usa-logo.png" alt="Brand USA, 미국 관광청">
+            <span class="verified__card-years">2026</span>
+          </div>
+          <p class="verified__card-title">미국관광청(Brand USA)</p>
+          <p class="verified__card-desc">2026년 7월 미국관광청이 선정하는 글로벌 앰버서더로 선정되어 협력하고 있습니다.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CELEBRITY / 함께한 셀러브리티  (내용 원본 그대로)
+  ============================================================= -->
+  <section class="celeb">
+    <div class="celeb__inner">
+
+      <h2 class="section-title">허니문리조트와 함께한 셀러브리티</h2>
+
+      <p class="celeb__lead">허니문리조트는 다양한 셀럽과 신혼여행을 진행해왔습니다.</p>
+
+      <div class="image-card-grid">
+        <div class="image-card">
+          <div class="image-card__image"><img class="image-card__photo" src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/celeb/aeley-choisihoon.jpg" alt="에일리 · 최시훈"></div>
+          <p class="image-card__caption">에일리 · 최시훈</p>
+        </div>
+        <div class="image-card">
+          <div class="image-card__image"><img class="image-card__photo" src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/celeb/seven-leedahae.jpg" alt="세븐 · 이다해"></div>
+          <p class="image-card__caption">세븐 · 이다해</p>
+        </div>
+        <div class="image-card">
+          <div class="image-card__image"><img class="image-card__photo" src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/celeb/kimkiri-moonjiin.jpg" alt="김기리 · 문지인"></div>
+          <p class="image-card__caption">김기리 · 문지인</p>
+        </div>
+        <div class="image-card">
+          <div class="image-card__image"><img class="image-card__photo" src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/celeb/parkhyunho-eungaeun.jpg" alt="박현호 · 은가은"></div>
+          <p class="image-card__caption">박현호 · 은가은</p>
+        </div>
+        <div class="image-card">
+          <div class="image-card__image"><img class="image-card__photo" src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/celeb/cheondung-mimi.jpg" alt="천둥 · 미미"></div>
+          <p class="image-card__caption">천둥 · 미미</p>
+        </div>
+        <div class="image-card">
+          <div class="image-card__image"><img class="image-card__photo" src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/celeb/simhyungtak-saya.jpg" alt="심형탁 · 사야"></div>
+          <p class="image-card__caption">심형탁 · 사야</p>
+        </div>
+        <div class="image-card">
+          <div class="image-card__image"><img class="image-card__photo" src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/celeb/bada.jpg" alt="바다 부부"></div>
+          <p class="image-card__caption">바다 부부<br>(가수이자 뮤지컬 배우)</p>
+        </div>
+        <div class="image-card">
+          <div class="image-card__image"><img class="image-card__photo" src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/celeb/parkhana-kimtaesul.jpg" alt="박하나 · 김태술"></div>
+          <p class="image-card__caption">박하나 · 김태술</p>
+        </div>
+        <div class="image-card">
+          <div class="image-card__image"><img class="image-card__photo" src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/celeb/chanmi-songeuihwan.jpg" alt="AOA찬미(임도화) · 송의환"></div>
+          <p class="image-card__caption">AOA찬미(임도화) · 송의환</p>
+        </div>
+        <div class="image-card">
+          <div class="image-card__image"><img class="image-card__photo" src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/celeb/daniel-lindemann.jpg" alt="다니엘 린데만 부부"></div>
+          <p class="image-card__caption">다니엘 린데만 부부</p>
+        </div>
+        <div class="image-card">
+          <div class="image-card__image"><img class="image-card__photo" src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/celeb/limsungjae.jpg" alt="임성재 부부"></div>
+          <p class="image-card__caption">임성재 부부<br>(PGA 골프 선수)</p>
+        </div>
+        <div class="image-card">
+          <div class="image-card__image"><img class="image-card__photo" src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/celeb/kimgaeun-yoonsunwoo.jpg" alt="김가은 · 윤선우"></div>
+          <p class="image-card__caption">김가은 · 윤선우</p>
+        </div>
+      </div>
+
+      <div class="text-stack celeb__note">
+        <p>다양한 유명인 및 스포츠 선수의 허니문을 상담·진행한 경험 역시 맞춤형 신혼여행 운영 경험을 보여주는 사례입니다.</p>
+        <p>다양한 고객의 신혼여행 스타일과 일정에 맞춰 신혼여행을 상담하고 진행해온 경험은 허니문리조트의 전문성을 보여주는 중요한 신뢰 요소입니다.</p>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+</body>
+</html>
