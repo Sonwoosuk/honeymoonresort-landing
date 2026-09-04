@@ -575,71 +575,41 @@
     });
 
     // ── 2. 사이드 네비게이션 노출 및 활성 항목 강조 (ScrollSpy) ──
-    // 모든 주요 섹션을 감시하여 해당 섹션이 화면 중앙에 들어올 때 사이드바의 노출 여부와 활성화 상태를 명확히 제어합니다.
+    // 목적지 섹션(.hotel-intro-section)들과 그 외 섹션을 함께 감시해
+    // 목적지 구간에 들어와 있을 때만 사이드바를 보이고 현재 위치를 강조합니다.
     var allSections = document.querySelectorAll(
-      '#hero, #marqueeSection, #storySection, .collection-title-section, #collectionKiwa, #collectionChoga, #collectionBukchon, #collectionLounge, .dining-section, .moments-section, .map-section, .footer'
+      '#hero, #storySection, .collection-title-section, .hotel-intro-section, .dining-section, .moments-section, .map-section, .footer'
     );
 
     var sideNavObserver = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          var targetId = entry.target.id || entry.target.className.split(' ')[0];
-          
-          if (targetId === 'collectionChoga' || targetId === 'collectionBukchon' || targetId === 'collectionLounge') {
-            // 사이드 네비게이션 활성화
-            if (sideNav) {
-              var wasVisible = sideNav.classList.contains('is-visible');
-              sideNav.classList.add('is-visible');
-              
-              // 처음 켜질 때 밀려 나오는 애니메이션
-              if (!wasVisible) {
-                sideNav.classList.remove('is-animating');
-                void sideNav.offsetWidth;
-                sideNav.classList.add('is-animating');
-              }
-            }
+        if (!entry.isIntersecting) return;
+        var isDest = entry.target.classList.contains('hotel-intro-section');
+        var targetId = entry.target.id;
 
-            if (targetId !== currentActiveId) {
-              currentActiveId = targetId;
-              
-              // 사이드바 항목 활성화
-              sideNavItems.forEach(function (item) {
-                if (item.getAttribute('data-target') === targetId) {
-                  item.classList.add('is-active');
-                } else {
-                  item.classList.remove('is-active');
-                }
-              });
-
-              // 개별 한자 활성화 클래스 토글 (전체 리로드 대신 글자만 스르륵 등장)
-              var charRak = sideNav ? sideNav.querySelector('.char-rak') : null;
-              var charKo  = sideNav ? sideNav.querySelector('.char-ko') : null;
-              var charJa  = sideNav ? sideNav.querySelector('.char-ja') : null;
-
-              if (charRak && charKo && charJa) {
-                if (targetId === 'collectionChoga') {
-                  charRak.classList.add('is-active');
-                  charKo.classList.remove('is-active');
-                  charJa.classList.remove('is-active');
-                } else if (targetId === 'collectionBukchon') {
-                  charRak.classList.add('is-active');
-                  charKo.classList.add('is-active');
-                  charJa.classList.remove('is-active');
-                } else if (targetId === 'collectionLounge') {
-                  charRak.classList.add('is-active');
-                  charKo.classList.add('is-active');
-                  charJa.classList.add('is-active');
-                }
-              }
-            }
-          } else {
-            // 그 외 컬렉션 영역이 아닌 섹션들 (Hero, Story, Dining, Moments, Map, Footer 등) 진입 시 사이드바를 완전히 숨김
-            if (sideNav) {
-              sideNav.classList.remove('is-visible');
+        if (isDest) {
+          if (sideNav) {
+            var wasVisible = sideNav.classList.contains('is-visible');
+            sideNav.classList.add('is-visible');
+            if (!wasVisible) {
               sideNav.classList.remove('is-animating');
+              void sideNav.offsetWidth;
+              sideNav.classList.add('is-animating');
             }
-            currentActiveId = '';
           }
+
+          if (targetId !== currentActiveId) {
+            currentActiveId = targetId;
+            sideNavItems.forEach(function (item) {
+              item.classList.toggle('is-active', item.getAttribute('data-target') === targetId);
+            });
+          }
+        } else {
+          if (sideNav) {
+            sideNav.classList.remove('is-visible');
+            sideNav.classList.remove('is-animating');
+          }
+          currentActiveId = '';
         }
       });
     }, {
