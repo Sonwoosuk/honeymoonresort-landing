@@ -106,64 +106,22 @@
     </div>
   </header>
 
-  <!-- ============ HERO ============ -->
-  <section class="hero" id="hero">
-    <div class="hero__slides" id="heroSlides">
-      <div class="hero__slide is-active" data-index="0">
-        <div class="hero__media placeholder" data-src="/honeymoonresort-landing/assets/destinations/hawaii.jpg"></div>
+  <!-- ============ HERO (스플릿 듀얼 이미지) ============ -->
+  <section class="hero hero--split" id="hero">
+    <div class="hero__split-media">
+      <div class="hero__split-half">
+        <img src="/honeymoonresort-landing/assets/destinations/hawaii.jpg" alt="하와이 신혼여행" />
       </div>
-      <div class="hero__slide" data-index="1">
-        <div class="hero__media placeholder" data-src="/honeymoonresort-landing/assets/destinations/maldives.jpg"></div>
-      </div>
-      <div class="hero__slide" data-index="2">
-        <div class="hero__media placeholder" data-src="/honeymoonresort-landing/assets/destinations/bali.jpg"></div>
-      </div>
-      <div class="hero__slide" data-index="3">
-        <div class="hero__media placeholder" data-src="/honeymoonresort-landing/assets/destinations/europe.jpg"></div>
-      </div>
-      <div class="hero__slide" data-index="4">
-        <div class="hero__media placeholder" data-src="/honeymoonresort-landing/assets/destinations/spain.jpg"></div>
-      </div>
-      <div class="hero__slide" data-index="5">
-        <div class="hero__media placeholder" data-src="/honeymoonresort-landing/assets/destinations/australia.jpg"></div>
-      </div>
-      <div class="hero__slide" data-index="6">
-        <div class="hero__media placeholder" data-src="/honeymoonresort-landing/assets/destinations/dubai.jpg"></div>
+      <div class="hero__split-half">
+        <img src="/honeymoonresort-landing/assets/destinations/maldives.jpg" alt="몰디브 신혼여행" />
       </div>
     </div>
 
-    <div class="hero__body container">
-      <div class="hero__copy">
-        <h1 class="hero__title">허니문리조트</h1>
-        <p class="hero__desc">
-          1995년부터 신혼여행을 전문으로 안내해 온 허니문 전문 여행사입니다.<br />
-          예비부부의 예산과 여행 스타일에 맞춰 항공·호텔·투어·현지 일정을 함께 구성합니다.
-        </p>
-
-        <div class="hero__indicator">
-          <span class="indicator__current" id="slideCurrent">01</span>
-          <div class="indicator__track">
-            <span class="indicator__progress" id="slideProgress"></span>
-          </div>
-          <span class="indicator__total" id="slideTotal">07</span>
-          <div class="indicator__arrows">
-            <button class="arrow arrow--prev" id="slidePrev" aria-label="이전 슬라이드">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5">
-                <polyline points="15 5 8 12 15 19" stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-            </button>
-            <button class="arrow arrow--next" id="slideNext" aria-label="다음 슬라이드">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5">
-                <polyline points="9 5 16 12 9 19" stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-            </button>
-          </div>
-        </div>
-
-        <div class="hero__actions">
-          <a href="#" class="btn btn--primary">1:1 무료 상담</a>
-          <a href="#destinations" class="btn btn--ghost">신혼여행지 보기</a>
-        </div>
+    <div class="hero__split-body container">
+      <h1 class="hero__split-title">1995년부터,<br>신혼여행을<br>전문으로</h1>
+      <div class="hero__split-foot">
+        <p class="hero__split-desc">예비부부의 예산과 여행 스타일에 맞춰<br>항공·호텔·투어·현지 일정을 함께 구성합니다.</p>
+        <a href="#" class="btn btn--primary">1:1 무료 상담</a>
       </div>
     </div>
   </section>
@@ -196,6 +154,37 @@
       </svg>
     </button>
 
+  </section>
+
+  <!-- ============ STATS SECTION ============ -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="stats-intro">
+        <p class="stats-intro__lead">허니문리조트는 1995년부터<br>신혼여행을 전문으로 안내해 온 여행사입니다.</p>
+        <p class="stats-intro__desc">하와이, 두바이, 호주 퀸즐랜드주, 타히티를 비롯한 13개 관광청과 협업하며 쌓아온 신뢰를 바탕으로, 2026년 7월 미국관광청이 선정한 글로벌 앰버서더로 선정된 검증된 신혼여행 전문 브랜드입니다.</p>
+      </div>
+
+      <h2 class="stats-title">검증된 신혼여행<br>전문 여행사</h2>
+
+      <div class="stats-grid">
+        <div class="stats-cell">
+          <b class="stats-cell__num">13개</b>
+          <span class="stats-cell__label">전국 지사</span>
+        </div>
+        <div class="stats-cell">
+          <b class="stats-cell__num">100명+</b>
+          <span class="stats-cell__label">임직원</span>
+        </div>
+        <div class="stats-cell stats-cell--dark">
+          <b class="stats-cell__num">7개</b>
+          <span class="stats-cell__label">포시즌스 한국 독점 지점</span>
+        </div>
+        <div class="stats-cell">
+          <b class="stats-cell__num">13개</b>
+          <span class="stats-cell__label">협업 관광청</span>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- ============ COLLECTION TITLE SECTION ============ -->
@@ -629,6 +618,8 @@
 
       </div>
     </div>
+
+    <p class="footer-wordmark">허니문리조트</p>
 
   </footer>
 

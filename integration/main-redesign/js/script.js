@@ -143,7 +143,9 @@
   });
 
   /* ---------- Hero 슬라이드 (가로 무한 밀림 및 지연 로드) ---------- */
+  /* #heroSlides가 없는 히어로(스플릿 이미지 등)에서는 이 블록 전체를 건너뜀 */
   const track = document.getElementById("heroSlides");
+  if (track) {
   const realSlides = Array.from(track.children);
   const TOTAL = realSlides.length;
 
@@ -367,6 +369,7 @@
       allSlides.forEach(function (_, idx) { loadSlideImage(idx); });
     }, 2000);
   }
+  } // end if (track)
 
   /* ---------- Story 슬라이더 (슬롯 기반 위치 전환) ---------- */
   var storyStage    = document.getElementById('storyStage');
@@ -553,7 +556,7 @@
 
   // 애니메이션 효과를 줄 섹션들 목록
   var revealSections = document.querySelectorAll(
-    '.hotel-intro-section, .collection-title-section, .dining-section, .moments-section, .map-section'
+    '.hotel-intro-section, .stats-section, .collection-title-section, .dining-section, .moments-section, .map-section'
   );
 
   if (revealSections.length > 0 && 'IntersectionObserver' in window) {
