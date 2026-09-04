@@ -509,35 +509,47 @@ p {
   text-align: center;
 }
 
-/* 숫자 통계 2열 (가운데 정렬, Pigma 레퍼런스의 박스형 스탯 카드 참고) */
+/* 숫자 통계 그리드 (goodai global 레퍼런스: 헤어라인 경계 + 큰 숫자, 카드/그림자 없음) */
 .scale__stats {
-  display: flex;
-  justify-content: center;
-  gap: 24px;
-  margin-bottom: 28px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 640px;
+  margin: 0 auto 32px;
+  border-top: 1px solid var(--hero-color-border);
+  border-left: 1px solid var(--hero-color-border);
 }
 
 .scale__stat {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 8px;
-  min-width: 200px;
-  padding: 28px 24px;
-  background-color: var(--hero-color-surface);
-  border: 1px solid var(--hero-color-border);
-  border-radius: 20px;
-  box-shadow: 0 10px 24px rgba(43, 31, 22, 0.08);
+  padding: 32px 28px;
+  background-color: var(--hero-color-bg);
+  border-right: 1px solid var(--hero-color-border);
+  border-bottom: 1px solid var(--hero-color-border);
   box-sizing: border-box;
+}
+
+/* OURA & CO. 레퍼런스: 통계 중 하나를 진한 색 셀로 강조 */
+.scale__stat--dark {
+  background-color: var(--hero-color-ink);
+}
+.scale__stat--dark .scale__stat-number,
+.scale__stat--dark .scale__stat-number span {
+  color: var(--hero-color-on-overlay);
+}
+.scale__stat--dark .scale__stat-label {
+  color: var(--hero-color-on-overlay-dim);
 }
 
 .scale__stat-number {
   margin: 0;
-  font-size: 52px;
+  font-size: 56px;
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.02em;
-  color: var(--hero-color-gold);
+  color: var(--hero-color-ink);
 }
 
 .scale__stat-number span {
@@ -609,16 +621,12 @@ p {
   }
 
   .scale__stats {
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
+    grid-template-columns: 1fr;
     margin-bottom: 32px;
   }
 
   .scale__stat {
-    min-width: 0;
     width: 100%;
-    max-width: 280px;
   }
 
   .scale__stat-number {
@@ -2039,7 +2047,7 @@ html, body {
         <p class="scale__stat-number">13<span>개</span></p>
         <p class="scale__stat-label">지역 지사 (B2B&nbsp;&amp;&nbsp;B2C)</p>
       </div>
-      <div class="scale__stat">
+      <div class="scale__stat scale__stat--dark">
         <p class="scale__stat-number">100<span>명+</span></p>
         <p class="scale__stat-label">임직원 운영 기반</p>
       </div>
