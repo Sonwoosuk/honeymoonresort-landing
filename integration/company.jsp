@@ -305,6 +305,23 @@ p {
   font-weight: 800;
   color: var(--hero-color-gold);
 }
+
+/* 헤드라인 단어 순차(사르륵) 등장 */
+.hero__text-headline .htw {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+}
+.hero__text-headline .htw-in {
+  display: inline-block;
+  transform: translateY(115%);
+  transition: transform 0.9s cubic-bezier(0.19, 1, 0.22, 1);
+  transition-delay: calc(var(--i, 0) * 90ms);
+}
+.hero__text-headline.is-visible .htw-in {
+  transform: translateY(0);
+}
+
 .hero__text-foot {
   text-align: center;
   margin-top: clamp(56px, 8vw, 112px);
@@ -317,6 +334,18 @@ p {
 .hero__text-arrow {
   display: inline-flex;
   color: var(--hero-color-ink);
+}
+.hero__text-arrow svg {
+  animation: heroArrowDrop 2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+@keyframes heroArrowDrop {
+  0%   { transform: translateY(-5px); opacity: 0.35; }
+  50%  { transform: translateY(7px);  opacity: 1; }
+  100% { transform: translateY(-5px); opacity: 0.35; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero__text-headline .htw-in { transition: none; transform: none; }
+  .hero__text-arrow svg { animation: none; opacity: 0.7; }
 }
 @media (max-width: 860px) {
   .hero__text-row { flex-direction: column; gap: 32px; }
@@ -1997,7 +2026,7 @@ html, body {
         <hr class="hero__text-divider">
         <p class="hero__text-desc">1995년부터<br>신혼여행만을 전문으로<br>맞춤 여행을 안내해온<br>허니문리조트</p>
       </div>
-      <p class="hero__text-headline"><b>30년의</b> 경험과<br>허니문 <b>전문성으로</b><br>완성하는<br><b>맞춤 허니문</b></p>
+      <p class="hero__text-headline" id="heroHeadline"><span class="htw" style="--i:0"><span class="htw-in"><b>30년의</b></span></span> <span class="htw" style="--i:1"><span class="htw-in">경험과</span></span><br><span class="htw" style="--i:2"><span class="htw-in">허니문</span></span> <span class="htw" style="--i:3"><span class="htw-in"><b>전문성으로</b></span></span><br><span class="htw" style="--i:4"><span class="htw-in">완성하는</span></span><br><span class="htw" style="--i:5"><span class="htw-in"><b>맞춤</b></span></span> <span class="htw" style="--i:6"><span class="htw-in"><b>허니문</b></span></span></p>
     </div>
     <div class="hero__text-foot">
       <p class="hero__text-tagline">두 사람의 시작을 가장 잘 아는 여행사</p>
@@ -2691,6 +2720,23 @@ html, body {
     numberEls.forEach(function (el) {
       numberObserver.observe(el);
     });
+  }
+
+  /* 히어로 헤드라인: 단어 하나씩 사르륵 등장 */
+  var heroHeadline = document.getElementById('heroHeadline');
+  if (heroHeadline) {
+    if (!('IntersectionObserver' in window)) {
+      heroHeadline.classList.add('is-visible');
+    } else {
+      new IntersectionObserver(function (entries, observer) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            heroHeadline.classList.add('is-visible');
+            observer.unobserve(heroHeadline);
+          }
+        });
+      }, { threshold: 0.3 }).observe(heroHeadline);
+    }
   }
 
   /* 맨 위로 이동 버튼: 페이지를 절반 이상 스크롤하면 표시 */
