@@ -152,72 +152,76 @@ p {
 }
 
 /* -------------------------------------------------------------
-   4-0. 싱글 풀블리드 히어로 (사진 1장 + 겹치는 대형 헤드라인)
+   4-0. 타이포 히어로 (사진 없이 좌측 소개 + 우측 대형 헤드라인)
 ------------------------------------------------------------- */
-.hero__single {
-  position: relative;
+.hero__text {
   width: 100%;
-  height: 82vh;
-  min-height: 560px;
-  max-height: 860px;
-  overflow: hidden;
-  background-color: var(--hero-color-ink);
+  min-height: 82vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(48px, 7vw, 96px) 0;
+  box-sizing: border-box;
+  background-color: var(--hero-color-bg);
 }
-.hero__single img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.hero__text-row {
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(40px, 7vw, 120px);
+}
+.hero__text-info {
+  flex: 0 0 clamp(200px, 22vw, 280px);
+  padding-top: 10px;
+}
+.hero__text-logo img {
+  height: 30px;
+  width: auto;
   display: block;
 }
-.hero__single-title {
-  position: absolute;
-  left: clamp(24px, 4vw, 56px);
-  bottom: clamp(28px, 4.4vw, 56px);
-  z-index: 2;
-  margin: 0;
-  max-width: 11ch;
-  color: var(--hero-color-on-overlay);
-  font-family: var(--hero-font);
-  font-weight: 800;
-  font-size: clamp(40px, 6.6vw, 92px);
-  line-height: 1.04;
-  letter-spacing: -0.03em;
-  text-shadow: 0 2px 28px rgba(0, 0, 0, 0.45);
-}
-.hero__single-card {
-  position: absolute;
-  right: clamp(20px, 4vw, 56px);
-  top: clamp(20px, 4vw, 56px);
-  z-index: 2;
-  max-width: 320px;
-  background: var(--hero-color-bg);
-  padding: 24px 26px;
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
-}
-.hero__single-desc {
-  margin: 0 0 16px;
-  color: var(--hero-color-body);
-  font-size: 14.5px;
-  line-height: 1.75;
-}
-.hero__single-cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px 24px;
+.hero__text-divider {
+  width: 100%;
+  height: 1px;
   background: var(--hero-color-ink);
-  color: var(--hero-color-on-overlay);
-  font-weight: 700;
-  font-size: 13.5px;
-  white-space: nowrap;
-  text-decoration: none;
+  margin: 20px 0 18px;
+  border: none;
+}
+.hero__text-desc {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--hero-color-body);
+}
+.hero__text-headline {
+  flex: 1;
+  margin: 0;
+  font-family: var(--hero-font);
+  font-weight: 600;
+  font-size: clamp(30px, 4.4vw, 60px);
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  color: var(--hero-color-ink);
+}
+.hero__text-headline b {
+  font-weight: 800;
+  color: var(--hero-color-gold);
+}
+.hero__text-foot {
+  text-align: center;
+  margin-top: clamp(56px, 8vw, 112px);
+}
+.hero__text-tagline {
+  margin: 0 0 22px;
+  font-size: 15px;
+  color: var(--hero-color-body);
+}
+.hero__text-arrow {
+  display: inline-flex;
+  color: var(--hero-color-ink);
 }
 @media (max-width: 860px) {
-  .hero__single { height: auto; min-height: 0; aspect-ratio: 3 / 4; }
-  .hero__single-card { position: static; max-width: none; margin: 0; box-shadow: none; padding: 22px 20px; }
-  .hero__single-title { position: absolute; }
+  .hero__text-row { flex-direction: column; gap: 32px; }
+  .hero__text-info { flex: none; }
+  .hero__text-headline { font-size: clamp(28px, 7vw, 40px); }
 }
 
 /* -------------------------------------------------------------
@@ -1837,8 +1841,7 @@ html, body {
   overflow-x: hidden;
 }
 
-.hero__banner,
-.hero__single {
+.hero__banner {
   position: relative;
   width: 100vw;
   left: 50%;
@@ -1928,14 +1931,23 @@ html, body {
 
 <section class="hero">
 
-  <!-- 풀와이드 배너 (.hero__inner 컨테이너 밖에 배치 -> 좌우 여백 없이 화면 전체 폭으로 표시
-       // 오가닉 블롭 프레임 없이 각진 사각형 + CSS 전용 자동 슬라이드, 임시 플레이스홀더 3장) + 하단 좌측 텍스트 -->
-  <div class="hero__single">
-    <img src="../assets/hero-main.jpg" alt="허니문리조트 몰디브 디가리 리조트 전경">
-    <p class="hero__single-title">1995년부터,<br>신혼여행을<br>전문으로</p>
-    <div class="hero__single-card">
-      <p class="hero__single-desc">예비부부의 예산과 여행 스타일에 맞춰 항공·호텔·투어·현지 일정을 함께 구성합니다.</p>
-      <a href="#" class="hero__single-cta">1:1 무료 상담</a>
+  <!-- 타이포 히어로: 사진 없이 좌측 소개(로고+구분선+문단) + 우측 대형 헤드라인 -->
+  <div class="hero__text">
+    <div class="hero__inner hero__text-row">
+      <div class="hero__text-info">
+        <div class="hero__text-logo">
+          <img src="../assets/logo/honeymoonresort-logo.png" alt="허니문리조트">
+        </div>
+        <hr class="hero__text-divider">
+        <p class="hero__text-desc">1995년부터<br>신혼여행만을 전문으로<br>맞춤 여행을 안내해온<br>허니문리조트</p>
+      </div>
+      <p class="hero__text-headline"><b>30년의</b> 경험과<br>허니문 <b>전문성으로</b><br>완성하는<br><b>맞춤 허니문</b></p>
+    </div>
+    <div class="hero__text-foot">
+      <p class="hero__text-tagline">두 사람의 시작을 가장 잘 아는 여행사</p>
+      <span class="hero__text-arrow" aria-hidden="true">
+        <svg width="16" height="24" viewBox="0 0 16 24" fill="none"><line x1="8" y1="0" x2="8" y2="20" stroke="currentColor" stroke-width="1.4"/><polyline points="2,15 8,21 14,15" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
     </div>
   </div>
 
