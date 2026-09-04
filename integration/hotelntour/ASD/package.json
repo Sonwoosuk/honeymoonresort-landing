@@ -1,0 +1,21 @@
+{
+  "name": "asd-playground",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "재미있는 React 3 섹션 데모 - 그라데이션 없이 납작한 색과 두꺼운 테두리로",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
+    "vite": "^5.4.8"
+  }
+}

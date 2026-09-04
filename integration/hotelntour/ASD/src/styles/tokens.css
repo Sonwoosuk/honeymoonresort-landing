@@ -1,0 +1,44 @@
+/* =========================================================
+   디자인 토큰 — 값은 여기서만 바꾼다
+   ========================================================= */
+:root {
+  /* ---- color (단색만, 그라데이션 금지) ---- */
+  --c-ink: #14110F;
+  --c-paper: #F5F1E8;
+  --c-paper-2: #ECE5D4;
+  --c-line: #D8CFB8;
+  --c-muted: #6B6353;
+
+  --c-accent: #FF5230;      /* 포인트 색 — 테마 전환 시 이 토큰만 교체 */
+  --c-accent-ink: #FFFFFF;  /* 포인트 색 위에 올라가는 글자색 */
+
+  /* ---- type ---- */
+  --font-sans: "Pretendard Variable", Pretendard, system-ui, -apple-system,
+    "Segoe UI", Roboto, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  --fs-display: clamp(2.5rem, 8vw, 6rem);
+  --fs-h1: clamp(2rem, 5vw, 3.5rem);
+  --fs-h2: clamp(1.5rem, 3vw, 2.25rem);
+  --fs-body: 1rem;
+  --fs-small: 0.8125rem;
+  --lh-tight: 1.05;
+  --lh-normal: 1.6;
+
+  /* ---- space (8pt 기반) ---- */
+  --s-1: 0.5rem;
+  --s-2: 1rem;
+  --s-3: 1.5rem;
+  --s-4: 2rem;
+  --s-6: 3rem;
+  --s-8: 5rem;
+  --s-12: 8rem;
+
+  /* ---- shape (납작하게) ---- */
+  --radius: 14px;
+  --bd: 2px solid var(--c-ink);
+  --shadow: 6px 6px 0 var(--c-ink);   /* 번지지 않는 하드 섀도우 */
+}
+
+/* 테마 = --c-accent 계열만 스왑 */
+[data-theme="blue"]   { --c-accent: #2E5BFF; --c-accent-ink: #FFFFFF; }
+[data-theme="yellow"] { --c-accent: #FFC93C; --c-accent-ink: #14110F; }
+[data-theme="green"]  { --c-accent: #16A34A; --c-accent-ink: #FFFFFF; }
