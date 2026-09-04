@@ -1,230 +1,579 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>허니문리조트 — 1995년부터, 신혼여행을 전문으로</title>
-<meta name="description" content="허니문리조트는 1995년부터 신혼여행을 전문으로 안내해 온 허니문 전문 여행사입니다. 서울 청담동 본사와 전국 13개 지사, 100명 이상의 임직원이 하와이·몰디브·발리 등 신혼여행지 상담부터 예약, 현지 소통까지 함께합니다." />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" />
-<link rel="stylesheet" href="css/style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>허니문리조트</title>
+  <meta name="description" content="허니문리조트는 1995년부터 신혼여행을 전문으로 안내해 온 허니문 전문 여행사입니다. 서울 청담동 본사와 전국 13개 지사, 100명 이상의 임직원이 하와이·몰디브·발리 등 신혼여행지 상담부터 예약, 현지 소통까지 함께합니다." />
+
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="preload" as="image" href="/honeymoonresort-landing/assets/destinations/hawaii.jpg" />
+
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css"
+    media="print"
+    onload="this.media='all'"
+  />
+  <noscript>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css" />
+  </noscript>
+
+  <link rel="stylesheet" href="css/style.css" />
+  <script>if(sessionStorage.getItem('rk-intro-shown')){document.documentElement.classList.add('intro-skip');}</script>
 </head>
 <body>
 
-<!-- ============ 헤더 ============ -->
-<header class="site-header" id="siteHeader">
-  <div class="wrap site-header__inner">
-    <a href="#top" class="site-header__logo" aria-label="허니문리조트 홈">
-      <img src="/honeymoonresort-landing/assets/logo/honeymoonresort-wordmark-white.png" alt="허니문리조트">
-    </a>
-    <nav>
-      <ul class="nav__list">
-        <li><a href="#destinations">신혼여행지</a></li>
-        <li><a href="#story">허니문리조트 이야기</a></li>
-        <li><a href="#family">브랜드 패밀리</a></li>
-        <li><a href="#info">오시는 길</a></li>
-      </ul>
-    </nav>
-    <div class="header__util">
-      <button class="util-icon" aria-label="검색">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21" stroke-linecap="round"/></svg>
-      </button>
-      <a href="#" class="util-cta">1:1 무료 상담</a>
+  <!-- ============ INTRO OVERLAY ============ -->
+  <div id="intro" aria-hidden="true">
+    <div id="intro-bg"></div>
+    <div id="intro-inner">
+      <div id="intro-logo">
+        <img src="/honeymoonresort-landing/assets/logo/honeymoonresort-logo-white.png" class="intro-logo-img" alt="허니문리조트" />
+      </div>
+      <div id="intro-line-wrap" aria-hidden="true">
+        <span id="intro-line-bar"></span>
+      </div>
+      <div id="intro-tagline">1995년부터, 신혼여행 전문</div>
     </div>
   </div>
-</header>
 
-<!-- ============ 히어로 ============ -->
-<section class="hero" id="top">
-  <div class="hero__slides" id="heroSlides">
-    <div class="hero__slide is-active"><img src="/honeymoonresort-landing/assets/destinations/hawaii.jpg" alt="하와이 신혼여행"></div>
-    <div class="hero__slide"><img src="/honeymoonresort-landing/assets/destinations/maldives.jpg" alt="몰디브 신혼여행"></div>
-    <div class="hero__slide"><img src="/honeymoonresort-landing/assets/destinations/bali.jpg" alt="발리 신혼여행"></div>
-    <div class="hero__slide"><img src="/honeymoonresort-landing/assets/destinations/europe.jpg" alt="유럽 신혼여행"></div>
-    <div class="hero__slide"><img src="/honeymoonresort-landing/assets/destinations/tahiti.jpg" alt="타히티 신혼여행"></div>
-  </div>
-  <div class="hero__overlay"></div>
-  <div class="wrap hero__body">
-    <p class="hero__eyebrow">Since 1995</p>
-    <h1 class="hero__title">허니문리조트는 1995년부터<br>신혼여행을 전문으로 안내합니다</h1>
-    <p class="hero__desc">예비부부의 예산, 일정, 여행 스타일에 맞춰 항공·호텔·투어·현지 일정을 함께 구성하며 두 사람에게 맞는 신혼여행을 설계합니다. 정해진 패키지가 아닌, 1:1 맞춤 상담으로 완성하는 신혼여행입니다.</p>
-    <div class="hero__actions">
-      <a href="#" class="btn btn--primary">1:1 무료 상담</a>
-      <a href="#story" class="btn btn--ghost">허니문리조트 이야기</a>
-    </div>
-  </div>
-  <div class="wrap" style="position:absolute; inset:0; pointer-events:none;">
-    <div class="hero__indicator" style="pointer-events:auto;">
-      <span class="indicator__current" id="slideCurrent">01</span>
-      <div class="indicator__track"><span class="indicator__progress" id="slideProgress"></span></div>
-      <span class="indicator__total" id="slideTotal">05</span>
-      <div class="indicator__arrows">
-        <button class="arrow" id="slidePrev" aria-label="이전 슬라이드"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><polyline points="15 5 8 12 15 19" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <button class="arrow" id="slideNext" aria-label="다음 슬라이드"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><polyline points="9 5 16 12 9 19" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  <!-- ============ HEADER ============ -->
+  <header class="header" id="header">
+    <div class="header__inner container">
+      <a href="#" class="header__logo" aria-label="허니문리조트 홈">
+        <img src="/honeymoonresort-landing/assets/logo/honeymoonresort-logo.png" alt="허니문리조트" />
+      </a>
+
+      <nav class="nav" id="nav">
+        <div class="nav__logo">
+          <img src="/honeymoonresort-landing/assets/logo/honeymoonresort-logo.png" alt="허니문리조트" />
+        </div>
+        <ul class="nav__list">
+          <li class="nav-item-dropdown">
+            <a href="#destinations" class="nav-dropdown-trigger">
+              신혼여행지
+              <svg class="nav-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </a>
+            <ul class="nav-submenu">
+              <li><a href="#dest-hawaii">하와이</a></li>
+              <li><a href="#dest-maldives">몰디브</a></li>
+              <li><a href="#dest-bali">발리</a></li>
+              <li><a href="#dest-europe">유럽</a></li>
+              <li><a href="#">괌 · 스페인 · 태국 · 호주 · 두바이 · 모리셔스</a></li>
+            </ul>
+          </li>
+          <li><a href="https://www.honeymoonresort.co.kr/company/company.do" target="_blank" rel="noopener">허니문리조트 이야기</a></li>
+          <li><a href="#">신혼여행 박람회</a></li>
+          <li><a href="#">여행 후기</a></li>
+          <li><a href="https://www.youtube.com/@honeymoonresort" target="_blank" rel="noopener">유튜브</a></li>
+        </ul>
+      </nav>
+
+      <div class="header__util">
+        <button class="util__search" aria-label="검색">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6">
+            <circle cx="11" cy="11" r="7" />
+            <line x1="16.5" y1="16.5" x2="21" y2="21" stroke-linecap="round" />
+          </svg>
+        </button>
+        <a href="#" class="util__link">1:1 무료 상담</a>
+
+        <button class="util__toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+      <div class="header-search-bar" id="headerSearchBar" role="search" aria-hidden="true">
+        <div class="header-search-inner">
+          <div class="header-search-hint" id="headerSearchHint"></div>
+          <input type="search" class="header-search-input" id="headerSearchInput"
+                 placeholder="여행지, 리조트를 검색해보세요" autocomplete="off" aria-label="검색" />
+          <button class="header-search-close" id="headerSearchClose" aria-label="검색 닫기">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </header>
 
-<!-- ============ 마퀴 ============ -->
-<section class="marquee" aria-hidden="true">
-  <div class="marquee__row">
-    <div class="marquee__track marquee__track--ltr" id="mqTop"></div>
-  </div>
-  <div class="marquee__row">
-    <div class="marquee__track marquee__track--rtl" id="mqBottom"></div>
-  </div>
-</section>
-
-<!-- ============ 스토리(브랜드) ============ -->
-<section class="story" id="story">
-  <div class="story__grid">
-    <div class="story__stage" id="storyStage"></div>
-    <div class="story__copy-wrap">
-      <div id="storyCopy">
-        <!-- JS가 채움 -->
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="hero">
+    <div class="hero__slides" id="heroSlides">
+      <div class="hero__slide is-active" data-index="0">
+        <div class="hero__media placeholder" data-src="/honeymoonresort-landing/assets/destinations/hawaii.jpg"></div>
+      </div>
+      <div class="hero__slide" data-index="1">
+        <div class="hero__media placeholder" data-src="/honeymoonresort-landing/assets/destinations/maldives.jpg"></div>
+      </div>
+      <div class="hero__slide" data-index="2">
+        <div class="hero__media placeholder" data-src="/honeymoonresort-landing/assets/destinations/bali.jpg"></div>
+      </div>
+      <div class="hero__slide" data-index="3">
+        <div class="hero__media placeholder" data-src="/honeymoonresort-landing/assets/destinations/europe.jpg"></div>
+      </div>
+      <div class="hero__slide" data-index="4">
+        <div class="hero__media placeholder" data-src="/honeymoonresort-landing/assets/destinations/spain.jpg"></div>
+      </div>
+      <div class="hero__slide" data-index="5">
+        <div class="hero__media placeholder" data-src="/honeymoonresort-landing/assets/destinations/australia.jpg"></div>
+      </div>
+      <div class="hero__slide" data-index="6">
+        <div class="hero__media placeholder" data-src="/honeymoonresort-landing/assets/destinations/dubai.jpg"></div>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- ============ 신혼여행지 컬렉션 ============ -->
-<section class="collection-title reveal">
-  <h2>1:1 맞춤으로 완성하는 신혼여행지</h2>
-  <p>같은 몰디브도, 같은 하와이도 — 두 사람에게 맞는 리조트는 다릅니다</p>
-</section>
+    <div class="hero__body container">
+      <div class="hero__copy">
+        <h1 class="hero__title">허니문리조트</h1>
+        <p class="hero__desc">
+          1995년부터 신혼여행을 전문으로 안내해 온 허니문 전문 여행사입니다.<br />
+          예비부부의 예산과 여행 스타일에 맞춰 항공·호텔·투어·현지 일정을 함께 구성합니다.
+        </p>
 
-<div class="collection" id="destinations">
-  <nav class="side-nav" id="sideNav">
-    <a href="#dest-hawaii" data-target="dest-hawaii"><span class="dot"></span><span class="label">하와이</span></a>
-    <a href="#dest-maldives" data-target="dest-maldives"><span class="dot"></span><span class="label">몰디브</span></a>
-    <a href="#dest-bali" data-target="dest-bali"><span class="dot"></span><span class="label">발리</span></a>
-    <a href="#dest-europe" data-target="dest-europe"><span class="dot"></span><span class="label">유럽</span></a>
-  </nav>
+        <div class="hero__indicator">
+          <span class="indicator__current" id="slideCurrent">01</span>
+          <div class="indicator__track">
+            <span class="indicator__progress" id="slideProgress"></span>
+          </div>
+          <span class="indicator__total" id="slideTotal">07</span>
+          <div class="indicator__arrows">
+            <button class="arrow arrow--prev" id="slidePrev" aria-label="이전 슬라이드">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5">
+                <polyline points="15 5 8 12 15 19" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </button>
+            <button class="arrow arrow--next" id="slideNext" aria-label="다음 슬라이드">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5">
+                <polyline points="9 5 16 12 9 19" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </button>
+          </div>
+        </div>
 
-  <section class="dest" id="dest-hawaii">
-    <div class="dest__img"><img src="/honeymoonresort-landing/assets/destinations/hawaii.jpg" alt="하와이 신혼여행"></div>
-    <div class="dest__overlay"></div>
-    <div class="wrap"><div class="dest__body">
-      <p class="dest__num">01 — Hawaii</p>
-      <h3 class="dest__title">하와이</h3>
-      <p class="dest__desc">숙박 지역과 이웃 섬 일정에 따라 여행의 동선과 구성이 크게 달라집니다. 와이키키 관광형부터 코올리나 휴양형까지 취향에 맞춰 설계합니다.</p>
-      <p class="dest__cta"><a href="#">하와이 신혼여행 상담하기</a></p>
-    </div></div>
+        <div class="hero__actions">
+          <a href="#" class="btn btn--primary">1:1 무료 상담</a>
+          <a href="#destinations" class="btn btn--ghost">신혼여행지 보기</a>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <section class="dest" id="dest-maldives">
-    <div class="dest__img"><img src="/honeymoonresort-landing/assets/destinations/maldives.jpg" alt="몰디브 신혼여행"></div>
-    <div class="dest__overlay"></div>
-    <div class="wrap"><div class="dest__body">
-      <p class="dest__num">02 — Maldives</p>
-      <h3 class="dest__title">몰디브</h3>
-      <p class="dest__desc">수중환경과 객실 타입, 식사 조건, 이동 방식에 따라 최적의 리조트가 달라집니다. 워터빌라부터 비치빌라까지 예산과 취향에 맞춰 비교해드립니다.</p>
-      <p class="dest__cta"><a href="#">몰디브 신혼여행 상담하기</a></p>
-    </div></div>
+  <!-- ============ MARQUEE STRIP ============ -->
+  <section class="marquee-section" id="marqueeSection" aria-hidden="true">
+
+    <div class="marquee-strip marquee-strip--ltr">
+      <div class="marquee-track" id="marqueeTrackTop">
+        <div class="marquee-group">
+          <div class="marquee-item"><img src="/honeymoonresort-landing/assets/destinations/hawaii.jpg" alt="" class="marquee-img" /></div>
+          <div class="marquee-item"><img src="/honeymoonresort-landing/assets/destinations/maldives.jpg" alt="" class="marquee-img" /></div>
+          <div class="marquee-item"><img src="/honeymoonresort-landing/assets/destinations/bali.jpg" alt="" class="marquee-img" /></div>
+          <div class="marquee-item"><img src="/honeymoonresort-landing/assets/destinations/europe.jpg" alt="" class="marquee-img" /></div>
+        </div>
+        <div class="marquee-group" aria-hidden="true">
+          <div class="marquee-item"><img src="/honeymoonresort-landing/assets/destinations/hawaii.jpg" alt="" class="marquee-img" /></div>
+          <div class="marquee-item"><img src="/honeymoonresort-landing/assets/destinations/maldives.jpg" alt="" class="marquee-img" /></div>
+          <div class="marquee-item"><img src="/honeymoonresort-landing/assets/destinations/bali.jpg" alt="" class="marquee-img" /></div>
+          <div class="marquee-item"><img src="/honeymoonresort-landing/assets/destinations/europe.jpg" alt="" class="marquee-img" /></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="marquee-strip marquee-strip--rtl">
+      <div class="marquee-track" id="marqueeTrackBottom">
+        <div class="marquee-group">
+          <div class="marquee-item"><img src="/honeymoonresort-landing/assets/destinations/spain.jpg" alt="" class="marquee-img" /></div>
+          <div class="marquee-item"><img src="/honeymoonresort-landing/assets/destinations/tahiti.jpg" alt="" class="marquee-img" /></div>
+          <div class="marquee-item"><img src="/honeymoonresort-landing/assets/destinations/dubai.jpg" alt="" class="marquee-img" /></div>
+          <div class="marquee-item"><img src="/honeymoonresort-landing/assets/destinations/australia.jpg" alt="" class="marquee-img" /></div>
+        </div>
+        <div class="marquee-group" aria-hidden="true">
+          <div class="marquee-item"><img src="/honeymoonresort-landing/assets/destinations/spain.jpg" alt="" class="marquee-img" /></div>
+          <div class="marquee-item"><img src="/honeymoonresort-landing/assets/destinations/tahiti.jpg" alt="" class="marquee-img" /></div>
+          <div class="marquee-item"><img src="/honeymoonresort-landing/assets/destinations/dubai.jpg" alt="" class="marquee-img" /></div>
+          <div class="marquee-item"><img src="/honeymoonresort-landing/assets/destinations/australia.jpg" alt="" class="marquee-img" /></div>
+        </div>
+      </div>
+    </div>
+
   </section>
 
-  <section class="dest" id="dest-bali">
-    <div class="dest__img"><img src="/honeymoonresort-landing/assets/destinations/bali.jpg" alt="발리 신혼여행"></div>
-    <div class="dest__overlay"></div>
-    <div class="wrap"><div class="dest__body">
-      <p class="dest__num">03 — Bali</p>
-      <h3 class="dest__title">발리</h3>
-      <p class="dest__desc">지역 조합과 이동 동선에 따라 신혼여행의 완성도가 달라집니다. 우붓의 고요함과 스미냑의 활기를 함께, 혹은 취향껏 골라 설계합니다.</p>
-      <p class="dest__cta"><a href="#">발리 신혼여행 상담하기</a></p>
-    </div></div>
+  <!-- ============ STORY SECTION ============ -->
+  <section class="story-section" id="storySection">
+
+    <div class="story-stage" id="storyStage"></div>
+
+    <div class="story-copy-wrap">
+      <div class="story-copy is-active">
+        <h2 class="story-title">허니문리조트</h2>
+        <p class="story-desc">
+          허니문리조트는 1995년부터 신혼여행을 전문으로 안내해 온 여행사입니다.<br />
+          서울 청담동 본사와 전국 13개 지사, 100명 이상의 임직원이<br />
+          신혼여행지 상담부터 예약, 현지 소통까지 함께합니다.
+        </p>
+        <a href="https://www.honeymoonresort.co.kr/company/company.do" target="_blank" rel="noopener" class="story-btn">더 알아보기</a>
+      </div>
+    </div>
+
+    <button class="story-nav story-nav--prev" id="storyPrev" aria-label="이전 슬라이드">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5">
+        <polyline points="15 5 8 12 15 19" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </button>
+    <button class="story-nav story-nav--next" id="storyNext" aria-label="다음 슬라이드">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5">
+        <polyline points="9 5 16 12 9 19" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </button>
+
   </section>
 
-  <section class="dest" id="dest-europe">
-    <div class="dest__img"><img src="/honeymoonresort-landing/assets/destinations/europe.jpg" alt="유럽 신혼여행"></div>
-    <div class="dest__overlay"></div>
-    <div class="wrap"><div class="dest__body">
-      <p class="dest__num">04 — Europe</p>
-      <h3 class="dest__title">유럽</h3>
-      <p class="dest__desc">출·도착 도시(IN–OUT)부터 이용하는 호텔과 리조트의 정확한 명칭까지 투명하게 안내합니다. 복잡한 일정도 하나의 동선으로 정리해드립니다.</p>
-      <p class="dest__cta"><a href="#">유럽 신혼여행 상담하기</a></p>
-    </div></div>
+  <!-- ============ COLLECTION TITLE SECTION ============ -->
+  <section class="collection-title-section" id="destinations">
+    <div class="collection-title-wrap">
+      <h2 class="collection-main-title">신혼여행지 컬렉션</h2>
+    </div>
   </section>
-</div>
 
-<!-- ============ 브랜드 패밀리 ============ -->
-<section class="family" id="family">
-  <div class="wrap">
-    <div class="family__head reveal">
-      <h2>허니문리조트 브랜드 패밀리</h2>
-      <p>신혼여행 전문 브랜드를 중심으로, 목적에 맞는 여행 브랜드를 함께 운영합니다.</p>
-    </div>
-    <div class="family__grid">
-      <div class="family__card reveal">
-        <img src="/honeymoonresort-landing/assets/logo/honeymoonresort-logo.png" alt="허니문리조트">
-        <h3>허니문리조트</h3>
-        <p>1995년부터, 신혼여행을 전문으로 안내해 온 허니문 전문 여행사입니다.</p>
+  <!-- ============ FIXED COLLECTION SIDE NAVIGATION ============ -->
+  <div class="collection-side-nav" id="collectionSideNav">
+    <ul class="side-nav-list">
+      <li class="side-nav-item" data-target="collectionHawaii">
+        <a href="#dest-hawaii">
+          <span class="side-nav-bullet"></span>
+          <span class="side-nav-text">하와이</span>
+        </a>
+      </li>
+      <li class="side-nav-item" data-target="collectionMaldives">
+        <a href="#dest-maldives">
+          <span class="side-nav-bullet"></span>
+          <span class="side-nav-text">몰디브</span>
+        </a>
+      </li>
+      <li class="side-nav-item" data-target="collectionBali">
+        <a href="#dest-bali">
+          <span class="side-nav-bullet"></span>
+          <span class="side-nav-text">발리</span>
+        </a>
+      </li>
+      <li class="side-nav-item" data-target="collectionEurope">
+        <a href="#dest-europe">
+          <span class="side-nav-bullet"></span>
+          <span class="side-nav-text">유럽</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ============ HOTEL INTRO SECTION: 하와이 ============ -->
+  <section class="hotel-intro-section" id="dest-hawaii">
+    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/honeymoonresort-landing/assets/destinations/hawaii.jpg" alt="" class="hotel-intro-bg lazy-img" />
+    <div class="hotel-intro-overlay"></div>
+    <div class="hotel-intro-content">
+      <div class="hotel-intro-header">
+        <h3 class="hotel-intro-title">하와이 신혼여행</h3>
+        <p class="hotel-intro-address">숙박 지역과 이웃 섬 일정에 따라 여행의 동선과 구성이 달라집니다</p>
       </div>
-      <div class="family__card reveal">
-        <img src="/honeymoonresort-landing/assets/logo/hotelntour-logo.png" alt="호텔엔투어">
-        <h3>호텔엔투어</h3>
-        <p>가족·친구·커플 모두의 여행을 위한 1:1 맞춤 자유여행 전문 브랜드입니다.</p>
-      </div>
-      <div class="family__card reveal">
-        <img src="/honeymoonresort-landing/assets/logo/hotelntrip-logo.png" alt="호텔엔트립">
-        <h3>호텔엔트립</h3>
-        <p>하와이 호텔 특가를 중심으로 한 실속형 예약 전문 플랫폼입니다.</p>
-      </div>
-      <div class="family__card reveal">
-        <img src="/honeymoonresort-landing/assets/logo/kwedding-logo.png" alt="K-웨딩 by 허니문리조트">
-        <h3>K-웨딩 by 허니문리조트</h3>
-        <p>한국을 방문하는 예비부부를 위한 웨딩 인바운드 컨시어지 서비스입니다.</p>
+      <div class="hotel-intro-actions">
+        <a href="#" class="hotel-intro-btn btn-space">하와이 신혼여행 알아보기</a>
+        <a href="#" class="hotel-intro-btn btn-room">1:1 상담 신청</a>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ============ 오시는 길 / 지사 안내 ============ -->
-<section class="info" id="info">
-  <div class="wrap info__grid">
-    <div class="info__hq reveal">
-      <h2>서울 청담동 본사</h2>
-      <p>허니문리조트는 서울 청담동 본사를 중심으로 전국 13개 지역 지사와 100명 이상의 임직원 운영 기반을 갖춘 허니문 전문 여행사입니다. B2C 신혼여행 상담과 B2B 여행 사업을 함께 운영합니다.</p>
+  <!-- ============ HOTEL INTRO SECTION: 몰디브 ============ -->
+  <section class="hotel-intro-section" id="dest-maldives">
+    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/honeymoonresort-landing/assets/destinations/maldives.jpg" alt="" class="hotel-intro-bg lazy-img" />
+    <div class="hotel-intro-overlay"></div>
+    <div class="hotel-intro-content">
+      <div class="hotel-intro-header">
+        <h3 class="hotel-intro-title">몰디브 신혼여행</h3>
+        <p class="hotel-intro-address">수중환경과 객실 타입, 식사 조건에 따라 최적의 리조트가 달라집니다</p>
+      </div>
+      <div class="hotel-intro-actions">
+        <a href="#" class="hotel-intro-btn btn-space">몰디브 신혼여행 알아보기</a>
+        <a href="#" class="hotel-intro-btn btn-room">1:1 상담 신청</a>
+      </div>
     </div>
-    <div class="info__branches reveal">
-      <h4>전국 지사 네트워크</h4>
-      <ul>
-        <li>서울 본사</li><li>천안</li><li>대전</li><li>대구</li><li>포항</li><li>울산</li>
-        <li>부산</li><li>창원</li><li>전주</li><li>광주</li><li>진주</li><li>순천</li><li>제주</li><li>하와이</li>
-      </ul>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- ============ 푸터 ============ -->
-<footer class="site-footer">
-  <div class="wrap site-footer__top">
-    <div class="site-footer__logo"><img src="/honeymoonresort-landing/assets/logo/honeymoonresort-logo-white.png" alt="허니문리조트"></div>
-    <div class="site-footer__sns">
-      <a href="#" class="sns-link" aria-label="인스타그램"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
-      <a href="#" class="sns-link" aria-label="유튜브"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg></a>
-      <a href="#" class="sns-link" aria-label="블로그">B</a>
+  <!-- ============ HOTEL INTRO SECTION: 발리 ============ -->
+  <section class="hotel-intro-section" id="dest-bali">
+    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/honeymoonresort-landing/assets/destinations/bali.jpg" alt="" class="hotel-intro-bg lazy-img" />
+    <div class="hotel-intro-overlay"></div>
+    <div class="hotel-intro-content">
+      <div class="hotel-intro-header">
+        <h3 class="hotel-intro-title">발리 신혼여행</h3>
+        <p class="hotel-intro-address">지역 조합과 이동 동선에 따라 신혼여행의 완성도가 달라집니다</p>
+      </div>
+      <div class="hotel-intro-actions">
+        <a href="#" class="hotel-intro-btn btn-space">발리 신혼여행 알아보기</a>
+        <a href="#" class="hotel-intro-btn btn-room">1:1 상담 신청</a>
+      </div>
     </div>
-  </div>
-  <div class="wrap site-footer__mid">
-    <b>허니문리조트</b> · 서울 청담동 본사 · 1995년부터 신혼여행 전문 여행사<br>
-    포시즌스 호텔 7개 지점 한국 독점 도매 · 주메이라 · 리딩 호텔 오브 더 월드 · 킴튼 · 아난타라 · 벨몬드 파트너십 운영
-  </div>
-  <div class="wrap site-footer__bottom">
-    <span>&copy; Honeymoonresort. All rights reserved.</span>
-    <div class="footer-brand-links">
-      <a href="https://hotelntour.co.kr" target="_blank" rel="noopener">호텔엔투어</a>
-      <a href="#" target="_blank" rel="noopener">호텔엔트립</a>
-      <a href="#" target="_blank" rel="noopener">K-웨딩</a>
+  </section>
+
+  <!-- ============ HOTEL INTRO SECTION: 유럽 ============ -->
+  <section class="hotel-intro-section" id="dest-europe">
+    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/honeymoonresort-landing/assets/destinations/europe.jpg" alt="" class="hotel-intro-bg lazy-img" />
+    <div class="hotel-intro-overlay"></div>
+    <div class="hotel-intro-content">
+      <div class="hotel-intro-header">
+        <h3 class="hotel-intro-title">유럽 신혼여행</h3>
+        <p class="hotel-intro-address">출·도착 도시(IN–OUT)부터 호텔·리조트 명칭까지 투명하게 안내합니다</p>
+      </div>
+      <div class="hotel-intro-actions">
+        <a href="#" class="hotel-intro-btn btn-space">유럽 신혼여행 알아보기</a>
+        <a href="#" class="hotel-intro-btn btn-room">1:1 상담 신청</a>
+      </div>
     </div>
-  </div>
-</footer>
+  </section>
 
-<button class="top-btn" id="topBtn" aria-label="맨 위로">
-  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
-</button>
+  <!-- ============ EXPO SECTION (신혼여행 박람회) ============ -->
+  <section class="dining-section">
+    <div class="dining-container container">
+      <div class="dining-media-wrap">
+        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/honeymoonresort-landing/assets/destinations/maldives.jpg" alt="신혼여행 박람회" class="dining-img lazy-img" />
+      </div>
 
-<script src="js/script.js"></script>
+      <div class="dining-info-wrap">
+        <div class="dining-header">
+          <h2 class="dining-title">신혼여행 박람회</h2>
+          <div class="dining-desc-wrap">
+            <p class="dining-desc-primary">신혼여행지와 리조트를 직접 비교하는 1:1 맞춤 상담 행사</p>
+            <p class="dining-desc-secondary">매주 주말 오전 11시 ~ 오후 7시 운영</p>
+          </div>
+        </div>
+
+        <div class="dining-actions">
+          <a href="#" class="dining-btn">박람회 일정 확인하기</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MOMENTS SECTION (허니문리조트를 더 알아보는 방법) ============ -->
+  <section class="moments-section">
+    <div class="moments-container container">
+      <h2 class="moments-title">허니문리조트를 더 알아보는 방법</h2>
+
+      <div class="moments-grid">
+        <div class="moment-card">
+          <div class="moment-card-media">
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/honeymoonresort-landing/assets/celeb/limsungjae.jpg" alt="셀럽 허니문" class="moment-card-img lazy-img" />
+          </div>
+          <div class="moment-card-info">
+            <h3 class="moment-card-title">셀럽 허니문</h3>
+            <p class="moment-card-desc">허니문리조트와 함께한 다양한 셀럽들의 신혼여행 이야기</p>
+          </div>
+        </div>
+
+        <div class="moment-card">
+          <div class="moment-card-media">
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/honeymoonresort-landing/assets/destinations/hawaii.jpg" alt="공식 인스타그램" class="moment-card-img lazy-img" />
+          </div>
+          <div class="moment-card-info">
+            <h3 class="moment-card-title">공식 인스타그램</h3>
+            <p class="moment-card-desc">신혼여행지 소식과 최신 프로모션을 가장 먼저 확인하세요</p>
+          </div>
+        </div>
+
+        <div class="moment-card">
+          <div class="moment-card-media">
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/honeymoonresort-landing/assets/destinations/bali.jpg" alt="여행 후기" class="moment-card-img lazy-img" />
+          </div>
+          <div class="moment-card-info">
+            <h3 class="moment-card-title">여행 후기</h3>
+            <p class="moment-card-desc">먼저 다녀온 예비부부들의 생생한 신혼여행 후기</p>
+          </div>
+        </div>
+
+        <div class="moment-card">
+          <div class="moment-card-media">
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/honeymoonresort-landing/assets/destinations/europe.jpg" alt="나의 여행지 찾기" class="moment-card-img lazy-img" />
+          </div>
+          <div class="moment-card-info">
+            <h3 class="moment-card-title">나의 여행지 찾기</h3>
+            <p class="moment-card-desc">취향과 예산에 맞는 신혼여행지를 찾아드립니다</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MAP SECTION ============ -->
+  <section class="map-section">
+    <div class="map-container container">
+      <div class="map-header">
+        <h2 class="map-section-title">오시는 길</h2>
+      </div>
+
+      <div class="map-content-grid">
+
+        <div class="map-info-panel">
+          <div class="map-cards-wrapper">
+            <div class="map-info-card is-active" id="card-seoul">
+              <h3 class="map-card-name">허니문리조트 서울 본사</h3>
+              <ul class="map-details-list">
+                <li class="map-detail-item">
+                  <span class="detail-label">주소</span>
+                  <span class="detail-val">(06070) 서울특별시 강남구 도산대로 506, 2층 (청담동, 재정빌딩)</span>
+                </li>
+                <li class="map-detail-item">
+                  <span class="detail-label">고객센터</span>
+                  <span class="detail-val"><a href="tel:02-548-2222" class="tel-link">02-548-2222</a></span>
+                </li>
+                <li class="map-detail-item">
+                  <span class="detail-label">팩스</span>
+                  <span class="detail-val">02-6007-1532</span>
+                </li>
+                <li class="map-detail-item">
+                  <span class="detail-label">전국 지사</span>
+                  <span class="detail-val">천안 · 대전 · 대구 · 포항 · 울산 · 부산 · 창원 · 전주 · 광주 · 진주 · 순천 · 제주 · 하와이</span>
+                </li>
+              </ul>
+              <div class="map-card-actions">
+                <a href="https://map.kakao.com/link/to/허니문리조트,37.5238,127.0438" target="_blank" rel="noopener noreferrer" class="map-cta-btn">
+                  <span>카카오맵 길찾기</span>
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="9 18 15 12 9 6" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="map-viewport-wrapper" id="mapWrapper">
+          <div id="map" class="map-viewport"></div>
+
+          <div class="map-placeholder" id="mapPlaceholder">
+            <div class="map-svg-bg">
+              <svg width="100%" height="100%" viewBox="0 0 600 450" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 50 0 L 50 450 M 150 0 L 150 450 M 250 0 L 250 450 M 350 0 L 350 450 M 450 0 L 450 450 M 550 0 L 550 450" stroke="rgba(var(--color-tan-rgb), 0.08)" stroke-width="1"/>
+                <path d="M 0 50 L 600 50 M 0 150 L 600 150 M 0 250 L 600 250 M 0 350 L 600 350" stroke="rgba(var(--color-tan-rgb), 0.08)" stroke-width="1"/>
+                <path d="M 0 100 L 600 320 M 100 0 L 500 450 M 0 400 L 400 0" stroke="rgba(var(--color-tan-rgb), 0.12)" stroke-width="2" stroke-dasharray="4,4"/>
+                <circle cx="300" cy="225" r="120" stroke="rgba(var(--color-tan-rgb), 0.06)" stroke-width="2"/>
+                <circle cx="300" cy="225" r="70" stroke="rgba(var(--color-tan-rgb), 0.04)" stroke-width="1"/>
+              </svg>
+            </div>
+
+            <div class="map-placeholder-content">
+              <div class="map-pin-container">
+                <svg class="map-pin-svg" viewBox="0 0 24 24" width="48" height="48" fill="none">
+                  <path d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22S19 14.25 19 9C19 5.13 15.87 2 12 2Z" fill="#8A6847" />
+                  <circle cx="12" cy="9" r="3.5" fill="#FFF7E6" />
+                </svg>
+                <div class="map-pin-pulse"></div>
+              </div>
+              <h4 class="map-placeholder-title">실시간 지도 연동 대기</h4>
+              <p class="map-placeholder-desc">카카오 지도 API 키가 설정되면 실시간 인터랙티브 지도가 활성화됩니다.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+
+    <div class="footer-upper">
+      <div class="footer-upper-inner container">
+
+        <div class="footer-logo-col">
+          <div class="footer-logo">
+            <img src="/honeymoonresort-landing/assets/logo/honeymoonresort-logo.png" class="footer-logo-img" alt="허니문리조트" />
+          </div>
+        </div>
+
+        <div class="footer-info-grid">
+          <div class="footer-info-col">
+            <h4 class="info-col-title">허니문리조트 서울 본사</h4>
+            <ul class="info-col-list">
+              <li>(06070) 서울특별시 강남구 도산대로 506, 2층 (청담동, 재정빌딩)</li>
+              <li>고객센터. 02-548-2222</li>
+              <li>팩스. 02-6007-1532</li>
+              <li>사업자등록번호: 211-87-49754</li>
+              <li>대표: 송종석</li>
+              <li>통신판매업: 제2009-서울강남-01388호</li>
+            </ul>
+          </div>
+
+          <div class="footer-info-col">
+            <h4 class="info-col-title">전국 지사</h4>
+            <ul class="info-col-list">
+              <li>천안 041-576-6445 · 대전 042-546-1234</li>
+              <li>대구 053-421-0003 · 포항 054-727-1253</li>
+              <li>울산 052-267-6405 · 부산 051-747-8255</li>
+              <li>창원 055-246-5678 · 전주 063-283-7090</li>
+              <li>광주 062-449-5353 · 진주 055-920-6026</li>
+              <li>순천 061-743-6548 · 제주 064-744-4741</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="footer-lower">
+      <div class="footer-lower-inner container">
+
+        <div class="footer-affiliate">
+          <span class="affiliate-label">브랜드 패밀리</span>
+          <div class="affiliate-dropdown-wrap">
+            <select id="affiliateSelect" class="affiliate-select" aria-label="브랜드 링크 선택">
+              <option value="" disabled selected>브랜드 바로가기</option>
+              <option value="https://hotelntour.co.kr">호텔엔투어</option>
+              <option value="#">호텔엔트립</option>
+              <option value="#">K-웨딩 by 허니문리조트</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="footer-foundation">
+          <span class="foundation-title">허니문리조트는 1995년부터 신혼여행을 전문으로 안내합니다</span>
+        </div>
+
+        <div class="footer-sns">
+          <a href="https://www.instagram.com/honeymoonresort" target="_blank" rel="noopener noreferrer" class="sns-link" aria-label="허니문리조트 인스타그램">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </a>
+          <a href="https://www.facebook.com/honeymoonresort.co.kr" target="_blank" rel="noopener noreferrer" class="sns-link" aria-label="허니문리조트 페이스북">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+            </svg>
+          </a>
+          <a href="https://www.youtube.com/@honeymoonresort" target="_blank" rel="noopener noreferrer" class="sns-link" aria-label="허니문리조트 유튜브">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
+              <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+            </svg>
+          </a>
+          <a href="https://blog.naver.com/hmresort" target="_blank" rel="noopener noreferrer" class="sns-link" aria-label="허니문리조트 블로그">B</a>
+        </div>
+
+      </div>
+    </div>
+
+  </footer>
+
+  <!-- ============ FLOATING BACK TO TOP BUTTON ============ -->
+  <button class="floating-top-btn" id="floatingTopBtn" aria-label="페이지 상단으로 이동">
+    <svg class="floating-top-btn__arrow" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="12" y1="19" x2="12" y2="5"></line>
+      <polyline points="5 12 12 5 19 12"></polyline>
+    </svg>
+  </button>
+
+  <script src="js/script.js"></script>
 </body>
 </html>
