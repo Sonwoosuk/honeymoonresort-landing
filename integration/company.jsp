@@ -306,46 +306,52 @@ p {
   color: var(--hero-color-gold);
 }
 
-/* 헤드라인 단어 순차(사르륵) 등장 */
-.hero__text-headline .htw {
-  display: inline-block;
-  overflow: hidden;
-  vertical-align: top;
+/* 헤드라인 등장: 한 줄씩 흐릿 → 또렷 (아련한 블러 인) */
+.hero__text-headline .htl {
+  display: block;
+  opacity: 0;
+  filter: blur(16px);
+  transition: opacity 1.2s ease, filter 1.2s ease;
+  transition-delay: calc(var(--i, 0) * 260ms);
 }
-.hero__text-headline .htw-in {
-  display: inline-block;
-  transform: translateY(115%);
-  transition: transform 0.9s cubic-bezier(0.19, 1, 0.22, 1);
-  transition-delay: calc(var(--i, 0) * 90ms);
-}
-.hero__text-headline.is-visible .htw-in {
-  transform: translateY(0);
+.hero__text-headline.is-visible .htl {
+  opacity: 1;
+  filter: blur(0);
 }
 
+/* 히어로 하단 마무리 줄: 화면 중앙 정렬 (태그라인 + "함께 준비한 신혼여행지 [바뀌는 여행지]") */
 .hero__text-foot {
+  margin-top: clamp(48px, 7vw, 96px);
   text-align: center;
-  margin-top: clamp(56px, 8vw, 112px);
 }
 .hero__text-tagline {
-  margin: 0 0 22px;
-  font-size: 15px;
+  margin: 0 0 10px;
+  font-size: 18px;
   color: var(--hero-color-body);
 }
-.hero__text-arrow {
-  display: inline-flex;
-  color: var(--hero-color-ink);
+/* 한 자리에서 바뀌는 여행지 단어 (스크롤 유도 화살표 대체) */
+.hero__text-rotate {
+  margin: 0;
+  font-size: 20px;
+  color: var(--hero-color-body);
 }
-.hero__text-arrow svg {
-  animation: heroArrowDrop 2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+.hero__text-rotate__slot {
+  display: inline-block;
+  font-weight: 700;
+  color: var(--hero-color-gold);
 }
-@keyframes heroArrowDrop {
-  0%   { transform: translateY(-5px); opacity: 0.35; }
-  50%  { transform: translateY(7px);  opacity: 1; }
-  100% { transform: translateY(-5px); opacity: 0.35; }
+.hero__text-rotate__slot b {
+  display: inline-block;
+  font-weight: 700;
+  animation: heroRotateWord 0.5s ease both;
+}
+@keyframes heroRotateWord {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .hero__text-headline .htw-in { transition: none; transform: none; }
-  .hero__text-arrow svg { animation: none; opacity: 0.7; }
+  .hero__text-headline .htl { transition: none; opacity: 1; filter: none; }
+  .hero__text-rotate__slot b { animation: none; }
 }
 @media (max-width: 860px) {
   .hero__text-row { flex-direction: column; gap: 32px; }
@@ -525,59 +531,44 @@ p {
   text-align: center;
 }
 
-/* 숫자 통계 그리드 (goodai global 레퍼런스: 헤어라인 경계 + 큰 숫자, 카드/그림자 없음) */
+/* 숫자 통계: 박스·테두리·색 채움 없이 큰 숫자만 (에디토리얼, 가운데 정렬) */
 .scale__stats {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: clamp(56px, 11vw, 128px);
   max-width: 640px;
-  margin: 0 auto 32px;
-  border-top: 1px solid var(--hero-color-border);
-  border-left: 1px solid var(--hero-color-border);
+  margin: 8px auto 40px;
 }
 
 .scale__stat {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
-  padding: 32px 28px;
-  background-color: var(--hero-color-bg);
-  border-right: 1px solid var(--hero-color-border);
-  border-bottom: 1px solid var(--hero-color-border);
-  box-sizing: border-box;
-}
-
-/* OURA & CO. 레퍼런스: 통계 중 하나를 진한 색 셀로 강조 */
-.scale__stat--dark {
-  background-color: var(--hero-color-ink);
-}
-.scale__stat--dark .scale__stat-number,
-.scale__stat--dark .scale__stat-number span {
-  color: var(--hero-color-on-overlay);
-}
-.scale__stat--dark .scale__stat-label {
-  color: var(--hero-color-on-overlay-dim);
+  align-items: center;
+  gap: 12px;
+  text-align: center;
 }
 
 .scale__stat-number {
   margin: 0;
-  font-size: 56px;
+  font-size: clamp(48px, 6vw, 68px);
   font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+  line-height: 1;
+  letter-spacing: -0.03em;
   color: var(--hero-color-ink);
 }
 
 .scale__stat-number span {
-  font-size: 22px;
+  font-size: 0.4em;
   font-weight: 600;
-  margin-left: 2px;
+  margin-left: 3px;
+  color: var(--hero-color-gold);
 }
 
 .scale__stat-label {
   margin: 0;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--hero-color-body);
 }
 
@@ -596,7 +587,7 @@ p {
 .scale__map {
   display: block;
   margin: 8px auto 28px;
-  max-width: 380px;
+  max-width: 520px;
   width: 100%;
   height: auto;
 }
@@ -637,16 +628,8 @@ p {
   }
 
   .scale__stats {
-    grid-template-columns: 1fr;
+    gap: 40px;
     margin-bottom: 32px;
-  }
-
-  .scale__stat {
-    width: 100%;
-  }
-
-  .scale__stat-number {
-    font-size: 40px;
   }
 
   .scale__desc {
@@ -2026,13 +2009,11 @@ html, body {
         <hr class="hero__text-divider">
         <p class="hero__text-desc">1995년부터<br>신혼여행만을 전문으로<br>맞춤 여행을 안내해온<br>허니문리조트</p>
       </div>
-      <p class="hero__text-headline" id="heroHeadline"><span class="htw" style="--i:0"><span class="htw-in"><b>30년의</b></span></span> <span class="htw" style="--i:1"><span class="htw-in">경험과</span></span><br><span class="htw" style="--i:2"><span class="htw-in">허니문</span></span> <span class="htw" style="--i:3"><span class="htw-in"><b>전문성으로</b></span></span><br><span class="htw" style="--i:4"><span class="htw-in">완성하는</span></span><br><span class="htw" style="--i:5"><span class="htw-in"><b>맞춤</b></span></span> <span class="htw" style="--i:6"><span class="htw-in"><b>허니문</b></span></span></p>
+      <p class="hero__text-headline" id="heroHeadline"><span class="htl" style="--i:0"><b>30년의</b> 경험과</span><span class="htl" style="--i:1">허니문 <b>전문성으로</b></span><span class="htl" style="--i:2">완성하는</span><span class="htl" style="--i:3"><b>맞춤 허니문</b></span></p>
     </div>
     <div class="hero__text-foot">
       <p class="hero__text-tagline">두 사람의 시작을 가장 잘 아는 여행사</p>
-      <span class="hero__text-arrow" aria-hidden="true">
-        <svg width="16" height="24" viewBox="0 0 16 24" fill="none"><line x1="8" y1="0" x2="8" y2="20" stroke="currentColor" stroke-width="1.4"/><polyline points="2,15 8,21 14,15" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </span>
+      <p class="hero__text-rotate">함께 준비한 신혼여행지 <span class="hero__text-rotate__slot" id="heroRotateSlot"><b>몰디브</b></span></p>
     </div>
   </div>
 
@@ -2062,7 +2043,7 @@ html, body {
         <p class="scale__stat-number">13<span>개</span></p>
         <p class="scale__stat-label">지역 지사 (B2B&nbsp;&amp;&nbsp;B2C)</p>
       </div>
-      <div class="scale__stat scale__stat--dark">
+      <div class="scale__stat">
         <p class="scale__stat-number">100<span>명+</span></p>
         <p class="scale__stat-label">임직원 운영 기반</p>
       </div>
@@ -2070,7 +2051,7 @@ html, body {
 
     <p class="scale__desc">허니문리조트는 서울 청담동 본사를 중심으로 13개 지역 지사와 100명 이상의 임직원 운영 기반을 갖춘 허니문 전문 여행사입니다. 서울 본사와 천안, 대전, 대구, 포항, 울산, 부산, 창원, 전주, 광주, 진주, 순천, 제주, 하와이 등 국내외 상담 네트워크를 운영하며 B2C 신혼여행 상담과 B2B 여행 사업을 함께 운영하고 있습니다.</p>
 
-    <img class="scale__map" src="../new_ver/img/company-intro/branch-map.png" alt="허니문리조트 지사 네트워크 지도: 서울 본사, 천안, 대전, 대구, 포항, 울산, 부산, 창원, 전주, 광주, 순천, 제주, 하와이">
+    <img class="scale__map" src="../new_ver/img/company-intro/branch-map.png" alt="허니문리조트 지사 네트워크 지도: 서울 본사, 천안, 대전, 대구, 포항, 울산, 부산, 창원, 진주, 전주, 광주, 순천, 제주, 하와이">
 
     <p class="scale__cities">
       <span class="scale__cities-label">지사 네트워크</span>
@@ -2722,7 +2703,7 @@ html, body {
     });
   }
 
-  /* 히어로 헤드라인: 단어 하나씩 사르륵 등장 */
+  /* 히어로 헤드라인: 한 줄씩 흐릿 → 또렷 (아련한 블러 인) */
   var heroHeadline = document.getElementById('heroHeadline');
   if (heroHeadline) {
     if (!('IntersectionObserver' in window)) {
@@ -2737,6 +2718,17 @@ html, body {
         });
       }, { threshold: 0.3 }).observe(heroHeadline);
     }
+  }
+
+  /* 히어로 하단: 한 자리에서 바뀌는 여행지 단어 */
+  var heroRotateSlot = document.getElementById('heroRotateSlot');
+  if (heroRotateSlot && !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+    var heroRotateWords = ['몰디브', '하와이', '발리', '칸쿤', '세이셸', '모리셔스', '두바이', '태국', '유럽', '호주'];
+    var heroRotateIdx = 0;
+    setInterval(function () {
+      heroRotateIdx = (heroRotateIdx + 1) % heroRotateWords.length;
+      heroRotateSlot.innerHTML = '<b>' + heroRotateWords[heroRotateIdx] + '</b>';
+    }, 2000);
   }
 
   /* 맨 위로 이동 버튼: 페이지를 절반 이상 스크롤하면 표시 */
