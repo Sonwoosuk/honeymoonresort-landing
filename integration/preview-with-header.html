@@ -191,8 +191,12 @@ p {
   line-height: 1.7;
   color: var(--hero-color-body);
 }
-.hero__text-headline {
+.hero__text-main {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.hero__text-headline {
   margin: 0;
   font-family: var(--hero-font);
   font-weight: 600;
@@ -219,28 +223,33 @@ p {
   filter: blur(0);
 }
 
+/* 헤드라인 아래 마무리 줄: 좌측 소개 칼럼(로고+구분선)과 대칭되게
+   헤어라인 + 태그라인 + "함께 준비한 신혼여행지 [바뀌는 여행지]" 를 헤드라인 왼쪽 끝에 정렬 */
 .hero__text-foot {
-  text-align: center;
-  margin-top: clamp(56px, 8vw, 112px);
+  margin-top: clamp(32px, 5vw, 56px);
+  text-align: left;
+}
+.hero__text-foot-rule {
+  width: 56px;
+  height: 1px;
+  background: var(--hero-color-ink);
+  border: none;
+  margin: 0 0 16px;
 }
 .hero__text-tagline {
-  margin: 0 0 16px;
-  font-size: 17px;
+  margin: 0 0 8px;
+  font-size: 15px;
   color: var(--hero-color-body);
 }
 /* 한 자리에서 바뀌는 여행지 단어 (스크롤 유도 화살표 대체) */
 .hero__text-rotate {
-  margin: 0 0 6px;
-  font-size: 15px;
+  margin: 0;
+  font-size: 16px;
   color: var(--hero-color-body);
 }
 .hero__text-rotate__slot {
-  display: block;
-  text-align: center;
-  font-size: 28px;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
+  display: inline-block;
+  font-weight: 700;
   color: var(--hero-color-gold);
 }
 .hero__text-rotate__slot b {
@@ -1979,12 +1988,14 @@ html, body {
         <hr class="hero__text-divider">
         <p class="hero__text-desc">1995년부터<br>신혼여행만을 전문으로<br>맞춤 여행을 안내해온<br>허니문리조트</p>
       </div>
-      <p class="hero__text-headline" id="heroHeadline"><span class="htl" style="--i:0"><b>30년의</b> 경험과</span><span class="htl" style="--i:1">허니문 <b>전문성으로</b></span><span class="htl" style="--i:2">완성하는</span><span class="htl" style="--i:3"><b>맞춤 허니문</b></span></p>
-    </div>
-    <div class="hero__text-foot">
-      <p class="hero__text-tagline">두 사람의 시작을 가장 잘 아는 여행사</p>
-      <p class="hero__text-rotate">함께 준비한 신혼여행지</p>
-      <span class="hero__text-rotate__slot" id="heroRotateSlot"><b>몰디브</b></span>
+      <div class="hero__text-main">
+        <p class="hero__text-headline" id="heroHeadline"><span class="htl" style="--i:0"><b>30년의</b> 경험과</span><span class="htl" style="--i:1">허니문 <b>전문성으로</b></span><span class="htl" style="--i:2">완성하는</span><span class="htl" style="--i:3"><b>맞춤 허니문</b></span></p>
+        <div class="hero__text-foot">
+          <hr class="hero__text-foot-rule">
+          <p class="hero__text-tagline">두 사람의 시작을 가장 잘 아는 여행사</p>
+          <p class="hero__text-rotate">함께 준비한 신혼여행지 <span class="hero__text-rotate__slot" id="heroRotateSlot"><b>몰디브</b></span></p>
+        </div>
+      </div>
     </div>
   </div>
 
