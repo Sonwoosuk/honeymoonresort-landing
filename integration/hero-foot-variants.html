@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>회사소개 히어로 — 헤드라인 등장 효과 & 하단 요소 비교</title>
+<link rel="stylesheet" as="style" crossorigin
+  href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --hero-color-bg: #ffffff;
+  --hero-color-surface: #f8f2ea;
+  --hero-color-border: #e6d9c6;
+  --hero-color-ink: #2b1f16;
+  --hero-color-body: #6b5c4c;
+  --hero-color-gold: #8a6847;
+  --hero-color-gold-soft: #b79a7a;
+  --hero-font: "Pretendard", -apple-system, BlinkMacSystemFont, "Malgun Gothic", sans-serif;
+}
+body {
+  background: #efe9e1;
+  font-family: var(--hero-font);
+  word-break: keep-all;
+  -webkit-font-smoothing: antialiased;
+  padding: 40px 0 80px;
+}
+.page-title { max-width: 1180px; margin: 0 auto 8px; padding: 0 40px; font-size: 20px; font-weight: 700; color: var(--hero-color-ink); }
+.page-note { max-width: 1180px; margin: 0 auto 36px; padding: 0 40px; font-size: 14px; line-height: 1.7; color: var(--hero-color-body); }
+.group-title { max-width: 1180px; margin: 44px auto 18px; padding: 0 40px; font-size: 16px; font-weight: 700; color: var(--hero-color-ink); border-top: 2px solid var(--hero-color-ink); padding-top: 16px; }
+
+.variant { max-width: 1180px; margin: 0 auto 28px; padding: 0 40px; }
+.variant__label { display: flex; align-items: baseline; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
+.variant__label b { font-size: 15px; font-weight: 700; color: var(--hero-color-ink); }
+.variant__label span { font-size: 13px; color: var(--hero-color-body); }
+.variant__stage { background: var(--hero-color-bg); border: 1px solid var(--hero-color-border); border-radius: 14px; overflow: hidden; }
+.replay {
+  font-family: inherit; font-size: 12px; color: var(--hero-color-gold);
+  background: none; border: 1px solid var(--hero-color-border); border-radius: 999px;
+  padding: 3px 12px; cursor: pointer;
+}
+
+/* ============ 히어로 축약본 (비교용) ============ */
+.hero__text { width: 100%; display: flex; flex-direction: column; justify-content: center; padding: 56px 0; }
+.hero__inner { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+.hero__text-row { display: flex; align-items: flex-start; gap: clamp(40px, 7vw, 120px); }
+.hero__text-info { flex: 0 0 clamp(200px, 22vw, 280px); padding-top: 10px; }
+.hero__text-logo img { height: 30px; width: auto; display: block; }
+.hero__text-divider { width: 100%; height: 1px; background: var(--hero-color-ink); margin: 20px 0 18px; border: none; }
+.hero__text-desc { margin: 0; font-size: 15px; line-height: 1.7; color: var(--hero-color-body); }
+.hero__text-headline {
+  flex: 1; margin: 0; font-weight: 600;
+  font-size: clamp(30px, 4.4vw, 60px);
+  line-height: 1.35; letter-spacing: -0.02em; color: var(--hero-color-ink);
+}
+.hero__text-headline b { font-weight: 800; color: var(--hero-color-gold); }
+.hero__text-foot { text-align: center; margin-top: clamp(48px, 7vw, 96px); }
+.hero__text-tagline { margin: 0 0 22px; font-size: 15px; color: var(--hero-color-body); }
+
+/* ---------- 헤드라인 효과 A: 현재(단어 슬라이드 업, 사르륵) ---------- */
+.fx-slide .htw { display: inline-block; overflow: hidden; vertical-align: top; }
+.fx-slide .htw-in {
+  display: inline-block; transform: translateY(115%);
+  transition: transform 0.9s cubic-bezier(0.19, 1, 0.22, 1);
+  transition-delay: calc(var(--i, 0) * 90ms);
+}
+.fx-slide.is-visible .htw-in { transform: translateY(0); }
+
+/* ---------- 헤드라인 효과 B: 아련한 블러 인 (흐릿 → 또렷) ---------- */
+.fx-blur .htw-in {
+  display: inline-block;
+  opacity: 0;
+  filter: blur(14px);
+  transform: translateY(6px);
+  transition: opacity 1.1s ease, filter 1.1s ease, transform 1.1s ease;
+  transition-delay: calc(var(--i, 0) * 130ms);
+}
+.fx-blur.is-visible .htw-in { opacity: 1; filter: blur(0); transform: translateY(0); }
+
+/* ---------- 헤드라인 효과 C: 아련한 블러 인 (한 줄씩) ---------- */
+.fx-blur-line .htl {
+  display: block;
+  opacity: 0;
+  filter: blur(16px);
+  transition: opacity 1.2s ease, filter 1.2s ease;
+  transition-delay: calc(var(--i, 0) * 260ms);
+}
+.fx-blur-line.is-visible .htl { opacity: 1; filter: blur(0); }
+
+/* ---------- 변형 1: 여행지 티커 ---------- */
+.foot-ticker {
+  position: relative; width: 100%; overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+.foot-ticker__track { display: inline-flex; white-space: nowrap; animation: footTickerScroll 32s linear infinite; }
+.foot-ticker__track span { font-size: 14px; letter-spacing: 0.02em; color: var(--hero-color-body); padding: 0 22px; position: relative; }
+.foot-ticker__track span::after {
+  content: ""; position: absolute; right: -2px; top: 50%;
+  width: 3px; height: 3px; border-radius: 50%; background: var(--hero-color-gold-soft); transform: translateY(-50%);
+}
+@keyframes footTickerScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ---------- 변형 2: 헤어라인 요약 스트립 ---------- */
+.foot-stats { display: inline-flex; align-items: center; gap: 28px; padding-top: 20px; border-top: 1px solid var(--hero-color-border); }
+.foot-stats__item { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.foot-stats__num { font-size: 20px; font-weight: 700; color: var(--hero-color-ink); letter-spacing: -0.02em; }
+.foot-stats__cap { font-size: 12px; color: var(--hero-color-body); }
+.foot-stats__sep { width: 1px; height: 26px; background: var(--hero-color-border); }
+
+/* ---------- 변형 3: 내려가는 점 ---------- */
+.foot-dot { position: relative; width: 1px; height: 46px; margin: 0 auto; background: var(--hero-color-border); overflow: hidden; }
+.foot-dot::after {
+  content: ""; position: absolute; left: 50%; top: 0;
+  width: 5px; height: 5px; border-radius: 50%; background: var(--hero-color-gold);
+  transform: translate(-50%, -8px);
+  animation: footDotDrop 2.2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+@keyframes footDotDrop {
+  0% { transform: translate(-50%, -8px); opacity: 0; }
+  20% { opacity: 1; } 80% { opacity: 1; }
+  100% { transform: translate(-50%, 46px); opacity: 0; }
+}
+
+/* ---------- 변형 4: 한 자리에서 바뀌는 여행지 단어 ---------- */
+.foot-rotate { font-size: 15px; color: var(--hero-color-body); }
+.foot-rotate__slot { display: inline-block; min-width: 5em; text-align: left; font-weight: 700; color: var(--hero-color-gold); }
+.foot-rotate__slot b { display: inline-block; font-weight: 700; animation: footRotateWord 0.5s ease both; }
+@keyframes footRotateWord { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .foot-ticker__track { animation: none; }
+  .foot-dot::after { animation: none; opacity: 0.7; transform: translate(-50%, 20px); }
+  .foot-rotate__slot b { animation: none; }
+}
+@media (max-width: 860px) {
+  .hero__text-row { flex-direction: column; gap: 32px; }
+  .hero__text-info { flex: none; }
+  .hero__text-headline { font-size: clamp(28px, 7vw, 40px); }
+  .foot-stats { gap: 16px; }
+}
+</style>
+</head>
+<body>
+
+<h1 class="page-title">회사소개 히어로 — 헤드라인 등장 효과 &amp; 하단 요소 비교</h1>
+<p class="page-note">
+  마음에 드는 조합(예: "헤드라인 B + 하단 1")을 알려주시면 preview-with-header.html 에 반영해서 커밋합니다.
+  각 스테이지의 <b>다시 재생</b> 버튼으로 애니메이션을 반복 확인할 수 있습니다.
+</p>
+
+<!-- ============================================================
+     GROUP 1 — 헤드라인 등장 효과
+============================================================ -->
+<div class="group-title">헤드라인 등장 효과</div>
+
+<!-- 효과 A: 현재 -->
+<div class="variant">
+  <div class="variant__label">
+    <b>A. 현재 — 단어가 아래에서 올라옴 (사르륵)</b>
+    <button class="replay" data-replay="fxA">다시 재생</button>
+  </div>
+  <div class="variant__stage">
+    <div class="hero__text">
+      <div class="hero__inner hero__text-row">
+        <div class="hero__text-info">
+          <div class="hero__text-logo"><img src="../assets/logo/honeymoonresort-logo.png" alt="허니문리조트"></div>
+          <hr class="hero__text-divider">
+          <p class="hero__text-desc">1995년부터<br>신혼여행만을 전문으로<br>맞춤 여행을 안내해온<br>허니문리조트</p>
+        </div>
+        <p class="hero__text-headline fx-slide is-visible" id="fxA">
+          <span class="htw" style="--i:0"><span class="htw-in"><b>30년의</b></span></span> <span class="htw" style="--i:1"><span class="htw-in">경험과</span></span><br>
+          <span class="htw" style="--i:2"><span class="htw-in">허니문</span></span> <span class="htw" style="--i:3"><span class="htw-in"><b>전문성으로</b></span></span><br>
+          <span class="htw" style="--i:4"><span class="htw-in">완성하는</span></span><br>
+          <span class="htw" style="--i:5"><span class="htw-in"><b>맞춤</b></span></span> <span class="htw" style="--i:6"><span class="htw-in"><b>허니문</b></span></span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 효과 B: 블러 인 (단어) -->
+<div class="variant">
+  <div class="variant__label">
+    <b>B. 아련한 블러 인 — 흐릿하게 있다가 또렷해짐 (단어 순차)</b>
+    <button class="replay" data-replay="fxB">다시 재생</button>
+  </div>
+  <div class="variant__stage">
+    <div class="hero__text">
+      <div class="hero__inner hero__text-row">
+        <div class="hero__text-info">
+          <div class="hero__text-logo"><img src="../assets/logo/honeymoonresort-logo.png" alt="허니문리조트"></div>
+          <hr class="hero__text-divider">
+          <p class="hero__text-desc">1995년부터<br>신혼여행만을 전문으로<br>맞춤 여행을 안내해온<br>허니문리조트</p>
+        </div>
+        <p class="hero__text-headline fx-blur is-visible" id="fxB">
+          <span class="htw" style="--i:0"><span class="htw-in"><b>30년의</b></span></span> <span class="htw" style="--i:1"><span class="htw-in">경험과</span></span><br>
+          <span class="htw" style="--i:2"><span class="htw-in">허니문</span></span> <span class="htw" style="--i:3"><span class="htw-in"><b>전문성으로</b></span></span><br>
+          <span class="htw" style="--i:4"><span class="htw-in">완성하는</span></span><br>
+          <span class="htw" style="--i:5"><span class="htw-in"><b>맞춤</b></span></span> <span class="htw" style="--i:6"><span class="htw-in"><b>허니문</b></span></span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 효과 C: 블러 인 (줄) -->
+<div class="variant">
+  <div class="variant__label">
+    <b>C. 아련한 블러 인 — 한 줄씩 천천히 (더 차분함)</b>
+    <button class="replay" data-replay="fxC">다시 재생</button>
+  </div>
+  <div class="variant__stage">
+    <div class="hero__text">
+      <div class="hero__inner hero__text-row">
+        <div class="hero__text-info">
+          <div class="hero__text-logo"><img src="../assets/logo/honeymoonresort-logo.png" alt="허니문리조트"></div>
+          <hr class="hero__text-divider">
+          <p class="hero__text-desc">1995년부터<br>신혼여행만을 전문으로<br>맞춤 여행을 안내해온<br>허니문리조트</p>
+        </div>
+        <p class="hero__text-headline fx-blur-line is-visible" id="fxC">
+          <span class="htl" style="--i:0"><b>30년의</b> 경험과</span>
+          <span class="htl" style="--i:1">허니문 <b>전문성으로</b></span>
+          <span class="htl" style="--i:2">완성하는</span>
+          <span class="htl" style="--i:3"><b>맞춤 허니문</b></span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     GROUP 2 — 하단 요소 (화살표 대체안)
+============================================================ -->
+<div class="group-title">하단 요소 — 화살표 대체안</div>
+
+<!-- 변형 1: 여행지 티커 -->
+<div class="variant">
+  <div class="variant__label"><b>1. 여행지 티커</b><span>목적지 이름이 가로로 천천히 흐름 · 소개 문단의 취급 지역과 연결 · 여행사다운 생동감</span></div>
+  <div class="variant__stage">
+    <div class="hero__text">
+      <div class="hero__inner hero__text-row">
+        <div class="hero__text-info">
+          <div class="hero__text-logo"><img src="../assets/logo/honeymoonresort-logo.png" alt="허니문리조트"></div>
+          <hr class="hero__text-divider">
+          <p class="hero__text-desc">1995년부터<br>신혼여행만을 전문으로<br>맞춤 여행을 안내해온<br>허니문리조트</p>
+        </div>
+        <p class="hero__text-headline"><b>30년의</b> 경험과<br>허니문 <b>전문성으로</b><br>완성하는<br><b>맞춤 허니문</b></p>
+      </div>
+      <div class="hero__text-foot">
+        <p class="hero__text-tagline">두 사람의 시작을 가장 잘 아는 여행사</p>
+        <div class="foot-ticker" aria-hidden="true">
+          <div class="foot-ticker__track">
+            <span>하와이</span><span>몰디브</span><span>발리</span><span>칸쿤</span><span>코사무이</span><span>푸켓</span><span>세이셸</span><span>보라보라</span><span>유럽</span><span>이탈리아</span><span>스페인</span><span>프랑스</span><span>호주</span>
+            <span>하와이</span><span>몰디브</span><span>발리</span><span>칸쿤</span><span>코사무이</span><span>푸켓</span><span>세이셸</span><span>보라보라</span><span>유럽</span><span>이탈리아</span><span>스페인</span><span>프랑스</span><span>호주</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 변형 2: 헤어라인 요약 스트립 -->
+<div class="variant">
+  <div class="variant__label"><b>2. 헤어라인 요약 스트립</b><span>설립·경력·지사를 얇은 선 위 한 줄로 · 다음 규모 섹션 예고편 · 페이지 헤어라인 톤과 통일</span></div>
+  <div class="variant__stage">
+    <div class="hero__text">
+      <div class="hero__inner hero__text-row">
+        <div class="hero__text-info">
+          <div class="hero__text-logo"><img src="../assets/logo/honeymoonresort-logo.png" alt="허니문리조트"></div>
+          <hr class="hero__text-divider">
+          <p class="hero__text-desc">1995년부터<br>신혼여행만을 전문으로<br>맞춤 여행을 안내해온<br>허니문리조트</p>
+        </div>
+        <p class="hero__text-headline"><b>30년의</b> 경험과<br>허니문 <b>전문성으로</b><br>완성하는<br><b>맞춤 허니문</b></p>
+      </div>
+      <div class="hero__text-foot">
+        <p class="hero__text-tagline">두 사람의 시작을 가장 잘 아는 여행사</p>
+        <div class="foot-stats">
+          <div class="foot-stats__item"><span class="foot-stats__num">1995</span><span class="foot-stats__cap">설립</span></div>
+          <div class="foot-stats__sep"></div>
+          <div class="foot-stats__item"><span class="foot-stats__num">30년</span><span class="foot-stats__cap">신혼여행 전문</span></div>
+          <div class="foot-stats__sep"></div>
+          <div class="foot-stats__item"><span class="foot-stats__num">전국 8곳</span><span class="foot-stats__cap">지사 네트워크</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 변형 3: 내려가는 점 -->
+<div class="variant">
+  <div class="variant__label"><b>3. 내려가는 점</b><span>가는 세로선 + 위→아래로 반복해 지나가는 작은 점 · 스크롤 유도는 유지, "화살표"만 제거</span></div>
+  <div class="variant__stage">
+    <div class="hero__text">
+      <div class="hero__inner hero__text-row">
+        <div class="hero__text-info">
+          <div class="hero__text-logo"><img src="../assets/logo/honeymoonresort-logo.png" alt="허니문리조트"></div>
+          <hr class="hero__text-divider">
+          <p class="hero__text-desc">1995년부터<br>신혼여행만을 전문으로<br>맞춤 여행을 안내해온<br>허니문리조트</p>
+        </div>
+        <p class="hero__text-headline"><b>30년의</b> 경험과<br>허니문 <b>전문성으로</b><br>완성하는<br><b>맞춤 허니문</b></p>
+      </div>
+      <div class="hero__text-foot">
+        <p class="hero__text-tagline">두 사람의 시작을 가장 잘 아는 여행사</p>
+        <div class="foot-dot" aria-hidden="true"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 변형 4: 바뀌는 여행지 단어 -->
+<div class="variant">
+  <div class="variant__label"><b>4. 바뀌는 여행지 단어</b><span>한 슬롯에서 단어만 교체 · 티커보다 절제된 움직임</span></div>
+  <div class="variant__stage">
+    <div class="hero__text">
+      <div class="hero__inner hero__text-row">
+        <div class="hero__text-info">
+          <div class="hero__text-logo"><img src="../assets/logo/honeymoonresort-logo.png" alt="허니문리조트"></div>
+          <hr class="hero__text-divider">
+          <p class="hero__text-desc">1995년부터<br>신혼여행만을 전문으로<br>맞춤 여행을 안내해온<br>허니문리조트</p>
+        </div>
+        <p class="hero__text-headline"><b>30년의</b> 경험과<br>허니문 <b>전문성으로</b><br>완성하는<br><b>맞춤 허니문</b></p>
+      </div>
+      <div class="hero__text-foot">
+        <p class="hero__text-tagline">두 사람의 시작을 가장 잘 아는 여행사</p>
+        <p class="foot-rotate">함께 준비한 신혼여행지 &nbsp;<span class="foot-rotate__slot" id="rotateSlot"><b>몰디브</b></span></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* 헤드라인 효과: 자동 루프 + 다시 재생 버튼 */
+  ["fxA", "fxB", "fxC"].forEach(function (id) {
+    var el = document.getElementById(id);
+    if (!el || reduce) return;
+    function play() {
+      el.classList.remove("is-visible");
+      void el.offsetWidth;            /* reflow → transition 재시작 */
+      el.classList.add("is-visible");
+    }
+    setInterval(play, 5000);
+  });
+  document.querySelectorAll("[data-replay]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var el = document.getElementById(btn.getAttribute("data-replay"));
+      if (!el) return;
+      el.classList.remove("is-visible");
+      void el.offsetWidth;
+      el.classList.add("is-visible");
+    });
+  });
+
+  /* 하단 변형 4: 바뀌는 단어 */
+  var slot = document.getElementById("rotateSlot");
+  if (slot && !reduce) {
+    var words = ["몰디브", "하와이", "발리", "칸쿤", "세이셸", "코사무이", "유럽", "호주"];
+    var i = 0;
+    setInterval(function () {
+      i = (i + 1) % words.length;
+      slot.innerHTML = "<b>" + words[i] + "</b>";
+    }, 2000);
+  }
+})();
+</script>
+
+</body>
+</html>
