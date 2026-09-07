@@ -230,16 +230,17 @@ p {
 }
 /* 한 자리에서 바뀌는 여행지 단어 (스크롤 유도 화살표 대체) */
 .hero__text-rotate {
-  margin: 0;
-  font-size: 19px;
+  margin: 0 0 6px;
+  font-size: 15px;
   color: var(--hero-color-body);
 }
 .hero__text-rotate__slot {
-  display: inline-block;
-  min-width: 4.5em;
+  display: block;
   text-align: center;
-  font-size: 24px;
-  font-weight: 700;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
   color: var(--hero-color-gold);
 }
 .hero__text-rotate__slot b {
@@ -1982,7 +1983,8 @@ html, body {
     </div>
     <div class="hero__text-foot">
       <p class="hero__text-tagline">두 사람의 시작을 가장 잘 아는 여행사</p>
-      <p class="hero__text-rotate">함께 준비한 신혼여행지 &nbsp;<span class="hero__text-rotate__slot" id="heroRotateSlot"><b>몰디브</b></span></p>
+      <p class="hero__text-rotate">함께 준비한 신혼여행지</p>
+      <span class="hero__text-rotate__slot" id="heroRotateSlot"><b>몰디브</b></span>
     </div>
   </div>
 
