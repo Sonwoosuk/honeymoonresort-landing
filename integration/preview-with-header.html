@@ -191,12 +191,8 @@ p {
   line-height: 1.7;
   color: var(--hero-color-body);
 }
-.hero__text-main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
 .hero__text-headline {
+  flex: 1;
   margin: 0;
   font-family: var(--hero-font);
   font-weight: 600;
@@ -223,28 +219,20 @@ p {
   filter: blur(0);
 }
 
-/* 헤드라인 아래 마무리 줄: 좌측 소개 칼럼(로고+구분선)과 대칭되게
-   헤어라인 + 태그라인 + "함께 준비한 신혼여행지 [바뀌는 여행지]" 를 헤드라인 왼쪽 끝에 정렬 */
+/* 히어로 하단 마무리 줄: 화면 중앙 정렬 (태그라인 + "함께 준비한 신혼여행지 [바뀌는 여행지]") */
 .hero__text-foot {
-  margin-top: clamp(32px, 5vw, 56px);
-  text-align: left;
-}
-.hero__text-foot-rule {
-  width: 56px;
-  height: 1px;
-  background: var(--hero-color-ink);
-  border: none;
-  margin: 0 0 16px;
+  margin-top: clamp(48px, 7vw, 96px);
+  text-align: center;
 }
 .hero__text-tagline {
-  margin: 0 0 8px;
-  font-size: 15px;
+  margin: 0 0 10px;
+  font-size: 18px;
   color: var(--hero-color-body);
 }
 /* 한 자리에서 바뀌는 여행지 단어 (스크롤 유도 화살표 대체) */
 .hero__text-rotate {
   margin: 0;
-  font-size: 16px;
+  font-size: 20px;
   color: var(--hero-color-body);
 }
 .hero__text-rotate__slot {
@@ -443,59 +431,44 @@ p {
   text-align: center;
 }
 
-/* 숫자 통계 그리드 (goodai global 레퍼런스: 헤어라인 경계 + 큰 숫자, 카드/그림자 없음) */
+/* 숫자 통계: 박스·테두리·색 채움 없이 큰 숫자만 (에디토리얼, 가운데 정렬) */
 .scale__stats {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: clamp(56px, 11vw, 128px);
   max-width: 640px;
-  margin: 0 auto 32px;
-  border-top: 1px solid var(--hero-color-border);
-  border-left: 1px solid var(--hero-color-border);
+  margin: 8px auto 40px;
 }
 
 .scale__stat {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
-  padding: 32px 28px;
-  background-color: var(--hero-color-bg);
-  border-right: 1px solid var(--hero-color-border);
-  border-bottom: 1px solid var(--hero-color-border);
-  box-sizing: border-box;
-}
-
-/* OURA & CO. 레퍼런스: 통계 중 하나를 진한 색 셀로 강조 */
-.scale__stat--dark {
-  background-color: var(--hero-color-ink);
-}
-.scale__stat--dark .scale__stat-number,
-.scale__stat--dark .scale__stat-number span {
-  color: var(--hero-color-on-overlay);
-}
-.scale__stat--dark .scale__stat-label {
-  color: var(--hero-color-on-overlay-dim);
+  align-items: center;
+  gap: 12px;
+  text-align: center;
 }
 
 .scale__stat-number {
   margin: 0;
-  font-size: 56px;
+  font-size: clamp(48px, 6vw, 68px);
   font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+  line-height: 1;
+  letter-spacing: -0.03em;
   color: var(--hero-color-ink);
 }
 
 .scale__stat-number span {
-  font-size: 22px;
+  font-size: 0.4em;
   font-weight: 600;
-  margin-left: 2px;
+  margin-left: 3px;
+  color: var(--hero-color-gold);
 }
 
 .scale__stat-label {
   margin: 0;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--hero-color-body);
 }
 
@@ -555,16 +528,8 @@ p {
   }
 
   .scale__stats {
-    grid-template-columns: 1fr;
+    gap: 40px;
     margin-bottom: 32px;
-  }
-
-  .scale__stat {
-    width: 100%;
-  }
-
-  .scale__stat-number {
-    font-size: 40px;
   }
 
   .scale__desc {
@@ -1988,14 +1953,11 @@ html, body {
         <hr class="hero__text-divider">
         <p class="hero__text-desc">1995년부터<br>신혼여행만을 전문으로<br>맞춤 여행을 안내해온<br>허니문리조트</p>
       </div>
-      <div class="hero__text-main">
-        <p class="hero__text-headline" id="heroHeadline"><span class="htl" style="--i:0"><b>30년의</b> 경험과</span><span class="htl" style="--i:1">허니문 <b>전문성으로</b></span><span class="htl" style="--i:2">완성하는</span><span class="htl" style="--i:3"><b>맞춤 허니문</b></span></p>
-        <div class="hero__text-foot">
-          <hr class="hero__text-foot-rule">
-          <p class="hero__text-tagline">두 사람의 시작을 가장 잘 아는 여행사</p>
-          <p class="hero__text-rotate">함께 준비한 신혼여행지 <span class="hero__text-rotate__slot" id="heroRotateSlot"><b>몰디브</b></span></p>
-        </div>
-      </div>
+      <p class="hero__text-headline" id="heroHeadline"><span class="htl" style="--i:0"><b>30년의</b> 경험과</span><span class="htl" style="--i:1">허니문 <b>전문성으로</b></span><span class="htl" style="--i:2">완성하는</span><span class="htl" style="--i:3"><b>맞춤 허니문</b></span></p>
+    </div>
+    <div class="hero__text-foot">
+      <p class="hero__text-tagline">두 사람의 시작을 가장 잘 아는 여행사</p>
+      <p class="hero__text-rotate">함께 준비한 신혼여행지 <span class="hero__text-rotate__slot" id="heroRotateSlot"><b>몰디브</b></span></p>
     </div>
   </div>
 
@@ -2025,7 +1987,7 @@ html, body {
         <p class="scale__stat-number">13<span>개</span></p>
         <p class="scale__stat-label">지역 지사 (B2B&nbsp;&amp;&nbsp;B2C)</p>
       </div>
-      <div class="scale__stat scale__stat--dark">
+      <div class="scale__stat">
         <p class="scale__stat-number">100<span>명+</span></p>
         <p class="scale__stat-label">임직원 운영 기반</p>
       </div>
