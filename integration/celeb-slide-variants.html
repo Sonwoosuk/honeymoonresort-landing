@@ -345,6 +345,8 @@ body {
   font-size: 15px;
   line-height: 1.8;
   color: var(--hero-color-body);
+  word-break: keep-all; /* 한글 단어 중간(예: "사례입"+"니다.")에서 잘려 혼자 내려가는 것 방지 */
+  overflow-wrap: break-word;
 }
 
 @media (max-width: 640px) {
