@@ -205,9 +205,9 @@ body {
 }
 
 /* =============================================================
-   시안 B: 스크롤 연동 코버플로우 (신규, 추천)
-   섹션을 아래로 스크롤하는 동안 가로 필름스트립이 옆으로 흘러가고,
-   화면 가운데 온 사진이 커지면서 이름이 바뀝니다. (position:sticky 이용)
+   시안 B: 버튼 갤러리 (스크롤 연동 → 버튼 왔다갔다로 변경)
+   가운데 카드가 바닥선 위로 솟아오르는 비주얼은 유지하고,
+   ‹ › 버튼을 누르면 트랙이 한 칸씩 옆으로 슬라이드합니다.
 ============================================================= */
 .celeb-scroll {
   position: relative;
@@ -215,26 +215,51 @@ body {
   margin-left: calc(50% - 50vw);
   margin-top: 8px;
 }
-.celeb-scroll__sticky {
-  position: sticky;
-  top: 50vh; /* 화면 맨 위가 아니라 세로 가운데에 고정되도록 (translateY(-50%)와 한 쌍) */
-  transform: translateY(-50%);
-  max-height: 520px; /* 안전상한선. 실제 높이는 아래 내용물(카드+캡션+페이지네이션)에 맞춰 auto */
+.celeb-scroll__viewport {
+  position: relative;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  padding: 68px 0 16px; /* 위쪽 68px = 가운데 카드가 확대+들어올려질 때 잘리지 않게 하는 여유 */
-  box-sizing: border-box;
+  padding: 68px 0 24px; /* 위쪽 68px = 가운데 카드가 확대+들어올려질 때 잘리지 않게 하는 여유 */
   overflow: hidden;
+}
+.celeb-scroll__nav {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--hero-color-border);
+  background-color: var(--hero-color-bg);
+  color: var(--hero-color-ink);
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin: 0 4px;
+  z-index: 10;
+  box-shadow: 0 6px 16px rgba(43, 31, 22, 0.12);
+  transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+.celeb-scroll__nav:hover {
+  border-color: var(--hero-color-gold);
+  color: var(--hero-color-gold);
+  transform: translateY(-1px);
+}
+.celeb-scroll__nav:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.celeb-scroll__nav:disabled:hover {
+  border-color: var(--hero-color-border);
+  color: var(--hero-color-ink);
+  transform: none;
 }
 .celeb-scroll__track {
   display: flex;
   align-items: flex-end; /* 카드들을 같은 바닥선에 맞춰서, 가운데 카드가 위로 "솟아오르는" 느낌 */
-  align-self: flex-start; /* .celeb-scroll__sticky 의 align-items:center 가 트랙(뷰포트보다 넓음)을
-                              통째로 가운데 정렬해서 JS translateX 계산과 어긋나던 버그 수정 */
   gap: 28px;
   padding-bottom: 24px; /* 확대된 가운데 카드가 아래로도 자랄 여유 공간 */
+  transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1);
   will-change: transform;
 }
 .celeb-scroll__card {
@@ -244,7 +269,7 @@ body {
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 10px 20px rgba(43, 31, 22, 0.1);
-  transition: box-shadow 0.2s ease;
+  transition: transform 0.5s cubic-bezier(0.34, 1.1, 0.64, 1), opacity 0.5s ease, box-shadow 0.5s ease;
   will-change: transform, opacity, box-shadow;
 }
 .celeb-scroll__card-photo {
@@ -316,21 +341,9 @@ body {
   width: 0%;
   background-color: var(--hero-color-gold);
 }
-.celeb-scroll__hint {
-  margin: 10px 0 0;
-  font-size: 12px;
-  color: var(--hero-color-body);
-  letter-spacing: 0.02em;
-  opacity: 0.8;
-  transition: opacity 0.4s ease;
-}
-.celeb-scroll__hint.is-hidden { opacity: 0; }
-
 @media (prefers-reduced-motion: reduce) {
-  .celeb-scroll__sticky { position: static; height: auto; overflow-x: auto; }
-  .celeb-scroll__track { transform: none !important; }
-  .celeb-scroll__card { transform: none !important; opacity: 1 !important; }
-  .celeb-scroll__hint { display: none; }
+  .celeb-scroll__track { transition: none; }
+  .celeb-scroll__card { transition: none; }
 }
 
 .text-stack {
@@ -359,9 +372,9 @@ body {
 <body>
 
 <p class="page-note">
-  셀러브리티 섹션 슬라이드 시안 (비교용, 실배포 파일 아님). <b>시안 A</b>는 클릭식(이전에 보여드린 것),
-  <b>시안 B</b>는 페이지를 스크롤하는 동안 필름스트립이 가로로 흘러가고 가운데 온 사진이 커지는 방식입니다.
-  두 시안 다 기존 <b>.image-card</b> 폴라로이드 프레임과 브랜드 컬러(골드/에스프레소 브라운)를 그대로 이어받았습니다.
+  셀러브리티 섹션 슬라이드 시안 (비교용, 실배포 파일 아님). <b>시안 A</b>는 무대 사진 + 하단 썸네일 클릭식,
+  <b>시안 B</b>는 가운데 카드가 바닥선 위로 솟아오르는 갤러리 비주얼에 ‹ › 버튼으로 왔다갔다 하는 방식입니다
+  (페이지 스크롤과는 무관하게 동작).
 </p>
 
 <p class="variant-label">시안 A — 클릭식<span class="sub">참고용. 무대 사진 + 썸네일 클릭해서 전환</span></p>
@@ -394,7 +407,7 @@ body {
   </div>
 </section>
 
-<p class="variant-label">시안 B — 스크롤 연동 코버플로우<span class="sub">추천. 아래로 스크롤해보세요</span></p>
+<p class="variant-label">시안 B — 버튼 갤러리<span class="sub">‹ › 버튼으로 왔다갔다</span></p>
 
 <section class="celeb">
   <div class="celeb__inner">
@@ -404,17 +417,18 @@ body {
   </div>
 
   <div class="celeb-scroll" id="celebScroll">
-    <div class="celeb-scroll__sticky">
+    <div class="celeb-scroll__viewport">
+      <button class="celeb-scroll__nav" id="celebScrollPrev" aria-label="이전 커플" type="button">‹</button>
       <div class="celeb-scroll__track" id="celebTrack">
         <!-- JS로 채워짐 -->
       </div>
-      <p class="celeb-scroll__caption" id="celebScrollCaption">에일리 · 최시훈</p>
-      <div class="celeb-scroll__pager">
-        <span class="celeb-scroll__pager-num" id="celebPagerNum">01</span>
-        <span class="celeb-scroll__pager-track"><span class="celeb-scroll__pager-fill" id="celebPagerFill"></span></span>
-        <span class="celeb-scroll__pager-total" id="celebPagerTotal">12</span>
-      </div>
-      <p class="celeb-scroll__hint" id="celebScrollHint">스크롤해서 계속 보기 ↓</p>
+      <button class="celeb-scroll__nav" id="celebScrollNext" aria-label="다음 커플" type="button">›</button>
+    </div>
+    <p class="celeb-scroll__caption" id="celebScrollCaption">에일리 · 최시훈</p>
+    <div class="celeb-scroll__pager">
+      <span class="celeb-scroll__pager-num" id="celebPagerNum">01</span>
+      <span class="celeb-scroll__pager-track"><span class="celeb-scroll__pager-fill" id="celebPagerFill"></span></span>
+      <span class="celeb-scroll__pager-total" id="celebPagerTotal">12</span>
     </div>
   </div>
 
@@ -490,21 +504,20 @@ var couples = [
 })();
 
 /* -------------------------------------------------------------
-   시안 B: 스크롤 연동 코버플로우
-   - .celeb-scroll 의 높이만큼 스크롤하는 동안 .celeb-scroll__sticky 가 고정되고,
-     그 진행률(0~1)에 비례해 .celeb-scroll__track 을 가로로 translateX 합니다.
-   - 화면 가운데(뷰포트 중앙)에 가까운 카드일수록 커지고 진해지며,
-     가장 가까운 카드가 바뀔 때 캡션이 크로스페이드로 갱신됩니다.
+   시안 B: 버튼 갤러리
+   - ‹ › 버튼을 누르면 currentIndex 가 ±1 되고, 그 카드가 가운데(바닥선 위로
+     솟아오른 상태)로 오도록 트랙을 translateX 로 슬라이드합니다.
+   - 스크롤과는 완전히 무관 — 페이지 스크롤 위치를 전혀 읽지 않습니다.
 ------------------------------------------------------------- */
 (function () {
-  var wrapper = document.getElementById('celebScroll');
+  var viewport = document.querySelector('#celebScroll .celeb-scroll__viewport');
   var track = document.getElementById('celebTrack');
   var caption = document.getElementById('celebScrollCaption');
-  var hint = document.getElementById('celebScrollHint');
+  var prevBtn = document.getElementById('celebScrollPrev');
+  var nextBtn = document.getElementById('celebScrollNext');
   var pagerNum = document.getElementById('celebPagerNum');
   var pagerFill = document.getElementById('celebPagerFill');
   var pagerTotal = document.getElementById('celebPagerTotal');
-  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   if (pagerTotal) pagerTotal.textContent = String(couples.length).padStart(2, '0');
 
@@ -519,57 +532,33 @@ var couples = [
     return card;
   });
 
-  if (reduceMotion) {
-    caption.innerHTML = couples[0].name;
-    return; // CSS 미디어쿼리가 정적 가로 스크롤 목록으로 대체
-  }
-
-  var maxTranslate = 0;
-  var currentIndex = -1;
-  var ticking = false;
-  var SCROLL_SPEED = 3; /* 이 배수만큼 "적게" 스크롤해도 필름스트립이 끝까지 흘러가게(체감 스크롤 거리 단축) */
+  var currentIndex = 0;
+  var step = 0; // 카드 1칸(카드 폭 + gap)의 픽셀 거리
 
   function layout() {
-    var viewportW = window.innerWidth;
+    var viewportW = viewport.getBoundingClientRect().width;
     var cardW = cards[0].getBoundingClientRect().width;
+    var gap = 28;
+    step = cardW + gap;
     var sidePad = Math.max(viewportW / 2 - cardW / 2, 0);
     track.style.paddingLeft = sidePad + 'px';
     track.style.paddingRight = sidePad + 'px';
 
-    maxTranslate = Math.max(track.scrollWidth - viewportW, 0);
-    var stickyH = wrapper.querySelector('.celeb-scroll__sticky').getBoundingClientRect().height;
-    var scrollable = maxTranslate / SCROLL_SPEED;
-    wrapper.style.height = (scrollable + stickyH) + 'px';
-
-    update();
+    track.style.transition = 'none';
+    render();
+    track.offsetHeight; // 강제 리플로우로 transition:none 적용 확정
+    track.style.transition = '';
+    updateCaption(false); // 첫 로드 시엔 블러 전환 없이 즉시 표시
+    prevBtn.disabled = currentIndex === 0;
+    nextBtn.disabled = currentIndex === couples.length - 1;
   }
 
-  function update() {
-    var rect = wrapper.getBoundingClientRect();
-    var stickyH = wrapper.querySelector('.celeb-scroll__sticky').getBoundingClientRect().height;
-    var scrollable = Math.max(rect.height - stickyH, 1);
-    var progress = (-rect.top) / scrollable;
-    progress = Math.max(0, Math.min(1, progress));
-
-    var translateX = -progress * maxTranslate;
-    track.style.transform = 'translateX(' + translateX + 'px)';
-
-    if (hint) {
-      hint.classList.toggle('is-hidden', progress > 0.04);
-    }
-    if (pagerFill) {
-      pagerFill.style.width = (progress * 100).toFixed(1) + '%';
-    }
-
-    var viewportCenter = window.innerWidth / 2;
-    var nearestIndex = 0;
-    var nearestDist = Infinity;
+  function render() {
+    track.style.transform = 'translateX(' + (-currentIndex * step) + 'px)';
 
     cards.forEach(function (card, i) {
-      var cRect = card.getBoundingClientRect();
-      var cCenter = cRect.left + cRect.width / 2;
-      var dist = Math.abs(cCenter - viewportCenter);
-      var norm = Math.min(dist / (window.innerWidth * 0.32), 1);
+      var dist = Math.abs(i - currentIndex);
+      var norm = Math.min(dist / 3, 1);
       var scale = 1.34 - norm * 0.64;
       var opacity = 1 - norm * 0.6;
       var lift = -(1 - norm) * 34; /* 바닥선 기준 위로 솟아오르는 정도 */
@@ -579,38 +568,40 @@ var couples = [
       card.style.opacity = opacity.toFixed(3);
       card.style.zIndex = String(Math.round((1 - norm) * 100));
       card.style.boxShadow = '0 ' + Math.round(shadowBlur * 0.55) + 'px ' + Math.round(shadowBlur) + 'px rgba(43, 31, 22, ' + shadowAlpha.toFixed(2) + ')';
-
-      if (dist < nearestDist) {
-        nearestDist = dist;
-        nearestIndex = i;
-      }
     });
-
-    if (nearestIndex !== currentIndex) {
-      currentIndex = nearestIndex;
-      var c = couples[currentIndex];
-      caption.classList.add('is-swapping');
-      setTimeout(function () {
-        caption.innerHTML = c.name + (c.sub ? '<span class="sub">' + c.sub + '</span>' : '');
-        if (pagerNum) pagerNum.textContent = String(currentIndex + 1).padStart(2, '0');
-        requestAnimationFrame(function () {
-          caption.classList.remove('is-swapping');
-        });
-      }, 200);
-    }
   }
 
-  function onScroll() {
-    if (!ticking) {
-      ticking = true;
+  function updateCaption(animate) {
+    var c = couples[currentIndex];
+    var apply = function () {
+      caption.innerHTML = c.name + (c.sub ? '<span class="sub">' + c.sub + '</span>' : '');
+      if (pagerNum) pagerNum.textContent = String(currentIndex + 1).padStart(2, '0');
+      if (pagerFill) pagerFill.style.width = (currentIndex / (couples.length - 1) * 100).toFixed(1) + '%';
+    };
+    if (animate === false) {
+      apply();
+      return;
+    }
+    caption.classList.add('is-swapping');
+    setTimeout(function () {
+      apply();
       requestAnimationFrame(function () {
-        update();
-        ticking = false;
+        caption.classList.remove('is-swapping');
       });
-    }
+    }, 160);
   }
 
-  window.addEventListener('scroll', onScroll, { passive: true });
+  function goTo(i) {
+    currentIndex = Math.max(0, Math.min(couples.length - 1, i));
+    render();
+    updateCaption(true);
+    prevBtn.disabled = currentIndex === 0;
+    nextBtn.disabled = currentIndex === couples.length - 1;
+  }
+
+  prevBtn.addEventListener('click', function () { goTo(currentIndex - 1); });
+  nextBtn.addEventListener('click', function () { goTo(currentIndex + 1); });
+
   window.addEventListener('resize', layout);
 
   var allImgs = track.querySelectorAll('img');
@@ -629,12 +620,6 @@ var couples = [
   layout();
 })();
 </script>
-
-<!-- 이 비교 페이지 자체가 짧아서(실제 사이트라면 이 아래에도 섹션이 계속 이어짐)
-     스크롤 가능한 최대 길이가 시안 B 갤러리를 12번째 사진까지 다 훑기 전에
-     끝나버리는 문제가 있었음 — 아래 여백은 그걸 막기 위한 비교용 페이지 전용 스페이서.
-     실제 회사소개 페이지에 반영할 때는 이 아래에 다른 섹션들이 이미 있으니 불필요. -->
-<div aria-hidden="true" style="height: 900px;"></div>
 
 </body>
 </html>
