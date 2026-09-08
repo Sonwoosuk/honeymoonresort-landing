@@ -36,8 +36,12 @@ body {
   font-size: 13px;
   line-height: 1.7;
   color: var(--hero-color-body);
+  text-align: center;
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 .page-note b { color: var(--hero-color-ink); }
+.nowrap { white-space: nowrap; }
 
 .variant-label {
   max-width: 900px;
@@ -48,6 +52,7 @@ body {
   letter-spacing: 0.04em;
   color: var(--hero-color-gold);
   text-transform: uppercase;
+  text-align: center;
 }
 .variant-label .sub {
   display: block;
@@ -377,7 +382,7 @@ body {
 
 <p class="page-note">
   셀러브리티 섹션 슬라이드 시안 (비교용, 실배포 파일 아님). <b>시안 A</b>는 무대 사진 + 하단 썸네일 클릭식,
-  <b>시안 B</b>는 가운데 카드가 바닥선 위로 솟아오르는 갤러리 비주얼에 ‹ › 버튼으로 왔다갔다 하는 방식입니다
+  <b>시안 B</b>는 가운데 카드가 바닥선 위로 솟아오르는 갤러리 비주얼에 <span class="nowrap">‹ › 버튼</span>으로 왔다갔다 하는 방식입니다
   (페이지 스크롤과는 무관하게 동작).
 </p>
 
@@ -411,7 +416,7 @@ body {
   </div>
 </section>
 
-<p class="variant-label">시안 B — 버튼 갤러리<span class="sub">‹ › 버튼으로 왔다갔다</span></p>
+<p class="variant-label">시안 B — 버튼 갤러리<span class="sub"><span class="nowrap">‹ › 버튼</span>으로 왔다갔다</span></p>
 
 <section class="celeb">
   <div class="celeb__inner">
