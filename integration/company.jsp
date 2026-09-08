@@ -940,6 +940,8 @@ p {
   letter-spacing: -0.01em;
   color: var(--hero-color-body);
   text-align: center;
+  word-break: keep-all; /* 단어 중간(예: "사례입"+"니다.")에서 잘려 혼자 다음 줄로 내려가는 것 방지 */
+  overflow-wrap: break-word;
 }
 
 /* 여러 문단을 하나로 합친 왼쪽 정렬 단락. .text-stack 과 함께 사용합니다:
