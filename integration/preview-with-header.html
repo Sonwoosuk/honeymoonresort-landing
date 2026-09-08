@@ -1467,6 +1467,157 @@ p {
   }
 }
 
+/* -------------------------------------------------------------
+   셀럽 갤러리: 가운데 카드가 바닥선 위로 솟아오르는 비주얼 +
+   ‹ › 버튼으로 넘기는 방식 (페이지 스크롤과 무관, 순수 버튼 인터랙션)
+------------------------------------------------------------- */
+.celeb-scroll {
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  margin-top: 8px;
+}
+.celeb-scroll__viewport {
+  position: relative;
+  padding: 68px 0 24px; /* 위쪽 68px = 가운데 카드가 확대+들어올려질 때 잘리지 않게 하는 여유 */
+  overflow: hidden;
+}
+/* 버튼은 트랙과 같은 flex 줄에 두면 트랙 폭(뷰포트보다 훨씬 넓음)에 밀려
+   화면 밖으로 나가버리므로, 뷰포트 위에 절대 위치로 얹음 */
+.celeb-scroll__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--hero-color-border);
+  background-color: var(--hero-color-bg);
+  color: var(--hero-color-ink);
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 6px 16px rgba(43, 31, 22, 0.12);
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+.celeb-scroll__nav--prev { left: 24px; }
+.celeb-scroll__nav--next { right: 24px; }
+.celeb-scroll__nav--prev:hover { transform: translateY(-50%) translateX(-2px); }
+.celeb-scroll__nav--next:hover { transform: translateY(-50%) translateX(2px); }
+.celeb-scroll__nav:hover {
+  border-color: var(--hero-color-gold);
+  color: var(--hero-color-gold);
+}
+.celeb-scroll__nav:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.celeb-scroll__nav:disabled:hover {
+  border-color: var(--hero-color-border);
+  color: var(--hero-color-ink);
+  transform: translateY(-50%);
+}
+.celeb-scroll__track {
+  display: flex;
+  align-items: flex-end; /* 카드들을 같은 바닥선에 맞춰서, 가운데 카드가 위로 "솟아오르는" 느낌 */
+  gap: 28px;
+  padding-bottom: 24px; /* 확대된 가운데 카드가 아래로도 자랄 여유 공간 */
+  transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+  will-change: transform;
+}
+.celeb-scroll__card {
+  flex: 0 0 auto;
+  width: 220px;
+  margin: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(43, 31, 22, 0.1);
+  transition: transform 0.5s cubic-bezier(0.34, 1.1, 0.64, 1), opacity 0.5s ease, box-shadow 0.5s ease;
+  will-change: transform, opacity, box-shadow;
+}
+.celeb-scroll__card-photo {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background-color: var(--hero-color-surface);
+}
+.celeb-scroll__card-photo img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+.celeb-scroll__caption {
+  margin: 20px 0 0;
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--hero-color-ink);
+  text-align: center;
+  min-height: 1.4em;
+  filter: blur(0);
+  transition: opacity 0.4s ease, filter 0.4s ease;
+}
+.celeb-scroll__caption.is-swapping {
+  opacity: 0;
+  filter: blur(10px);
+}
+.celeb-scroll__caption .sub {
+  display: block;
+  margin-top: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--hero-color-body);
+}
+.celeb-scroll__pager {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 16px;
+}
+.celeb-scroll__pager-num {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--hero-color-gold);
+  min-width: 1.2em;
+  text-align: right;
+}
+.celeb-scroll__pager-total {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--hero-color-body);
+  min-width: 1.2em;
+}
+.celeb-scroll__pager-track {
+  position: relative;
+  width: 120px;
+  height: 2px;
+  background-color: var(--hero-color-border);
+  border-radius: 1px;
+  overflow: hidden;
+}
+.celeb-scroll__pager-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0%;
+  background-color: var(--hero-color-gold);
+}
+@media (prefers-reduced-motion: reduce) {
+  .celeb-scroll__track { transition: none; }
+  .celeb-scroll__card { transition: none; }
+}
+@media (max-width: 640px) {
+  .celeb-scroll__card { width: 160px; }
+}
+
 /* =============================================================
    EXPO SECTION STYLES
    - "허니문리조트 신혼여행 박람회?" 섹션
@@ -2442,63 +2593,29 @@ html, body {
 
     <p class="celeb__lead">허니문리조트는 다양한 셀럽과 신혼여행을 진행해왔습니다.</p>
 
-    <div class="image-card-grid">
-      <!-- TODO: 각 카드의 .image-card__image 를 실제 커플 사진으로 교체 -->
-      <div class="image-card">
-        <div class="image-card__image"><img class="image-card__photo" src="../assets/celeb/aeley-choisihoon.jpg" alt="에일리 · 최시훈"></div>
-        <p class="image-card__caption">에일리 · 최시훈</p>
-      </div>
-      <div class="image-card">
-        <div class="image-card__image"><img class="image-card__photo" src="../assets/celeb/seven-leedahae.jpg" alt="세븐 · 이다해"></div>
-        <p class="image-card__caption">세븐 · 이다해</p>
-      </div>
-      <div class="image-card">
-        <div class="image-card__image"><img class="image-card__photo" src="../assets/celeb/kimkiri-moonjiin.jpg" alt="김기리 · 문지인"></div>
-        <p class="image-card__caption">김기리 · 문지인</p>
-      </div>
-      <div class="image-card">
-        <div class="image-card__image"><img class="image-card__photo" src="../assets/celeb/parkhyunho-eungaeun.jpg" alt="박현호 · 은가은"></div>
-        <p class="image-card__caption">박현호 · 은가은</p>
-      </div>
-      <div class="image-card">
-        <div class="image-card__image"><img class="image-card__photo" src="../assets/celeb/cheondung-mimi.jpg" alt="천둥 · 미미"></div>
-        <p class="image-card__caption">천둥 · 미미</p>
-      </div>
-      <div class="image-card">
-        <div class="image-card__image"><img class="image-card__photo" src="../assets/celeb/simhyungtak-saya.jpg" alt="심형탁 · 사야"></div>
-        <p class="image-card__caption">심형탁 · 사야</p>
-      </div>
-      <div class="image-card">
-        <div class="image-card__image"><img class="image-card__photo" src="../assets/celeb/bada.jpg" alt="바다 부부"></div>
-        <p class="image-card__caption">바다 부부<br>(가수이자 뮤지컬 배우)</p>
-      </div>
-      <div class="image-card">
-        <div class="image-card__image"><img class="image-card__photo" src="../assets/celeb/parkhana-kimtaesul.jpg" alt="박하나 · 김태술"></div>
-        <p class="image-card__caption">박하나 · 김태술</p>
-      </div>
-      <div class="image-card">
-        <div class="image-card__image"><img class="image-card__photo" src="../assets/celeb/chanmi-songeuihwan.jpg" alt="AOA찬미(임도화) · 송의환"></div>
-        <p class="image-card__caption">AOA찬미(임도화) · 송의환</p>
-      </div>
-      <div class="image-card">
-        <div class="image-card__image"><img class="image-card__photo" src="../assets/celeb/daniel-lindemann.jpg" alt="다니엘 린데만 부부"></div>
-        <p class="image-card__caption">다니엘 린데만 부부</p>
-      </div>
-      <div class="image-card">
-        <div class="image-card__image"><img class="image-card__photo" src="../assets/celeb/limsungjae.jpg" alt="임성재 부부"></div>
-        <p class="image-card__caption">임성재 부부<br>(PGA 골프 선수)</p>
-      </div>
-      <div class="image-card">
-        <div class="image-card__image"><img class="image-card__photo" src="../assets/celeb/kimgaeun-yoonsunwoo.jpg" alt="김가은 · 윤선우"></div>
-        <p class="image-card__caption">김가은 · 윤선우</p>
-      </div>
-    </div>
+  </div>
 
+  <div class="celeb-scroll" id="celebScroll">
+    <div class="celeb-scroll__viewport">
+      <button class="celeb-scroll__nav celeb-scroll__nav--prev" id="celebScrollPrev" aria-label="이전 커플" type="button">‹</button>
+      <div class="celeb-scroll__track" id="celebTrack">
+        <!-- JS로 채워짐 -->
+      </div>
+      <button class="celeb-scroll__nav celeb-scroll__nav--next" id="celebScrollNext" aria-label="다음 커플" type="button">›</button>
+    </div>
+    <p class="celeb-scroll__caption" id="celebScrollCaption">에일리 · 최시훈</p>
+    <div class="celeb-scroll__pager">
+      <span class="celeb-scroll__pager-num" id="celebPagerNum">01</span>
+      <span class="celeb-scroll__pager-track"><span class="celeb-scroll__pager-fill" id="celebPagerFill"></span></span>
+      <span class="celeb-scroll__pager-total" id="celebPagerTotal">12</span>
+    </div>
+  </div>
+
+  <div class="celeb__inner">
     <div class="text-stack celeb__note">
       <p>다양한 유명인 및 스포츠 선수의 허니문을 상담·진행한 경험 역시 맞춤형 신혼여행 운영 경험을 보여주는 사례입니다.</p>
       <p>다양한 고객의 신혼여행 스타일과 일정에 맞춰 신혼여행을 상담하고 진행해온 경험은<br>허니문리조트의 전문성을 보여주는 중요한 신뢰 요소입니다.</p>
     </div>
-
   </div>
 </section>
 
@@ -2774,6 +2891,140 @@ html, body {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
+})();
+</script>
+
+<!-- 셀럽 갤러리: 가운데 카드가 바닥선 위로 솟아오르는 비주얼 + ‹ › 버튼으로 넘김
+     (페이지 스크롤과는 무관, 순수 버튼 인터랙션) -->
+<script>
+(function () {
+  var couples = [
+    { src: '../assets/celeb/aeley-choisihoon.jpg', name: '에일리 · 최시훈' },
+    { src: '../assets/celeb/seven-leedahae.jpg', name: '세븐 · 이다해' },
+    { src: '../assets/celeb/kimkiri-moonjiin.jpg', name: '김기리 · 문지인' },
+    { src: '../assets/celeb/parkhyunho-eungaeun.jpg', name: '박현호 · 은가은' },
+    { src: '../assets/celeb/cheondung-mimi.jpg', name: '천둥 · 미미' },
+    { src: '../assets/celeb/simhyungtak-saya.jpg', name: '심형탁 · 사야' },
+    { src: '../assets/celeb/bada.jpg', name: '바다 부부', sub: '가수이자 뮤지컬 배우' },
+    { src: '../assets/celeb/parkhana-kimtaesul.jpg', name: '박하나 · 김태술' },
+    { src: '../assets/celeb/chanmi-songeuihwan.jpg', name: 'AOA찬미(임도화) · 송의환' },
+    { src: '../assets/celeb/daniel-lindemann.jpg', name: '다니엘 린데만 부부' },
+    { src: '../assets/celeb/limsungjae.jpg', name: '임성재 부부', sub: 'PGA 골프 선수' },
+    { src: '../assets/celeb/kimgaeun-yoonsunwoo.jpg', name: '김가은 · 윤선우' }
+  ];
+
+  var viewport = document.querySelector('#celebScroll .celeb-scroll__viewport');
+  var track = document.getElementById('celebTrack');
+  if (!track) return;
+  var caption = document.getElementById('celebScrollCaption');
+  var prevBtn = document.getElementById('celebScrollPrev');
+  var nextBtn = document.getElementById('celebScrollNext');
+  var pagerNum = document.getElementById('celebPagerNum');
+  var pagerFill = document.getElementById('celebPagerFill');
+  var pagerTotal = document.getElementById('celebPagerTotal');
+
+  if (pagerTotal) pagerTotal.textContent = String(couples.length).padStart(2, '0');
+
+  var cards = couples.map(function (c) {
+    var card = document.createElement('figure');
+    card.className = 'celeb-scroll__card';
+    var img = document.createElement('div');
+    img.className = 'celeb-scroll__card-photo';
+    img.innerHTML = '<img src="' + c.src + '" alt="' + c.name + '">';
+    card.appendChild(img);
+    track.appendChild(card);
+    return card;
+  });
+
+  var currentIndex = 0;
+  var step = 0; // 카드 1칸(카드 폭 + gap)의 픽셀 거리
+
+  function layout() {
+    var viewportW = viewport.getBoundingClientRect().width;
+    var cardW = cards[0].offsetWidth; /* getBoundingClientRect()는 transform:scale() 적용된 값을 반환해서,
+                                          이미지가 늦게 로드돼 layout()이 재호출될 때 currentIndex가 0이 아니면
+                                          잘못된 카드 폭을 읽어 정렬이 옆으로 밀리는 버그가 있었음. offsetWidth는
+                                          transform과 무관한 실제 CSS 레이아웃 폭이라 항상 고정값. */
+    var gap = 28;
+    step = cardW + gap;
+    var sidePad = Math.max(viewportW / 2 - cardW / 2, 0);
+    track.style.paddingLeft = sidePad + 'px';
+    track.style.paddingRight = sidePad + 'px';
+
+    track.style.transition = 'none';
+    render();
+    track.offsetHeight; // 강제 리플로우로 transition:none 적용 확정
+    track.style.transition = '';
+    updateCaption(false); // 첫 로드 시엔 블러 전환 없이 즉시 표시
+    prevBtn.disabled = currentIndex === 0;
+    nextBtn.disabled = currentIndex === couples.length - 1;
+  }
+
+  function render() {
+    track.style.transform = 'translateX(' + (-currentIndex * step) + 'px)';
+
+    cards.forEach(function (card, i) {
+      var dist = Math.abs(i - currentIndex);
+      var norm = Math.min(dist / 3, 1);
+      var scale = 1.34 - norm * 0.64;
+      var opacity = 1 - norm * 0.6;
+      var lift = -(1 - norm) * 34; /* 바닥선 기준 위로 솟아오르는 정도 */
+      var shadowBlur = 10 + (1 - norm) * 34;
+      var shadowAlpha = 0.1 + (1 - norm) * 0.22;
+      card.style.transform = 'translateY(' + lift.toFixed(2) + 'px) scale(' + scale.toFixed(3) + ')';
+      card.style.opacity = opacity.toFixed(3);
+      card.style.zIndex = String(Math.round((1 - norm) * 100));
+      card.style.boxShadow = '0 ' + Math.round(shadowBlur * 0.55) + 'px ' + Math.round(shadowBlur) + 'px rgba(43, 31, 22, ' + shadowAlpha.toFixed(2) + ')';
+    });
+  }
+
+  function updateCaption(animate) {
+    var c = couples[currentIndex];
+    var apply = function () {
+      caption.innerHTML = c.name + (c.sub ? '<span class="sub">' + c.sub + '</span>' : '');
+      if (pagerNum) pagerNum.textContent = String(currentIndex + 1).padStart(2, '0');
+      if (pagerFill) pagerFill.style.width = (currentIndex / (couples.length - 1) * 100).toFixed(1) + '%';
+    };
+    if (animate === false) {
+      apply();
+      return;
+    }
+    caption.classList.add('is-swapping');
+    setTimeout(function () {
+      apply();
+      requestAnimationFrame(function () {
+        caption.classList.remove('is-swapping');
+      });
+    }, 160);
+  }
+
+  function goTo(i) {
+    currentIndex = Math.max(0, Math.min(couples.length - 1, i));
+    render();
+    updateCaption(true);
+    prevBtn.disabled = currentIndex === 0;
+    nextBtn.disabled = currentIndex === couples.length - 1;
+  }
+
+  prevBtn.addEventListener('click', function () { goTo(currentIndex - 1); });
+  nextBtn.addEventListener('click', function () { goTo(currentIndex + 1); });
+
+  window.addEventListener('resize', layout);
+
+  var allImgs = track.querySelectorAll('img');
+  var loaded = 0;
+  allImgs.forEach(function (img) {
+    if (img.complete) {
+      loaded++;
+    } else {
+      img.addEventListener('load', function () {
+        loaded++;
+        if (loaded === allImgs.length) layout();
+      });
+    }
+  });
+
+  layout();
 })();
 </script>
 
