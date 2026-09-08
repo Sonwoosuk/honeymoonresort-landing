@@ -26,6 +26,7 @@ body {
   font-family: var(--hero-font);
   background: #efe6d8;
   color: var(--hero-color-ink);
+  overflow-x: hidden; /* 시안 B 풀블리드 트랙 때문에 가로 스크롤바 방지 */
 }
 
 .page-note {
@@ -38,9 +39,29 @@ body {
 }
 .page-note b { color: var(--hero-color-ink); }
 
+.variant-label {
+  max-width: 900px;
+  margin: 56px auto 0;
+  padding: 0 24px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--hero-color-gold);
+  text-transform: uppercase;
+}
+.variant-label .sub {
+  display: block;
+  margin-top: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--hero-color-body);
+}
+
 .celeb {
   width: 100%;
-  padding: 56px 0 80px;
+  padding: 32px 0 80px;
 }
 .celeb__inner {
   max-width: 900px;
@@ -63,8 +84,8 @@ body {
 }
 
 /* =============================================================
-   셀럽 슬라이드: 큰 폴라로이드 무대 사진 + 하단 가로 필름스트립
-   (기존 .image-card 폴라로이드 컨셉을 그대로 이어받아 통일감 유지)
+   시안 A: 클릭식 (이전에 보여드린 것, 참고용)
+   큰 폴라로이드 무대 사진 + 하단 가로 필름스트립, 클릭해서 전환
 ============================================================= */
 .celeb-slide {
   position: relative;
@@ -73,7 +94,6 @@ body {
   align-items: center;
   gap: 22px;
 }
-
 .celeb-slide__stage-row {
   position: relative;
   display: flex;
@@ -82,7 +102,6 @@ body {
   width: 100%;
   max-width: 620px;
 }
-
 .celeb-slide__stage {
   flex: 1;
   background-color: var(--hero-color-bg);
@@ -91,7 +110,6 @@ body {
   box-sizing: border-box;
   box-shadow: 0 18px 40px rgba(43, 31, 22, 0.16);
 }
-
 .celeb-slide__photo-wrap {
   position: relative;
   width: 100%;
@@ -99,7 +117,6 @@ body {
   overflow: hidden;
   background-color: var(--hero-color-surface);
 }
-
 .celeb-slide__photo {
   width: 100%;
   height: 100%;
@@ -107,7 +124,6 @@ body {
   object-fit: cover;
   transition: opacity 0.35s ease;
 }
-
 .celeb-slide__caption {
   margin: 0;
   padding: 16px 6px 20px;
@@ -123,8 +139,6 @@ body {
   font-weight: 500;
   color: var(--hero-color-body);
 }
-
-/* 이전/다음 원형 버튼 */
 .celeb-slide__nav {
   flex: none;
   width: 40px;
@@ -145,8 +159,6 @@ body {
   color: var(--hero-color-gold);
   transform: translateY(-1px);
 }
-
-/* 하단 가로 필름스트립 (미니 폴라로이드) */
 .celeb-slide__strip {
   display: flex;
   gap: 12px;
@@ -160,7 +172,6 @@ body {
 }
 .celeb-slide__strip::-webkit-scrollbar { height: 6px; }
 .celeb-slide__strip::-webkit-scrollbar-thumb { background: var(--hero-color-border); border-radius: 3px; }
-
 .celeb-slide__thumb {
   flex: 0 0 auto;
   width: 74px;
@@ -185,14 +196,100 @@ body {
   display: block;
   object-fit: cover;
 }
-.celeb-slide__thumb:hover {
-  opacity: 0.85;
-}
+.celeb-slide__thumb:hover { opacity: 0.85; }
 .celeb-slide__thumb.is-active {
   opacity: 1;
   transform: scale(1);
   border-color: var(--hero-color-gold);
   box-shadow: 0 10px 22px rgba(43, 31, 22, 0.18);
+}
+
+/* =============================================================
+   시안 B: 스크롤 연동 코버플로우 (신규, 추천)
+   섹션을 아래로 스크롤하는 동안 가로 필름스트립이 옆으로 흘러가고,
+   화면 가운데 온 사진이 커지면서 이름이 바뀝니다. (position:sticky 이용)
+============================================================= */
+.celeb-scroll {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-top: 8px;
+}
+.celeb-scroll__sticky {
+  position: sticky;
+  top: 0;
+  height: 78vh;
+  max-height: 640px;
+  min-height: 460px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.celeb-scroll__track {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  will-change: transform;
+}
+.celeb-scroll__card {
+  flex: 0 0 auto;
+  width: 220px;
+  margin: 0;
+  background-color: var(--hero-color-bg);
+  border: 1px solid var(--hero-color-border);
+  padding: 12px 12px 0;
+  box-sizing: border-box;
+  box-shadow: 0 16px 34px rgba(43, 31, 22, 0.14);
+  will-change: transform, opacity;
+}
+.celeb-scroll__card-photo {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background-color: var(--hero-color-surface);
+}
+.celeb-scroll__card-photo img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+.celeb-scroll__card-space {
+  height: 12px;
+}
+.celeb-scroll__caption {
+  margin: 20px 0 0;
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--hero-color-ink);
+  text-align: center;
+  min-height: 1.4em;
+  transition: opacity 0.25s ease;
+}
+.celeb-scroll__caption .sub {
+  display: block;
+  margin-top: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--hero-color-body);
+}
+.celeb-scroll__hint {
+  margin: 10px 0 0;
+  font-size: 12px;
+  color: var(--hero-color-body);
+  letter-spacing: 0.02em;
+  opacity: 0.8;
+  transition: opacity 0.4s ease;
+}
+.celeb-scroll__hint.is-hidden { opacity: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .celeb-scroll__sticky { position: static; height: auto; overflow-x: auto; }
+  .celeb-scroll__track { transform: none !important; }
+  .celeb-scroll__card { transform: none !important; opacity: 1 !important; }
+  .celeb-scroll__hint { display: none; }
 }
 
 .text-stack {
@@ -212,16 +309,19 @@ body {
 @media (max-width: 640px) {
   .celeb-slide__stage-row { gap: 8px; }
   .celeb-slide__nav { width: 32px; height: 32px; font-size: 14px; }
+  .celeb-scroll__card { width: 160px; }
 }
 </style>
 </head>
 <body>
 
 <p class="page-note">
-  셀러브리티 섹션 슬라이드 시안 (비교용). 큰 무대 사진 아래 12장 썸네일을 가로 필름스트립으로 배치하고,
-  썸네일을 클릭하면 무대 사진이 바뀝니다. 기존 <b>.image-card</b> 폴라로이드 컨셉(흰 프레임)을
-  무대 사진·썸네일 양쪽에 그대로 이어받아 브랜드 톤은 유지했습니다.
+  셀러브리티 섹션 슬라이드 시안 (비교용, 실배포 파일 아님). <b>시안 A</b>는 클릭식(이전에 보여드린 것),
+  <b>시안 B</b>는 페이지를 스크롤하는 동안 필름스트립이 가로로 흘러가고 가운데 온 사진이 커지는 방식입니다.
+  두 시안 다 기존 <b>.image-card</b> 폴라로이드 프레임과 브랜드 컬러(골드/에스프레소 브라운)를 그대로 이어받았습니다.
 </p>
+
+<p class="variant-label">시안 A — 클릭식<span class="sub">참고용. 무대 사진 + 썸네일 클릭해서 전환</span></p>
 
 <section class="celeb">
   <div class="celeb__inner">
@@ -248,31 +348,56 @@ body {
       </div>
     </div>
 
+  </div>
+</section>
+
+<p class="variant-label">시안 B — 스크롤 연동 코버플로우<span class="sub">추천. 아래로 스크롤해보세요</span></p>
+
+<section class="celeb">
+  <div class="celeb__inner">
+
+    <h2 class="section-title">허니문리조트와 함께한 셀러브리티</h2>
+    <p class="celeb__lead">허니문리조트는 다양한 셀럽과 신혼여행을 진행해왔습니다.</p>
+  </div>
+
+  <div class="celeb-scroll" id="celebScroll">
+    <div class="celeb-scroll__sticky">
+      <div class="celeb-scroll__track" id="celebTrack">
+        <!-- JS로 채워짐 -->
+      </div>
+      <p class="celeb-scroll__caption" id="celebScrollCaption">에일리 · 최시훈</p>
+      <p class="celeb-scroll__hint" id="celebScrollHint">스크롤해서 계속 보기 ↓</p>
+    </div>
+  </div>
+
+  <div class="celeb__inner">
     <div class="text-stack">
       <p>다양한 유명인 및 스포츠 선수의 허니문을 상담·진행한 경험 역시 맞춤형 신혼여행 운영 경험을 보여주는 사례입니다.</p>
       <p>다양한 고객의 신혼여행 스타일과 일정에 맞춰 신혼여행을 상담하고 진행해온 경험은<br>허니문리조트의 전문성을 보여주는 중요한 신뢰 요소입니다.</p>
     </div>
-
   </div>
 </section>
 
 <script>
-(function () {
-  var couples = [
-    { src: '../assets/celeb/aeley-choisihoon.jpg', name: '에일리 · 최시훈' },
-    { src: '../assets/celeb/seven-leedahae.jpg', name: '세븐 · 이다해' },
-    { src: '../assets/celeb/kimkiri-moonjiin.jpg', name: '김기리 · 문지인' },
-    { src: '../assets/celeb/parkhyunho-eungaeun.jpg', name: '박현호 · 은가은' },
-    { src: '../assets/celeb/cheondung-mimi.jpg', name: '천둥 · 미미' },
-    { src: '../assets/celeb/simhyungtak-saya.jpg', name: '심형탁 · 사야' },
-    { src: '../assets/celeb/bada.jpg', name: '바다 부부', sub: '가수이자 뮤지컬 배우' },
-    { src: '../assets/celeb/parkhana-kimtaesul.jpg', name: '박하나 · 김태술' },
-    { src: '../assets/celeb/chanmi-songeuihwan.jpg', name: 'AOA찬미(임도화) · 송의환' },
-    { src: '../assets/celeb/daniel-lindemann.jpg', name: '다니엘 린데만 부부' },
-    { src: '../assets/celeb/limsungjae.jpg', name: '임성재 부부', sub: 'PGA 골프 선수' },
-    { src: '../assets/celeb/kimgaeun-yoonsunwoo.jpg', name: '김가은 · 윤선우' }
-  ];
+var couples = [
+  { src: '../assets/celeb/aeley-choisihoon.jpg', name: '에일리 · 최시훈' },
+  { src: '../assets/celeb/seven-leedahae.jpg', name: '세븐 · 이다해' },
+  { src: '../assets/celeb/kimkiri-moonjiin.jpg', name: '김기리 · 문지인' },
+  { src: '../assets/celeb/parkhyunho-eungaeun.jpg', name: '박현호 · 은가은' },
+  { src: '../assets/celeb/cheondung-mimi.jpg', name: '천둥 · 미미' },
+  { src: '../assets/celeb/simhyungtak-saya.jpg', name: '심형탁 · 사야' },
+  { src: '../assets/celeb/bada.jpg', name: '바다 부부', sub: '가수이자 뮤지컬 배우' },
+  { src: '../assets/celeb/parkhana-kimtaesul.jpg', name: '박하나 · 김태술' },
+  { src: '../assets/celeb/chanmi-songeuihwan.jpg', name: 'AOA찬미(임도화) · 송의환' },
+  { src: '../assets/celeb/daniel-lindemann.jpg', name: '다니엘 린데만 부부' },
+  { src: '../assets/celeb/limsungjae.jpg', name: '임성재 부부', sub: 'PGA 골프 선수' },
+  { src: '../assets/celeb/kimgaeun-yoonsunwoo.jpg', name: '김가은 · 윤선우' }
+];
 
+/* -------------------------------------------------------------
+   시안 A: 클릭식
+------------------------------------------------------------- */
+(function () {
   var stagePhoto = document.getElementById('celebStagePhoto');
   var stageCaption = document.getElementById('celebStageCaption');
   var strip = document.getElementById('celebStrip');
@@ -314,6 +439,131 @@ body {
 
   prevBtn.addEventListener('click', function () { goTo(current - 1); });
   nextBtn.addEventListener('click', function () { goTo(current + 1); });
+})();
+
+/* -------------------------------------------------------------
+   시안 B: 스크롤 연동 코버플로우
+   - .celeb-scroll 의 높이만큼 스크롤하는 동안 .celeb-scroll__sticky 가 고정되고,
+     그 진행률(0~1)에 비례해 .celeb-scroll__track 을 가로로 translateX 합니다.
+   - 화면 가운데(뷰포트 중앙)에 가까운 카드일수록 커지고 진해지며,
+     가장 가까운 카드가 바뀔 때 캡션이 크로스페이드로 갱신됩니다.
+------------------------------------------------------------- */
+(function () {
+  var wrapper = document.getElementById('celebScroll');
+  var track = document.getElementById('celebTrack');
+  var caption = document.getElementById('celebScrollCaption');
+  var hint = document.getElementById('celebScrollHint');
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var cards = couples.map(function (c) {
+    var card = document.createElement('figure');
+    card.className = 'celeb-scroll__card';
+    var img = document.createElement('div');
+    img.className = 'celeb-scroll__card-photo';
+    img.innerHTML = '<img src="' + c.src + '" alt="' + c.name + '">';
+    var space = document.createElement('div');
+    space.className = 'celeb-scroll__card-space';
+    card.appendChild(img);
+    card.appendChild(space);
+    track.appendChild(card);
+    return card;
+  });
+
+  if (reduceMotion) {
+    caption.innerHTML = couples[0].name;
+    return; // CSS 미디어쿼리가 정적 가로 스크롤 목록으로 대체
+  }
+
+  var maxTranslate = 0;
+  var currentIndex = -1;
+  var ticking = false;
+
+  function layout() {
+    var viewportW = window.innerWidth;
+    var cardW = cards[0].getBoundingClientRect().width;
+    var sidePad = Math.max(viewportW / 2 - cardW / 2, 0);
+    track.style.paddingLeft = sidePad + 'px';
+    track.style.paddingRight = sidePad + 'px';
+
+    maxTranslate = Math.max(track.scrollWidth - viewportW, 0);
+    var stickyH = wrapper.querySelector('.celeb-scroll__sticky').getBoundingClientRect().height;
+    wrapper.style.height = (maxTranslate + stickyH) + 'px';
+
+    update();
+  }
+
+  function update() {
+    var rect = wrapper.getBoundingClientRect();
+    var stickyH = wrapper.querySelector('.celeb-scroll__sticky').getBoundingClientRect().height;
+    var scrollable = Math.max(rect.height - stickyH, 1);
+    var progress = (-rect.top) / scrollable;
+    progress = Math.max(0, Math.min(1, progress));
+
+    var translateX = -progress * maxTranslate;
+    track.style.transform = 'translateX(' + translateX + 'px)';
+
+    if (hint) {
+      hint.classList.toggle('is-hidden', progress > 0.04);
+    }
+
+    var viewportCenter = window.innerWidth / 2;
+    var nearestIndex = 0;
+    var nearestDist = Infinity;
+
+    cards.forEach(function (card, i) {
+      var cRect = card.getBoundingClientRect();
+      var cCenter = cRect.left + cRect.width / 2;
+      var dist = Math.abs(cCenter - viewportCenter);
+      var norm = Math.min(dist / (window.innerWidth * 0.5), 1);
+      var scale = 1.18 - norm * 0.42;
+      var opacity = 1 - norm * 0.55;
+      card.style.transform = 'scale(' + scale.toFixed(3) + ')';
+      card.style.opacity = opacity.toFixed(3);
+
+      if (dist < nearestDist) {
+        nearestDist = dist;
+        nearestIndex = i;
+      }
+    });
+
+    if (nearestIndex !== currentIndex) {
+      currentIndex = nearestIndex;
+      var c = couples[currentIndex];
+      caption.style.opacity = 0;
+      setTimeout(function () {
+        caption.innerHTML = c.name + (c.sub ? '<span class="sub">' + c.sub + '</span>' : '');
+        caption.style.opacity = 1;
+      }, 120);
+    }
+  }
+
+  function onScroll() {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(function () {
+        update();
+        ticking = false;
+      });
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', layout);
+
+  var allImgs = track.querySelectorAll('img');
+  var loaded = 0;
+  allImgs.forEach(function (img) {
+    if (img.complete) {
+      loaded++;
+    } else {
+      img.addEventListener('load', function () {
+        loaded++;
+        if (loaded === allImgs.length) layout();
+      });
+    }
+  });
+
+  layout();
 })();
 </script>
 
