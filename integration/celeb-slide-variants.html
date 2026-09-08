@@ -261,7 +261,12 @@ body {
   color: var(--hero-color-ink);
   text-align: center;
   min-height: 1.4em;
-  transition: opacity 0.25s ease;
+  filter: blur(0);
+  transition: opacity 0.4s ease, filter 0.4s ease;
+}
+.celeb-scroll__caption.is-swapping {
+  opacity: 0;
+  filter: blur(10px);
 }
 .celeb-scroll__caption .sub {
   display: block;
@@ -506,11 +511,13 @@ var couples = [
       var cRect = card.getBoundingClientRect();
       var cCenter = cRect.left + cRect.width / 2;
       var dist = Math.abs(cCenter - viewportCenter);
-      var norm = Math.min(dist / (window.innerWidth * 0.5), 1);
-      var scale = 1.18 - norm * 0.42;
-      var opacity = 1 - norm * 0.55;
-      card.style.transform = 'scale(' + scale.toFixed(3) + ')';
+      var norm = Math.min(dist / (window.innerWidth * 0.32), 1);
+      var scale = 1.34 - norm * 0.64;
+      var opacity = 1 - norm * 0.6;
+      var lift = -(1 - norm) * 16;
+      card.style.transform = 'translateY(' + lift.toFixed(2) + 'px) scale(' + scale.toFixed(3) + ')';
       card.style.opacity = opacity.toFixed(3);
+      card.style.zIndex = String(Math.round((1 - norm) * 100));
 
       if (dist < nearestDist) {
         nearestDist = dist;
@@ -521,11 +528,13 @@ var couples = [
     if (nearestIndex !== currentIndex) {
       currentIndex = nearestIndex;
       var c = couples[currentIndex];
-      caption.style.opacity = 0;
+      caption.classList.add('is-swapping');
       setTimeout(function () {
         caption.innerHTML = c.name + (c.sub ? '<span class="sub">' + c.sub + '</span>' : '');
-        caption.style.opacity = 1;
-      }, 120);
+        requestAnimationFrame(function () {
+          caption.classList.remove('is-swapping');
+        });
+      }, 200);
     }
   }
 
