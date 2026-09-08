@@ -217,13 +217,15 @@ body {
 }
 .celeb-scroll__viewport {
   position: relative;
-  display: flex;
-  align-items: center;
   padding: 68px 0 24px; /* 위쪽 68px = 가운데 카드가 확대+들어올려질 때 잘리지 않게 하는 여유 */
   overflow: hidden;
 }
+/* 버튼은 트랙과 같은 flex 줄에 두면 트랙 폭(뷰포트보다 훨씬 넓음)에 밀려
+   화면 밖으로 나가버리므로, 뷰포트 위에 절대 위치로 얹음 */
 .celeb-scroll__nav {
-  flex: none;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   width: 44px;
   height: 44px;
   border-radius: 50%;
@@ -235,15 +237,17 @@ body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  margin: 0 4px;
   z-index: 10;
   box-shadow: 0 6px 16px rgba(43, 31, 22, 0.12);
   transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
+.celeb-scroll__nav--prev { left: 24px; }
+.celeb-scroll__nav--next { right: 24px; }
+.celeb-scroll__nav--prev:hover { transform: translateY(-50%) translateX(-2px); }
+.celeb-scroll__nav--next:hover { transform: translateY(-50%) translateX(2px); }
 .celeb-scroll__nav:hover {
   border-color: var(--hero-color-gold);
   color: var(--hero-color-gold);
-  transform: translateY(-1px);
 }
 .celeb-scroll__nav:disabled {
   opacity: 0.35;
@@ -252,7 +256,7 @@ body {
 .celeb-scroll__nav:disabled:hover {
   border-color: var(--hero-color-border);
   color: var(--hero-color-ink);
-  transform: none;
+  transform: translateY(-50%);
 }
 .celeb-scroll__track {
   display: flex;
@@ -418,11 +422,11 @@ body {
 
   <div class="celeb-scroll" id="celebScroll">
     <div class="celeb-scroll__viewport">
-      <button class="celeb-scroll__nav" id="celebScrollPrev" aria-label="이전 커플" type="button">‹</button>
+      <button class="celeb-scroll__nav celeb-scroll__nav--prev" id="celebScrollPrev" aria-label="이전 커플" type="button">‹</button>
       <div class="celeb-scroll__track" id="celebTrack">
         <!-- JS로 채워짐 -->
       </div>
-      <button class="celeb-scroll__nav" id="celebScrollNext" aria-label="다음 커플" type="button">›</button>
+      <button class="celeb-scroll__nav celeb-scroll__nav--next" id="celebScrollNext" aria-label="다음 커플" type="button">›</button>
     </div>
     <p class="celeb-scroll__caption" id="celebScrollCaption">에일리 · 최시훈</p>
     <div class="celeb-scroll__pager">
