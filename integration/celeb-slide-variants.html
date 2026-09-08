@@ -237,11 +237,9 @@ body {
   flex: 0 0 auto;
   width: 220px;
   margin: 0;
-  background-color: var(--hero-color-bg);
-  border: 1px solid var(--hero-color-border);
-  padding: 12px 12px 0;
-  box-sizing: border-box;
-  box-shadow: 0 16px 34px rgba(43, 31, 22, 0.14);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 16px 34px rgba(43, 31, 22, 0.16);
   will-change: transform, opacity;
 }
 .celeb-scroll__card-photo {
@@ -255,9 +253,6 @@ body {
   height: 100%;
   display: block;
   object-fit: cover;
-}
-.celeb-scroll__card-space {
-  height: 12px;
 }
 .celeb-scroll__caption {
   margin: 20px 0 0;
@@ -461,10 +456,7 @@ var couples = [
     var img = document.createElement('div');
     img.className = 'celeb-scroll__card-photo';
     img.innerHTML = '<img src="' + c.src + '" alt="' + c.name + '">';
-    var space = document.createElement('div');
-    space.className = 'celeb-scroll__card-space';
     card.appendChild(img);
-    card.appendChild(space);
     track.appendChild(card);
     return card;
   });
