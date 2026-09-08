@@ -350,7 +350,7 @@ p {
    5. 배너 하단 소개 문단 (가운데 정렬 단일 단락)
 ------------------------------------------------------------- */
 .hero__intro {
-  max-width: 760px;
+  max-width: 920px; /* 넓게 잡아서 줄바꿈 수를 줄임(가운데 정렬 문단이 버섯 모양으로 보이는 것 방지) */
   margin: 32px auto 0;
 }
 
@@ -360,7 +360,12 @@ p {
   line-height: 1.75;
   color: var(--hero-color-body);
   letter-spacing: -0.01em;
-  text-align: center;
+  /* 3문장(<br>로 연결)짜리 긴 문단이라 가운데 정렬(text-align:center)하면 줄마다
+     길이가 들쭉날쭉해 버섯 모양처럼 보임. 그렇다고 완전 왼쪽 정렬하면 오른쪽만
+     들쭉날쭉해서 "왼쪽으로 쏠려 보인다"는 지적을 다시 받았음.
+     양쪽 정렬(justify)로 좌우 끝을 딱 맞춰 깔끔한 사각형 블록으로 보이게 함. */
+  text-align: justify;
+  text-align-last: left; /* 각 <br> 앞 마지막 줄만 늘어나지 않고 자연스럽게 왼쪽 정렬 */
 }
 
 /* -------------------------------------------------------------
@@ -828,7 +833,8 @@ p {
   display: flex;
   flex-direction: column;
   gap: 14px;
-  max-width: 760px;
+  max-width: 920px; /* 가운데 정렬 문단이 줄마다 폭이 들쭉날쭉해 보이는(버섯 모양) 걸
+                        줄이려고 폭을 넓혀 줄바꿈 수 자체를 줄임 */
   margin: 0 auto;
 }
 
@@ -843,17 +849,29 @@ p {
   overflow-wrap: break-word;
 }
 
-/* 여러 문단을 하나로 합친 가운데 정렬 단락. .text-stack 과 함께 사용합니다:
-   class="text-stack text-stack--2col" */
+/* 짧은 블러브(process/브랜드/안전 인트로, <br>로 미리 2줄 나눠둔 유튜브·셀럽
+   문단)는 text-align:center 그대로가 깔끔함. "검증된 회사" 섹션 문단만 <br> 없이
+   자연스럽게 줄바꿈되는 진짜 긴 문단(3~4줄)이라 줄마다 길이가 들쭉날쭉해
+   버섯 모양처럼 보이므로, 여기만 양쪽 정렬(justify)로 좌우 끝을 맞춤 */
+.verified__intro p {
+  text-align: justify;
+  text-align-last: left;
+}
+
+/* 여러 문단을 하나로 합친 단락. .text-stack 과 함께 사용합니다:
+   class="text-stack text-stack--2col"
+   내용이 길어서 가운데 정렬하면 버섯 모양이 되므로 양쪽 정렬(justify)로
+   좌우 끝을 맞춤 */
 .text-stack--2col {
   display: block;
-  max-width: 760px;
+  max-width: 920px;
   margin: 0 auto;
 }
 
 .text-stack--2col p {
   margin: 0;
-  text-align: center;
+  text-align: justify;
+  text-align-last: left;
 }
 
 @media (max-width: 860px) {
@@ -2456,7 +2474,7 @@ html, body {
 
     <h2 class="section-title">허니문리조트는 검증된 회사입니다</h2>
 
-    <div class="text-stack" style="margin-bottom: 28px;">
+    <div class="text-stack verified__intro" style="margin-bottom: 28px;">
       <p>허니문리조트는 하와이, 두바이, 호주 퀸즐랜드주, 타히티를 비롯한 13개 관광청과 협업하며 신혼여행 상품을 알리고 고객에게 더 다양한 선택지를 제공해왔습니다. 이렇게 쌓은 글로벌 네트워크와 허니문 전문성을 바탕으로 2026년 7월 미국관광청이 선정한 글로벌 앰버서더에 선정될 만큼, 여행업계 및 아웃바운드 럭셔리·허니문 관광산업에서 검증된 회사로 자리매김했습니다.</p>
     </div>
 
