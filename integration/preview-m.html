@@ -285,70 +285,107 @@ br.mbr {
 }
 
 /* =============================================================
-   HERO
+   HERO — 타이포 히어로 (PC와 동일 컨셉: 사진 없이 소개 칼럼 + 헤드라인, 세로 배치)
 ============================================================= */
 .hero {
-  padding: 0 0 52px;
+  padding: 8px 0 52px;
 }
 
-.hero__banner {
-  position: relative;
+.hero__text {
   width: 100%;
-  overflow: hidden;
-  margin-bottom: 24px;
-}
-
-.hero__banner-slides {
-  position: relative;
-  width: 100%;
-}
-
-.hero__banner-slide {
-  position: relative;
-  width: 100%;
-}
-
-/* 원본 비율 그대로 노출 (잘림 없음). 세로가 너무 길면
-   max-height 로만 살짝 제한하고 그때만 cover 로 중앙 크롭 */
-.hero__banner-image {
-  width: 100%;
-  height: auto;
-  max-height: 62vh;
-  display: block;
-  object-fit: cover;
-  object-position: center;
-}
-
-/* 텍스트를 이미지 위에 겹치지 않고 이미지 바로 아래 띠로 배치
-   (겹치면 배너 하단이 가려져서 사진이 잘 안 보임) */
-.hero__banner-overlay {
-  position: static;
-  z-index: 2;
-  background-color: var(--hero-color-overlay);
-  padding: 16px var(--m-gutter);
   box-sizing: border-box;
 }
 
-.hero__banner-eyebrow {
-  display: inline-block;
-  margin-bottom: 8px;
-  color: var(--hero-color-accent);
-  font-weight: 700;
-  font-size: 12px;
-  letter-spacing: 0.04em;
+.hero__text-row {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
 }
 
-.hero__banner-headline {
+.hero__text-logo img {
+  height: 22px;
+  width: auto;
+  display: block;
+}
+
+.hero__text-divider {
+  width: 100%;
+  height: 1px;
+  background: var(--hero-color-ink);
+  margin: 16px 0 14px;
+  border: none;
+}
+
+.hero__text-desc {
   margin: 0;
-  font-size: 15px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--hero-color-body);
+}
+
+.hero__text-headline {
+  margin: 0;
   font-weight: 600;
-  line-height: 1.55;
-  letter-spacing: -0.01em;
-  color: var(--hero-color-on-overlay);
+  font-size: 28px;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  color: var(--hero-color-ink);
+}
+
+.hero__text-headline b {
+  font-weight: 800;
+  color: var(--hero-color-gold);
+}
+
+/* 헤드라인 등장: 한 줄씩 흐릿 → 또렷 (아련한 블러 인) */
+.hero__text-headline .htl {
+  display: block;
+  opacity: 0;
+  filter: blur(16px);
+  transition: opacity 1.2s ease, filter 1.2s ease;
+  transition-delay: calc(var(--i, 0) * 260ms);
+}
+.hero__text-headline.is-visible .htl {
+  opacity: 1;
+  filter: blur(0);
+}
+
+/* 히어로 하단 마무리 줄: 가운데 정렬 (태그라인 + "함께 준비한 신혼여행지 [바뀌는 여행지]") */
+.hero__text-foot {
+  margin-top: 40px;
+  text-align: center;
+}
+.hero__text-tagline {
+  margin: 0 0 8px;
+  font-size: 14px;
+  color: var(--hero-color-body);
+}
+.hero__text-rotate {
+  margin: 0;
+  font-size: 16px;
+  color: var(--hero-color-body);
+}
+.hero__text-rotate__slot {
+  display: inline-block;
+  font-weight: 700;
+  color: var(--hero-color-gold);
+}
+.hero__text-rotate__slot b {
+  display: inline-block;
+  font-weight: 700;
+  animation: heroRotateWord 0.5s ease both;
+}
+@keyframes heroRotateWord {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero__text-headline .htl { transition: none; opacity: 1; filter: none; }
+  .hero__text-rotate__slot b { animation: none; }
 }
 
 .hero__intro {
-  margin: 0 auto;
+  margin: 40px auto 0;
 }
 
 .hero__intro p {
@@ -397,48 +434,44 @@ br.mbr {
   text-align: center;
 }
 
+/* 숫자 통계: 박스·테두리·색 채움 없이 큰 숫자만 (PC와 동일 컨셉, 가운데 정렬) */
 .scale__stats {
   display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 12px;
-  margin-bottom: 22px;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  margin: 8px auto 28px;
 }
 
 .scale__stat {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
-  padding: 20px 16px;
-  background-color: var(--hero-color-surface);
-  border: 1px solid var(--hero-color-border);
-  border-radius: 16px;
-  box-shadow: 0 8px 18px rgba(43, 31, 22, 0.08);
-  box-sizing: border-box;
+  gap: 8px;
+  text-align: center;
 }
 
 .scale__stat-number {
   margin: 0;
-  font-size: 36px;
+  font-size: 40px;
   font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  color: var(--hero-color-gold);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--hero-color-ink);
 }
 
 .scale__stat-number span {
-  font-size: 17px;
+  font-size: 0.42em;
   font-weight: 600;
   margin-left: 2px;
+  color: var(--hero-color-gold);
 }
 
 .scale__stat-label {
   margin: 0;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--hero-color-body);
-  text-align: center;
 }
 
 .scale__desc {
@@ -686,29 +719,53 @@ br.mbr {
 /* =============================================================
    PROCESS (5단계) — 세로 목록
 ============================================================= */
+/* 5단계 스텝: 위→아래로 그려지는 진행선 + 숫자 원이 하나씩 팝업 (PC와 동일 컨셉) */
 .process__steps {
   position: relative;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
-  gap: 12px;
+  align-items: flex-start;
+  gap: 20px;
   margin-top: 20px;
   margin-bottom: 28px;
 }
 
+/* 배경 트랙 (연한 선) — 숫자 원 중심(22px) 세로선 */
+.process__steps::before {
+  content: "";
+  position: absolute;
+  top: 22px;
+  bottom: 22px;
+  left: 22px;
+  width: 2px;
+  background: var(--hero-color-border);
+  z-index: 0;
+}
+
+/* 채워지는 진행선 (골드) — 섹션이 보이면 height 0 → 끝까지 */
+.process__steps::after {
+  content: "";
+  position: absolute;
+  top: 22px;
+  left: 22px;
+  width: 2px;
+  height: 0;
+  background: var(--hero-color-gold);
+  z-index: 0;
+  transition: height 1.4s cubic-bezier(0.65, 0, 0.35, 1);
+}
+.process__steps.is-playing::after {
+  height: calc(100% - 44px);
+}
+
 .process__step {
   position: relative;
+  z-index: 1;
   flex: none;
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 12px;
-}
-
-.process__step:not(:last-child)::after,
-.process__step::after {
-  content: none;
-  display: none;
 }
 
 .process__step-number {
@@ -723,6 +780,18 @@ br.mbr {
   display: flex;
   align-items: center;
   justify-content: center;
+  transform: scale(0);
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition-delay: calc(var(--i, 0) * 230ms);
+}
+.process__steps.is-playing .process__step-number {
+  transform: scale(1);
+  animation: processPulse 0.7s ease-out both;
+  animation-delay: calc(var(--i, 0) * 230ms + 0.15s);
+}
+@keyframes processPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(138, 104, 71, 0.4); }
+  100% { box-shadow: 0 0 0 16px rgba(138, 104, 71, 0); }
 }
 
 .process__step-label {
@@ -732,6 +801,21 @@ br.mbr {
   color: var(--hero-color-ink);
   text-align: left;
   padding: 0;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition-delay: calc(var(--i, 0) * 230ms + 0.12s);
+}
+.process__steps.is-playing .process__step-label {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .process__steps::after { transition: none; }
+  .process__step-number { transform: none; transition: none; }
+  .process__steps.is-playing .process__step-number { animation: none; }
+  .process__step-label { opacity: 1; transform: none; transition: none; }
 }
 
 /* =============================================================
@@ -1199,19 +1283,6 @@ a.safety__badge-image {
 }
 
 /* =============================================================
-   풀블리드 배너 (실제 사이트 .wrap 안에 넣을 때)
-============================================================= */
-.hero__banner {
-  position: relative;
-  width: 100vw;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-  overflow: hidden;
-}
-
-/* =============================================================
    데스크톱/큰 화면에서 열었을 때: 모바일 컬럼을 가운데로 고정해
    좌우가 허전하지 않도록 카드처럼 프레임 처리합니다.
    (실제 스마트폰 화면 폭에서는 아래 규칙이 적용되지 않습니다.)
@@ -1222,15 +1293,6 @@ a.safety__badge-image {
     margin-left: auto;
     margin-right: auto;
     box-shadow: 0 0 60px rgba(43, 31, 22, 0.13);
-  }
-
-  /* 풀블리드 배너도 컬럼 폭에 맞춥니다 (100vw 로 삐져나오지 않도록) */
-  .hero__banner {
-    width: 100%;
-    left: auto;
-    right: auto;
-    margin-left: 0;
-    margin-right: 0;
   }
 }
 </style>
@@ -1255,19 +1317,21 @@ a.safety__badge-image {
   <!-- 화면에는 보이지 않는 페이지 대표 제목(h1): 스크린리더 & 검색엔진용 -->
   <h1 style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;">허니문리조트 회사소개 - 1995년부터 신혼여행을 전문으로 하는 허니문 전문 여행사</h1>
 
-  <!-- 풀와이드 배너 (.hero__inner 컨테이너 밖에 배치 -> 좌우 여백 없이 화면 전체 폭으로 표시
-       // 오가닉 블롭 프레임 없이 각진 사각형 + CSS 전용 자동 슬라이드, 임시 플레이스홀더 3장) + 하단 좌측 텍스트 -->
-  <div class="hero__banner">
-    <div class="hero__banner-slides">
-      <!-- TODO: 실제 이미지로 교체 (현재는 임시 플레이스홀더 이미지) -->
-      <div class="hero__banner-slide">
-        <img class="hero__banner-image" src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/hero-main.jpg" alt="허니문리조트 몰디브 디가리 리조트 전경">
+  <!-- 타이포 히어로: 사진 없이 소개(로고+구분선+문단) + 헤드라인, 세로 배치 (PC와 동일 컨셉) -->
+  <div class="hero__text">
+    <div class="hero__inner hero__text-row">
+      <div class="hero__text-info">
+        <div class="hero__text-logo">
+          <img src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/logo/honeymoonresort-logo.png" alt="허니문리조트">
+        </div>
+        <hr class="hero__text-divider">
+        <p class="hero__text-desc">1995년부터<br>신혼여행만을 전문으로<br>맞춤 여행을 안내해온<br>허니문리조트</p>
       </div>
+      <p class="hero__text-headline" id="heroHeadline"><span class="htl" style="--i:0"><b>30년의</b> 경험과</span><span class="htl" style="--i:1">허니문 <b>전문성으로</b></span><span class="htl" style="--i:2">완성하는</span><span class="htl" style="--i:3"><b>맞춤 허니문</b></span></p>
     </div>
-
-    <div class="hero__banner-overlay">
-      <span class="hero__banner-eyebrow">EST</span>
-      <p class="hero__banner-headline">허니문리조트는 1995년부터 신혼여행을 전문으로 맞춤여행으로 안내드린 허니문 전문 여행사입니다.</p>
+    <div class="hero__text-foot">
+      <p class="hero__text-tagline">두 사람의 시작을 가장 잘 아는 여행사</p>
+      <p class="hero__text-rotate">함께 준비한 신혼여행지 <span class="hero__text-rotate__slot" id="heroRotateSlot"><b>몰디브</b></span></p>
     </div>
   </div>
 
@@ -1305,7 +1369,7 @@ a.safety__badge-image {
 
     <p class="scale__desc">허니문리조트는 서울 청담동 본사를 중심으로 13개 지역 지사와 100명 이상의 임직원 운영 기반을 갖춘 허니문 전문 여행사입니다.<br><strong>서울 본사와 천안, 대전, 대구, 포항, 울산, 부산, 창원, 전주, 광주, 진주, 순천, 제주, 하와이</strong> 등 국내외 상담 네트워크를 운영하며 B2C 신혼여행 상담과 B2B 여행 사업을 함께 운영하고 있습니다.</p>
 
-    <img class="scale__map" src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/branch-map.png" alt="허니문리조트 지사 네트워크 지도: 서울 본사, 천안, 대전, 대구, 포항, 울산, 부산, 창원, 전주, 광주, 순천, 제주, 하와이">
+    <img class="scale__map" src="https://new.honeymoonresort.co.kr/new_ver/img/company-intro/branch-map.png" alt="허니문리조트 지사 네트워크 지도: 서울 본사, 천안, 대전, 대구, 포항, 울산, 부산, 창원, 진주, 전주, 광주, 순천, 제주, 하와이">
 
     <p class="scale__cities">
       <span class="scale__cities-label">지사 네트워크</span>
@@ -1439,23 +1503,23 @@ a.safety__badge-image {
     <h2 class="section-title">허니문리조트와 준비하는 신혼여행은 어떻게 진행되나요?</h2>
 
     <div class="process__steps">
-      <div class="process__step">
+      <div class="process__step" style="--i:0">
         <span class="process__step-number">1</span>
         <span class="process__step-label">신혼여행 조건 확인</span>
       </div>
-      <div class="process__step">
+      <div class="process__step" style="--i:1">
         <span class="process__step-number">2</span>
         <span class="process__step-label">신혼여행지 및 리조트 비교</span>
       </div>
-      <div class="process__step">
+      <div class="process__step" style="--i:2">
         <span class="process__step-number">3</span>
         <span class="process__step-label">항공·호텔·투어 구성</span>
       </div>
-      <div class="process__step">
+      <div class="process__step" style="--i:3">
         <span class="process__step-number">4</span>
         <span class="process__step-label">견적 및 일정 확정</span>
       </div>
-      <div class="process__step">
+      <div class="process__step" style="--i:4">
         <span class="process__step-number">5</span>
         <span class="process__step-label">예약 후 출발 준비 안내</span>
       </div>
@@ -1894,7 +1958,7 @@ a.safety__badge-image {
 (function () {
   var revealTargets = document.querySelectorAll(
     '.section-title, .scale__stat, .expo__stat, .expo__gallery-photo, .awards__timeline-item, ' +
-    '.verified__card, .contact__card, .brand__card, .process__step, ' +
+    '.verified__card, .contact__card, .brand__card, .process .text-stack, ' +
     '.image-card, .youtube__video-thumb'
   );
 
@@ -1953,6 +2017,51 @@ a.safety__badge-image {
     numberEls.forEach(function (el) {
       numberObserver.observe(el);
     });
+  }
+
+  /* 진행 단계(5스텝): 화면에 들어오면 진행선이 그려지고 숫자 원이 하나씩 팝업 */
+  var processSteps = document.querySelector('.process__steps');
+  if (processSteps) {
+    if (!('IntersectionObserver' in window)) {
+      processSteps.classList.add('is-playing');
+    } else {
+      new IntersectionObserver(function (entries, observer) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            processSteps.classList.add('is-playing');
+            observer.unobserve(processSteps);
+          }
+        });
+      }, { threshold: 0.35 }).observe(processSteps);
+    }
+  }
+
+  /* 히어로 헤드라인: 한 줄씩 흐릿 → 또렷 (아련한 블러 인) */
+  var heroHeadline = document.getElementById('heroHeadline');
+  if (heroHeadline) {
+    if (!('IntersectionObserver' in window)) {
+      heroHeadline.classList.add('is-visible');
+    } else {
+      new IntersectionObserver(function (entries, observer) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            heroHeadline.classList.add('is-visible');
+            observer.unobserve(heroHeadline);
+          }
+        });
+      }, { threshold: 0.3 }).observe(heroHeadline);
+    }
+  }
+
+  /* 히어로 하단: 한 자리에서 바뀌는 여행지 단어 */
+  var heroRotateSlot = document.getElementById('heroRotateSlot');
+  if (heroRotateSlot && !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+    var heroRotateWords = ['몰디브', '하와이', '발리', '칸쿤', '세이셸', '모리셔스', '두바이', '태국', '유럽', '호주'];
+    var heroRotateIdx = 0;
+    setInterval(function () {
+      heroRotateIdx = (heroRotateIdx + 1) % heroRotateWords.length;
+      heroRotateSlot.innerHTML = '<b>' + heroRotateWords[heroRotateIdx] + '</b>';
+    }, 2000);
   }
 })();
 </script>
