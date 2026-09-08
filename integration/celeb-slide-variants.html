@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>셀러브리티 섹션 - 슬라이드 시안 (비교용, 실배포 파일 아님)</title>
+
+<link rel="stylesheet" as="style" crossorigin
+  href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+
+<style>
+:root {
+  --hero-color-bg:        #ffffff;
+  --hero-color-surface:   #f8f2ea;
+  --hero-color-border:    #e6d9c6;
+  --hero-color-ink:       #2b1f16;
+  --hero-color-body:      #6b5c4c;
+  --hero-color-gold:      #8a6847;
+  --hero-color-accent:    #f9c359;
+  --hero-font: "Pretendard", -apple-system, BlinkMacSystemFont, "Malgun Gothic", sans-serif;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: var(--hero-font);
+  background: #efe6d8;
+  color: var(--hero-color-ink);
+}
+
+.page-note {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 28px 24px 0;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--hero-color-body);
+}
+.page-note b { color: var(--hero-color-ink); }
+
+.celeb {
+  width: 100%;
+  padding: 56px 0 80px;
+}
+.celeb__inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px;
+  box-sizing: border-box;
+  text-align: center;
+}
+.section-title {
+  margin: 0 0 14px;
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--hero-color-ink);
+}
+.celeb__lead {
+  margin: 0 0 40px;
+  font-size: 16px;
+  color: var(--hero-color-body);
+}
+
+/* =============================================================
+   셀럽 슬라이드: 큰 폴라로이드 무대 사진 + 하단 가로 필름스트립
+   (기존 .image-card 폴라로이드 컨셉을 그대로 이어받아 통일감 유지)
+============================================================= */
+.celeb-slide {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+}
+
+.celeb-slide__stage-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  width: 100%;
+  max-width: 620px;
+}
+
+.celeb-slide__stage {
+  flex: 1;
+  background-color: var(--hero-color-bg);
+  border: 1px solid var(--hero-color-border);
+  padding: 14px 14px 0;
+  box-sizing: border-box;
+  box-shadow: 0 18px 40px rgba(43, 31, 22, 0.16);
+}
+
+.celeb-slide__photo-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background-color: var(--hero-color-surface);
+}
+
+.celeb-slide__photo {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: opacity 0.35s ease;
+}
+
+.celeb-slide__caption {
+  margin: 0;
+  padding: 16px 6px 20px;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--hero-color-ink);
+  transition: opacity 0.35s ease;
+}
+.celeb-slide__caption .sub {
+  display: block;
+  margin-top: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--hero-color-body);
+}
+
+/* 이전/다음 원형 버튼 */
+.celeb-slide__nav {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--hero-color-border);
+  background-color: var(--hero-color-bg);
+  color: var(--hero-color-ink);
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+.celeb-slide__nav:hover {
+  border-color: var(--hero-color-gold);
+  color: var(--hero-color-gold);
+  transform: translateY(-1px);
+}
+
+/* 하단 가로 필름스트립 (미니 폴라로이드) */
+.celeb-slide__strip {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  max-width: 780px;
+  overflow-x: auto;
+  padding: 6px 4px 14px;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--hero-color-border) transparent;
+}
+.celeb-slide__strip::-webkit-scrollbar { height: 6px; }
+.celeb-slide__strip::-webkit-scrollbar-thumb { background: var(--hero-color-border); border-radius: 3px; }
+
+.celeb-slide__thumb {
+  flex: 0 0 auto;
+  width: 74px;
+  padding: 5px 5px 6px;
+  background-color: var(--hero-color-bg);
+  border: 1px solid var(--hero-color-border);
+  box-shadow: 0 4px 10px rgba(43, 31, 22, 0.08);
+  opacity: 0.55;
+  transform: scale(0.94);
+  cursor: pointer;
+  transition: opacity 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.celeb-slide__thumb-img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background-color: var(--hero-color-surface);
+}
+.celeb-slide__thumb-img img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+.celeb-slide__thumb:hover {
+  opacity: 0.85;
+}
+.celeb-slide__thumb.is-active {
+  opacity: 1;
+  transform: scale(1);
+  border-color: var(--hero-color-gold);
+  box-shadow: 0 10px 22px rgba(43, 31, 22, 0.18);
+}
+
+.text-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 640px;
+  margin: 40px auto 0;
+}
+.text-stack p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--hero-color-body);
+}
+
+@media (max-width: 640px) {
+  .celeb-slide__stage-row { gap: 8px; }
+  .celeb-slide__nav { width: 32px; height: 32px; font-size: 14px; }
+}
+</style>
+</head>
+<body>
+
+<p class="page-note">
+  셀러브리티 섹션 슬라이드 시안 (비교용). 큰 무대 사진 아래 12장 썸네일을 가로 필름스트립으로 배치하고,
+  썸네일을 클릭하면 무대 사진이 바뀝니다. 기존 <b>.image-card</b> 폴라로이드 컨셉(흰 프레임)을
+  무대 사진·썸네일 양쪽에 그대로 이어받아 브랜드 톤은 유지했습니다.
+</p>
+
+<section class="celeb">
+  <div class="celeb__inner">
+
+    <h2 class="section-title">허니문리조트와 함께한 셀러브리티</h2>
+    <p class="celeb__lead">허니문리조트는 다양한 셀럽과 신혼여행을 진행해왔습니다.</p>
+
+    <div class="celeb-slide">
+      <div class="celeb-slide__stage-row">
+        <button class="celeb-slide__nav" id="celebPrev" aria-label="이전 커플" type="button">‹</button>
+
+        <div class="celeb-slide__stage">
+          <div class="celeb-slide__photo-wrap">
+            <img class="celeb-slide__photo" id="celebStagePhoto" src="../assets/celeb/aeley-choisihoon.jpg" alt="에일리 · 최시훈">
+          </div>
+          <p class="celeb-slide__caption" id="celebStageCaption">에일리 · 최시훈</p>
+        </div>
+
+        <button class="celeb-slide__nav" id="celebNext" aria-label="다음 커플" type="button">›</button>
+      </div>
+
+      <div class="celeb-slide__strip" id="celebStrip">
+        <!-- JS로 채워짐 -->
+      </div>
+    </div>
+
+    <div class="text-stack">
+      <p>다양한 유명인 및 스포츠 선수의 허니문을 상담·진행한 경험 역시 맞춤형 신혼여행 운영 경험을 보여주는 사례입니다.</p>
+      <p>다양한 고객의 신혼여행 스타일과 일정에 맞춰 신혼여행을 상담하고 진행해온 경험은<br>허니문리조트의 전문성을 보여주는 중요한 신뢰 요소입니다.</p>
+    </div>
+
+  </div>
+</section>
+
+<script>
+(function () {
+  var couples = [
+    { src: '../assets/celeb/aeley-choisihoon.jpg', name: '에일리 · 최시훈' },
+    { src: '../assets/celeb/seven-leedahae.jpg', name: '세븐 · 이다해' },
+    { src: '../assets/celeb/kimkiri-moonjiin.jpg', name: '김기리 · 문지인' },
+    { src: '../assets/celeb/parkhyunho-eungaeun.jpg', name: '박현호 · 은가은' },
+    { src: '../assets/celeb/cheondung-mimi.jpg', name: '천둥 · 미미' },
+    { src: '../assets/celeb/simhyungtak-saya.jpg', name: '심형탁 · 사야' },
+    { src: '../assets/celeb/bada.jpg', name: '바다 부부', sub: '가수이자 뮤지컬 배우' },
+    { src: '../assets/celeb/parkhana-kimtaesul.jpg', name: '박하나 · 김태술' },
+    { src: '../assets/celeb/chanmi-songeuihwan.jpg', name: 'AOA찬미(임도화) · 송의환' },
+    { src: '../assets/celeb/daniel-lindemann.jpg', name: '다니엘 린데만 부부' },
+    { src: '../assets/celeb/limsungjae.jpg', name: '임성재 부부', sub: 'PGA 골프 선수' },
+    { src: '../assets/celeb/kimgaeun-yoonsunwoo.jpg', name: '김가은 · 윤선우' }
+  ];
+
+  var stagePhoto = document.getElementById('celebStagePhoto');
+  var stageCaption = document.getElementById('celebStageCaption');
+  var strip = document.getElementById('celebStrip');
+  var prevBtn = document.getElementById('celebPrev');
+  var nextBtn = document.getElementById('celebNext');
+  var thumbs = [];
+  var current = 0;
+
+  couples.forEach(function (c, i) {
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'celeb-slide__thumb' + (i === 0 ? ' is-active' : '');
+    btn.setAttribute('aria-label', c.name);
+    btn.innerHTML = '<span class="celeb-slide__thumb-img"><img src="' + c.src + '" alt="' + c.name + '"></span>';
+    btn.addEventListener('click', function () { goTo(i); });
+    strip.appendChild(btn);
+    thumbs.push(btn);
+  });
+
+  function goTo(i) {
+    if (i === current) return;
+    current = (i + couples.length) % couples.length;
+    var c = couples[current];
+
+    stagePhoto.style.opacity = 0;
+    stageCaption.style.opacity = 0;
+    setTimeout(function () {
+      stagePhoto.src = c.src;
+      stagePhoto.alt = c.name;
+      stageCaption.innerHTML = c.name + (c.sub ? '<span class="sub">' + c.sub + '</span>' : '');
+      stagePhoto.style.opacity = 1;
+      stageCaption.style.opacity = 1;
+    }, 180);
+
+    thumbs.forEach(function (t) { t.classList.remove('is-active'); });
+    thumbs[current].classList.add('is-active');
+    thumbs[current].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+  }
+
+  prevBtn.addEventListener('click', function () { goTo(current - 1); });
+  nextBtn.addEventListener('click', function () { goTo(current + 1); });
+})();
+</script>
+
+</body>
+</html>
