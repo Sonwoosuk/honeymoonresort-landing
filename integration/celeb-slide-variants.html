@@ -230,6 +230,8 @@ body {
 .celeb-scroll__track {
   display: flex;
   align-items: center;
+  align-self: flex-start; /* .celeb-scroll__sticky 의 align-items:center 가 트랙(뷰포트보다 넓음)을
+                              통째로 가운데 정렬해서 JS translateX 계산과 어긋나던 버그 수정 */
   gap: 28px;
   will-change: transform;
 }
