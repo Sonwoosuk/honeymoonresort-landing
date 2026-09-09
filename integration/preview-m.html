@@ -430,9 +430,13 @@ br.mbr {
   text-wrap: pretty;
 }
 
-/* 소개 문단 아래 소개 영상 (16:9, 라운드) */
+/* 소개 문단 아래 소개 영상 (16:9, 라운드) + 아래 요약 카드 3장 */
+.hero__video-wrap {
+  margin: 30px auto 0;
+}
+
 .hero__video {
-  margin: 32px auto 0;
+  margin: 0;
   border-radius: 10px;
   overflow: hidden;
   background-color: var(--hero-color-ink);
@@ -445,6 +449,43 @@ br.mbr {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.hero__video-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.hero__video-card {
+  background-color: var(--hero-color-bg);
+  border: 1px solid var(--hero-color-border);
+  border-radius: 11px;
+  padding: 14px 16px;
+  box-shadow: 0 12px 26px -16px rgba(43, 31, 22, 0.28);
+}
+
+.hero__video-card:nth-child(2) {
+  background-color: var(--hero-color-ink);
+  border-color: var(--hero-color-ink);
+}
+.hero__video-card:nth-child(2) h3 { color: #ffffff; }
+.hero__video-card:nth-child(2) p { color: #d9c7ae; }
+
+.hero__video-card h3 {
+  margin: 0 0 5px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--hero-color-ink);
+}
+
+.hero__video-card p {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--hero-color-body);
 }
 
 /* =============================================================
@@ -1532,12 +1573,28 @@ a.safety__badge-image {
       <p>신혼여행은 인생에 한 번뿐인 특별한 여행입니다. 어디로 갈지, 어떤 리조트를 선택할지, 항공과 일정은 어떻게 구성할지, 현지에서 어떤 시간을 보낼지에 따라 신혼여행의 만족도가 달라집니다. 예비부부의 예산, 일정, 여행 스타일에 맞춰 항공, 호텔, 투어, 현지 일정을 함께 구성하며 두 사람에게 맞는 신혼여행을 설계합니다.<br>대표적인 휴양지인 하와이 신혼여행, 몰디브 신혼여행, 발리 신혼여행, 칸쿤 신혼여행, 코사무이 신혼여행, 푸켓 신혼여행 외에도 관광과 휴양이 가능한 유럽 신혼여행, 스페인 신혼여행, 이탈리아 신혼여행, 프랑스 신혼여행, 호주 신혼여행 등 인기 신혼여행지를 중심으로 다양한 상품과 상담 노하우를 축적해왔으며, 신혼여행지 선택부터 예약 이후 소통까지 신혼여행 준비 전 과정을 함께합니다.<br>허니문리조트는 오랜 상담 경험을 바탕으로 예비부부가 원하는 신혼여행의 컨셉 & 분위기와 현실적인 조건을 함께 살펴보고, 가장 어울리는 신혼여행 일정을 제안합니다.</p>
     </div>
 
-    <!-- 소개 문단 아래 소개 영상 (배포 시 ../new_ver/video/company-intro/ 경로로 교체) -->
-    <figure class="hero__video">
-      <video autoplay muted loop playsinline preload="metadata" aria-label="허니문리조트 신혼여행 준비 과정 소개 영상">
-        <source src="../assets/video/honeymoon-source-v03.mp4" type="video/mp4">
-      </video>
-    </figure>
+    <!-- 소개 문단 아래 소개 영상 + 요약 카드 (배포 시 ../new_ver/video/company-intro/ 경로로 교체) -->
+    <div class="hero__video-wrap">
+      <figure class="hero__video">
+        <video autoplay muted loop playsinline preload="metadata" aria-label="허니문리조트 신혼여행 준비 과정 소개 영상">
+          <source src="../assets/video/honeymoon-source-v03.mp4" type="video/mp4">
+        </video>
+      </figure>
+      <div class="hero__video-cards">
+        <article class="hero__video-card">
+          <h3>1:1 맞춤 설계</h3>
+          <p>예산·일정·여행 스타일에 맞춰 항공·호텔·투어·현지 일정을 함께 구성합니다.</p>
+        </article>
+        <article class="hero__video-card">
+          <h3>신혼여행 전문</h3>
+          <p>하와이·몰디브·발리·유럽 등 인기 신혼여행지의 상품과 상담 노하우를 축적해왔습니다.</p>
+        </article>
+        <article class="hero__video-card">
+          <h3>처음부터 끝까지</h3>
+          <p>신혼여행지 선택부터 예약 이후 소통까지 준비 전 과정을 함께합니다.</p>
+        </article>
+      </div>
+    </div>
 
   </div>
 </section>
