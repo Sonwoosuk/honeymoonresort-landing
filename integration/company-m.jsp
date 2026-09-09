@@ -719,26 +719,28 @@ br.mbr {
   background: var(--hero-color-gold);
 }
 
+/* 수상 상패: 박스 없이 누끼 이미지를 선반 위에 진열한 스타일 */
 .awards__timeline-photos,
 .awards__timeline-item:nth-child(odd) .awards__timeline-photos,
 .awards__timeline-item:nth-child(even) .awards__timeline-photos {
   display: flex;
-  gap: 8px;
-  margin-top: 12px;
+  align-items: flex-end;
+  gap: 16px;
+  margin-top: 14px;
+  padding: 0 2px 12px;
   flex-wrap: wrap;
   justify-content: flex-start;
+  border-bottom: 1px solid var(--hero-color-border);
 }
 
 .awards__timeline-photo {
-  width: 96px;
-  height: 96px;
+  display: block;
+  width: auto;
+  height: 108px;
+  max-width: 42vw;
   object-fit: contain;
-  box-sizing: border-box;
-  padding: 6px;
-  background: var(--hero-color-bg);
-  border: 1px solid var(--hero-color-border);
-  border-radius: 8px;
-  box-shadow: 0 5px 12px rgba(43, 31, 22, 0.08);
+  object-position: bottom;
+  filter: drop-shadow(0 10px 9px rgba(43, 31, 22, 0.24));
 }
 
 /* 사진을 누르면 같은 페이지 위 오버레이(Fancybox)로 감사패/트로피/인증서 원본이 크게 열립니다 */
@@ -746,7 +748,6 @@ br.mbr {
   display: inline-block;
   font-size: 0;
   line-height: 0;
-  border-radius: 8px;
   cursor: zoom-in;
   -webkit-tap-highlight-color: transparent;
 }
@@ -1664,7 +1665,7 @@ a.safety__badge-image {
           <li>스타우드 코리아 세일즈 어워드</li>
         </ul>
         <div class="awards__timeline-photos">
-          <a class="awards__photo-link" data-fancybox="awards" href="/new_ver/img/company-intro/awards/2015-starwood-award.jpg" data-caption="스타우드 코리아 세일즈 어워드 트로피"><img class="awards__timeline-photo" src="/new_ver/img/company-intro/awards/2015-starwood-award.jpg" alt="스타우드 코리아 세일즈 어워드 트로피"></a>
+          <a class="awards__photo-link" data-fancybox="awards" href="/new_ver/img/company-intro/awards/2015-starwood-award.png" data-caption="스타우드 코리아 세일즈 어워드 트로피"><img class="awards__timeline-photo" src="/new_ver/img/company-intro/awards/2015-starwood-award.png" alt="스타우드 코리아 세일즈 어워드 트로피"></a>
         </div>
       </div>
       <div class="awards__timeline-item">
@@ -1682,7 +1683,7 @@ a.safety__badge-image {
           <li>하얏트 센트릭 와이키키 비치 세일즈 우수 감사패 수상</li>
         </ul>
         <div class="awards__timeline-photos">
-          <a class="awards__photo-link" data-fancybox="awards" href="/new_ver/img/company-intro/awards/2018-hyatt-centric-waikiki.jpg" data-caption="하얏트 센트릭 와이키키 비치 세일즈 우수 감사패 (2018)"><img class="awards__timeline-photo" src="/new_ver/img/company-intro/awards/2018-hyatt-centric-waikiki.jpg" alt="하얏트 센트릭 와이키키 비치 세일즈 우수 감사패 (2018)"></a>
+          <a class="awards__photo-link" data-fancybox="awards" href="/new_ver/img/company-intro/awards/2018-hyatt-centric-waikiki.png" data-caption="하얏트 센트릭 와이키키 비치 세일즈 우수 감사패 (2018)"><img class="awards__timeline-photo" src="/new_ver/img/company-intro/awards/2018-hyatt-centric-waikiki.png" alt="하얏트 센트릭 와이키키 비치 세일즈 우수 감사패 (2018)"></a>
         </div>
       </div>
       <div class="awards__timeline-item">
@@ -1700,7 +1701,7 @@ a.safety__badge-image {
           <li>쉐라톤 와이키키 아시아 세일즈 우수 감사패 수상</li>
         </ul>
         <div class="awards__timeline-photos">
-          <a class="awards__photo-link" data-fancybox="awards" href="/new_ver/img/company-intro/awards/2022-sheraton-waikiki.jpg" data-caption="쉐라톤 와이키키 아시아 세일즈 우수 감사패"><img class="awards__timeline-photo" src="/new_ver/img/company-intro/awards/2022-sheraton-waikiki.jpg" alt="쉐라톤 와이키키 아시아 세일즈 우수 감사패"></a>
+          <a class="awards__photo-link" data-fancybox="awards" href="/new_ver/img/company-intro/awards/2022-sheraton-waikiki.png" data-caption="쉐라톤 와이키키 아시아 세일즈 우수 감사패"><img class="awards__timeline-photo" src="/new_ver/img/company-intro/awards/2022-sheraton-waikiki.png" alt="쉐라톤 와이키키 아시아 세일즈 우수 감사패"></a>
         </div>
       </div>
       <div class="awards__timeline-item">
@@ -1727,12 +1728,12 @@ a.safety__badge-image {
           <li>에메랄드 파루푸시 한국 세일즈&nbsp;1위</li>
         </ul>
         <div class="awards__timeline-photos">
-          <a class="awards__photo-link" data-fancybox="awards" href="/new_ver/img/company-intro/awards/2024-vakkaru.jpg" data-caption="바카루 몰디브 한국 세일즈 1위 트로피"><img class="awards__timeline-photo" src="/new_ver/img/company-intro/awards/2024-vakkaru.jpg" alt="바카루 몰디브 한국 세일즈 1위 트로피"></a>
-          <a class="awards__photo-link" data-fancybox="awards" href="/new_ver/img/company-intro/awards/2024-hilton-amingiri.jpg" data-caption="힐튼 몰디브 아밍기리 리조트 & 스파 Top Selling Korean Partner 트로피"><img class="awards__timeline-photo" src="/new_ver/img/company-intro/awards/2024-hilton-amingiri.jpg" alt="힐튼 몰디브 아밍기리 리조트 & 스파 Top Selling Korean Partner 트로피"></a>
-          <a class="awards__photo-link" data-fancybox="awards" href="/new_ver/img/company-intro/awards/2024-kuda-villingili.jpg" data-caption="쿠다 빌링길리 몰디브 Top Selling Korean Partner 트로피"><img class="awards__timeline-photo" src="/new_ver/img/company-intro/awards/2024-kuda-villingili.jpg" alt="쿠다 빌링길리 몰디브 Top Selling Korean Partner 트로피"></a>
-          <a class="awards__photo-link" data-fancybox="awards" href="/new_ver/img/company-intro/awards/2024-ava-cancun.jpg" data-caption="AVA Resort Cancun Asia Top Producer 트로피"><img class="awards__timeline-photo" src="/new_ver/img/company-intro/awards/2024-ava-cancun.jpg" alt="AVA Resort Cancun Asia Top Producer 트로피"></a>
-          <a class="awards__photo-link" data-fancybox="awards" href="/new_ver/img/company-intro/awards/2024-impression-moxche.jpg" data-caption="Impression Moxché by Secrets Asia Top Producer 트로피"><img class="awards__timeline-photo" src="/new_ver/img/company-intro/awards/2024-impression-moxche.jpg" alt="Impression Moxché by Secrets Asia Top Producer 트로피"></a>
-          <a class="awards__photo-link" data-fancybox="awards" href="/new_ver/img/company-intro/awards/2024-emerald-faarufushi.jpg" data-caption="에메랄드 파루푸시 한국 세일즈 1위 트로피"><img class="awards__timeline-photo" src="/new_ver/img/company-intro/awards/2024-emerald-faarufushi.jpg" alt="에메랄드 파루푸시 한국 세일즈 1위 트로피"></a>
+          <a class="awards__photo-link" data-fancybox="awards" href="/new_ver/img/company-intro/awards/2024-vakkaru.png" data-caption="바카루 몰디브 한국 세일즈 1위 트로피"><img class="awards__timeline-photo" src="/new_ver/img/company-intro/awards/2024-vakkaru.png" alt="바카루 몰디브 한국 세일즈 1위 트로피"></a>
+          <a class="awards__photo-link" data-fancybox="awards" href="/new_ver/img/company-intro/awards/2024-hilton-amingiri.png" data-caption="힐튼 몰디브 아밍기리 리조트 & 스파 Top Selling Korean Partner 트로피"><img class="awards__timeline-photo" src="/new_ver/img/company-intro/awards/2024-hilton-amingiri.png" alt="힐튼 몰디브 아밍기리 리조트 & 스파 Top Selling Korean Partner 트로피"></a>
+          <a class="awards__photo-link" data-fancybox="awards" href="/new_ver/img/company-intro/awards/2024-kuda-villingili.png" data-caption="쿠다 빌링길리 몰디브 Top Selling Korean Partner 트로피"><img class="awards__timeline-photo" src="/new_ver/img/company-intro/awards/2024-kuda-villingili.png" alt="쿠다 빌링길리 몰디브 Top Selling Korean Partner 트로피"></a>
+          <a class="awards__photo-link" data-fancybox="awards" href="/new_ver/img/company-intro/awards/2024-ava-cancun.png" data-caption="AVA Resort Cancun Asia Top Producer 트로피"><img class="awards__timeline-photo" src="/new_ver/img/company-intro/awards/2024-ava-cancun.png" alt="AVA Resort Cancun Asia Top Producer 트로피"></a>
+          <a class="awards__photo-link" data-fancybox="awards" href="/new_ver/img/company-intro/awards/2024-impression-moxche.png" data-caption="Impression Moxché by Secrets Asia Top Producer 트로피"><img class="awards__timeline-photo" src="/new_ver/img/company-intro/awards/2024-impression-moxche.png" alt="Impression Moxché by Secrets Asia Top Producer 트로피"></a>
+          <a class="awards__photo-link" data-fancybox="awards" href="/new_ver/img/company-intro/awards/2024-emerald-faarufushi.png" data-caption="에메랄드 파루푸시 한국 세일즈 1위 트로피"><img class="awards__timeline-photo" src="/new_ver/img/company-intro/awards/2024-emerald-faarufushi.png" alt="에메랄드 파루푸시 한국 세일즈 1위 트로피"></a>
         </div>
       </div>
       <div class="awards__timeline-item">
@@ -1752,8 +1753,9 @@ a.safety__badge-image {
           <li>하와이 하얏트 센트릭 와이키키 아시아 판매&nbsp;1위</li>
         </ul>
         <div class="awards__timeline-photos">
-          <a class="awards__photo-link" data-fancybox="awards" href="/new_ver/img/company-intro/awards/2025-waikiki-marriott.jpg" data-caption="와이키키 비치 메리어트 리조트 & 스파 Top Korean Producer of the Year 감사패"><img class="awards__timeline-photo" src="/new_ver/img/company-intro/awards/2025-waikiki-marriott.jpg" alt="와이키키 비치 메리어트 리조트 & 스파 Top Korean Producer of the Year 감사패"></a>
-          <a class="awards__photo-link" data-fancybox="awards" href="/new_ver/img/company-intro/awards/2025-hyatt-centric-waikiki.jpg" data-caption="하얏트 센트릭 와이키키 비치 세일즈 우수 감사패 (2025)"><img class="awards__timeline-photo" src="/new_ver/img/company-intro/awards/2025-hyatt-centric-waikiki.jpg" alt="하얏트 센트릭 와이키키 비치 세일즈 우수 감사패 (2025)"></a>
+          <a class="awards__photo-link" data-fancybox="awards" href="/new_ver/img/company-intro/awards/2025-waikiki-marriott.png" data-caption="와이키키 비치 메리어트 리조트 & 스파 Top Korean Producer of the Year 감사패"><img class="awards__timeline-photo" src="/new_ver/img/company-intro/awards/2025-waikiki-marriott.png" alt="와이키키 비치 메리어트 리조트 & 스파 Top Korean Producer of the Year 감사패"></a>
+          <a class="awards__photo-link" data-fancybox="awards" href="/new_ver/img/company-intro/awards/2025-hilton-waikoloa.png" data-caption="힐튼 와이콜로아 빌리지 리조트 한국 세일즈 1위 상패"><img class="awards__timeline-photo" src="/new_ver/img/company-intro/awards/2025-hilton-waikoloa.png" alt="힐튼 와이콜로아 빌리지 리조트 한국 세일즈 1위 상패"></a>
+          <a class="awards__photo-link" data-fancybox="awards" href="/new_ver/img/company-intro/awards/2025-hyatt-centric-waikiki.png" data-caption="하얏트 센트릭 와이키키 비치 세일즈 우수 감사패 (2025)"><img class="awards__timeline-photo" src="/new_ver/img/company-intro/awards/2025-hyatt-centric-waikiki.png" alt="하얏트 센트릭 와이키키 비치 세일즈 우수 감사패 (2025)"></a>
         </div>
       </div>
     </div>
