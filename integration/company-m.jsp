@@ -210,7 +210,8 @@
   line-height: 1.8;
   letter-spacing: -0.01em;
   color: var(--hero-color-body);
-  text-align: left;
+  text-align: center;
+  text-wrap: pretty;
   word-break: keep-all; /* 단어 중간에서 잘려 혼자 다음 줄로 내려가는 것 방지 */
   overflow-wrap: break-word;
 }
@@ -221,7 +222,27 @@
 
 .text-stack--2col p {
   margin: 0;
-  text-align: left;
+  text-align: center;
+  text-wrap: pretty;
+}
+
+/* 본문 문단: JS가 문장마다 <span> 블록으로 나누면 각 문장을 balance 로 고르게 배치 */
+.hero__intro p > span,
+.text-stack p > span,
+.text-stack--2col p > span,
+.scale__desc > span,
+.awards__intro > span,
+.youtube__collab > span {
+  display: block;
+  text-wrap: balance;
+}
+.hero__intro p > span + span,
+.text-stack p > span + span,
+.text-stack--2col p > span + span,
+.scale__desc > span + span,
+.awards__intro > span + span,
+.youtube__collab > span + span {
+  margin-top: 0.5em;
 }
 
 /* 모바일에서는 문단 안의 의도적 줄바꿈(<br>)이 어색하게 끊기므로 무시 */
@@ -409,7 +430,8 @@ br.mbr {
   line-height: 1.85;
   color: var(--hero-color-body);
   letter-spacing: -0.01em;
-  text-align: left;
+  text-align: center;
+  text-wrap: pretty;
 }
 
 /* 소개 문단 아래 소개 영상 (16:9, 라운드) */
@@ -2099,6 +2121,20 @@ a.safety__badge-image {
 ============================================================= -->
 <script>
 (function () {
+  /* 본문 문단을 문장 단위 <span> 블록으로 나눔 — CSS(text-wrap:balance)가 각 문장을
+     고르게 배치해 가운데 정렬에서도 고아줄(마지막 줄 한두 글자) 없이 깔끔하게 보이게 함. */
+  (function splitSentences() {
+    var sel = '.hero__intro p, .text-stack p, .text-stack--2col p, .scale__desc, .awards__intro, .youtube__collab';
+    Array.prototype.forEach.call(document.querySelectorAll(sel), function (el) {
+      if (el.getAttribute('data-split') || el.querySelector('span')) return;
+      var html = el.innerHTML.replace(/<br\s*\/?>/gi, ' ').replace(/\s+/g, ' ').trim();
+      var parts = html.split(/(?<=[.!?])\s+/).map(function (s) { return s.trim(); }).filter(Boolean);
+      if (!parts.length) return;
+      el.innerHTML = parts.map(function (s) { return '<span>' + s + '</span>'; }).join('');
+      el.setAttribute('data-split', '1');
+    });
+  })();
+
   /* 히어로 소개 영상: 화면에 보일 때만 재생(자동재생·무음·반복), 벗어나면 일시정지 */
   var heroVideo = document.querySelector('.hero__video video');
   if (heroVideo) {
