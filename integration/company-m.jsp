@@ -364,7 +364,7 @@ br.mbr {
   font-size: 28px;
   line-height: 1.4;
   letter-spacing: -0.02em;
-  color: var(--hero-color-ink);
+  color: var(--hero-color-gold);
   text-align: right; /* 모바일: 헤드라인은 오른쪽 정렬 */
 }
 
@@ -1564,7 +1564,7 @@ a.safety__badge-image {
         <hr class="hero__text-divider">
         <p class="hero__text-desc">1995년부터<br>신혼여행만을 전문으로<br>맞춤 여행을 안내해온<br>허니문리조트</p>
       </div>
-      <p class="hero__text-headline" id="heroHeadline"><span class="htl" style="--i:0"><b>30년의</b> 경험과</span><span class="htl" style="--i:1">허니문 <b>전문성으로</b></span><span class="htl" style="--i:2">완성하는</span><span class="htl" style="--i:3"><b>맞춤 허니문</b></span></p>
+      <p class="hero__text-headline" id="heroHeadline"><span class="htl" style="--i:0"><b>30년의</b> 경험과</span><span class="htl" style="--i:1">허니문 <b>전문성으로</b></span><span class="htl" style="--i:2">완성하는 <b>맞춤 허니문</b></span></p>
     </div>
     <div class="hero__text-foot">
       <p class="hero__text-tagline">두 사람의 시작을 가장 잘 아는 여행사</p>
