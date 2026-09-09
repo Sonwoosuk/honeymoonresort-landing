@@ -719,33 +719,35 @@ br.mbr {
   background: var(--hero-color-gold);
 }
 
-/* 수상 상패: 박스 없이 누끼 이미지를 선반 위에 진열한 스타일 */
+/* 수상 상패: 박스 없이 누끼 이미지를 선반 위에 진열 — 한 줄에 3개, 칸 크기 통일 */
 .awards__timeline-photos,
 .awards__timeline-item:nth-child(odd) .awards__timeline-photos,
 .awards__timeline-item:nth-child(even) .awards__timeline-photos {
   display: flex;
-  align-items: flex-end;
-  gap: 16px;
-  margin-top: 14px;
-  padding: 0 2px 12px;
   flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 12px;
+  margin: 14px -8px 0 -36px;
+  padding-bottom: 12px;
   justify-content: flex-start;
   border-bottom: 1px solid var(--hero-color-border);
 }
 
 .awards__timeline-photo {
   display: block;
-  width: auto;
-  height: 108px;
-  max-width: 42vw;
+  width: 100%;
+  height: clamp(88px, 27vw, 108px);
   object-fit: contain;
-  object-position: bottom;
+  object-position: bottom center;
   filter: drop-shadow(0 10px 9px rgba(43, 31, 22, 0.24));
 }
 
 /* 사진을 누르면 같은 페이지 위 오버레이(Fancybox)로 감사패/트로피/인증서 원본이 크게 열립니다 */
 .awards__photo-link {
-  display: inline-block;
+  flex: 0 0 clamp(86px, 27vw, 106px);
+  align-items: flex-end;
+  justify-content: center;
+  display: flex;
   font-size: 0;
   line-height: 0;
   cursor: zoom-in;
