@@ -403,6 +403,23 @@ br.mbr {
   text-align: left;
 }
 
+/* 소개 문단 아래 소개 영상 (16:9, 라운드) */
+.hero__video {
+  margin: 32px auto 0;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: var(--hero-color-ink);
+  aspect-ratio: 16 / 9;
+  box-shadow: 0 16px 36px -20px rgba(43, 31, 22, 0.5);
+}
+
+.hero__video video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 /* =============================================================
    STATEMENT (브랜드 워드마크)
 ============================================================= */
@@ -1494,6 +1511,13 @@ a.safety__badge-image {
       <p>신혼여행은 인생에 한 번뿐인 특별한 여행입니다. 어디로 갈지, 어떤 리조트를 선택할지, 항공과 일정은 어떻게 구성할지, 현지에서 어떤 시간을 보낼지에 따라 신혼여행의 만족도가 달라집니다. 예비부부의 예산, 일정, 여행 스타일에 맞춰 항공, 호텔, 투어, 현지 일정을 함께 구성하며 두 사람에게 맞는 신혼여행을 설계합니다.<br>대표적인 휴양지인 하와이 신혼여행, 몰디브 신혼여행, 발리 신혼여행, 칸쿤 신혼여행, 코사무이 신혼여행, 푸켓 신혼여행 외에도 관광과 휴양이 가능한 유럽 신혼여행, 스페인 신혼여행, 이탈리아 신혼여행, 프랑스 신혼여행, 호주 신혼여행 등 인기 신혼여행지를 중심으로 다양한 상품과 상담 노하우를 축적해왔으며, 신혼여행지 선택부터 예약 이후 소통까지 신혼여행 준비 전 과정을 함께합니다.<br>허니문리조트는 오랜 상담 경험을 바탕으로 예비부부가 원하는 신혼여행의 컨셉 & 분위기와 현실적인 조건을 함께 살펴보고, 가장 어울리는 신혼여행 일정을 제안합니다.</p>
     </div>
 
+    <!-- 소개 문단 아래 소개 영상 (영상 파일은 서버 ../new_ver/video/company-intro/ 에 업로드) -->
+    <figure class="hero__video">
+      <video autoplay muted loop playsinline preload="metadata" aria-label="허니문리조트 신혼여행 준비 과정 소개 영상">
+        <source src="../new_ver/video/company-intro/honeymoon-source-v03.mp4" type="video/mp4">
+      </video>
+    </figure>
+
   </div>
 </section>
 
@@ -2075,6 +2099,25 @@ a.safety__badge-image {
 ============================================================= -->
 <script>
 (function () {
+  /* 히어로 소개 영상: 화면에 보일 때만 재생(자동재생·무음·반복), 벗어나면 일시정지 */
+  var heroVideo = document.querySelector('.hero__video video');
+  if (heroVideo) {
+    var playHeroVideo = function () {
+      var p = heroVideo.play();
+      if (p && typeof p.catch === 'function') { p.catch(function () {}); }
+    };
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) { playHeroVideo(); }
+          else { heroVideo.pause(); }
+        });
+      }, { threshold: 0.25 }).observe(heroVideo);
+    } else {
+      playHeroVideo();
+    }
+  }
+
   var revealTargets = document.querySelectorAll(
     '.section-title, .scale__stat, .expo__stat, .expo__gallery-photo, .awards__timeline-item, ' +
     '.verified__card, .contact__card, .brand__card, .process .text-stack, ' +
