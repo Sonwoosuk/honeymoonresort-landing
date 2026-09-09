@@ -314,6 +314,14 @@ br.mbr {
   display: block;
 }
 
+/* 모바일: 상단 소개 블록(로고+문구)도 헤드라인과 같이 오른쪽에 맞춤 */
+.hero__text-info {
+  text-align: right;
+}
+.hero__text-info .hero__text-logo img {
+  margin-left: auto;
+}
+
 .hero__text-divider {
   width: 100%;
   height: 1px;
@@ -1086,7 +1094,11 @@ br.mbr {
   position: relative;
   padding: 44px 0 16px; /* 위쪽 44px = 가운데 카드가 확대+들어올려질 때 잘리지 않게 하는 여유 */
   overflow: hidden;
+  touch-action: pan-y; /* 가로 스와이프는 캐러셀이, 세로 스크롤은 페이지가 처리 */
+  -webkit-user-select: none;
+  user-select: none;
 }
+.celeb-scroll__viewport img { -webkit-user-drag: none; }
 /* 버튼은 트랙과 같은 flex 줄에 두면 트랙 폭(뷰포트보다 훨씬 넓음)에 밀려
    화면 밖으로 나가버리므로, 뷰포트 위에 절대 위치로 얹음 */
 .celeb-scroll__nav {
@@ -1165,43 +1177,34 @@ br.mbr {
 }
 .celeb-scroll__pager {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  margin-top: 12px;
+  gap: 9px;
+  margin-top: 18px;
+  padding: 0 20px;
 }
-.celeb-scroll__pager-num {
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--hero-color-gold);
-  min-width: 1.2em;
-  text-align: right;
-}
-.celeb-scroll__pager-total {
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--hero-color-body);
-  min-width: 1.2em;
-}
-.celeb-scroll__pager-track {
-  position: relative;
-  width: 92px;
-  height: 2px;
+.celeb-scroll__dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
   background-color: var(--hero-color-border);
-  border-radius: 1px;
-  overflow: hidden;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: width 0.4s cubic-bezier(0.65, 0, 0.35, 1), background-color 0.3s ease;
 }
-.celeb-scroll__pager-fill {
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 0%;
+.celeb-scroll__dot.is-active {
+  width: 28px;
   background-color: var(--hero-color-gold);
+  cursor: default;
 }
 @media (prefers-reduced-motion: reduce) {
   .celeb-scroll__track { transition: none; }
   .celeb-scroll__card { transition: none; }
+  .celeb-scroll__dot { transition: none; }
 }
 
 /* =============================================================
@@ -1941,11 +1944,7 @@ a.safety__badge-image {
       <button class="celeb-scroll__nav celeb-scroll__nav--next" id="celebScrollNext" aria-label="다음 커플" type="button">›</button>
     </div>
     <p class="celeb-scroll__caption" id="celebScrollCaption">에일리 · 최시훈</p>
-    <div class="celeb-scroll__pager">
-      <span class="celeb-scroll__pager-num" id="celebPagerNum">01</span>
-      <span class="celeb-scroll__pager-track"><span class="celeb-scroll__pager-fill" id="celebPagerFill"></span></span>
-      <span class="celeb-scroll__pager-total" id="celebPagerTotal">12</span>
-    </div>
+    <div class="celeb-scroll__pager" id="celebPager" aria-label="셀러브리티 선택"></div>
   </div>
 
   <div class="celeb__inner">
@@ -2254,11 +2253,7 @@ a.safety__badge-image {
   var caption = document.getElementById('celebScrollCaption');
   var prevBtn = document.getElementById('celebScrollPrev');
   var nextBtn = document.getElementById('celebScrollNext');
-  var pagerNum = document.getElementById('celebPagerNum');
-  var pagerFill = document.getElementById('celebPagerFill');
-  var pagerTotal = document.getElementById('celebPagerTotal');
-
-  if (pagerTotal) pagerTotal.textContent = String(couples.length).padStart(2, '0');
+  var pager = document.getElementById('celebPager');
 
   var cards = couples.map(function (c) {
     var card = document.createElement('figure');
@@ -2270,6 +2265,22 @@ a.safety__badge-image {
     track.appendChild(card);
     return card;
   });
+
+  /* 페이지 표시 = 확장형 점(클릭 시 해당 커플로 이동) */
+  var dots = pager ? couples.map(function (c, i) {
+    var d = document.createElement('button');
+    d.type = 'button';
+    d.className = 'celeb-scroll__dot';
+    d.setAttribute('aria-label', (i + 1) + ' / ' + couples.length + ' · ' + c.name);
+    d.addEventListener('click', function () { goTo(i); });
+    pager.appendChild(d);
+    return d;
+  }) : [];
+  function updateDots() {
+    for (var i = 0; i < dots.length; i++) {
+      dots[i].classList.toggle('is-active', i === currentIndex);
+    }
+  }
 
   var currentIndex = 0;
   var step = 0; // 카드 1칸(카드 폭 + gap)의 픽셀 거리
@@ -2311,14 +2322,14 @@ a.safety__badge-image {
       card.style.zIndex = String(Math.round((1 - norm) * 100));
       card.style.boxShadow = '0 ' + Math.round(shadowBlur * 0.55) + 'px ' + Math.round(shadowBlur) + 'px rgba(43, 31, 22, ' + shadowAlpha.toFixed(2) + ')';
     });
+
+    updateDots();
   }
 
   function updateCaption(animate) {
     var c = couples[currentIndex];
     var apply = function () {
       caption.innerHTML = c.name + (c.sub ? '<span class="sub">' + c.sub + '</span>' : '');
-      if (pagerNum) pagerNum.textContent = String(currentIndex + 1).padStart(2, '0');
-      if (pagerFill) pagerFill.style.width = (currentIndex / (couples.length - 1) * 100).toFixed(1) + '%';
     };
     if (animate === false) {
       apply();
@@ -2343,6 +2354,42 @@ a.safety__badge-image {
 
   prevBtn.addEventListener('click', function () { goTo(currentIndex - 1); });
   nextBtn.addEventListener('click', function () { goTo(currentIndex + 1); });
+
+  /* 터치·마우스 드래그(스와이프) — 손가락으로 넘기기 */
+  (function enableSwipe() {
+    var startX = 0, startY = 0, dragging = false, axis = null, delta = 0;
+    viewport.addEventListener('pointerdown', function (e) {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      dragging = true; axis = null; delta = 0;
+      startX = e.clientX; startY = e.clientY;
+      track.style.transition = 'none';
+    });
+    viewport.addEventListener('pointermove', function (e) {
+      if (!dragging) return;
+      var dx = e.clientX - startX, dy = e.clientY - startY;
+      if (axis === null && (Math.abs(dx) > 8 || Math.abs(dy) > 8)) {
+        axis = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
+      }
+      if (axis !== 'x') return;
+      e.preventDefault();
+      delta = dx;
+      var atEdge = (currentIndex === 0 && dx > 0) || (currentIndex === couples.length - 1 && dx < 0);
+      track.style.transform = 'translateX(' + (-currentIndex * step + dx * (atEdge ? 0.3 : 1)) + 'px)';
+    });
+    function endDrag() {
+      if (!dragging) return;
+      dragging = false;
+      track.style.transition = '';
+      if (axis === 'x' && Math.abs(delta) > Math.max(step * 0.16, 40)) {
+        goTo(currentIndex + (delta < 0 ? 1 : -1));
+      } else {
+        render();
+      }
+      axis = null; delta = 0;
+    }
+    viewport.addEventListener('pointerup', endDrag);
+    viewport.addEventListener('pointercancel', endDrag);
+  })();
 
   window.addEventListener('resize', layout);
 
