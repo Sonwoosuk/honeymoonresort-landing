@@ -299,7 +299,7 @@ p {
   font-size: clamp(30px, 4.4vw, 60px);
   line-height: 1.35;
   letter-spacing: -0.02em;
-  color: var(--hero-color-gold);
+  color: var(--hero-color-ink);
 }
 .hero__text-headline b {
   font-weight: 800;

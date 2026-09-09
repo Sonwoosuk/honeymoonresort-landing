@@ -199,7 +199,7 @@ p {
   font-size: clamp(30px, 4.4vw, 60px);
   line-height: 1.35;
   letter-spacing: -0.02em;
-  color: var(--hero-color-gold);
+  color: var(--hero-color-ink);
 }
 .hero__text-headline b {
   font-weight: 800;
@@ -2310,6 +2310,174 @@ html, body {
 
   </div>
 </section>
+
+<!-- ============================================================
+   SKYWAY SECTION (실험용 — 스크롤에 따라 비행기가 구름 사이를 날아감)
+   되돌릴 때는 이 <section class="skyway"> 블록 + 아래 <style id="skyway-style">
+   + <script id="skyway-script"> 3개만 지우면 됩니다.
+============================================================= -->
+<style id="skyway-style">
+.skyway {
+  position: relative;
+  background: linear-gradient(180deg, #bcd4e6 0%, #d7e4ec 42%, #eef1ee 74%, #f7f3ec 100%);
+}
+.skyway__stage {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+.skyway__cloud {
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 100%;
+  will-change: transform;
+  pointer-events: none;
+}
+.skyway__puff {
+  position: absolute;
+  display: block;
+  color: #ffffff;
+  filter: drop-shadow(0 22px 34px rgba(96, 124, 152, 0.18));
+}
+.skyway__puff svg { display: block; width: 100%; height: auto; }
+.skyway__cloud--back  { top: 8%;  opacity: 0.72; z-index: 1; }
+.skyway__cloud--mid   { top: 30%; opacity: 0.92; z-index: 2; }
+.skyway__cloud--front { top: 58%; opacity: 1; z-index: 4; }
+.skyway__cloud--back  .skyway__puff { width: clamp(180px, 20vw, 300px); }
+.skyway__cloud--mid   .skyway__puff { width: clamp(260px, 30vw, 440px); }
+.skyway__cloud--front .skyway__puff { width: clamp(360px, 42vw, 640px); }
+.skyway__cloud--back  .skyway__puff:nth-child(1){ left: 4%; }
+.skyway__cloud--back  .skyway__puff:nth-child(2){ left: 52%; top: -40px; }
+.skyway__cloud--back  .skyway__puff:nth-child(3){ left: 82%; top: 30px; }
+.skyway__cloud--mid   .skyway__puff:nth-child(1){ left: -6%; }
+.skyway__cloud--mid   .skyway__puff:nth-child(2){ left: 58%; top: -30px; }
+.skyway__cloud--front .skyway__puff:nth-child(1){ left: -10%; }
+.skyway__cloud--front .skyway__puff:nth-child(2){ left: 55%; top: -60px; }
+
+.skyway__plane {
+  position: absolute;
+  left: 0;
+  top: 42%;
+  z-index: 3;
+  width: clamp(130px, 15vw, 230px);
+  height: auto;
+  will-change: transform;
+  filter: drop-shadow(0 22px 26px rgba(43, 31, 22, 0.24));
+}
+.skyway__plane path { fill: var(--hero-color-ink); }
+.skyway__plane .skyway__plane-wing { fill: #47382b; }
+.skyway__plane .skyway__plane-win { fill: #cfe0ec; }
+
+.skyway__caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 62%;
+  z-index: 5;
+  text-align: center;
+  font-family: var(--hero-font);
+  font-size: clamp(22px, 3vw, 40px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--hero-color-ink);
+  text-shadow: 0 2px 16px rgba(255, 255, 255, 0.95), 0 0 34px rgba(255, 255, 255, 0.8);
+  opacity: 0;
+  padding: 0 var(--padding, 24px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skyway__stage { height: 74vh; }
+  .skyway__caption { opacity: 1; }
+  .skyway__plane { left: 50%; transform: translate(-50%, -50%); }
+}
+@media (max-width: 860px) {
+  .skyway__caption { font-size: clamp(20px, 6vw, 28px); }
+}
+</style>
+
+<section class="skyway" aria-hidden="true">
+  <div class="skyway__stage">
+    <div class="skyway__cloud skyway__cloud--back">
+      <span class="skyway__puff"><svg viewBox="0 0 320 130"><path fill="currentColor" d="M52 122c-24 0-38-15-38-34 0-17 12-30 30-32 3-19 19-32 40-32 12 0 23 4 31 12 9-9 22-14 36-14 22 0 40 13 46 32 4-1 8-2 13-2 22 0 38 16 38 36 0 21-16 38-40 38H52z"/></svg></span>
+      <span class="skyway__puff"><svg viewBox="0 0 320 130"><path fill="currentColor" d="M52 122c-24 0-38-15-38-34 0-17 12-30 30-32 3-19 19-32 40-32 12 0 23 4 31 12 9-9 22-14 36-14 22 0 40 13 46 32 4-1 8-2 13-2 22 0 38 16 38 36 0 21-16 38-40 38H52z"/></svg></span>
+      <span class="skyway__puff"><svg viewBox="0 0 320 130"><path fill="currentColor" d="M52 122c-24 0-38-15-38-34 0-17 12-30 30-32 3-19 19-32 40-32 12 0 23 4 31 12 9-9 22-14 36-14 22 0 40 13 46 32 4-1 8-2 13-2 22 0 38 16 38 36 0 21-16 38-40 38H52z"/></svg></span>
+    </div>
+    <div class="skyway__cloud skyway__cloud--mid">
+      <span class="skyway__puff"><svg viewBox="0 0 340 140"><path fill="currentColor" d="M58 132c-28 0-44-17-44-38 0-19 14-33 34-36 4-21 22-36 46-36 14 0 26 5 35 13 10-10 24-16 40-16 25 0 45 15 51 37 5-2 10-3 16-3 25 0 43 18 43 40 0 24-19 43-46 43H58z"/></svg></span>
+      <span class="skyway__puff"><svg viewBox="0 0 340 140"><path fill="currentColor" d="M58 132c-28 0-44-17-44-38 0-19 14-33 34-36 4-21 22-36 46-36 14 0 26 5 35 13 10-10 24-16 40-16 25 0 45 15 51 37 5-2 10-3 16-3 25 0 43 18 43 40 0 24-19 43-46 43H58z"/></svg></span>
+    </div>
+    <div class="skyway__caption" id="skywayCaption">그리고, 함께 떠납니다.</div>
+    <svg class="skyway__plane" id="skywayPlane" viewBox="0 0 240 92">
+      <path class="skyway__plane-wing" d="M104 46 L150 84 L128 84 L86 48 Z"/>
+      <path d="M150 40 L182 8 L192 10 L172 42 Z"/>
+      <path d="M10 50 C 34 43 78 39 128 38 L 190 27 C 208 24 222 29 224 40 C 225 47 219 51 206 52 L 128 55 C 92 61 52 62 30 60 C 16 59 6 55 6 51 C 6 49 8 49 10 50 Z"/>
+      <circle class="skyway__plane-win" cx="30" cy="49" r="2.1"/>
+      <circle class="skyway__plane-win" cx="44" cy="48" r="2.1"/>
+      <circle class="skyway__plane-win" cx="58" cy="47" r="2.1"/>
+      <circle class="skyway__plane-win" cx="72" cy="46.5" r="2.1"/>
+      <circle class="skyway__plane-win" cx="86" cy="46" r="2.1"/>
+    </svg>
+    <div class="skyway__cloud skyway__cloud--front">
+      <span class="skyway__puff"><svg viewBox="0 0 360 150"><path fill="currentColor" d="M62 142c-30 0-48-19-48-42 0-21 16-36 38-39 4-23 24-39 50-39 15 0 28 5 38 14 11-11 26-17 43-17 27 0 49 16 55 40 6-2 11-3 18-3 27 0 46 20 46 43 0 26-21 46-50 46H62z"/></svg></span>
+      <span class="skyway__puff"><svg viewBox="0 0 360 150"><path fill="currentColor" d="M62 142c-30 0-48-19-48-42 0-21 16-36 38-39 4-23 24-39 50-39 15 0 28 5 38 14 11-11 26-17 43-17 27 0 49 16 55 40 6-2 11-3 18-3 27 0 46 20 46 43 0 26-21 46-50 46H62z"/></svg></span>
+    </div>
+  </div>
+</section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script id="skyway-script">
+(function () {
+  if (!window.gsap || !window.ScrollTrigger) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  var vw = function () { return window.innerWidth; };
+  var vh = function () { return window.innerHeight; };
+  gsap.set('#skywayPlane', {
+    x: function () { return -0.18 * vw(); },
+    y: function () { return 0.22 * vh(); },
+    rotation: -6, scale: 0.76, transformOrigin: '50% 50%'
+  });
+
+  // 스테이지를 스크롤 구간 동안 고정(pin)하고, 그 안에서 비행기·구름·캡션을 스크럽 애니메이션
+  var tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: '.skyway__stage',
+      start: 'top top',
+      end: '+=240%',
+      scrub: 0.7,
+      pin: true,
+      anticipatePin: 1,
+      invalidateOnRefresh: true
+    },
+    defaults: { ease: 'none' }
+  });
+
+  // 구름: 레이어별로 다른 속도(패럴랙스)
+  tl.to('.skyway__cloud--back',  { yPercent: -30, xPercent: -8 }, 0)
+    .to('.skyway__cloud--mid',   { yPercent: -54, xPercent: 8 }, 0)
+    .to('.skyway__cloud--front', { yPercent: -88, xPercent: -10, scale: 1.14 }, 0);
+
+  // 비행기: 왼쪽 아래 → 가운데 상승·기울기 → 오른쪽 위로 빠져나감
+  tl.to('#skywayPlane', {
+      x: function () { return 0.44 * vw(); },
+      y: function () { return -0.04 * vh(); },
+      rotation: 7, scale: 1.06, ease: 'sine.inOut', duration: 0.62
+    }, 0)
+    .to('#skywayPlane', {
+      x: function () { return 1.25 * vw(); },
+      y: function () { return -0.32 * vh(); },
+      rotation: -2, scale: 0.48, ease: 'power1.in', duration: 0.38
+    }, 0.62);
+
+  // 캡션: 중간 구간에서 살짝 나타났다 사라짐
+  tl.to('#skywayCaption', { opacity: 1, duration: 0.16 }, 0.36)
+    .to('#skywayCaption', { opacity: 0, duration: 0.16 }, 0.66);
+
+  window.addEventListener('load', function () { ScrollTrigger.refresh(); });
+})();
+</script>
 
 <!-- ============================================================
    SCALE SECTION ("허니문리조트 어느정도 규모 회사?")
