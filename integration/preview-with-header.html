@@ -191,8 +191,13 @@ p {
   line-height: 1.7;
   color: var(--hero-color-body);
 }
-.hero__text-headline {
+.hero__text-headline-col {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(28px, 4vw, 44px);
+}
+.hero__text-headline {
   margin: 0;
   font-family: var(--hero-font);
   font-weight: 600;
@@ -229,36 +234,33 @@ p {
   font-size: 18px;
   color: var(--hero-color-body);
 }
-/* 한 자리에서 바뀌는 여행지 단어 (스크롤 유도 화살표 대체) */
+/* 헤드라인 아래: 크게, 사진과 함께 바뀌는 여행지 카드 */
 .hero__text-rotate {
-  margin: 0;
-  font-size: 22px;
-  color: var(--hero-color-body);
-}
-.hero__text-rotate__slot {
-  display: inline-block;
-  font-weight: 700;
-  font-size: 26px;
-  color: var(--hero-color-gold);
-  vertical-align: middle;
-}
-.hero__text-rotate__unit {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
+  gap: 20px;
   animation: heroRotateWord 0.5s ease both;
 }
-.hero__text-rotate__thumb {
-  display: inline-block;
-  width: 92px;
-  height: 64px;
-  border-radius: 10px;
+.hero__text-rotate__img {
+  flex: none;
+  width: clamp(160px, 15vw, 220px);
+  height: clamp(108px, 10vw, 148px);
+  border-radius: 14px;
   object-fit: cover;
-  box-shadow: 0 6px 16px rgba(43, 31, 22, 0.28);
+  box-shadow: 0 10px 26px rgba(43, 31, 22, 0.3);
 }
-.hero__text-rotate__slot b {
-  display: inline-block;
-  font-weight: 700;
+.hero__text-rotate__label {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--hero-color-body);
+}
+.hero__text-rotate__label b {
+  display: block;
+  margin-top: 6px;
+  font-size: clamp(22px, 2.4vw, 28px);
+  font-weight: 800;
+  color: var(--hero-color-gold);
 }
 @keyframes heroRotateWord {
   from { opacity: 0; transform: translateY(6px); }
@@ -266,7 +268,7 @@ p {
 }
 @media (prefers-reduced-motion: reduce) {
   .hero__text-headline .htl { transition: none; opacity: 1; filter: none; }
-  .hero__text-rotate__unit { animation: none; }
+  .hero__text-rotate { animation: none; }
 }
 @media (max-width: 860px) {
   .hero__text-row { flex-direction: column; gap: 32px; }
@@ -2285,11 +2287,16 @@ html, body {
         <hr class="hero__text-divider">
         <p class="hero__text-desc">1995년부터<br>신혼여행만을 전문으로<br>맞춤 여행을 안내해온<br>허니문리조트</p>
       </div>
-      <p class="hero__text-headline" id="heroHeadline"><span class="htl" style="--i:0"><b>30년의</b> 경험과</span><span class="htl" style="--i:1">허니문 <b>전문성으로</b></span><span class="htl" style="--i:2">완성하는 <b>맞춤 허니문</b></span></p>
+      <div class="hero__text-headline-col">
+        <p class="hero__text-headline" id="heroHeadline"><span class="htl" style="--i:0"><b>30년의</b> 경험과</span><span class="htl" style="--i:1">허니문 <b>전문성으로</b></span><span class="htl" style="--i:2">완성하는 <b>맞춤 허니문</b></span></p>
+        <div class="hero__text-rotate" id="heroRotateSlot">
+          <img class="hero__text-rotate__img" src="../assets/destinations/maldives.jpg" alt="">
+          <p class="hero__text-rotate__label">함께 준비한 신혼여행지<br><b>몰디브</b></p>
+        </div>
+      </div>
     </div>
     <div class="hero__text-foot">
       <p class="hero__text-tagline">두 사람의 시작을 가장 잘 아는 여행사</p>
-      <p class="hero__text-rotate">함께 준비한 신혼여행지 <span class="hero__text-rotate__slot" id="heroRotateSlot"><span class="hero__text-rotate__unit"><img class="hero__text-rotate__thumb" src="../assets/destinations/maldives.jpg" alt=""><b>몰디브</b></span></span></p>
     </div>
   </div>
 
@@ -3075,7 +3082,11 @@ html, body {
     setInterval(function () {
       heroRotateIdx = (heroRotateIdx + 1) % heroRotateWords.length;
       var cur = heroRotateWords[heroRotateIdx];
-      heroRotateSlot.innerHTML = '<span class="hero__text-rotate__unit"><img class="hero__text-rotate__thumb" src="' + cur.img + '" alt=""><b>' + cur.w + '</b></span>';
+      heroRotateSlot.innerHTML = '<img class="hero__text-rotate__img" src="' + cur.img + '" alt=""><p class="hero__text-rotate__label">함께 준비한 신혼여행지<br><b>' + cur.w + '</b></p>';
+      /* 카드 전체가 이미지+글자 같이 크로스페이드되도록 애니메이션 재시작 */
+      heroRotateSlot.style.animation = 'none';
+      void heroRotateSlot.offsetWidth;
+      heroRotateSlot.style.animation = '';
     }, 2000);
   }
 
