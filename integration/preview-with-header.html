@@ -239,11 +239,25 @@ p {
   display: inline-block;
   font-weight: 700;
   color: var(--hero-color-gold);
+  vertical-align: middle;
+}
+.hero__text-rotate__unit {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  animation: heroRotateWord 0.5s ease both;
+}
+.hero__text-rotate__thumb {
+  display: inline-block;
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  object-fit: cover;
+  box-shadow: 0 3px 8px rgba(43, 31, 22, 0.22);
 }
 .hero__text-rotate__slot b {
   display: inline-block;
   font-weight: 700;
-  animation: heroRotateWord 0.5s ease both;
 }
 @keyframes heroRotateWord {
   from { opacity: 0; transform: translateY(6px); }
@@ -251,7 +265,7 @@ p {
 }
 @media (prefers-reduced-motion: reduce) {
   .hero__text-headline .htl { transition: none; opacity: 1; filter: none; }
-  .hero__text-rotate__slot b { animation: none; }
+  .hero__text-rotate__unit { animation: none; }
 }
 @media (max-width: 860px) {
   .hero__text-row { flex-direction: column; gap: 32px; }
@@ -2274,7 +2288,7 @@ html, body {
     </div>
     <div class="hero__text-foot">
       <p class="hero__text-tagline">두 사람의 시작을 가장 잘 아는 여행사</p>
-      <p class="hero__text-rotate">함께 준비한 신혼여행지 <span class="hero__text-rotate__slot" id="heroRotateSlot"><b>몰디브</b></span></p>
+      <p class="hero__text-rotate">함께 준비한 신혼여행지 <span class="hero__text-rotate__slot" id="heroRotateSlot"><span class="hero__text-rotate__unit"><img class="hero__text-rotate__thumb" src="../assets/destinations/maldives.jpg" alt=""><b>몰디브</b></span></span></p>
     </div>
   </div>
 
@@ -3044,11 +3058,23 @@ html, body {
   /* 히어로 하단: 한 자리에서 바뀌는 여행지 단어 */
   var heroRotateSlot = document.getElementById('heroRotateSlot');
   if (heroRotateSlot && !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
-    var heroRotateWords = ['몰디브', '하와이', '발리', '칸쿤', '세이셸', '모리셔스', '두바이', '태국', '유럽', '호주'];
+    var heroRotateWords = [
+      { w: '몰디브', img: '../assets/destinations/maldives.jpg' },
+      { w: '하와이', img: '../assets/destinations/hawaii.jpg' },
+      { w: '발리', img: '../assets/destinations/bali.jpg' },
+      { w: '칸쿤', img: '../assets/destinations/cancun.jpg' },
+      { w: '세이셸', img: '../assets/destinations/tahiti.jpg' },
+      { w: '모리셔스', img: '../assets/destinations/mauritius.jpg' },
+      { w: '두바이', img: '../assets/destinations/dubai.jpg' },
+      { w: '태국', img: '../assets/destinations/phuket.jpg' },
+      { w: '유럽', img: '../assets/destinations/europe.jpg' },
+      { w: '호주', img: '../assets/destinations/australia.jpg' }
+    ];
     var heroRotateIdx = 0;
     setInterval(function () {
       heroRotateIdx = (heroRotateIdx + 1) % heroRotateWords.length;
-      heroRotateSlot.innerHTML = '<b>' + heroRotateWords[heroRotateIdx] + '</b>';
+      var cur = heroRotateWords[heroRotateIdx];
+      heroRotateSlot.innerHTML = '<span class="hero__text-rotate__unit"><img class="hero__text-rotate__thumb" src="' + cur.img + '" alt=""><b>' + cur.w + '</b></span>';
     }, 2000);
   }
 
