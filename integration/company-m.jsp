@@ -1581,11 +1581,13 @@ a.safety__badge-image {
       <p>신혼여행은 인생에 한 번뿐인 특별한 여행입니다. 어디로 갈지, 어떤 리조트를 선택할지, 항공과 일정은 어떻게 구성할지, 현지에서 어떤 시간을 보낼지에 따라 신혼여행의 만족도가 달라집니다. 예비부부의 예산, 일정, 여행 스타일에 맞춰 항공, 호텔, 투어, 현지 일정을 함께 구성하며 두 사람에게 맞는 신혼여행을 설계합니다.<br>대표적인 휴양지인 하와이 신혼여행, 몰디브 신혼여행, 발리 신혼여행, 칸쿤 신혼여행, 코사무이 신혼여행, 푸켓 신혼여행 외에도 관광과 휴양이 가능한 유럽 신혼여행, 스페인 신혼여행, 이탈리아 신혼여행, 프랑스 신혼여행, 호주 신혼여행 등 인기 신혼여행지를 중심으로 다양한 상품과 상담 노하우를 축적해왔으며, 신혼여행지 선택부터 예약 이후 소통까지 신혼여행 준비 전 과정을 함께합니다.<br>허니문리조트는 오랜 상담 경험을 바탕으로 예비부부가 원하는 신혼여행의 컨셉 & 분위기와 현실적인 조건을 함께 살펴보고, 가장 어울리는 신혼여행 일정을 제안합니다.</p>
     </div>
 
-    <!-- 소개 문단 아래 소개 영상 + 요약 카드 (영상 파일은 서버 ../new_ver/video/company-intro/ 에 업로드) -->
+    <!-- 소개 문단 아래 소개 영상 + 요약 카드
+         ※ 임시: 서버가 /new_ver/video/ 경로와 .mp4 확장자를 웹으로 안 내보내서,
+            mp4 원본을 확장자만 .jpg 로 바꿔 img 폴더에 두고 참조함. 서버에서 mp4 서빙 열리면 원복할 것. -->
     <div class="hero__video-wrap">
       <figure class="hero__video">
         <video autoplay muted loop playsinline preload="metadata" aria-label="허니문리조트 신혼여행 준비 과정 소개 영상">
-          <source src="../new_ver/video/company-intro/honeymoon-source-v03.mp4" type="video/mp4">
+          <source src="/new_ver/img/company-intro/honeymoon-source-v03.jpg" type="video/mp4">
         </video>
       </figure>
       <div class="hero__video-cards">
