@@ -1715,8 +1715,8 @@ p {
   box-shadow: 0 6px 16px rgba(43, 31, 22, 0.12);
   transition: border-color 0.2s ease, color 0.2s ease;
 }
-.celeb-scroll__nav--prev { left: 24px; }
-.celeb-scroll__nav--next { right: 24px; }
+.celeb-scroll__nav--prev { left: max(24px, calc(50% - 550px)); }
+.celeb-scroll__nav--next { right: max(24px, calc(50% - 550px)); }
 .celeb-scroll__nav--prev:hover { transform: translateY(-50%) translateX(-2px); }
 .celeb-scroll__nav--next:hover { transform: translateY(-50%) translateX(2px); }
 .celeb-scroll__nav:hover {
