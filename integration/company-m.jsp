@@ -335,12 +335,9 @@ br.mbr {
   display: block;
 }
 
-/* 모바일: 상단 소개 블록(로고+문구)도 헤드라인과 같이 오른쪽에 맞춤 */
+/* 모바일: 상단 소개 블록(로고+문구)은 왼쪽 정렬, 헤드라인만 오른쪽 */
 .hero__text-info {
-  text-align: right;
-}
-.hero__text-info .hero__text-logo img {
-  margin-left: auto;
+  text-align: left;
 }
 
 .hero__text-divider {
