@@ -224,13 +224,8 @@ p {
   filter: blur(0);
 }
 
-/* 히어로 하단 마무리 줄: 화면 중앙 정렬 (태그라인 + "함께 준비한 신혼여행지 [바뀌는 여행지]") */
-.hero__text-foot {
-  margin-top: clamp(48px, 7vw, 96px);
-  text-align: center;
-}
 .hero__text-tagline {
-  margin: 0 0 10px;
+  margin: 0;
   font-size: 18px;
   color: var(--hero-color-body);
 }
@@ -2289,14 +2284,12 @@ html, body {
       </div>
       <div class="hero__text-headline-col">
         <p class="hero__text-headline" id="heroHeadline"><span class="htl" style="--i:0"><b>30년의</b> 경험과</span><span class="htl" style="--i:1">허니문 <b>전문성으로</b></span><span class="htl" style="--i:2">완성하는 <b>맞춤 허니문</b></span></p>
+        <p class="hero__text-tagline">두 사람의 시작을 가장 잘 아는 여행사</p>
         <div class="hero__text-rotate" id="heroRotateSlot">
-          <img class="hero__text-rotate__img" src="../assets/destinations/maldives.jpg" alt="">
           <p class="hero__text-rotate__label">함께 준비한 신혼여행지<br><b>몰디브</b></p>
+          <img class="hero__text-rotate__img" src="../assets/destinations/maldives.jpg" alt="">
         </div>
       </div>
-    </div>
-    <div class="hero__text-foot">
-      <p class="hero__text-tagline">두 사람의 시작을 가장 잘 아는 여행사</p>
     </div>
   </div>
 
@@ -3082,7 +3075,7 @@ html, body {
     setInterval(function () {
       heroRotateIdx = (heroRotateIdx + 1) % heroRotateWords.length;
       var cur = heroRotateWords[heroRotateIdx];
-      heroRotateSlot.innerHTML = '<img class="hero__text-rotate__img" src="' + cur.img + '" alt=""><p class="hero__text-rotate__label">함께 준비한 신혼여행지<br><b>' + cur.w + '</b></p>';
+      heroRotateSlot.innerHTML = '<p class="hero__text-rotate__label">함께 준비한 신혼여행지<br><b>' + cur.w + '</b></p><img class="hero__text-rotate__img" src="' + cur.img + '" alt="">';
       /* 카드 전체가 이미지+글자 같이 크로스페이드되도록 애니메이션 재시작 */
       heroRotateSlot.style.animation = 'none';
       void heroRotateSlot.offsetWidth;
