@@ -291,8 +291,13 @@ p {
   line-height: 1.7;
   color: var(--hero-color-body);
 }
-.hero__text-headline {
+.hero__text-headline-col {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(28px, 4vw, 44px);
+}
+.hero__text-headline {
   margin: 0;
   font-family: var(--hero-font);
   font-weight: 600;
@@ -319,31 +324,38 @@ p {
   filter: blur(0);
 }
 
-/* 히어로 하단 마무리 줄: 화면 중앙 정렬 (태그라인 + "함께 준비한 신혼여행지 [바뀌는 여행지]") */
-.hero__text-foot {
-  margin-top: clamp(48px, 7vw, 96px);
-  text-align: center;
-}
 .hero__text-tagline {
-  margin: 0 0 10px;
+  margin: 0;
   font-size: 18px;
   color: var(--hero-color-body);
 }
-/* 한 자리에서 바뀌는 여행지 단어 (스크롤 유도 화살표 대체) */
+/* 헤드라인 아래: 크게, 사진과 함께 바뀌는 여행지 카드 */
 .hero__text-rotate {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+  animation: heroRotateWord 0.5s ease both;
+}
+.hero__text-rotate__img {
+  flex: none;
+  width: clamp(160px, 15vw, 220px);
+  height: clamp(108px, 10vw, 148px);
+  border-radius: 14px;
+  object-fit: cover;
+  box-shadow: 0 10px 26px rgba(43, 31, 22, 0.3);
+}
+.hero__text-rotate__label {
   margin: 0;
-  font-size: 20px;
+  font-size: 16px;
+  line-height: 1.5;
   color: var(--hero-color-body);
 }
-.hero__text-rotate__slot {
-  display: inline-block;
-  font-weight: 700;
+.hero__text-rotate__label b {
+  display: block;
+  margin-top: 6px;
+  font-size: clamp(22px, 2.4vw, 28px);
+  font-weight: 800;
   color: var(--hero-color-gold);
-}
-.hero__text-rotate__slot b {
-  display: inline-block;
-  font-weight: 700;
-  animation: heroRotateWord 0.5s ease both;
 }
 @keyframes heroRotateWord {
   from { opacity: 0; transform: translateY(6px); }
@@ -351,7 +363,7 @@ p {
 }
 @media (prefers-reduced-motion: reduce) {
   .hero__text-headline .htl { transition: none; opacity: 1; filter: none; }
-  .hero__text-rotate__slot b { animation: none; }
+  .hero__text-rotate { animation: none; }
 }
 @media (max-width: 860px) {
   .hero__text-row { flex-direction: column; gap: 32px; }
@@ -2324,11 +2336,14 @@ html, body {
         <hr class="hero__text-divider">
         <p class="hero__text-desc">1995년부터<br>신혼여행만을 전문으로<br>맞춤 여행을 안내해온<br>허니문리조트</p>
       </div>
-      <p class="hero__text-headline" id="heroHeadline"><span class="htl" style="--i:0"><b>30년의</b> 경험과</span><span class="htl" style="--i:1">허니문 <b>전문성으로</b></span><span class="htl" style="--i:2">완성하는 <b>맞춤 허니문</b></span></p>
-    </div>
-    <div class="hero__text-foot">
-      <p class="hero__text-tagline">두 사람의 시작을 가장 잘 아는 여행사</p>
-      <p class="hero__text-rotate">함께 준비한 신혼여행지 <span class="hero__text-rotate__slot" id="heroRotateSlot"><b>몰디브</b></span></p>
+      <div class="hero__text-headline-col">
+        <p class="hero__text-headline" id="heroHeadline"><span class="htl" style="--i:0"><b>30년의</b> 경험과</span><span class="htl" style="--i:1">허니문 <b>전문성으로</b></span><span class="htl" style="--i:2">완성하는 <b>맞춤 허니문</b></span></p>
+        <p class="hero__text-tagline">두 사람의 시작을 가장 잘 아는 여행사</p>
+        <div class="hero__text-rotate" id="heroRotateSlot">
+          <p class="hero__text-rotate__label">함께 준비한 신혼여행지<br><b>몰디브</b></p>
+          <img class="hero__text-rotate__img" src="../new_ver/img/company-intro/destinations/maldives.jpg" alt="">
+        </div>
+      </div>
     </div>
   </div>
 
@@ -3097,11 +3112,27 @@ html, body {
   /* 히어로 하단: 한 자리에서 바뀌는 여행지 단어 */
   var heroRotateSlot = document.getElementById('heroRotateSlot');
   if (heroRotateSlot && !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
-    var heroRotateWords = ['몰디브', '하와이', '발리', '칸쿤', '세이셸', '모리셔스', '두바이', '태국', '유럽', '호주'];
+    var heroRotateWords = [
+      { w: '몰디브', img: '../new_ver/img/company-intro/destinations/maldives.jpg' },
+      { w: '하와이', img: '../new_ver/img/company-intro/destinations/hawaii.jpg' },
+      { w: '발리', img: '../new_ver/img/company-intro/destinations/bali.jpg' },
+      { w: '칸쿤', img: '../new_ver/img/company-intro/destinations/cancun.jpg' },
+      { w: '세이셸', img: '../new_ver/img/company-intro/destinations/seychelles.jpg' },
+      { w: '모리셔스', img: '../new_ver/img/company-intro/destinations/mauritius.jpg' },
+      { w: '두바이', img: '../new_ver/img/company-intro/destinations/dubai.jpg' },
+      { w: '태국', img: '../new_ver/img/company-intro/destinations/phuket.jpg' },
+      { w: '유럽', img: '../new_ver/img/company-intro/destinations/europe.jpg' },
+      { w: '호주', img: '../new_ver/img/company-intro/destinations/australia.jpg' }
+    ];
     var heroRotateIdx = 0;
     setInterval(function () {
       heroRotateIdx = (heroRotateIdx + 1) % heroRotateWords.length;
-      heroRotateSlot.innerHTML = '<b>' + heroRotateWords[heroRotateIdx] + '</b>';
+      var cur = heroRotateWords[heroRotateIdx];
+      heroRotateSlot.innerHTML = '<p class="hero__text-rotate__label">함께 준비한 신혼여행지<br><b>' + cur.w + '</b></p><img class="hero__text-rotate__img" src="' + cur.img + '" alt="">';
+      /* 카드 전체가 이미지+글자 같이 크로스페이드되도록 애니메이션 재시작 */
+      heroRotateSlot.style.animation = 'none';
+      void heroRotateSlot.offsetWidth;
+      heroRotateSlot.style.animation = '';
     }, 2000);
   }
 

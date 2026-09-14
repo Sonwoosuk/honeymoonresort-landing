@@ -383,30 +383,42 @@ br.mbr {
   filter: blur(0);
 }
 
-/* 히어로 하단 마무리 줄: 가운데 정렬 (태그라인 + "함께 준비한 신혼여행지 [바뀌는 여행지]") */
-.hero__text-foot {
-  margin-top: 40px;
-  text-align: center;
-}
 .hero__text-tagline {
-  margin: 0 0 8px;
+  margin: 0;
   font-size: 14px;
   color: var(--hero-color-body);
+  text-align: right;
 }
+/* 헤드라인 아래: 사진과 함께 바뀌는 여행지 카드 (헤드라인과 같은 오른쪽 정렬) */
 .hero__text-rotate {
-  margin: 0;
-  font-size: 16px;
-  color: var(--hero-color-body);
-}
-.hero__text-rotate__slot {
-  display: inline-block;
-  font-weight: 700;
-  color: var(--hero-color-gold);
-}
-.hero__text-rotate__slot b {
-  display: inline-block;
-  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  gap: 14px;
   animation: heroRotateWord 0.5s ease both;
+}
+.hero__text-rotate__img {
+  flex: none;
+  width: 96px;
+  height: 66px;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 8px 20px rgba(43, 31, 22, 0.28);
+}
+.hero__text-rotate__label {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--hero-color-body);
+  text-align: right;
+}
+.hero__text-rotate__label b {
+  display: block;
+  margin-top: 4px;
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--hero-color-gold);
 }
 @keyframes heroRotateWord {
   from { opacity: 0; transform: translateY(6px); }
@@ -414,7 +426,7 @@ br.mbr {
 }
 @media (prefers-reduced-motion: reduce) {
   .hero__text-headline .htl { transition: none; opacity: 1; filter: none; }
-  .hero__text-rotate__slot b { animation: none; }
+  .hero__text-rotate { animation: none; }
 }
 
 .hero__intro {
@@ -1564,10 +1576,11 @@ a.safety__badge-image {
         <p class="hero__text-desc">1995년부터<br>신혼여행만을 전문으로<br>맞춤 여행을 안내해온<br>허니문리조트</p>
       </div>
       <p class="hero__text-headline" id="heroHeadline"><span class="htl" style="--i:0"><b>30년의</b> 경험과</span><span class="htl" style="--i:1">허니문 <b>전문성으로</b></span><span class="htl" style="--i:2">완성하는 <b>맞춤 허니문</b></span></p>
-    </div>
-    <div class="hero__text-foot">
       <p class="hero__text-tagline">두 사람의 시작을 가장 잘 아는 여행사</p>
-      <p class="hero__text-rotate">함께 준비한 신혼여행지 <span class="hero__text-rotate__slot" id="heroRotateSlot"><b>몰디브</b></span></p>
+      <div class="hero__text-rotate" id="heroRotateSlot">
+        <p class="hero__text-rotate__label">함께 준비한 신혼여행지<br><b>몰디브</b></p>
+        <img class="hero__text-rotate__img" src="/new_ver/img/company-intro/destinations/maldives.jpg" alt="">
+      </div>
     </div>
   </div>
 
@@ -2335,11 +2348,26 @@ a.safety__badge-image {
   /* 히어로 하단: 한 자리에서 바뀌는 여행지 단어 */
   var heroRotateSlot = document.getElementById('heroRotateSlot');
   if (heroRotateSlot && !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
-    var heroRotateWords = ['몰디브', '하와이', '발리', '칸쿤', '세이셸', '모리셔스', '두바이', '태국', '유럽', '호주'];
+    var heroRotateWords = [
+      { w: '몰디브', img: '/new_ver/img/company-intro/destinations/maldives.jpg' },
+      { w: '하와이', img: '/new_ver/img/company-intro/destinations/hawaii.jpg' },
+      { w: '발리', img: '/new_ver/img/company-intro/destinations/bali.jpg' },
+      { w: '칸쿤', img: '/new_ver/img/company-intro/destinations/cancun.jpg' },
+      { w: '세이셸', img: '/new_ver/img/company-intro/destinations/seychelles.jpg' },
+      { w: '모리셔스', img: '/new_ver/img/company-intro/destinations/mauritius.jpg' },
+      { w: '두바이', img: '/new_ver/img/company-intro/destinations/dubai.jpg' },
+      { w: '태국', img: '/new_ver/img/company-intro/destinations/phuket.jpg' },
+      { w: '유럽', img: '/new_ver/img/company-intro/destinations/europe.jpg' },
+      { w: '호주', img: '/new_ver/img/company-intro/destinations/australia.jpg' }
+    ];
     var heroRotateIdx = 0;
     setInterval(function () {
       heroRotateIdx = (heroRotateIdx + 1) % heroRotateWords.length;
-      heroRotateSlot.innerHTML = '<b>' + heroRotateWords[heroRotateIdx] + '</b>';
+      var cur = heroRotateWords[heroRotateIdx];
+      heroRotateSlot.innerHTML = '<p class="hero__text-rotate__label">함께 준비한 신혼여행지<br><b>' + cur.w + '</b></p><img class="hero__text-rotate__img" src="' + cur.img + '" alt="">';
+      heroRotateSlot.style.animation = 'none';
+      void heroRotateSlot.offsetWidth;
+      heroRotateSlot.style.animation = '';
     }, 2000);
   }
 })();
