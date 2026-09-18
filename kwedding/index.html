@@ -288,6 +288,98 @@ body{
 @media (prefers-reduced-motion:reduce){
   .kw *{ transition:none !important; }
 }
+
+/* ── hero ─────────────────────────────────────────────────── */
+.kw .kw-hero{
+  width:100%;
+  background:var(--kw-surface);
+  padding:clamp(56px,8vw,104px) 0;
+}
+.kw .kw-hero__inner{
+  max-width:1120px;
+  margin:0 auto;
+  padding:0 clamp(20px,5vw,40px);
+  display:flex;
+  align-items:flex-start;
+  gap:clamp(40px,7vw,120px);
+}
+.kw .kw-hero__info{
+  flex:0 0 clamp(200px,22vw,280px);
+  padding-top:10px;
+}
+.kw .kw-hero__logo img{
+  height:28px;
+  width:auto;
+  display:block;
+}
+.kw .kw-hero__divider{
+  width:100%;
+  height:1px;
+  background:var(--kw-line-2);
+  margin:20px 0 18px;
+  border:none;
+}
+.kw .kw-hero__desc{
+  margin:0;
+  font-size:15px;
+  line-height:1.7;
+  color:var(--kw-muted);
+}
+.kw .kw-hero__headline-col{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  gap:clamp(28px,4vw,44px);
+}
+.kw .kw-hero__headline{
+  margin:0;
+  font-weight:500;
+  font-size:clamp(28px,4vw,52px);
+  line-height:1.4;
+  letter-spacing:-.01em;
+  color:var(--kw-ink);
+}
+.kw .kw-hero__headline b{
+  font-weight:700;
+}
+.kw .kw-hero__tagline{
+  margin:0;
+  font-size:17px;
+  color:var(--kw-muted);
+}
+.kw .kw-hero__rotate{
+  display:inline-flex;
+  align-items:center;
+  gap:20px;
+}
+.kw .kw-hero__rotate-img{
+  flex:none;
+  width:clamp(150px,14vw,200px);
+  height:clamp(100px,9vw,134px);
+  object-fit:cover;
+  border:1px solid var(--kw-line);
+}
+.kw .kw-hero__rotate-label{
+  margin:0;
+  font-size:15px;
+  line-height:1.5;
+  color:var(--kw-muted);
+}
+.kw .kw-hero__rotate-label b{
+  display:block;
+  margin-top:6px;
+  font-family:var(--kw-display);
+  font-size:clamp(18px,1.8vw,22px);
+  font-weight:400;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  color:var(--kw-ink);
+}
+@media (max-width:860px){
+  .kw .kw-hero__inner{ flex-direction:column; gap:32px; }
+  .kw .kw-hero__info{ flex:none; }
+  .kw .kw-hero__headline{ font-size:clamp(26px,7vw,36px); }
+}
 </style>
 </head>
 <body>
@@ -298,6 +390,29 @@ body{
 </div>
 
 <div class="kw">
+
+  <!-- ============================================================
+       HERO
+  ============================================================= -->
+  <section class="kw-hero">
+    <div class="kw-hero__inner">
+      <div class="kw-hero__info">
+        <div class="kw-hero__logo">
+          <img src="../assets/logo/kwedding-logo.png" alt="K-Wedding">
+        </div>
+        <hr class="kw-hero__divider">
+        <p class="kw-hero__desc">Since 1995<br>K-Wedding, by Honeymoon Resort,<br>has specialized in tailored<br>honeymoon travel</p>
+      </div>
+      <div class="kw-hero__headline-col">
+        <p class="kw-hero__headline"><b>30 years</b> of experience and<br>honeymoon <b>expertise</b>, perfected<br>into every <b>tailored honeymoon</b></p>
+        <p class="kw-hero__tagline">The travel specialists who know how your story begins</p>
+        <div class="kw-hero__rotate" id="kwHeroRotate">
+          <p class="kw-hero__rotate-label">Honeymoon destinations<br>we've planned together<br><b>Maldives</b></p>
+          <img class="kw-hero__rotate-img" src="../assets/destinations/maldives.jpg" alt="">
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- ============================================================
        INTRO / K-Wedding by Honeymoon Resort
@@ -486,6 +601,31 @@ body{
   </section>
 
 </div>
+
+<script>
+(function () {
+  var slot = document.getElementById('kwHeroRotate');
+  if (!slot || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+  var words = [
+    { w: 'Maldives', img: '../assets/destinations/maldives.jpg' },
+    { w: 'Hawaii', img: '../assets/destinations/hawaii.jpg' },
+    { w: 'Bali', img: '../assets/destinations/bali.jpg' },
+    { w: 'Cancun', img: '../assets/destinations/cancun.jpg' },
+    { w: 'Seychelles', img: '../assets/destinations/seychelles.jpg' },
+    { w: 'Mauritius', img: '../assets/destinations/mauritius.jpg' },
+    { w: 'Dubai', img: '../assets/destinations/dubai.jpg' },
+    { w: 'Thailand', img: '../assets/destinations/phuket.jpg' },
+    { w: 'Europe', img: '../assets/destinations/europe.jpg' },
+    { w: 'Australia', img: '../assets/destinations/australia.jpg' }
+  ];
+  var i = 0;
+  setInterval(function () {
+    i = (i + 1) % words.length;
+    var cur = words[i];
+    slot.innerHTML = '<p class="kw-hero__rotate-label">Honeymoon destinations<br>we\'ve planned together<br><b>' + cur.w + '</b></p><img class="kw-hero__rotate-img" src="' + cur.img + '" alt="">';
+  }, 2000);
+})();
+</script>
 
 </body>
 </html>
